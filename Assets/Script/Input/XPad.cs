@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
 
-public class InputPad : SingletonMonoBehaviour<InputPad>
+public class XPad : SingletonMonoBehaviour<XPad>
 {
     const int MaxControllerNum = 4;
     PlayerIndex[] playerIndex = new PlayerIndex[MaxControllerNum];            //現在つないでいるプレイヤーの番号
@@ -222,9 +222,21 @@ public class InputPad : SingletonMonoBehaviour<InputPad>
 	/// </summary>
 	void DebugKeyFlagSwitching()
 	{
-		if (Input.GetKey(KeyCode.Alpha1)) KeyDebugFlag[0] = !KeyDebugFlag[0];
-		if (Input.GetKey(KeyCode.Alpha2)) KeyDebugFlag[1] = !KeyDebugFlag[1];
-		if (Input.GetKey(KeyCode.Alpha3)) KeyDebugFlag[2] = !KeyDebugFlag[2];
-		if (Input.GetKey(KeyCode.Alpha4)) KeyDebugFlag[3] = !KeyDebugFlag[3];
+		if (Input.GetKeyDown(KeyCode.Alpha1)) {
+			KeyDebugFlag[0] = !KeyDebugFlag[0];
+			Debug.Log("コントローラーNo" + 1 + "接続状態 : " + KeyDebugFlag[0]);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha2)) {
+			KeyDebugFlag[1] = !KeyDebugFlag[1];
+			Debug.Log("コントローラーNo" + 2 + "接続状態 : " + KeyDebugFlag[1]);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha3)) {
+			KeyDebugFlag[2] = !KeyDebugFlag[2];
+			Debug.Log("コントローラーNo" + 3 + "接続状態 : " + KeyDebugFlag[2]);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha4)) {
+			KeyDebugFlag[3] = !KeyDebugFlag[3];
+			Debug.Log("コントローラーNo" + 4 + "接続状態 : " + KeyDebugFlag[3]);
+		}
 	}
 }

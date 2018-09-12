@@ -5,7 +5,7 @@ public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBe
 {
 
 	private static T instance;
-	public static T Instance
+	public static T Get
 	{
 		get
 		{
@@ -38,7 +38,7 @@ public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBe
 			instance = this as T;
 			return true;
 		}
-		else if (Instance == this)
+		else if (Get == this)
 		{
 			return true;
 		}
