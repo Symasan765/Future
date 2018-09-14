@@ -14,25 +14,41 @@ public class Bazooka : MonoBehaviour {
     //バズーカーのオブジェクトをPrefabからロードしておく。
 	void Start () 
     {
-        BazookaPrefab = Resources.Load("Prefab/Lee/Bazooka") as GameObject;
+        
     }
 
     //Update関数の中で、特定の条件になるとバズーカーオブジェクトを生成する関数を呼び出す。
     void Update()
     {
         ShotBazooka();
+        FindSyoukou();
     }
     //バズーカーを生成する。動的でオブジェクトを生成。in_posの位置に移動させる。
     void ShotBazooka()
     {
-        Vector3 TargetVector = BazookaObject.transform.position - TargetPos;
+        Vector3 TargetVector = TargetPos;
         Vector3.Normalize(TargetVector);
-        BazookaObject.transform.position += TargetVector;
+        TargetVector = TargetVector * 1 / 100;
+        if(Vector3.Distance(TargetPos,BazookaObject.transform.position)>0.5f)
+        {
+            BazookaObject.transform.position += TargetVector;
+        }
     }
 
-    void SetBazooka(Vector3 in_TargetPos)
+    public void SetBazooka(Vector3 in_TargetPos)
     {
+        if(BazookaPrefab==null)
+        {
+            BazookaPrefab = Resources.Load("Prefab/Lee/Bazooka") as GameObject;
+        }
         TargetPos = in_TargetPos;
+        BazookaObject = Instantiate(BazookaPrefab);
+        
+    }
+
+    public GameObject GetBazookaObeject()
+    {
+        return BazookaPrefab;
     }
     //証拠の数を調べる。現状では証拠タグをつけたオブジェクトの数を数えている。
     void FindSyoukou()
