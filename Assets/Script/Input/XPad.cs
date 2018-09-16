@@ -12,16 +12,20 @@ public class XPad : SingletonMonoBehaviour<XPad>
     //下記の二つはビットフラグを使用するので注意
     short[] NowInp = new short[MaxControllerNum];
     short[] OldInp = new short[MaxControllerNum];
-    bool[] ConnectFlag = new bool[MaxControllerNum];
+	Vector2[] m_KeyboardLeftStickVal = new Vector2[MaxControllerNum];
+	Vector2[] m_KeyboardRightStickVal = new Vector2[MaxControllerNum];
+	bool[] ConnectFlag = new bool[MaxControllerNum];
 
     // デバッグではコントローラーだけではなくキーボード入力も利用するため
     bool DebugFlag = false;
-	public bool[] KeyDebugFlag = new bool[MaxControllerNum];	// キーボードでの複数人接続を行う
+	public bool[] KeyDebugFlag = new bool[MaxControllerNum];    // キーボードでの複数人接続を行う
 
-    /// <summary>
-    /// 入力するキー番号。ビット演算を使用するため各数値は累乗
-    /// </summary>
-    public enum KeyData {
+	const float m_DeadZone = 0.3f;
+
+	/// <summary>
+	/// 入力するキー番号。ビット演算を使用するため各数値は累乗
+	/// </summary>
+	public enum KeyData {
 		A = 1,
 		B = 2,
 		X = 4,
@@ -84,6 +88,62 @@ public class XPad : SingletonMonoBehaviour<XPad>
 	{
 		if ((NowInp[GamePadNo] & (short)key) != 0) return true;
 		return false;
+	}
+
+	/// <summary>
+	/// 右スティックの入力ベクトルを取得する
+	/// </summary>
+	/// <param name="GamePadNo"></param>
+	/// <returns>長さ1.0f以内のX,Y成分ベクトル</returns>
+	public Vector2 GetRightStick(int GamePadNo)
+	{
+		if (ConnectFlag[GamePadNo])
+		{
+			return StickJudge(NowState[GamePadNo].ThumbSticks.Right);
+		}
+
+		// ゲームパッド非接続
+		return m_KeyboardRightStickVal[GamePadNo];
+	}
+
+	/// <summary>
+	/// 左スティックの入力ベクトルを取得する
+	/// </summary>
+	/// <param name="GamePadNo"></param>
+	/// <returns>長さ1.0f以内のX,Y成分ベクトル</returns>
+	public Vector2 GetLeftStick(int GamePadNo)
+	{
+		if (ConnectFlag[GamePadNo])
+		{
+			return StickJudge(NowState[GamePadNo].ThumbSticks.Left);
+		}
+
+		// ゲームパッド非接続
+		return m_KeyboardLeftStickVal[GamePadNo];
+	}
+
+	Vector2 StickJudge(GamePadThumbSticks.StickValue stick)
+	{
+		Vector2 val = new Vector2(stick.X, stick.Y);
+		// デッドゾーンより入力が少なければ入力を感知しない
+		if(val.magnitude < m_DeadZone)
+		{
+			return Vector2.zero;
+		}
+
+		return val;
+	}
+
+	/// <summary>
+	/// コントローラーの振動を有効にする
+	/// </summary>
+	/// <param name="GamePadNo"></param>
+	/// <param name="LeftMagnitude"></param>
+	/// <param name="RightMagnitude"></param>
+	public void SetVibration(int GamePadNo, float LeftMagnitude, float RightMagnitude)
+	{
+		if (ConnectFlag[GamePadNo])
+			GamePad.SetVibration((PlayerIndex)GamePadNo, LeftMagnitude, RightMagnitude);
 	}
 
 	void Start()
@@ -203,18 +263,35 @@ public class XPad : SingletonMonoBehaviour<XPad>
 	/// <param name="i"></param>
 	void KeyButtonUpdate(int i)
 	{
-		if (Input.GetKey(KeyCode.Space)) NowInp[i] += (short)KeyData.A;
-		if (Input.GetKey(KeyCode.D)) NowInp[i] += (short)KeyData.B;
-		if (Input.GetKey(KeyCode.P)) NowInp[i] += (short)KeyData.X;
-		if (Input.GetKey(KeyCode.L)) NowInp[i] += (short)KeyData.Y;
+		if (Input.GetKey(KeyCode.K)) NowInp[i] += (short)KeyData.A;
+		if (Input.GetKey(KeyCode.L)) NowInp[i] += (short)KeyData.B;
+		if (Input.GetKey(KeyCode.I)) NowInp[i] += (short)KeyData.X;
+		if (Input.GetKey(KeyCode.J)) NowInp[i] += (short)KeyData.Y;
 		if (Input.GetKey(KeyCode.UpArrow)) NowInp[i] += (short)KeyData.UP;
 		if (Input.GetKey(KeyCode.DownArrow)) NowInp[i] += (short)KeyData.DOWN;
 		if (Input.GetKey(KeyCode.LeftArrow)) NowInp[i] += (short)KeyData.LEFT;
 		if (Input.GetKey(KeyCode.RightArrow)) NowInp[i] += (short)KeyData.RIGHT;
-		if (Input.GetKey(KeyCode.W)) NowInp[i] += (short)KeyData.RB;
-		if (Input.GetKey(KeyCode.A)) NowInp[i] += (short)KeyData.LB;
-		if (Input.GetKey(KeyCode.Return)) NowInp[i] += (short)KeyData.START;
-		if (Input.GetKey(KeyCode.M)) NowInp[i] += (short)KeyData.BACK;
+		if (Input.GetKey(KeyCode.U)) NowInp[i] += (short)KeyData.RB;
+		if (Input.GetKey(KeyCode.E)) NowInp[i] += (short)KeyData.LB;
+		if (Input.GetKey(KeyCode.Space)) NowInp[i] += (short)KeyData.START;
+		if (Input.GetKey(KeyCode.Escape)) NowInp[i] += (short)KeyData.BACK;
+
+		float x = 0, y = 0;
+		// 左スティックの入力
+		if (Input.GetKey(KeyCode.A)) x -= 1.0f;
+		if (Input.GetKey(KeyCode.D)) x += 1.0f;
+		if (Input.GetKey(KeyCode.S)) y -= 1.0f;
+		if (Input.GetKey(KeyCode.W)) y += 1.0f;
+		m_KeyboardLeftStickVal[i] = new Vector2(x, y).normalized;
+
+		x = 0;
+		y = 0;
+		if (Input.GetKey(KeyCode.B)) x -= 1.0f;
+		if (Input.GetKey(KeyCode.Comma)) x += 1.0f;
+		if (Input.GetKey(KeyCode.M)) y -= 1.0f;
+		if (Input.GetKey(KeyCode.N)) y += 1.0f;
+
+		m_KeyboardRightStickVal[i] = new Vector2(x, y).normalized;
 	}
 
 	/// <summary>
