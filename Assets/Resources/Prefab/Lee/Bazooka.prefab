@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33262377156060890}
   - component: {fileID: 136231890540944242}
   - component: {fileID: 23490854003247670}
-  - component: {fileID: 114156160152358956}
+  - component: {fileID: 114770897264832362}
   m_Layer: 0
   m_Name: Bazooka
   m_TagString: Untagged
@@ -84,7 +84,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1298366636574104}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114156160152358956
+--- !u!114 &114770897264832362
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -92,12 +92,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1298366636574104}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0acf6f646caf81409afc158f00b8f0f, type: 3}
+  m_Script: {fileID: 11500000, guid: 938f58f1f97a27449b5efb4509db700d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SyoukouNum: 0
-  TargetPos: {x: -5, y: 10, z: 10}
-  TargetVector: {x: 0, y: 0, z: 0}
+  TargetPos: {x: 0, y: 0, z: 0}
 --- !u!136 &136231890540944242
 CapsuleCollider:
   m_ObjectHideFlags: 1

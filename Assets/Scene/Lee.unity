@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657892, g: 0.49641287, b: 0.5748173, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -191,7 +191,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 22906114}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.11, y: 0.63, z: -2.056804}
+  m_LocalPosition: {x: 0.11, y: 0.63, z: 0.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -275,7 +275,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 77201243}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.11, y: 0.63, z: -2.056804}
+  m_LocalPosition: {x: -8.45, y: 0.63, z: -1.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -292,7 +292,6 @@ GameObject:
   - component: {fileID: 127641101}
   - component: {fileID: 127641100}
   - component: {fileID: 127641099}
-  - component: {fileID: 127641103}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -363,19 +362,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &127641103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 127641098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eece51cbcd3efc4aa6a52cb2971150a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Bazooka1: {fileID: 0}
-  BazookaPrefab: {fileID: 0}
 --- !u!1 &813946782
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,6 +373,7 @@ GameObject:
   - component: {fileID: 813946785}
   - component: {fileID: 813946784}
   - component: {fileID: 813946783}
+  - component: {fileID: 813946787}
   m_Layer: 0
   m_Name: BazookaRifle
   m_TagString: Untagged
@@ -461,6 +448,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &813946787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 813946782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc0fc60836219b34ab8c23741d652171, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BazookaPrefab: {fileID: 1298366636574104, guid: 567e6c65deb35664bb64e266a92ba19d,
+    type: 2}
 --- !u!1 &889931735
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,7 +539,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 889931735}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.11, y: 0.63, z: -2.056804}
+  m_LocalPosition: {x: 1.26, y: 0.63, z: -0.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -596,7 +596,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4629756675682566, guid: 347f29e7d226d8f49a6e357bed7dec6e, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.91
+      value: 6.17
       objectReference: {fileID: 0}
     - target: {fileID: 4629756675682566, guid: 347f29e7d226d8f49a6e357bed7dec6e, type: 2}
       propertyPath: m_LocalPosition.y
@@ -604,7 +604,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4629756675682566, guid: 347f29e7d226d8f49a6e357bed7dec6e, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -3.9
+      value: 0.67
       objectReference: {fileID: 0}
     - target: {fileID: 4629756675682566, guid: 347f29e7d226d8f49a6e357bed7dec6e, type: 2}
       propertyPath: m_LocalRotation.x
