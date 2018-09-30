@@ -26,7 +26,6 @@ public class Player : MonoBehaviour
 
 	public GameObject ItemPosition;
 
-	private NavMeshAgent agent;
 	private GameObject getItemObj;
 	private GameObject holdDeskObj;
 	private Animator animator;
@@ -39,7 +38,6 @@ public class Player : MonoBehaviour
 	void Start ()
 	{
 		animator = GetComponent<Animator>();
-		agent = GetComponent<NavMeshAgent>();
 	}
 	
 	void Update ()
@@ -55,14 +53,18 @@ public class Player : MonoBehaviour
 			JumpStart();
 		}
 		SerchMoveDesk();
-		Move();
-		Jump();
 	}
+
+    void FixedUpdate() {
+        Move();
+        Jump();
+    }
 
 	private void Move()
 	{
+        Vector2 LeftStick = XPad.Get.GetLeftStick(PlayerIndex);
 
-		if (XPad.Get.GetLeftStick(PlayerIndex).x != 0 || XPad.Get.GetLeftStick(PlayerIndex).y != 0)
+        if (LeftStick.x != 0 || LeftStick.y != 0)
 		{
 			animator.SetBool("isWalk", true);
 		} else
@@ -70,10 +72,8 @@ public class Player : MonoBehaviour
 			animator.SetBool("isWalk", false);
 		}
 
-		if (agent.enabled)
-		{
-			//アイテムを持った&机を持った時移動速度を半減(仮)
-			if (flgGetItem || flgHoldDesk)
+		//アイテムを持った&机を持った時移動速度を半減(仮)
+		if (flgGetItem || flgHoldDesk)
 			{
 				nowMoveSpeed = Speed / 2;
 			} else
@@ -81,32 +81,38 @@ public class Player : MonoBehaviour
 				nowMoveSpeed = Speed;
 			}
 
-			if (flgHoldDesk)
-			{
-				//机を持っている時の移動
-				if (holdDeskDirction.x != 0)
-				{
-					Vector3 move = holdDeskDirction * XPad.Get.GetLeftStick(PlayerIndex).x;
-					agent.Move(move * Time.deltaTime * nowMoveSpeed);
-				}
-				if (holdDeskDirction.z != 0)
-				{
-					Vector3 move = holdDeskDirction * XPad.Get.GetLeftStick(PlayerIndex).y;
-					agent.Move(move * Time.deltaTime * nowMoveSpeed);
-				}
+        if (flgHoldDesk) {
+            //机を持っている時の移動
+            if (holdDeskDirction.x != 0) {
+                Vector3 move = holdDeskDirction * LeftStick.x;
+                //agent.Move(move * Time.deltaTime * nowMoveSpeed);
+            }
+            if (holdDeskDirction.z != 0) {
+                Vector3 move = holdDeskDirction * LeftStick.y;
+                //agent.Move(move * Time.deltaTime * nowMoveSpeed);
+            }
 
-			} else
-			{
-				//机をもっていない時の移動
-				Vector3 move = Vector3.forward * XPad.Get.GetLeftStick(PlayerIndex).y + Vector3.right * XPad.Get.GetLeftStick(PlayerIndex).x;
-				agent.Move(move * Time.deltaTime * nowMoveSpeed);
-				//倒した方向に向く
-				if (XPad.Get.GetLeftStick(PlayerIndex).x != 0 || XPad.Get.GetLeftStick(PlayerIndex).y != 0)
-				{
-					transform.forward = new Vector3(XPad.Get.GetLeftStick(PlayerIndex).x, transform.forward.y, XPad.Get.GetLeftStick(PlayerIndex).y);
-				}
-			}
-		}
+        }
+        else {
+            //机をもっていない時の移動
+            //倒した方向(X軸のみ)に向く
+            if (LeftStick.x != 0) {
+                transform.forward = new Vector3(LeftStick.x, 0, 0);
+            }
+
+            Vector3 move = Vector3.forward * Mathf.Abs(LeftStick.x);
+            Debug.Log(move);
+            this.transform.Translate(move * Time.deltaTime * nowMoveSpeed);
+
+            /*Vector3 move = Vector3.forward * LeftStick.y + Vector3.right * LeftStick.x;
+            agent.Move(move * Time.deltaTime * nowMoveSpeed);
+
+            
+            //倒した方向に向く
+            if (LeftStick.x != 0 || LeftStick.y != 0) {
+                transform.forward = new Vector3(LeftStick.x, transform.forward.y, XPad.Get.GetLeftStick(PlayerIndex).y);
+            }*/
+        }
 	}
 
 	//前方に机があるか調べる
@@ -137,7 +143,6 @@ public class Player : MonoBehaviour
 	{
 		if (!flgJump)
 		{
-			agent.enabled = false;
 			jumpStartYPosition = transform.position.y;
 			jumpSpeed = JumpPower;
 			flgJump = true;
@@ -152,9 +157,8 @@ public class Player : MonoBehaviour
 			jumpSpeed -= Gravity;
 			if (jumpSpeed <= JumpPower * -1)
 			{
-				agent.enabled = true;
 				flgJump = false;
-				transform.position = new Vector3(transform.position.x, jumpStartYPosition, transform.position.z);
+				//transform.position = new Vector3(transform.position.x, jumpStartYPosition, transform.position.z);
 			}
 		}
 	}
