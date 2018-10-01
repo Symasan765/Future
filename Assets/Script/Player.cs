@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private int PlayerIndex = 0;		//プレイヤー番号
 	[SerializeField]
-	private float Speed = 2.0f;			//移動速度
+	private float WalkSpeed = 2.0f;			//移動速度
 	[SerializeField]
 	private float JumpPower = 10.0f;	//ジャンプ力
 	[SerializeField]
@@ -16,14 +16,14 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private int GetItemBlankTime = 30;	//アイテムを持つ&捨てる時の硬直フレーム
 	[SerializeField]
-	private float CanMoveDeskDistance = 0.1f;	//机を運べるようになる範囲
+	private float CanHoldItemDistance = 0.1f;	//机を運べるようになる範囲
 	[SerializeField]
 	private bool flgJump = false;
 	[SerializeField]
-	private bool flgGetItem = false;
-	[SerializeField]
+	private bool flgHoldItem = false;
 	private bool flgHoldDesk = false;
-
+	[SerializeField]
+	private int mentalGauge = 0;
 	public GameObject ItemPosition;
 
 	private GameObject getItemObj;
@@ -31,7 +31,6 @@ public class Player : MonoBehaviour
 	private Animator animator;
 	private float nowMoveSpeed;
 	private float jumpSpeed;
-	private float jumpStartYPosition;
 	private int cntGetItemBlankTime = 0;
 	private Vector3 holdDeskDirction;	//机を持った時の移動方向
 
@@ -42,7 +41,6 @@ public class Player : MonoBehaviour
 	
 	void Update ()
 	{
-		if (cntGetItemBlankTime > 0) cntGetItemBlankTime--;
 
 		if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
 		{
@@ -52,7 +50,19 @@ public class Player : MonoBehaviour
 		{
 			JumpStart();
 		}
-		SerchMoveDesk();
+		SerchItem();
+
+		//証拠を持っている時メンタルゲージ増加(とりあえず何か持ってたら溜まる)
+		if (flgHoldItem)
+		{
+			if (mentalGauge < 100)
+			{
+				mentalGauge++;
+			}
+
+		}
+
+		//SerchMoveDesk();	//机を動かす処理、仕様変更されたので使わないかも
 	}
 
     void FixedUpdate() {
@@ -73,23 +83,21 @@ public class Player : MonoBehaviour
 		}
 
 		//アイテムを持った&机を持った時移動速度を半減(仮)
-		if (flgGetItem || flgHoldDesk)
+		if (flgHoldItem || flgHoldDesk)
 			{
-				nowMoveSpeed = Speed / 2;
+				nowMoveSpeed = WalkSpeed / 2;
 			} else
 			{
-				nowMoveSpeed = Speed;
+				nowMoveSpeed = WalkSpeed;
 			}
 
         if (flgHoldDesk) {
             //机を持っている時の移動
             if (holdDeskDirction.x != 0) {
                 Vector3 move = holdDeskDirction * LeftStick.x;
-                //agent.Move(move * Time.deltaTime * nowMoveSpeed);
             }
             if (holdDeskDirction.z != 0) {
                 Vector3 move = holdDeskDirction * LeftStick.y;
-                //agent.Move(move * Time.deltaTime * nowMoveSpeed);
             }
 
         }
@@ -103,15 +111,6 @@ public class Player : MonoBehaviour
             Vector3 move = Vector3.forward * Mathf.Abs(LeftStick.x);
             Debug.Log(move);
             this.transform.Translate(move * Time.deltaTime * nowMoveSpeed);
-
-            /*Vector3 move = Vector3.forward * LeftStick.y + Vector3.right * LeftStick.x;
-            agent.Move(move * Time.deltaTime * nowMoveSpeed);
-
-            
-            //倒した方向に向く
-            if (LeftStick.x != 0 || LeftStick.y != 0) {
-                transform.forward = new Vector3(LeftStick.x, transform.forward.y, XPad.Get.GetLeftStick(PlayerIndex).y);
-            }*/
         }
 	}
 
@@ -128,7 +127,7 @@ public class Player : MonoBehaviour
 		} else
 		{
 			RaycastHit hit;
-			Physics.Raycast(transform.position, transform.forward, out hit, CanMoveDeskDistance);
+			Physics.Raycast(transform.position, transform.forward, out hit, CanHoldItemDistance);
 			if (hit.collider)
 			{
 				if (XPad.Get.GetPress(XPad.KeyData.A, PlayerIndex))
@@ -141,24 +140,56 @@ public class Player : MonoBehaviour
 
 	private void JumpStart()
 	{
-		if (!flgJump)
+		if (IsOnGround() && !flgJump && !flgHoldItem)
 		{
-			jumpStartYPosition = transform.position.y;
 			jumpSpeed = JumpPower;
 			flgJump = true;
 		}
 	}
 
+	private bool IsOnGround()
+	{
+		RaycastHit hit;
+		Physics.Raycast(transform.position, transform.up * -1, out hit, 0.08f);
+
+		if(hit.collider){
+			return true;
+		}
+		return false;
+	}
+
 	private void Jump()
 	{
+		animator.SetBool("isJump", flgJump);
 		if (flgJump)
 		{
 			transform.position += Vector3.up * jumpSpeed * Time.deltaTime;
 			jumpSpeed -= Gravity;
-			if (jumpSpeed <= JumpPower * -1)
+			if (jumpSpeed <= 0)
 			{
 				flgJump = false;
-				//transform.position = new Vector3(transform.position.x, jumpStartYPosition, transform.position.z);
+			}
+		}
+	}
+
+
+	//持てるアイテムを探す
+	private void SerchItem()
+	{
+		if (cntGetItemBlankTime > 0) cntGetItemBlankTime--;
+
+		if (!flgHoldItem)
+		{
+			Debug.DrawRay(transform.position, transform.forward * CanHoldItemDistance, Color.red);
+			RaycastHit hit;
+			Physics.Raycast(transform.position, transform.forward, out hit, CanHoldItemDistance);
+			if (hit.collider)
+			{
+				Debug.Log(hit.collider.name + "を取得可能");
+				if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
+				{
+					GetItem(hit.collider.gameObject);
+				}
 			}
 		}
 	}
@@ -169,11 +200,11 @@ public class Player : MonoBehaviour
 		Item item = _itemObj.GetComponent<Item>();
 		if (item)
 		{
-			if (!flgGetItem && cntGetItemBlankTime == 0)
+			if (!flgHoldItem && cntGetItemBlankTime == 0)
 			{
 				getItemObj = _itemObj.gameObject;
 				cntGetItemBlankTime = GetItemBlankTime;
-				flgGetItem = true;
+				flgHoldItem = true;
 				_itemObj.transform.parent = transform;
 				Rigidbody itemRb = _itemObj.GetComponent<Rigidbody>();
 				itemRb.useGravity = false;
@@ -190,11 +221,11 @@ public class Player : MonoBehaviour
 	{
 		if (getItemObj)
 		{
-			if (cntGetItemBlankTime == 0 && flgGetItem)
+			if (cntGetItemBlankTime == 0 && flgHoldItem)
 			{
 				getItemObj.transform.parent = null;
 				cntGetItemBlankTime = GetItemBlankTime;
-				flgGetItem = false;
+				flgHoldItem = false;
 				Rigidbody itemRb = getItemObj.GetComponent<Rigidbody>();
 				Item item = getItemObj.GetComponent<Item>();
 				itemRb.useGravity = true;
@@ -248,10 +279,11 @@ public class Player : MonoBehaviour
 
 	private void OnTriggerStay(Collider other)
 	{
+		/*
 		if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
 		{
 			GetItem(other.gameObject);
-		}
+		}*/
 
 	}
 
