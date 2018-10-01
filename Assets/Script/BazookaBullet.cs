@@ -7,23 +7,23 @@ using UnityEngine;
 /// バズーカーの弾のPrefabにコンポネントとして当てておくと良い。
 /// </summary>
 public class BazookaBullet : MonoBehaviour {
-    [SerializeField]
-    private Vector3 TargetPos;
-    private Vector3 TargetVector;
-    private Vector3 MyPos;
+    
+    public Vector3 TargetPos;
 
+    public Vector3 TargetVector;
 
-    //自分の座標と、弾が向いていく方向を確保しておく。
-    void Start()
-    {
-        MyPos = this.transform.position;
-        TargetVector = TargetPos - MyPos;
-    }
+    public Vector3 MyPos;
+
+    public bool isPosSet = false;
+
     
     //Updateでがターゲッティング関数をずっと呼び出す。
     void Update()
     {
-        Targetting();
+        if(isPosSet)
+        {
+            Targetting();
+        }
     }
 
     //的に向かっていく処理。
@@ -50,5 +50,7 @@ public class BazookaBullet : MonoBehaviour {
     {
         TargetPos = in_TargetPos;
         MyPos = in_MyPos;
+        TargetVector = TargetPos - MyPos;
+        isPosSet = true;
     }
 }

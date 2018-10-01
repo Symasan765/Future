@@ -28,6 +28,7 @@ public class BazookaRifle : MonoBehaviour
         if (NearSyoukoNum == 3)
         {
             Instantiate(BazookaPrefab);
+            BazookaPrefab.transform.position = this.transform.position;
             BazookaPrefab.GetComponent<BazookaBullet>().SetBazooka(Boss.gameObject.transform.position, this.transform.position);
             for(int i=0;i<3;i++)
             {
