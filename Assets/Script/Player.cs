@@ -14,34 +14,44 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private float Gravity = 1.0f;		//ジャンプ用重力
 	[SerializeField]
+	private int AttackFrame = 10;		//攻撃持続フレーム
+	[SerializeField]
 	private int GetItemBlankTime = 30;	//アイテムを持つ&捨てる時の硬直フレーム
 	[SerializeField]
 	private float CanHoldItemDistance = 0.1f;	//机を運べるようになる範囲
 	[SerializeField]
-	private bool flgJump = false;
-	[SerializeField]
-	private bool flgHoldItem = false;
-	private bool flgHoldDesk = false;
-	[SerializeField]
 	private int mentalGauge = 0;
+	[SerializeField]
+	private bool isJump = false;
+	[SerializeField]
+	private bool isHoldItem = false;
+	[SerializeField]
+	private bool isHoldDesk = false;
+	[SerializeField]
+	private bool isAttack = false;
+
 	public GameObject ItemPosition;
+	public GameObject AttackCollisionObj;
 
 	private GameObject getItemObj;
 	private GameObject holdDeskObj;
 	private Animator animator;
+	private Rigidbody rb;
+
 	private float nowMoveSpeed;
 	private float jumpSpeed;
 	private int cntGetItemBlankTime = 0;
+	private int cntAttackFrame = 0;
 	private Vector3 holdDeskDirction;	//机を持った時の移動方向
 
 	void Start ()
 	{
+		rb = GetComponent<Rigidbody>();
 		animator = GetComponent<Animator>();
 	}
 	
 	void Update ()
 	{
-
 		if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
 		{
 			ReleaseItem();
@@ -50,10 +60,18 @@ public class Player : MonoBehaviour
 		{
 			JumpStart();
 		}
+
+
 		SerchItem();
 
+		if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
+		{
+			AttackStart();
+		}
+		Attack();
+
 		//証拠を持っている時メンタルゲージ増加(とりあえず何か持ってたら溜まる)
-		if (flgHoldItem)
+		if (isHoldItem)
 		{
 			if (mentalGauge < 100)
 			{
@@ -70,11 +88,12 @@ public class Player : MonoBehaviour
         Jump();
     }
 
+	//移動
 	private void Move()
 	{
         Vector2 LeftStick = XPad.Get.GetLeftStick(PlayerIndex);
-
-        if (LeftStick.x != 0 || LeftStick.y != 0)
+		rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
+        if (LeftStick.x != 0)
 		{
 			animator.SetBool("isWalk", true);
 		} else
@@ -83,7 +102,7 @@ public class Player : MonoBehaviour
 		}
 
 		//アイテムを持った&机を持った時移動速度を半減(仮)
-		if (flgHoldItem || flgHoldDesk)
+		if (isHoldItem || isHoldDesk)
 			{
 				nowMoveSpeed = WalkSpeed / 2;
 			} else
@@ -91,7 +110,7 @@ public class Player : MonoBehaviour
 				nowMoveSpeed = WalkSpeed;
 			}
 
-        if (flgHoldDesk) {
+        if (isHoldDesk) {
             //机を持っている時の移動
             if (holdDeskDirction.x != 0) {
                 Vector3 move = holdDeskDirction * LeftStick.x;
@@ -109,16 +128,57 @@ public class Player : MonoBehaviour
             }
 
             Vector3 move = Vector3.forward * Mathf.Abs(LeftStick.x);
-            Debug.Log(move);
+            //Debug.Log(move);
+			nowMoveSpeed = nowMoveSpeed * LeftStick.x;
+			if (nowMoveSpeed < 0)
+			{
+				nowMoveSpeed *= -1;
+			}
             this.transform.Translate(move * Time.deltaTime * nowMoveSpeed);
         }
+	}
+
+	private void AttackStart()
+	{
+		if (cntGetItemBlankTime == 0 && !isJump && !isAttack && !isHoldDesk && !isHoldItem)
+		{
+			BoxCollider col = AttackCollisionObj.GetComponent<BoxCollider>();
+			col.enabled = true;
+			cntAttackFrame = 0;
+			isAttack = true;
+		}
+	}
+
+	private void Attack()
+	{
+		if (isAttack)
+		{
+			cntAttackFrame++;
+			if (cntAttackFrame == AttackFrame || isHoldItem)
+			{
+				BoxCollider col = AttackCollisionObj.GetComponent<BoxCollider>();
+				col.enabled = false;
+				isAttack = false;
+				cntAttackFrame = 0;
+			}
+		}
+	}
+
+	//攻撃が敵にヒットした
+	public void HitAttackCollision()
+	{
+		mentalGauge -= Random.Range(20, 40);
+		if (mentalGauge < 0)
+		{
+			mentalGauge = 0;
+		}
 	}
 
 	//前方に机があるか調べる
 	private void SerchMoveDesk()
 	{
-		Debug.DrawRay(transform.position, transform.forward);
-		if (flgHoldDesk)
+		//Debug.DrawRay(transform.position, transform.forward);
+		if (isHoldDesk)
 		{
 			if (XPad.Get.GetRelease(XPad.KeyData.A, PlayerIndex))
 			{
@@ -138,15 +198,17 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	//ジャンプ開始
 	private void JumpStart()
 	{
-		if (IsOnGround() && !flgJump && !flgHoldItem)
+		if (IsOnGround() && !isJump && !isHoldItem)
 		{
 			jumpSpeed = JumpPower;
-			flgJump = true;
+			isJump = true;
 		}
 	}
 
+	//接地しているか
 	private bool IsOnGround()
 	{
 		RaycastHit hit;
@@ -158,16 +220,17 @@ public class Player : MonoBehaviour
 		return false;
 	}
 
+	//ジャンプ中
 	private void Jump()
 	{
-		animator.SetBool("isJump", flgJump);
-		if (flgJump)
+		animator.SetBool("isJump", isJump);
+		if (isJump)
 		{
 			transform.position += Vector3.up * jumpSpeed * Time.deltaTime;
 			jumpSpeed -= Gravity;
 			if (jumpSpeed <= 0)
 			{
-				flgJump = false;
+				isJump = false;
 			}
 		}
 	}
@@ -178,17 +241,23 @@ public class Player : MonoBehaviour
 	{
 		if (cntGetItemBlankTime > 0) cntGetItemBlankTime--;
 
-		if (!flgHoldItem)
+		if (!isAttack && !isHoldItem && cntGetItemBlankTime == 0)
 		{
-			Debug.DrawRay(transform.position, transform.forward * CanHoldItemDistance, Color.red);
+			//Debug.DrawRay(transform.position, transform.forward * CanHoldItemDistance, Color.red);
 			RaycastHit hit;
 			Physics.Raycast(transform.position, transform.forward, out hit, CanHoldItemDistance);
 			if (hit.collider)
 			{
-				Debug.Log(hit.collider.name + "を取得可能");
+				//Debug.Log(hit.collider.name + "を取得可能");
 				if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
 				{
-					GetItem(hit.collider.gameObject);
+					if (hit.collider.tag == "Player")
+					{
+						ReceiveItem(hit.collider.gameObject);
+					} else
+					{
+						GetItem(hit.collider.gameObject);
+					}
 				}
 			}
 		}
@@ -200,19 +269,40 @@ public class Player : MonoBehaviour
 		Item item = _itemObj.GetComponent<Item>();
 		if (item)
 		{
-			if (!flgHoldItem && cntGetItemBlankTime == 0)
-			{
-				getItemObj = _itemObj.gameObject;
-				cntGetItemBlankTime = GetItemBlankTime;
-				flgHoldItem = true;
-				_itemObj.transform.parent = transform;
-				Rigidbody itemRb = _itemObj.GetComponent<Rigidbody>();
-				itemRb.useGravity = false;
-				itemRb.isKinematic = true;
+			getItemObj = _itemObj.gameObject;
+			cntGetItemBlankTime = GetItemBlankTime;
+			isHoldItem = true;
+			_itemObj.transform.parent = transform;
+			Rigidbody itemRb = _itemObj.GetComponent<Rigidbody>();
+			BoxCollider col = _itemObj.GetComponent<BoxCollider>();
+			col.isTrigger = true;
+			itemRb.useGravity = false;
+			itemRb.isKinematic = true;
 
-				item.SetItemLocalPosition(ItemPosition.transform.localPosition);
-				item.flgMoveToGetPos = true;
-			}
+			item.SetItemLocalPosition(ItemPosition.transform.localPosition);
+			item.flgMoveToGetPos = true;
+		}
+	}
+
+	//アイテムの親を変更
+	public void ChangeItemParent(GameObject _newParentObj)
+	{
+		isHoldItem = false;
+		cntGetItemBlankTime = GetItemBlankTime;
+		getItemObj.transform.parent = _newParentObj.transform;
+		getItemObj = null;
+	}
+
+	//アイテムを渡す
+	private void ReceiveItem(GameObject passPlayerObj)
+	{
+		Player player = passPlayerObj.GetComponent<Player>();
+		if (player.isHoldItem)
+		{
+			isHoldItem = true;
+			getItemObj = player.getItemObj;
+			player.ChangeItemParent(this.gameObject);
+			cntGetItemBlankTime = GetItemBlankTime;
 		}
 	}
 
@@ -221,16 +311,18 @@ public class Player : MonoBehaviour
 	{
 		if (getItemObj)
 		{
-			if (cntGetItemBlankTime == 0 && flgHoldItem)
+			if (cntGetItemBlankTime == 0 && isHoldItem)
 			{
 				getItemObj.transform.parent = null;
 				cntGetItemBlankTime = GetItemBlankTime;
-				flgHoldItem = false;
+				isHoldItem = false;
 				Rigidbody itemRb = getItemObj.GetComponent<Rigidbody>();
 				Item item = getItemObj.GetComponent<Item>();
+				BoxCollider col = getItemObj.GetComponent<BoxCollider>();
+				col.isTrigger = false;
 				itemRb.useGravity = true;
 				itemRb.isKinematic = false;
-				itemRb.AddForce(transform.forward * 5, ForceMode.Impulse);
+				itemRb.AddForce(transform.forward * 1, ForceMode.Impulse);
 				item.flgMoveToGetPos = false;
 				getItemObj = null;
 			}
@@ -243,7 +335,7 @@ public class Player : MonoBehaviour
 		if (_deskObj.tag == "MoveDesk")
 		{
 			holdDeskObj = _deskObj;
-			flgHoldDesk = true;
+			isHoldDesk = true;
 			holdDeskObj.transform.parent = transform;
 			NavMeshObstacle navMeshObstacle = _deskObj.GetComponent<NavMeshObstacle>();
 			navMeshObstacle.enabled = false;
@@ -267,11 +359,11 @@ public class Player : MonoBehaviour
 	//机を離す
 	private void ReleaseDesk()
 	{
-		if (flgHoldDesk)
+		if (isHoldDesk)
 		{
 			NavMeshObstacle navMeshObstacle = holdDeskObj.GetComponent<NavMeshObstacle>();
 			navMeshObstacle.enabled = true;
-			flgHoldDesk = false;
+			isHoldDesk = false;
 			holdDeskObj.transform.parent = null;
 			holdDeskObj = null;
 		}
