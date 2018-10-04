@@ -32,8 +32,6 @@ public class NavMove : MonoBehaviour {
 
     void Attack() {
         if (agent.remainingDistance <= 0.1) {
-            Debug.LogError("Attacked");
-
             mat.color = Color.red;
             Instantiate(shouko, this.transform.position, this.transform.rotation);
         }
