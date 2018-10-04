@@ -391,6 +391,7 @@ GameObject:
   - component: {fileID: 114737702006511886}
   - component: {fileID: 114373559273784012}
   - component: {fileID: 136039236205371716}
+  - component: {fileID: 114572649080155060}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3081,7 +3082,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1182581083222096}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.82, z: 0}
+  m_LocalPosition: {x: 0, y: -8.074, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4488160233153910}
@@ -4120,7 +4121,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!95 &95615643487801776
 Animator:
   serializedVersion: 3
@@ -4241,7 +4242,7 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 0ccfe86ed1121478bbeacb8e227ec19c, type: 2}
   - {fileID: 7400000, guid: 508261753cbbd4493b10da3a43602a39, type: 2}
   delayWeight: 3
-  isKeepFace: 1
+  isKeepFace: 0
   isGUI: 0
 --- !u!114 &114072992022391818
 MonoBehaviour:
@@ -4303,8 +4304,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerIndex: 0
-  WalkSpeed: 1.2
-  JumpPower: 5
+  WalkSpeed: 6
+  JumpPower: 12
   Gravity: 0.3
   GetItemBlankTime: 20
   CanHoldItemDistance: 0.4
@@ -4535,6 +4536,17 @@ MonoBehaviour:
   - {fileID: 0}
   debug: 1
   threshold: 0.01
+--- !u!114 &114572649080155060
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1182581083222096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bfaba21bbbd43e46971a10468a392f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114586261629681412
 MonoBehaviour:
   m_ObjectHideFlags: 1
