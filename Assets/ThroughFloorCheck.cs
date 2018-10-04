@@ -13,6 +13,7 @@ public class ThroughFloorCheck : MonoBehaviour {
         if (other.gameObject.CompareTag("ThroughFloor")) {
             Debug.Log("Enter");
             collider.isTrigger = true;
+            // この方法だとisTriggerがtrueになった時に他の当たり判定との
         }
     }
 

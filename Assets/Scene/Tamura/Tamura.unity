@@ -808,6 +808,10 @@ Prefab:
       propertyPath: isKeepFace
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1182581083222096, guid: ecd20bb50c9a1ca4ea4b60bc19e032ea, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 195095269509636048, guid: ecd20bb50c9a1ca4ea4b60bc19e032ea, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: ecd20bb50c9a1ca4ea4b60bc19e032ea, type: 2}
