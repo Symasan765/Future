@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Item : MonoBehaviour {
 
-	[SerializeField]
 	private float MoveSpeed = 5.0f;
 
 	private Vector3 getPosition;
+	[HideInInspector]
 	public bool flgMoveToGetPos;
 	
 	void Start ()
