@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
 	private bool isHoldDesk = false;
 	[SerializeField]
 	private bool isAttack = false;
+	[SerializeField]
+	private bool isDamage = false;
 
 	public GameObject ItemPosition;
 	public GameObject AttackCollisionObj;
@@ -42,6 +44,7 @@ public class Player : MonoBehaviour
 	private float jumpSpeed;
 	private int cntGetItemBlankTime = 0;
 	private int cntAttackFrame = 0;
+	private int cntDamageFrame = 0;
 	private Vector3 holdDeskDirction;	//机を持った時の移動方向
 
 	void Start ()
@@ -52,39 +55,51 @@ public class Player : MonoBehaviour
 	
 	void Update ()
 	{
-		if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
+		if (!isDamage)
 		{
-			ReleaseItem();
-		}
-		if (XPad.Get.GetTrigger(XPad.KeyData.X, PlayerIndex))
-		{
-			JumpStart();
-		}
-
-
-		SerchItem();
-
-		if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
-		{
-			AttackStart();
-		}
-		Attack();
-
-		//証拠を持っている時メンタルゲージ増加(とりあえず何か持ってたら溜まる)
-		if (isHoldItem)
-		{
-			if (mentalGauge < 100)
+			if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
 			{
-				mentalGauge++;
+				if (cntGetItemBlankTime == 0)
+				{
+					ReleaseItem();
+				}
+			}
+			if (XPad.Get.GetTrigger(XPad.KeyData.X, PlayerIndex))
+			{
+				JumpStart();
 			}
 
+
+			SerchItem();
+
+			if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
+			{
+				AttackStart();
+			}
+			Attack();
+
+			//証拠を持っている時メンタルゲージ増加(とりあえず何か持ってたら溜まる)
+			if (isHoldItem)
+			{
+				if (mentalGauge < 100)
+				{
+					mentalGauge++;
+				}
+
+			}
+		} else
+		{
+			Damage();
 		}
 
 		//SerchMoveDesk();	//机を動かす処理、仕様変更されたので使わないかも
 	}
 
     void FixedUpdate() {
-        Move();
+		if (!isDamage)
+		{
+			Move();
+		}
         Jump();
     }
 
@@ -148,7 +163,6 @@ public class Player : MonoBehaviour
 			isAttack = true;
 		}
 	}
-
 	private void Attack()
 	{
 		if (isAttack)
@@ -165,12 +179,48 @@ public class Player : MonoBehaviour
 	}
 
 	//攻撃が敵にヒットした
-	public void HitAttackCollision()
+	public void HitPlayerAttack()
 	{
 		mentalGauge -= Random.Range(20, 40);
 		if (mentalGauge < 0)
 		{
 			mentalGauge = 0;
+		}
+	}
+
+	//敵の攻撃が自分にヒットした
+	public void HitBossAttack()
+	{
+		if (isHoldItem)
+		{
+			ReleaseItem();
+		}
+		cntDamageFrame = 180;
+		isDamage = true;
+		mentalGauge += Random.Range(5, 15);
+		if (mentalGauge > 100)
+		{
+			mentalGauge = 100;
+		}
+		Debug.Log("Player" + PlayerIndex + "にボスの攻撃がヒットした！");
+	}
+
+	//今のメンタルゲージを返す
+	public int GetMentalGauge()
+	{
+		return mentalGauge;
+	}
+
+	//ダメージ処理
+	private void Damage()
+	{
+		if (cntDamageFrame > 0)
+		{
+			cntDamageFrame--;
+			if (cntDamageFrame == 0)
+			{
+				isDamage = false;
+			}
 		}
 	}
 
@@ -311,7 +361,7 @@ public class Player : MonoBehaviour
 	{
 		if (getItemObj)
 		{
-			if (cntGetItemBlankTime == 0 && isHoldItem)
+			if (isHoldItem)
 			{
 				getItemObj.transform.parent = null;
 				cntGetItemBlankTime = GetItemBlankTime;
