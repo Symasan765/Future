@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour {
 		if (other.name == "AttackCollision")
 		{
 			Player player = other.transform.parent.GetComponent<Player>();
-			player.HitAttackCollision();
+			player.HitPlayerAttack();
 			rb.AddForce(other.transform.forward * DamagePower, ForceMode.Impulse);
 		}
 	}
