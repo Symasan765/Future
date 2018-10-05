@@ -195,7 +195,7 @@ public class Player : MonoBehaviour
 		{
 			ReleaseItem();
 		}
-		cntDamageFrame = 180;
+		cntDamageFrame = 190;
 		isDamage = true;
 		mentalGauge += Random.Range(5, 15);
 		if (mentalGauge > 100)
