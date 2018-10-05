@@ -31,9 +31,11 @@ public class Player : MonoBehaviour
 	private bool isAttack = false;
 	[SerializeField]
 	private bool isDamage = false;
-
+	[SerializeField]
+	private int angleValue = 0;
 	public GameObject ItemPosition;
 	public GameObject AttackCollisionObj;
+	public GameObject RotateObj;
 
 	private GameObject getItemObj;
 	private GameObject holdDeskObj;
@@ -57,6 +59,7 @@ public class Player : MonoBehaviour
 	{
 		if (!isDamage)
 		{
+			Rotate();
 			if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
 			{
 				if (cntGetItemBlankTime == 0)
@@ -68,7 +71,6 @@ public class Player : MonoBehaviour
 			{
 				JumpStart();
 			}
-
 
 			SerchItem();
 
@@ -103,6 +105,20 @@ public class Player : MonoBehaviour
         Jump();
     }
 
+	private void Rotate()
+	{
+		if (angleValue == 1)
+		{
+			RotateObj.transform.localEulerAngles = new Vector3(0, 30, 0);
+			//RotateObj.transform.localEulerAngles = Vector3.Slerp(RotateObj.transform.localEulerAngles, new Vector3(RotateObj.transform.localEulerAngles.x, 30, RotateObj.transform.localEulerAngles.z), 0.1f);
+		}
+		if(angleValue == -1)
+		{
+			RotateObj.transform.localEulerAngles = new Vector3(0, -30, 0);
+			//RotateObj.transform.localEulerAngles = Vector3.Slerp(RotateObj.transform.localEulerAngles, new Vector3(RotateObj.transform.localEulerAngles.x, 0, RotateObj.transform.localEulerAngles.z), 0.1f);
+		}
+	}
+
 	//移動
 	private void Move()
 	{
@@ -110,6 +126,13 @@ public class Player : MonoBehaviour
 		rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
         if (LeftStick.x != 0)
 		{
+			if (LeftStick.x > 0)
+			{
+				angleValue = 1;
+			} else
+			{
+				angleValue = -1;
+			}
 			animator.SetBool("isWalk", true);
 		} else
 		{
@@ -251,7 +274,7 @@ public class Player : MonoBehaviour
 	//ジャンプ開始
 	private void JumpStart()
 	{
-		if (IsOnGround() && !isJump && !isHoldItem)
+		if (IsOnGround() && !isJump)
 		{
 			jumpSpeed = JumpPower;
 			isJump = true;
