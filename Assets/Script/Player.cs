@@ -103,7 +103,7 @@ public class Player : MonoBehaviour
 	}
 
     void FixedUpdate() {
-		if (!isDamage)
+		if (!isDamage && cntAttackFrame == 0)
 		{
 			Move();
 		}
@@ -115,13 +115,13 @@ public class Player : MonoBehaviour
 		if (angleValue == 1)
 		{
 			//transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, new Vector3(0, 90, 0), 0.2f);
-			RotateObj.transform.localEulerAngles = new Vector3(0, 30, 0);
+			RotateObj.transform.localEulerAngles = new Vector3(0, 55, 0);
 			//RotateObj.transform.localRotation = Quaternion.Slerp(RotateObj.transform.localRotation, , 0.1f);
 		}
 		if(angleValue == -1)
 		{
 			//transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, new Vector3(0, 270, 0), 0.2f);
-			RotateObj.transform.localEulerAngles = new Vector3(0, -30, 0);
+			RotateObj.transform.localEulerAngles = new Vector3(0, -55, 0);
 		}
 	}
 
@@ -154,12 +154,17 @@ public class Player : MonoBehaviour
 		{
 			if (IsOnGround() && Mathf.Abs(LeftStick.x) - Mathf.Abs(oldLeftStick.x) > 0.75f)
 			{
+				XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
 				Debug.Log("ダッシュ開始");
 				isDash = true;
 			}
 			if (isDash)
 			{
 				nowMoveSpeed = DashSpeed;
+				if (!IsOnGround())
+				{
+					nowMoveSpeed = WalkSpeed;
+				}
 			} else
 			{
 				nowMoveSpeed = WalkSpeed;
@@ -199,10 +204,12 @@ public class Player : MonoBehaviour
 	{
 		if (cntGetItemBlankTime == 0 && !isJump && !isAttack && !isHoldDesk && !isHoldItem)
 		{
+			XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
 			BoxCollider col = AttackCollisionObj.GetComponent<BoxCollider>();
 			col.enabled = true;
 			cntAttackFrame = 0;
 			isAttack = true;
+			isDash = false;
 		}
 	}
 	private void Attack()
@@ -223,6 +230,7 @@ public class Player : MonoBehaviour
 	//攻撃が敵にヒットした
 	public void HitPlayerAttack()
 	{
+		XPad.Get.SetVibration(PlayerIndex, 0.7f, 0.7f, 0.2f);
 		mentalGauge -= Random.Range(20, 40);
 		if (mentalGauge < 0)
 		{
@@ -237,6 +245,7 @@ public class Player : MonoBehaviour
 		{
 			ReleaseItem();
 		}
+		XPad.Get.SetVibration(PlayerIndex, 1.0f, 1.0f, 0.5f);
 		cntDamageFrame = 40;
 		isDamage = true;
 		mentalGauge += Random.Range(5, 15);
@@ -295,9 +304,9 @@ public class Player : MonoBehaviour
 	{
 		if (IsOnGround() && !isJump)
 		{
+			XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
 			jumpSpeed = JumpPower;
 			isJump = true;
-			isDash = false;
 		}
 	}
 
@@ -362,6 +371,7 @@ public class Player : MonoBehaviour
 		Item item = _itemObj.GetComponent<Item>();
 		if (item)
 		{
+			XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
 			getItemObj = _itemObj.gameObject;
 			cntGetItemBlankTime = GetItemBlankTime;
 			isHoldItem = true;
@@ -392,6 +402,7 @@ public class Player : MonoBehaviour
 		Player player = passPlayerObj.GetComponent<Player>();
 		if (player.isHoldItem)
 		{
+			XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
 			isHoldItem = true;
 			getItemObj = player.getItemObj;
 			player.ChangeItemParent(this.gameObject);
@@ -406,6 +417,7 @@ public class Player : MonoBehaviour
 		{
 			if (isHoldItem)
 			{
+				XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
 				getItemObj.transform.parent = null;
 				cntGetItemBlankTime = GetItemBlankTime;
 				isHoldItem = false;
