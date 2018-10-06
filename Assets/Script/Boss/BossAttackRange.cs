@@ -14,14 +14,6 @@ public class BossAttackRange : MonoBehaviour {
 
 	bool m_AttackFlag;
 
-	private void Start()
-	{
-		m_AttackFlag = false;
-		m_AttackRangeBoard = Instantiate(m_AttackRangePrefab);
-		m_AttackRangeBoard.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-		AttackCommand(new Vector2(-28.8f,-8.0f), new Vector2(3.0f, 8.0f), 2.0f);
-	}
-
 	// Update is called once per frame
 	void Update () {
 		AttackUpdate();
@@ -35,11 +27,15 @@ public class BossAttackRange : MonoBehaviour {
 	/// <param name="atackTime">攻撃までの時間</param>
 	public void AttackCommand(Vector2 atackPos,Vector2 range,float atackTime)
 	{
+		// 初期化処理
+		m_AttackFlag = false;
+		m_AttackRangeBoard = Instantiate(m_AttackRangePrefab);
+
+		// 攻撃情報保持
 		m_AttackPos = new Vector3(atackPos.x, atackPos.y,0.5f);
 		m_Range = range;
 		m_AttackTime = atackTime;
 		m_AttackCount = 0.0f;
-
 		m_AttackRangeBoard.transform.position = m_AttackPos;
 		m_AttackRangeBoard.transform.localScale = new Vector3(range.x, range.y, 1.0f);
 	}
@@ -86,6 +82,9 @@ public class BossAttackRange : MonoBehaviour {
 			{
 				if (hitInfo[i].collider.gameObject.tag == "Player")
 					hitInfo[i].collider.gameObject.GetComponent<Player>().HitBossAttack();
+				// TODO ボスの攻撃モーションを呼ぶならここ
+				Destroy(m_AttackRangeBoard);
+				Destroy(gameObject);
 			}
 			m_AttackFlag = false;
 		}
