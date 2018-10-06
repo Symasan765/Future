@@ -3,7 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour {
+    [SerializeField]
     GameObject[] playerArray;   // プレイヤーキャラの格納先
+
+    [SerializeField]
+    int n1;
+    [SerializeField]
+    int n2;
+
     [SerializeField]
     float longestDist;          // プレイヤーキャラ間の最長距離
     [SerializeField]
@@ -39,7 +46,7 @@ public class CameraManager : MonoBehaviour {
         // 配列内の各キャラ間の距離を計算
         for (int cnt1 = 0; cnt1 < playerArray.Length; cnt1++) {
             float nowDist;
-            for (int cnt2 = 1; cnt2 < playerArray.Length; cnt2++) {
+            for (int cnt2 = cnt1 + 1; cnt2 < playerArray.Length; cnt2++) {
                 nowDist = Vector3.Distance(playerArray[cnt1].transform.position, playerArray[cnt2].transform.position);
 
                 // 今保存してある最長距離よりも長ければ更新
@@ -47,8 +54,11 @@ public class CameraManager : MonoBehaviour {
                     distance = nowDist;
                     middlePos = (playerArray[cnt1].transform.position + playerArray[cnt2].transform.position) / 2;
 
-                    fromLeftBottom = new Vector3(playerArray[cnt1].transform.position.x - width, centerPos.y - height, 0);
-                    toRightUp = new Vector3(playerArray[cnt2].transform.position.x + width, centerPos.y + height, 0);
+                    fromLeftBottom = new Vector3(playerArray[cnt1].transform.position.x, centerPos.y - height, 0);
+                    toRightUp = new Vector3(playerArray[cnt2].transform.position.x, centerPos.y + height, 0);
+
+                    n1 = cnt1;
+                    n2 = cnt2;
                 }
             }
         }
