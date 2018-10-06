@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
 		if(angleValue == -1)
 		{
 			//transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, new Vector3(0, 270, 0), 0.2f);
-			//RotateObj.transform.localEulerAngles = new Vector3(0, -30, 0);
+			RotateObj.transform.localEulerAngles = new Vector3(0, -30, 0);
 		}
 	}
 
