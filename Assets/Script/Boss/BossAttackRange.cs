@@ -9,18 +9,10 @@ public class BossAttackRange : MonoBehaviour {
 	float m_AttackTime;      // 攻撃秒数
 	float m_AttackCount;        // 攻撃までのカウント
 
+	public GameObject m_AttackRangePrefab;
 	GameObject m_AttackRangeBoard;
 
-	public Material m_RangeMaterial;
-
-	private void Start()
-	{
-		m_AttackRangeBoard = GameObject.CreatePrimitive(PrimitiveType.Cube);
-		m_AttackRangeBoard.transform.localScale = new Vector3(1.0f, 1.0f, 0.0f);
-
-		AttackCommand(Vector3.zero, new Vector2(3.0f, 8.0f), 32.0f);
-		m_AttackRangeBoard.GetComponent<Renderer>().material = m_RangeMaterial;
-	}
+	bool m_AttackFlag;
 
 	// Update is called once per frame
 	void Update () {
@@ -33,15 +25,19 @@ public class BossAttackRange : MonoBehaviour {
 	/// <param name="atackPos">攻撃中心座標</param>
 	/// <param name="range">攻撃範囲</param>
 	/// <param name="atackTime">攻撃までの時間</param>
-	public void AttackCommand(Vector3 atackPos,Vector2 range,float atackTime)
+	public void AttackCommand(Vector2 atackPos,Vector2 range,float atackTime)
 	{
-		m_AttackPos = atackPos;
+		// 初期化処理
+		m_AttackFlag = false;
+		m_AttackRangeBoard = Instantiate(m_AttackRangePrefab);
+
+		// 攻撃情報保持
+		m_AttackPos = new Vector3(atackPos.x, atackPos.y,0.5f);
 		m_Range = range;
 		m_AttackTime = atackTime;
 		m_AttackCount = 0.0f;
-
 		m_AttackRangeBoard.transform.position = m_AttackPos;
-		m_AttackRangeBoard.transform.localScale = new Vector3(range.x, range.y, 0.0f);
+		m_AttackRangeBoard.transform.localScale = new Vector3(range.x, range.y, 1.0f);
 	}
 
 	void AttackUpdate()
@@ -52,6 +48,11 @@ public class BossAttackRange : MonoBehaviour {
 			RangeFlashing();
 
 			m_AttackCount += Time.deltaTime;
+			m_AttackFlag = true;
+		}
+		else
+		{
+			AttackPlayer();
 		}
 	}
 
@@ -68,4 +69,26 @@ public class BossAttackRange : MonoBehaviour {
 			m_AttackRangeBoard.active = true;
 		}
 	}
+
+	// プレイヤーに攻撃を仕掛ける関数
+	void AttackPlayer()
+	{
+		if (m_AttackFlag)
+		{
+			RaycastHit[] hitInfo = Physics.BoxCastAll(m_AttackPos, new Vector3(m_Range.x / 2.0f, m_Range.y / 2.0f, 0.0f), Vector3.back, Quaternion.identity, 5.0f);
+			
+			// 当たったオブジェクトからプレイヤーを探してダメージ処理
+			for(int i = 0; i < hitInfo.Length; i++)
+			{
+				if (hitInfo[i].collider.gameObject.tag == "Player")
+					hitInfo[i].collider.gameObject.GetComponent<Player>().HitBossAttack();
+				// TODO ボスの攻撃モーションを呼ぶならここ
+				Destroy(m_AttackRangeBoard);
+				Destroy(gameObject);
+			}
+			m_AttackFlag = false;
+		}
+	}
+
+	
 }
