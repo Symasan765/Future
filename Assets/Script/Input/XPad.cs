@@ -22,6 +22,8 @@ public class XPad : SingletonMonoBehaviour<XPad>
 
 	const float m_DeadZone = 0.3f;
 
+	Vector3[] m_VibeData = new Vector3[MaxControllerNum];		// x = 左振動情報、y = 右振動情報,z = 残りタイム
+
 	/// <summary>
 	/// 入力するキー番号。ビット演算を使用するため各数値は累乗
 	/// </summary>
@@ -135,15 +137,16 @@ public class XPad : SingletonMonoBehaviour<XPad>
 	}
 
 	/// <summary>
-	/// コントローラーの振動を有効にする
+	/// コントローラーの振動を有効にする。
 	/// </summary>
 	/// <param name="GamePadNo"></param>
-	/// <param name="LeftMagnitude"></param>
-	/// <param name="RightMagnitude"></param>
-	public void SetVibration(int GamePadNo, float LeftMagnitude, float RightMagnitude)
+	/// <param name="LeftMagnitude">0.0~1.0 粗の大きいショック性の振動</param>
+	/// <param name="RightMagnitude">0.0-1.0 きめの細かい連続性の振動</param>
+	/// <param name="vibeSec"></param>
+	public void SetVibration(int GamePadNo, float LeftMagnitude, float RightMagnitude,float vibeSec)
 	{
 		if (ConnectFlag[GamePadNo])
-			GamePad.SetVibration((PlayerIndex)GamePadNo, LeftMagnitude, RightMagnitude);
+			m_VibeData[GamePadNo] = new Vector3(LeftMagnitude, RightMagnitude, vibeSec);
 	}
 
 	void Start()
@@ -169,12 +172,30 @@ public class XPad : SingletonMonoBehaviour<XPad>
 		DebugKeyFlagSwitching();
 
 		AllInputUpdate();
+		Vibration();
 	}
 
-    /// <summary>
-    /// コントローラーとの接続を試みる
-    /// </summary>
-    void AllConfirmConnection()
+	void Vibration()
+	{
+		for (int i = 0; i < MaxControllerNum; i++)
+		{
+			// 振動時間がまだ残っている
+			if (m_VibeData[i].z > 0.0f)
+			{
+				m_VibeData[i].z -= Time.deltaTime;
+			}
+			else
+			{
+				m_VibeData[i] = Vector3.zero;
+			}
+			GamePad.SetVibration((PlayerIndex)i, m_VibeData[i].x, m_VibeData[i].y);
+		}
+	}
+
+	/// <summary>
+	/// コントローラーとの接続を試みる
+	/// </summary>
+	void AllConfirmConnection()
     {
         for (int i = 0; i < MaxControllerNum; i++)
         {
