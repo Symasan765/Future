@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private float WalkSpeed = 2.0f;			//移動速度
 	[SerializeField]
+	private float DashSpeed = 10.0f;		//ダッシュ速度
+	[SerializeField]
 	private float JumpPower = 10.0f;	//ジャンプ力
 	[SerializeField]
 	private float Gravity = 1.0f;		//ジャンプ用重力
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour
 	private int mentalGauge = 0;
 	[SerializeField]
 	private bool isJump = false;
+	private bool isDash = false;
 	[SerializeField]
 	private bool isHoldItem = false;
 	[SerializeField]
@@ -48,7 +51,8 @@ public class Player : MonoBehaviour
 	private int cntAttackFrame = 0;
 	private int cntDamageFrame = 0;
 	private Vector3 holdDeskDirction;	//机を持った時の移動方向
-
+	private Vector3 oldLeftStick;
+	private float rotationValue = 0;
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody>();
@@ -57,6 +61,7 @@ public class Player : MonoBehaviour
 	
 	void Update ()
 	{
+		animator.SetBool("isDamage", isDamage);
 		if (!isDamage)
 		{
 			Rotate();
@@ -109,13 +114,14 @@ public class Player : MonoBehaviour
 	{
 		if (angleValue == 1)
 		{
+			//transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, new Vector3(0, 90, 0), 0.2f);
 			RotateObj.transform.localEulerAngles = new Vector3(0, 30, 0);
-			//RotateObj.transform.localEulerAngles = Vector3.Slerp(RotateObj.transform.localEulerAngles, new Vector3(RotateObj.transform.localEulerAngles.x, 30, RotateObj.transform.localEulerAngles.z), 0.1f);
+			//RotateObj.transform.localRotation = Quaternion.Slerp(RotateObj.transform.localRotation, , 0.1f);
 		}
 		if(angleValue == -1)
 		{
-			RotateObj.transform.localEulerAngles = new Vector3(0, -30, 0);
-			//RotateObj.transform.localEulerAngles = Vector3.Slerp(RotateObj.transform.localEulerAngles, new Vector3(RotateObj.transform.localEulerAngles.x, 0, RotateObj.transform.localEulerAngles.z), 0.1f);
+			//transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, new Vector3(0, 270, 0), 0.2f);
+			//RotateObj.transform.localEulerAngles = new Vector3(0, -30, 0);
 		}
 	}
 
@@ -136,17 +142,29 @@ public class Player : MonoBehaviour
 			animator.SetBool("isWalk", true);
 		} else
 		{
+			isDash = false;
 			animator.SetBool("isWalk", false);
 		}
 
 		//アイテムを持った&机を持った時移動速度を半減(仮)
 		if (isHoldItem || isHoldDesk)
+		{
+			nowMoveSpeed = WalkSpeed / 2;
+		} else
+		{
+			if (IsOnGround() && Mathf.Abs(LeftStick.x) - Mathf.Abs(oldLeftStick.x) > 0.75f)
 			{
-				nowMoveSpeed = WalkSpeed / 2;
+				Debug.Log("ダッシュ開始");
+				isDash = true;
+			}
+			if (isDash)
+			{
+				nowMoveSpeed = DashSpeed;
 			} else
 			{
 				nowMoveSpeed = WalkSpeed;
 			}
+		}
 
         if (isHoldDesk) {
             //机を持っている時の移動
@@ -162,7 +180,7 @@ public class Player : MonoBehaviour
             //机をもっていない時の移動
             //倒した方向(X軸のみ)に向く
             if (LeftStick.x != 0) {
-                transform.forward = new Vector3(LeftStick.x, 0, 0);
+               transform.forward = new Vector3(LeftStick.x, 0, 0);
             }
 
             Vector3 move = Vector3.forward * Mathf.Abs(LeftStick.x);
@@ -174,6 +192,7 @@ public class Player : MonoBehaviour
 			}
             this.transform.Translate(move * Time.deltaTime * nowMoveSpeed);
         }
+		oldLeftStick = LeftStick;
 	}
 
 	private void AttackStart()
@@ -218,7 +237,7 @@ public class Player : MonoBehaviour
 		{
 			ReleaseItem();
 		}
-		cntDamageFrame = 190;
+		cntDamageFrame = 40;
 		isDamage = true;
 		mentalGauge += Random.Range(5, 15);
 		if (mentalGauge > 100)
@@ -278,6 +297,7 @@ public class Player : MonoBehaviour
 		{
 			jumpSpeed = JumpPower;
 			isJump = true;
+			isDash = false;
 		}
 	}
 
@@ -450,6 +470,12 @@ public class Player : MonoBehaviour
 			GetItem(other.gameObject);
 		}*/
 
+	}
+
+	//アイテムを取得しているかどうかを返す
+	public bool IsHoldItem()
+	{
+		return isHoldItem;
 	}
 
 }

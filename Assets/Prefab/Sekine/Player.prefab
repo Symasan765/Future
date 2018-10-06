@@ -4375,8 +4375,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerIndex: 0
-  WalkSpeed: 2
-  JumpPower: 12
+  WalkSpeed: 3
+  DashSpeed: 6
+  JumpPower: 10
   Gravity: 0.3
   AttackFrame: 10
   GetItemBlankTime: 20
