@@ -42,6 +42,7 @@ public class ThroughFloorCheck : MonoBehaviour {
 	public void IsFall(float fallTimeSec)
 	{
 		m_FallingTimeCntSec = fallTimeSec;
+		gameObject.layer = ThroughFloorLayerNo;
 	}
 
 	void Rising()
