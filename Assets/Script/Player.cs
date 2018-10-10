@@ -161,7 +161,7 @@ public class Player : MonoBehaviour {
             }
         }
         moveAcc = Mathf.Clamp(moveAcc, 0.0f, 15.0f);
-        //mt.ChangeZPos(moveAcc);
+        mt.ChangeZPos(moveAcc);
 
         if (isHoldDesk) {
             //机を持っている時の移動
