@@ -10,15 +10,41 @@ public class ThroughFloorCheck : MonoBehaviour {
 	int ThroughFloorLayerNo = 0;
 	int DefaultLayerNo = 0;
 
+	float m_FallingTimeCntSec;
+
 	private void Start()
 	{
 		m_Rigid = GetComponent<Rigidbody>();
 		m_Capsule = GetComponent<CapsuleCollider>();
 		ThroughFloorLayerNo = LayerMask.NameToLayer("ThroughFloor");
 		DefaultLayerNo = LayerMask.NameToLayer("Default");
+		m_FallingTimeCntSec = 0;
 	}
 
 	private void Update()
+	{
+		// 落下中ではない
+		if(m_FallingTimeCntSec <= 0.0f)
+		{
+			Rising();
+		}
+		// 落下中
+		else
+		{
+			Fall();
+		}
+	}
+
+	/// <summary>
+	/// 落下状態に変更する関数
+	/// </summary>
+	/// <param name="fallTimeSec">落下判定時間を指定する(秒)</param>
+	public void IsFall(float fallTimeSec)
+	{
+		m_FallingTimeCntSec = fallTimeSec;
+	}
+
+	void Rising()
 	{
 		// まずはキャラの足元の座標を計算する
 		Vector3 capsulePos = transform.position + m_Capsule.center;
@@ -28,7 +54,7 @@ public class ThroughFloorCheck : MonoBehaviour {
 		Ray ray = new Ray(footPos, Vector3.up);
 
 		// レイヤーの管理番号を取得
-		
+
 		// マスクへの変換（ビットシフト）
 		int layerMask = 1 << ThroughFloorLayerNo;
 
@@ -40,5 +66,12 @@ public class ThroughFloorCheck : MonoBehaviour {
 		{
 			gameObject.layer = ThroughFloorLayerNo;
 		}
+	}
+
+	void Fall()
+	{
+		m_FallingTimeCntSec -= Time.deltaTime;
+		if (m_FallingTimeCntSec < 0.0f)
+			m_FallingTimeCntSec = 0.0f;
 	}
 }
