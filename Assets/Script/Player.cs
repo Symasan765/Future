@@ -14,27 +14,26 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private float JumpPower = 10.0f;	//ジャンプ力
 	[SerializeField]
-	private float Gravity = 1.0f;		//ジャンプ用重力
+	private float Gravity = 1.0f;		//キャラ固有重力
 	[SerializeField]
 	private int AttackFrame = 10;		//攻撃持続フレーム
 	[SerializeField]
-	private int GetItemBlankTime = 30;	//アイテムを持つ&捨てる時の硬直フレーム
+	private int GetItemBlankFrame = 30;	//アイテムを持つ&捨てる時の硬直フレーム
 	[SerializeField]
 	private float CanHoldItemDistance = 0.1f;	//机を運べるようになる範囲
 	[SerializeField]
-	private int mentalGauge = 0;
+	private int MentalGaugeMax = 100;		//メンタルゲージ最大値
 	[SerializeField]
+	private int MentalGaugeAccumulateSpeed = 5;
+
+	private int mentalGauge = 0;
 	private bool isJump = false;
 	private bool isDash = false;
-	[SerializeField]
 	private bool isHoldItem = false;
-	[SerializeField]
 	private bool isHoldDesk = false;
-	[SerializeField]
 	private bool isAttack = false;
-	[SerializeField]
 	private bool isDamage = false;
-	[SerializeField]
+	private bool isMove = false;
 	private int angleValue = 0;
 	public GameObject ItemPosition;
 	public GameObject AttackCollisionObj;
@@ -62,6 +61,7 @@ public class Player : MonoBehaviour
 	void Update ()
 	{
 		animator.SetBool("isDamage", isDamage);
+		animator.SetInteger("cntGetItemBlankTime", cntGetItemBlankTime);
 		if (!isDamage)
 		{
 			Rotate();
@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
 			//証拠を持っている時メンタルゲージ増加(とりあえず何か持ってたら溜まる)
 			if (isHoldItem)
 			{
-				if (mentalGauge < 100)
+				if (mentalGauge < MentalGaugeMax && Time.frameCount % MentalGaugeAccumulateSpeed == 0)
 				{
 					mentalGauge++;
 				}
@@ -103,7 +103,8 @@ public class Player : MonoBehaviour
 	}
 
     void FixedUpdate() {
-		if (!isDamage && cntAttackFrame == 0)
+		rb.AddForce(Vector3.down * Gravity);
+		if (!isDamage && cntAttackFrame == 0 && cntGetItemBlankTime == 0)
 		{
 			Move();
 		}
@@ -114,13 +115,10 @@ public class Player : MonoBehaviour
 	{
 		if (angleValue == 1)
 		{
-			//transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, new Vector3(0, 90, 0), 0.2f);
 			RotateObj.transform.localEulerAngles = new Vector3(0, 55, 0);
-			//RotateObj.transform.localRotation = Quaternion.Slerp(RotateObj.transform.localRotation, , 0.1f);
 		}
 		if(angleValue == -1)
 		{
-			//transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, new Vector3(0, 270, 0), 0.2f);
 			RotateObj.transform.localEulerAngles = new Vector3(0, -55, 0);
 		}
 	}
@@ -132,6 +130,7 @@ public class Player : MonoBehaviour
 		rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
         if (LeftStick.x != 0)
 		{
+			isMove = true;
 			if (LeftStick.x > 0)
 			{
 				angleValue = 1;
@@ -142,6 +141,7 @@ public class Player : MonoBehaviour
 			animator.SetBool("isWalk", true);
 		} else
 		{
+			isMove = false;
 			isDash = false;
 			animator.SetBool("isWalk", false);
 		}
@@ -214,6 +214,7 @@ public class Player : MonoBehaviour
 	}
 	private void Attack()
 	{
+		animator.SetBool("isAttack", isAttack);
 		if (isAttack)
 		{
 			cntAttackFrame++;
@@ -249,9 +250,9 @@ public class Player : MonoBehaviour
 		cntDamageFrame = 40;
 		isDamage = true;
 		mentalGauge += Random.Range(5, 15);
-		if (mentalGauge > 100)
+		if (mentalGauge > MentalGaugeMax)
 		{
-			mentalGauge = 100;
+			mentalGauge = MentalGaugeMax;
 		}
 		Debug.Log("Player" + PlayerIndex + "にボスの攻撃がヒットした！");
 	}
@@ -265,6 +266,7 @@ public class Player : MonoBehaviour
 	//ダメージ処理
 	private void Damage()
 	{
+		isMove = false;
 		if (cntDamageFrame > 0)
 		{
 			cntDamageFrame--;
@@ -302,12 +304,19 @@ public class Player : MonoBehaviour
 	//ジャンプ開始
 	private void JumpStart()
 	{
-		if (IsOnGround() && !isJump)
+		if (IsOnGround() && !isJump && !isAttack)
 		{
 			XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
 			jumpSpeed = JumpPower;
 			isJump = true;
 		}
+	}
+
+
+	//移動しているか
+	public bool IsMove()
+	{
+		return isMove;
 	}
 
 	//接地しているか
@@ -373,7 +382,7 @@ public class Player : MonoBehaviour
 		{
 			XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
 			getItemObj = _itemObj.gameObject;
-			cntGetItemBlankTime = GetItemBlankTime;
+			cntGetItemBlankTime = GetItemBlankFrame;
 			isHoldItem = true;
 			_itemObj.transform.parent = transform;
 			Rigidbody itemRb = _itemObj.GetComponent<Rigidbody>();
@@ -391,7 +400,7 @@ public class Player : MonoBehaviour
 	public void ChangeItemParent(GameObject _newParentObj)
 	{
 		isHoldItem = false;
-		cntGetItemBlankTime = GetItemBlankTime;
+		cntGetItemBlankTime = GetItemBlankFrame;
 		getItemObj.transform.parent = _newParentObj.transform;
 		getItemObj = null;
 	}
@@ -406,7 +415,7 @@ public class Player : MonoBehaviour
 			isHoldItem = true;
 			getItemObj = player.getItemObj;
 			player.ChangeItemParent(this.gameObject);
-			cntGetItemBlankTime = GetItemBlankTime;
+			cntGetItemBlankTime = GetItemBlankFrame;
 		}
 	}
 
@@ -419,7 +428,7 @@ public class Player : MonoBehaviour
 			{
 				XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
 				getItemObj.transform.parent = null;
-				cntGetItemBlankTime = GetItemBlankTime;
+				cntGetItemBlankTime = GetItemBlankFrame;
 				isHoldItem = false;
 				Rigidbody itemRb = getItemObj.GetComponent<Rigidbody>();
 				Item item = getItemObj.GetComponent<Item>();
