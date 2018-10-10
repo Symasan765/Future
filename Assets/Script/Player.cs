@@ -128,8 +128,10 @@ public class Player : MonoBehaviour
 	{
         Vector2 LeftStick = XPad.Get.GetLeftStick(PlayerIndex);
 		rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
+		//キャラの向きを変える
         if (LeftStick.x != 0)
 		{
+			//スティックが倒れている時は動いている状態
 			isMove = true;
 			if (LeftStick.x > 0)
 			{
@@ -146,6 +148,12 @@ public class Player : MonoBehaviour
 			animator.SetBool("isWalk", false);
 		}
 
+		//すり抜け床の処理
+		if (XPad.Get.GetLeftStick(PlayerIndex).y < -0.2f)
+		{
+			GetComponent<ThroughFloorCheck>().IsFall(0.5f);
+		}
+
 		//アイテムを持った&机を持った時移動速度を半減(仮)
 		if (isHoldItem || isHoldDesk)
 		{
@@ -154,7 +162,6 @@ public class Player : MonoBehaviour
 		{
 			if (IsOnGround() && Mathf.Abs(LeftStick.x) - Mathf.Abs(oldLeftStick.x) > 0.75f)
 			{
-				XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
 				Debug.Log("ダッシュ開始");
 				isDash = true;
 			}
@@ -306,7 +313,6 @@ public class Player : MonoBehaviour
 	{
 		if (IsOnGround() && !isJump && !isAttack)
 		{
-			XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
 			jumpSpeed = JumpPower;
 			isJump = true;
 		}
@@ -326,6 +332,7 @@ public class Player : MonoBehaviour
 		Physics.Raycast(transform.position, transform.up * -1, out hit, 0.08f);
 
 		if(hit.collider){
+			rb.velocity = Vector3.zero;
 			return true;
 		}
 		return false;

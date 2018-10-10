@@ -49,7 +49,7 @@ public class ThroughFloorCheck : MonoBehaviour {
 	{
 		// まずはキャラの足元の座標を計算する
 		Vector3 capsulePos = transform.position + m_Capsule.center;
-		Vector3 footPos = new Vector3(capsulePos.x, capsulePos.y - (m_Capsule.height / 2.0f) - 0.35f, capsulePos.z);   // 0.001fは地面から少し上からレイを飛ばすため
+		Vector3 footPos = new Vector3(capsulePos.x, capsulePos.y - (m_Capsule.height / 2.0f) + 0.01f, capsulePos.z);   // 0.001fは地面から少し上からレイを飛ばすため
 
 		// レイを作成
 		Ray ray = new Ray(footPos, Vector3.up);
