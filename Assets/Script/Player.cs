@@ -506,4 +506,7 @@ public class Player : MonoBehaviour
 		return isHoldItem;
 	}
 
+    public int GetPlayerIndex() {
+        return PlayerIndex;
+    }
 }

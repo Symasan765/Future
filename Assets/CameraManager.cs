@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ public class CameraManager : MonoBehaviour {
 
 	void Start () {
         playerArray = GameObject.FindGameObjectsWithTag("Player");
+        //Array.Sort(playerArray, (a, b) => a.time - b.time)
 	}
 	
 	void Update () {
