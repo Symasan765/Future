@@ -8,23 +8,25 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	public int PlayerIndex = 0;		//プレイヤー番号
 	[SerializeField]
+	private float ForwardAngle = 55.0f;
+	[SerializeField]
 	private float WalkSpeed = 2.0f;			//移動速度
 	[SerializeField]
 	private float DashSpeed = 10.0f;		//ダッシュ速度
 	[SerializeField]
 	private float JumpPower = 10.0f;	//ジャンプ力
 	[SerializeField]
-	private float Gravity = 1.0f;		//キャラ固有重力
+	private float Gravity = 0.4f;		//キャラ固有重力
 	[SerializeField]
-	private int AttackFrame = 10;		//攻撃持続フレーム
-	[SerializeField]
-	private int GetItemBlankFrame = 30;	//アイテムを持つ&捨てる時の硬直フレーム
-	[SerializeField]
-	private float CanHoldItemDistance = 0.1f;	//机を運べるようになる範囲
+	private float BrakePower = 0.4f;	//ブレーキの強さ
 	[SerializeField]
 	private int MentalGaugeMax = 100;		//メンタルゲージ最大値
 	[SerializeField]
 	private int MentalGaugeAccumulateSpeed = 5;
+
+	private int AttackFrame = 25;		//攻撃持続フレーム
+	private int GetItemBlankFrame = 5;	//アイテムを持つ&捨てる時の硬直フレーム
+	private float CanHoldItemDistance = 0.4f;	//机を運べるようになる範囲
 
 	private int mentalGauge = 0;
 	private bool isJump = false;
@@ -46,6 +48,8 @@ public class Player : MonoBehaviour
 	private Rigidbody rb;
 
 	private float nowMoveSpeed;
+	private float rightSpeed;
+	private float leftSpeed;
 	private float jumpSpeed;
 	private int cntGetItemBlankTime = 0;
 	private int cntAttackFrame = 0;
@@ -54,6 +58,7 @@ public class Player : MonoBehaviour
 	private Vector3 oldLeftStick;
 	private Vector3 respawnPosition;
 	private float rotationValue = 0;
+	private float dashBrakeSpeed = 1.0f;
 
 	void Start ()
 	{
@@ -70,7 +75,6 @@ public class Player : MonoBehaviour
 		animator.SetInteger("cntGetItemBlankTime", cntGetItemBlankTime);
 		if (!isDamage)
 		{
-			Rotate();
 			if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
 			{
 				if (cntGetItemBlankTime == 0)
@@ -90,7 +94,6 @@ public class Player : MonoBehaviour
 				AttackStart();
 			}
 			Attack();
-
 			//証拠を持っている時メンタルゲージ増加(とりあえず何か持ってたら溜まる)
 			if (isHoldItem)
 			{
@@ -98,14 +101,16 @@ public class Player : MonoBehaviour
 				{
 					mentalGauge++;
 				}
-
 			}
 		} else
 		{
 			Damage();
 		}
 		Respawn();
-		//SerchMoveDesk();	//机を動かす処理、仕様変更されたので使わないかも
+		
+		//キャラのZ座標は常に0
+		transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+		Rotate();
 	}
 
     void FixedUpdate()
@@ -122,11 +127,13 @@ public class Player : MonoBehaviour
 	{
 		if (angleValue == 1)
 		{
-			RotateObj.transform.localEulerAngles = new Vector3(0, 55, 0);
+			transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, new Vector3(0, 90, 0), 0.4f);
+			RotateObj.transform.localEulerAngles = new Vector3(0, ForwardAngle + 360, 0);
 		}
 		if(angleValue == -1)
 		{
-			RotateObj.transform.localEulerAngles = new Vector3(0, -55, 0);
+			transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, new Vector3(0, 270, 0), 0.4f);
+			RotateObj.transform.localEulerAngles = new Vector3(0, 360 - ForwardAngle, 0);
 		}
 	}
 
@@ -136,6 +143,29 @@ public class Player : MonoBehaviour
 		animator.SetBool("isDash", isDash);
         Vector2 LeftStick = XPad.Get.GetLeftStick(PlayerIndex);
 		rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
+		if (LeftStick.x <= 0)
+		{
+			if (rightSpeed > 0)
+			{
+				rightSpeed -= BrakePower;
+				if (rightSpeed < 0)
+				{
+					rightSpeed = 0;
+				}
+			}
+		}
+		if (LeftStick.x >= 0)
+		{
+			if (leftSpeed < 0)
+			{
+				leftSpeed += BrakePower;
+				if (leftSpeed > 0)
+				{
+					leftSpeed = 0;
+				}
+			}
+		}
+
 		//キャラの向きを変える
         if (LeftStick.x != 0)
 		{
@@ -143,9 +173,11 @@ public class Player : MonoBehaviour
 			isMove = true;
 			if (LeftStick.x > 0)
 			{
+				//スティックが右に倒れている
 				angleValue = 1;
 			} else
 			{
+				//スティックが左に倒れている
 				angleValue = -1;
 			}
 			animator.SetBool("isWalk", true);
@@ -168,9 +200,8 @@ public class Player : MonoBehaviour
 			nowMoveSpeed = WalkSpeed / 2;
 		} else
 		{
-			if (IsOnGround() && Mathf.Abs(LeftStick.x) - Mathf.Abs(oldLeftStick.x) > 0.75f)
+			if (IsOnGround() && Mathf.Abs(LeftStick.x) - Mathf.Abs(oldLeftStick.x) > 0.65f)
 			{
-				Debug.Log("ダッシュ開始");
 				isDash = true;
 			}
 			if (isDash)
@@ -185,34 +216,30 @@ public class Player : MonoBehaviour
 				nowMoveSpeed = WalkSpeed;
 			}
 		}
+		if (nowMoveSpeed < 0)
+		{
+			nowMoveSpeed *= -1;
+		}
+		if (LeftStick.x != 0)
+		{
+			SetMoveSpeed(angleValue, nowMoveSpeed);
+		}
 
-        if (isHoldDesk) {
-            //机を持っている時の移動
-            if (holdDeskDirction.x != 0) {
-                Vector3 move = holdDeskDirction * LeftStick.x;
-            }
-            if (holdDeskDirction.z != 0) {
-                Vector3 move = holdDeskDirction * LeftStick.y;
-            }
-
-        }
-        else {
-            //机をもっていない時の移動
-            //倒した方向(X軸のみ)に向く
-            if (LeftStick.x != 0) {
-               transform.forward = new Vector3(LeftStick.x, 0, 0);
-            }
-
-            Vector3 move = Vector3.forward * Mathf.Abs(LeftStick.x);
-            //Debug.Log(move);
-			nowMoveSpeed = nowMoveSpeed * LeftStick.x;
-			if (nowMoveSpeed < 0)
-			{
-				nowMoveSpeed *= -1;
-			}
-            this.transform.Translate(move * Time.deltaTime * nowMoveSpeed);
-        }
+		this.transform.Translate(Vector3.forward * angleValue * Time.deltaTime * (rightSpeed + leftSpeed));
 		oldLeftStick = LeftStick;
+	}
+
+	//向きごとに速度をセットする
+	private void SetMoveSpeed(int _angleValue, float _speed)
+	{
+		if (_angleValue == 1)
+		{
+			rightSpeed = _speed;
+		}
+		if (_angleValue == -1)
+		{
+			leftSpeed = _speed * -1;
+		}
 	}
 
 	private void AttackStart()
@@ -225,6 +252,7 @@ public class Player : MonoBehaviour
 			cntAttackFrame = 0;
 			isAttack = true;
 			isDash = false;
+			rightSpeed = leftSpeed = 0.0f;
 		}
 	}
 	private void Attack()
@@ -261,6 +289,7 @@ public class Player : MonoBehaviour
 		{
 			ReleaseItem();
 		}
+		rightSpeed = leftSpeed = 0.0f;
 		cntGetItemBlankTime = 0;
 		XPad.Get.SetVibration(PlayerIndex, 1.0f, 1.0f, 0.5f);
 		cntDamageFrame = 40;
@@ -270,7 +299,7 @@ public class Player : MonoBehaviour
 		{
 			mentalGauge = MentalGaugeMax;
 		}
-		Debug.Log("Player" + PlayerIndex + "にボスの攻撃がヒットした！");
+	//	Debug.Log("Player" + PlayerIndex + "にボスの攻撃がヒットした！");
 	}
 
 	//今のメンタルゲージを返す
@@ -397,6 +426,7 @@ public class Player : MonoBehaviour
 		Item item = _itemObj.GetComponent<Item>();
 		if (item)
 		{
+			rightSpeed = leftSpeed = 0.0f;
 			isDash = false;
 			XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
 			getItemObj = _itemObj.gameObject;
@@ -434,6 +464,7 @@ public class Player : MonoBehaviour
 			getItemObj = player.getItemObj;
 			player.ChangeItemParent(this.gameObject);
 			cntGetItemBlankTime = GetItemBlankFrame;
+			rightSpeed = leftSpeed = 0.0f;
 		}
 	}
 
@@ -504,8 +535,16 @@ public class Player : MonoBehaviour
 	//リスポーン処理
 	private void Respawn()
 	{
+		Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+
+		if (pos.y < 0)
+		{
+			isRespawn = true;
+		}
+
 		if (isRespawn)
 		{
+			rightSpeed = leftSpeed = 0.0f;
 			transform.position = respawnPosition;
 			cntAttackFrame = 0;
 			cntDamageFrame = 0;
