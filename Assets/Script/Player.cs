@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
 	private bool isAttack = false;
 	private bool isDamage = false;
 	private bool isMove = false;
+	public bool isRespawn = false;
 	private int angleValue = 0;
 	public GameObject ItemPosition;
 	public GameObject AttackCollisionObj;
@@ -51,9 +52,14 @@ public class Player : MonoBehaviour
 	private int cntDamageFrame = 0;
 	private Vector3 holdDeskDirction;	//机を持った時の移動方向
 	private Vector3 oldLeftStick;
+	private Vector3 respawnPosition;
 	private float rotationValue = 0;
+
 	void Start ()
 	{
+		//とりあえずリスポン位置をゲーム開始位置に
+		respawnPosition = transform.position;
+
 		rb = GetComponent<Rigidbody>();
 		animator = GetComponent<Animator>();
 	}
@@ -98,11 +104,12 @@ public class Player : MonoBehaviour
 		{
 			Damage();
 		}
-
+		Respawn();
 		//SerchMoveDesk();	//机を動かす処理、仕様変更されたので使わないかも
 	}
 
-    void FixedUpdate() {
+    void FixedUpdate()
+	{
 		rb.AddForce(Vector3.down * Gravity);
 		if (!isDamage && cntAttackFrame == 0 && cntGetItemBlankTime == 0)
 		{
@@ -126,6 +133,7 @@ public class Player : MonoBehaviour
 	//移動
 	private void Move()
 	{
+		animator.SetBool("isDash", isDash);
         Vector2 LeftStick = XPad.Get.GetLeftStick(PlayerIndex);
 		rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
 		//キャラの向きを変える
@@ -253,6 +261,7 @@ public class Player : MonoBehaviour
 		{
 			ReleaseItem();
 		}
+		cntGetItemBlankTime = 0;
 		XPad.Get.SetVibration(PlayerIndex, 1.0f, 1.0f, 0.5f);
 		cntDamageFrame = 40;
 		isDamage = true;
@@ -283,6 +292,7 @@ public class Player : MonoBehaviour
 			}
 		}
 	}
+
 
 	//前方に机があるか調べる
 	private void SerchMoveDesk()
@@ -387,6 +397,7 @@ public class Player : MonoBehaviour
 		Item item = _itemObj.GetComponent<Item>();
 		if (item)
 		{
+			isDash = false;
 			XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
 			getItemObj = _itemObj.gameObject;
 			cntGetItemBlankTime = GetItemBlankFrame;
@@ -490,14 +501,25 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	private void OnTriggerStay(Collider other)
+	//リスポーン処理
+	private void Respawn()
 	{
-		/*
-		if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
+		if (isRespawn)
 		{
-			GetItem(other.gameObject);
-		}*/
+			transform.position = respawnPosition;
+			cntAttackFrame = 0;
+			cntDamageFrame = 0;
+			cntGetItemBlankTime = 0;
+			isAttack = false;
+			isDamage = false;
+			isDash = false;
+			isHoldDesk = false;
+			isHoldItem = false;
+			isJump = false;
+			isMove = false;
 
+			isRespawn = false;
+		}
 	}
 
 	//アイテムを取得しているかどうかを返す
