@@ -4448,15 +4448,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerIndex: 0
-  WalkSpeed: 2.5
+  WalkSpeed: 3
   DashSpeed: 5
   JumpPower: 10
   Gravity: 0.4
   AttackFrame: 27
-  GetItemBlankFrame: 30
+  GetItemBlankFrame: 20
   CanHoldItemDistance: 0.4
   MentalGaugeMax: 100
   MentalGaugeAccumulateSpeed: 10
+  isRespawn: 0
   ItemPosition: {fileID: 1928901944325868}
   AttackCollisionObj: {fileID: 1645813745616584}
   RotateObj: {fileID: 1744731403096458}
