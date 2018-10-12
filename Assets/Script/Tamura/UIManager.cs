@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour {
     Player[] playerArray;
     [SerializeField]
     Image[] GaugeArray;
+    [SerializeField]
+    GameObject[] UIArray;
 
 	void Start () {
         playerArray = FindObjectsOfType<Player>();
@@ -22,6 +24,7 @@ public class UIManager : MonoBehaviour {
     void UpdateUI() {
         int index = 0;
         foreach (var player in playerArray) {
+            // ゲージの増減
             float mentalGauge = (float)player.GetMentalGauge();
             GaugeArray[index].fillAmount = Mathf.Clamp((mentalGauge / 100.0f), 0.1f, 0.9f);
             if (GaugeArray[index].fillAmount > 0.7f) {
@@ -33,6 +36,10 @@ public class UIManager : MonoBehaviour {
             else {
                 GaugeArray[index].color = Color.green;
             }
+
+            // UIの位置調整(揺らし)
+            Vector3 UIPos;
+            //UIArray[index].transform.position = UIPos;
             index++;
         }
     }
