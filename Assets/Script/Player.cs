@@ -225,7 +225,7 @@ public class Player : MonoBehaviour
 			SetMoveSpeed(angleValue, nowMoveSpeed);
 		}
 
-		this.transform.Translate(Vector3.forward * angleValue * Time.deltaTime * (rightSpeed + leftSpeed));
+		this.transform.Translate(Vector3.forward * angleValue * Time.deltaTime * ((rightSpeed + leftSpeed) * Mathf.Abs(LeftStick.x)));
 		oldLeftStick = LeftStick;
 	}
 
