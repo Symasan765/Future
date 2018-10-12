@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Player : MonoBehaviour
 {
 	[SerializeField]
-	private int PlayerIndex = 0;		//プレイヤー番号
+	public int PlayerIndex = 0;		//プレイヤー番号
 	[SerializeField]
 	private float WalkSpeed = 2.0f;			//移動速度
 	[SerializeField]
