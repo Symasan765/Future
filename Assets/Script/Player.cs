@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
 	private int cntAttackFrame = 0;
 	private int cntDamageFrame = 0;
 	private int cntJumpCheckFrame = 0;
-	private int cntInvincibleFrame = 0;
+	[SerializeField]private int cntInvincibleFrame = 0;
 	private Vector3 holdDeskDirction;	//机を持った時の移動方向
 	private Vector3 oldLeftStick;
 	private Vector3 respawnPosition;
@@ -344,7 +344,7 @@ public class Player : MonoBehaviour
 	//無敵時間かどうかを返す
 	public bool IsInvincible()
 	{
-		if (cntGetItemBlankTime > 0)
+		if (cntInvincibleFrame > 0)
 		{
 			return true;
 		}
