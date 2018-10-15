@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
 	private int MentalGaugeMax = 100;		//メンタルゲージ最大値
 	[SerializeField]
 	private int MentalGaugeAccumulateSpeed = 5;
+	[SerializeField]
+	private int InvincibleFrame = 90;
 
 	private int AttackFrame = 25;		//攻撃持続フレーム
 	private int GetItemBlankFrame = 5;	//アイテムを持つ&捨てる時の硬直フレーム
@@ -61,6 +63,7 @@ public class Player : MonoBehaviour
 	private int cntAttackFrame = 0;
 	private int cntDamageFrame = 0;
 	private int cntJumpCheckFrame = 0;
+	private int cntInvincibleFrame = 0;
 	private Vector3 holdDeskDirction;	//机を持った時の移動方向
 	private Vector3 oldLeftStick;
 	private Vector3 respawnPosition;
@@ -105,6 +108,11 @@ public class Player : MonoBehaviour
 					mentalGauge++;
 				}
 			}
+			//無敵フレームのカウント
+			if (cntInvincibleFrame > 0)
+			{
+				cntInvincibleFrame--;
+			}
 		} else
 		{
 			Damage();
@@ -145,6 +153,7 @@ public class Player : MonoBehaviour
 		rb.AddForce(Vector3.down * (Gravity * FallSpeed));
 	}
 
+	//キャラの向きを変える
 	private void Rotate()
 	{
 		if (angleValue == 1)
@@ -264,6 +273,7 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	//攻撃開始
 	private void AttackStart()
 	{
 		if (cntGetItemBlankTime == 0 && !isJump && !isAttack && !isHoldDesk && !isHoldItem)
@@ -277,6 +287,8 @@ public class Player : MonoBehaviour
 			rightSpeed = leftSpeed = 0.0f;
 		}
 	}
+
+	//攻撃処理
 	private void Attack()
 	{
 		animator.SetBool("isAttack", isAttack);
@@ -304,26 +316,39 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	//敵の攻撃が自分にヒットした
+	//ボスの攻撃が自分にヒットした
 	public void HitBossAttack()
 	{
-		PlayerDamage pd = GetComponent<PlayerDamage>();
-		pd.StartEffect();
-		if (isHoldItem)
+		if (!IsInvincible())
 		{
-			ReleaseItem();
+			PlayerDamage pd = GetComponent<PlayerDamage>();
+			pd.StartEffect();
+			if (isHoldItem)
+			{
+				ReleaseItem();
+			}
+			rightSpeed = leftSpeed = 0.0f;
+			cntGetItemBlankTime = 0;
+			XPad.Get.SetVibration(PlayerIndex, 1.0f, 1.0f, 0.5f);
+			cntDamageFrame = 40;
+			isDamage = true;
+			mentalGauge += Random.Range(5, 15);
+			if (mentalGauge > MentalGaugeMax)
+			{
+				mentalGauge = MentalGaugeMax;
+			}
+			cntInvincibleFrame = InvincibleFrame;
 		}
-		rightSpeed = leftSpeed = 0.0f;
-		cntGetItemBlankTime = 0;
-		XPad.Get.SetVibration(PlayerIndex, 1.0f, 1.0f, 0.5f);
-		cntDamageFrame = 40;
-		isDamage = true;
-		mentalGauge += Random.Range(5, 15);
-		if (mentalGauge > MentalGaugeMax)
+	}
+
+	//無敵時間かどうかを返す
+	public bool IsInvincible()
+	{
+		if (cntGetItemBlankTime > 0)
 		{
-			mentalGauge = MentalGaugeMax;
+			return true;
 		}
-	//	Debug.Log("Player" + PlayerIndex + "にボスの攻撃がヒットした！");
+		return false;
 	}
 
 	//今のメンタルゲージを返す
@@ -345,7 +370,6 @@ public class Player : MonoBehaviour
 			}
 		}
 	}
-
 
 	//前方に机があるか調べる
 	private void SerchMoveDesk()
