@@ -4452,7 +4452,10 @@ MonoBehaviour:
   ForwardAngle: 55
   WalkSpeed: 3
   DashSpeed: 5
-  JumpPower: 10
+  JumpPower: 15
+  JumpSpeed: 2
+  FallSpeed: 0.1
+  FallSpeedMax: 5
   Gravity: 0.4
   BrakePower: 0.4
   MentalGaugeMax: 100
