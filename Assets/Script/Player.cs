@@ -225,7 +225,7 @@ public class Player : MonoBehaviour
 			SetMoveSpeed(angleValue, nowMoveSpeed);
 		}
 
-		this.transform.Translate(Vector3.forward * angleValue * Time.deltaTime * ((rightSpeed + leftSpeed) * Mathf.Abs(LeftStick.x)));
+		this.transform.Translate(Vector3.forward * angleValue * Time.deltaTime * (rightSpeed + leftSpeed));
 		oldLeftStick = LeftStick;
 	}
 
@@ -285,6 +285,8 @@ public class Player : MonoBehaviour
 	//敵の攻撃が自分にヒットした
 	public void HitBossAttack()
 	{
+		PlayerDamage pd = GetComponent<PlayerDamage>();
+		pd.StartEffect();
 		if (isHoldItem)
 		{
 			ReleaseItem();
