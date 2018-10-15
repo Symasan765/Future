@@ -1254,6 +1254,25 @@ Prefab:
       propertyPath: field of view
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114852327918385748, guid: 20147953ff61ca449a053d050f12a287,
+        type: 2}
+      propertyPath: m_ShowCameraFrustum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114852327918385748, guid: 20147953ff61ca449a053d050f12a287,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114801709899225662, guid: 20147953ff61ca449a053d050f12a287,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854095824535836, guid: 20147953ff61ca449a053d050f12a287, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20147953ff61ca449a053d050f12a287, type: 2}
   m_IsPrefabParent: 0
