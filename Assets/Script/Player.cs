@@ -16,6 +16,12 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private float JumpPower = 10.0f;	//ジャンプ力
 	[SerializeField]
+	private float JumpSpeed = 2.0f;
+	[SerializeField]
+	private float FallSpeed = 1.0f;
+	[SerializeField]
+	private float FallSpeedMax = 5.0f;
+	[SerializeField]
 	private float Gravity = 0.4f;		//キャラ固有重力
 	[SerializeField]
 	private float BrakePower = 0.4f;	//ブレーキの強さ
@@ -54,6 +60,7 @@ public class Player : MonoBehaviour
 	private int cntGetItemBlankTime = 0;
 	private int cntAttackFrame = 0;
 	private int cntDamageFrame = 0;
+	private int cntJumpCheckFrame = 0;
 	private Vector3 holdDeskDirction;	//机を持った時の移動方向
 	private Vector3 oldLeftStick;
 	private Vector3 respawnPosition;
@@ -81,10 +88,6 @@ public class Player : MonoBehaviour
 				{
 					ReleaseItem();
 				}
-			}
-			if (XPad.Get.GetTrigger(XPad.KeyData.X, PlayerIndex))
-			{
-				JumpStart();
 			}
 
 			SerchItem();
@@ -115,13 +118,32 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
 	{
-		rb.AddForce(Vector3.down * Gravity);
+		Fall();
+
 		if (!isDamage && cntAttackFrame == 0 && cntGetItemBlankTime == 0)
 		{
 			Move();
 		}
         Jump();
     }
+
+	//落下処理
+	private void Fall()
+	{
+		Debug.Log(rb.velocity);
+
+		if (rb.velocity.y < FallSpeedMax * -1)
+		{
+			rb.velocity = new Vector3(rb.velocity.x, FallSpeedMax * -1, rb.velocity.z);
+		}
+
+		if (!isJump && !IsOnGround() && XPad.Get.GetLeftStick(PlayerIndex).y < -0.8f)
+		{
+			rb.velocity = new Vector3(rb.velocity.x, (FallSpeedMax * 2) * -1, rb.velocity.z);
+		}
+
+		rb.AddForce(Vector3.down * (Gravity * FallSpeed));
+	}
 
 	private void Rotate()
 	{
@@ -349,17 +371,6 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	//ジャンプ開始
-	private void JumpStart()
-	{
-		if (IsOnGround() && !isJump && !isAttack)
-		{
-			jumpSpeed = JumpPower;
-			isJump = true;
-		}
-	}
-
-
 	//移動しているか
 	public bool IsMove()
 	{
@@ -382,13 +393,35 @@ public class Player : MonoBehaviour
 	//ジャンプ中
 	private void Jump()
 	{
+		if (IsOnGround() && !isJump && !isAttack)
+		{
+			if (XPad.Get.GetPress(XPad.KeyData.X, PlayerIndex))
+			{
+				cntJumpCheckFrame++;
+			}
+
+			if (cntJumpCheckFrame > 4)
+			{
+				jumpSpeed = JumpPower;
+				isJump = true;
+			} else
+			{
+				if (XPad.Get.GetRelease(XPad.KeyData.X, PlayerIndex))
+				{
+					jumpSpeed = JumpPower - (JumpPower / 3);
+					isJump = true;
+				}
+			}
+		}
+
 		animator.SetBool("isJump", isJump);
 		if (isJump)
 		{
 			transform.position += Vector3.up * jumpSpeed * Time.deltaTime;
-			jumpSpeed -= Gravity;
+			jumpSpeed -= Gravity * JumpSpeed;
 			if (jumpSpeed <= 0)
 			{
+				cntJumpCheckFrame = 0;
 				isJump = false;
 			}
 		}
@@ -546,6 +579,7 @@ public class Player : MonoBehaviour
 
 		if (isRespawn)
 		{
+			Debug.Log(gameObject.name + "がリスポーンした");
 			rightSpeed = leftSpeed = 0.0f;
 			transform.position = respawnPosition;
 			cntAttackFrame = 0;
