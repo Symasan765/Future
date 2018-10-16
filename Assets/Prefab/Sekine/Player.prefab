@@ -4452,18 +4452,20 @@ MonoBehaviour:
   ForwardAngle: 55
   WalkSpeed: 3
   DashSpeed: 5
-  JumpPower: 15
+  JumpPower: 20
   JumpSpeed: 2
-  FallSpeed: 0.1
+  FallSpeed: 0.4
   FallSpeedMax: 5
   Gravity: 0.4
   BrakePower: 0.4
   MentalGaugeMax: 100
   MentalGaugeAccumulateSpeed: 10
+  InvincibleFrame: 90
   isRespawn: 0
   ItemPosition: {fileID: 1928901944325868}
   AttackCollisionObj: {fileID: 1645813745616584}
   RotateObj: {fileID: 1744731403096458}
+  cntInvincibleFrame: 0
 --- !u!114 &114150531013870058
 MonoBehaviour:
   m_ObjectHideFlags: 1
