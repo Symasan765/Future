@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private float FallSpeedMax = 5.0f;
 	[SerializeField]
+	private int AirJumpNum = 1;
+	[SerializeField]
 	private float Gravity = 0.4f;		//キャラ固有重力
 	[SerializeField]
 	private float BrakePower = 0.4f;	//ブレーキの強さ
@@ -31,6 +33,8 @@ public class Player : MonoBehaviour
 	private int MentalGaugeAccumulateSpeed = 5;
 	[SerializeField]
 	private int InvincibleFrame = 90;
+	[SerializeField]
+	private int DamageFrame = 40;
 
 	private int AttackFrame = 25;		//攻撃持続フレーム
 	private int GetItemBlankFrame = 5;	//アイテムを持つ&捨てる時の硬直フレーム
@@ -44,7 +48,8 @@ public class Player : MonoBehaviour
 	private bool isAttack = false;
 	private bool isDamage = false;
 	private bool isMove = false;
-	public bool isRespawn = false;
+	private bool isRespawn = false;
+
 	private int angleValue = 0;
 	public GameObject ItemPosition;
 	public GameObject AttackCollisionObj;
@@ -63,7 +68,9 @@ public class Player : MonoBehaviour
 	private int cntAttackFrame = 0;
 	private int cntDamageFrame = 0;
 	private int cntJumpCheckFrame = 0;
-	[SerializeField]private int cntInvincibleFrame = 0;
+	private int cntJumpTriggerFrame = 0;
+	private int cntInvincibleFrame = 0;
+	private int cntAirJumpNum = 1;
 	private Vector3 holdDeskDirction;	//机を持った時の移動方向
 	private Vector3 oldLeftStick;
 	private Vector3 respawnPosition;
@@ -85,6 +92,7 @@ public class Player : MonoBehaviour
 	{
 		animator.SetBool("isDamage", isDamage);
 		animator.SetInteger("cntGetItemBlankTime", cntGetItemBlankTime);
+
 		if (!isDamage)
 		{
 			if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
@@ -241,7 +249,7 @@ public class Player : MonoBehaviour
 				nowMoveSpeed = DashSpeed;
 				if (!IsOnGround())
 				{
-					nowMoveSpeed = WalkSpeed;
+					//nowMoveSpeed = WalkSpeed;
 				}
 			} else
 			{
@@ -332,7 +340,7 @@ public class Player : MonoBehaviour
 			rightSpeed = leftSpeed = 0.0f;
 			cntGetItemBlankTime = 0;
 			XPad.Get.SetVibration(PlayerIndex, 1.0f, 1.0f, 0.5f);
-			cntDamageFrame = 40;
+			cntDamageFrame = DamageFrame;
 			cntAttackFrame = 0;
 			isDamage = true;
 			mentalGauge += Random.Range(5, 15);
@@ -419,7 +427,20 @@ public class Player : MonoBehaviour
 	//ジャンプ中
 	private void Jump()
 	{
-		if (IsOnGround() && !isJump && !isAttack)
+		//空中ジャンプ
+		if (!IsOnGround() && cntAirJumpNum > 0 && !isAttack && !isDamage)
+		{
+			if (XPad.Get.GetTrigger(XPad.KeyData.X, PlayerIndex))
+			{
+				rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+				cntAirJumpNum--;
+				SoundManager.Get.PlaySE("jump");
+				jumpSpeed = JumpPower;
+				isJump = true;
+			}
+		}
+		//地上ジャンプの処理
+		if (IsOnGround() && !isJump && !isAttack && !isDamage)
 		{
 			if (XPad.Get.GetPress(XPad.KeyData.X, PlayerIndex))
 			{
@@ -440,6 +461,11 @@ public class Player : MonoBehaviour
 					isJump = true;
 				}
 			}
+		}
+
+		if (IsOnGround())
+		{
+			cntAirJumpNum = AirJumpNum;
 		}
 
 		animator.SetBool("isJump", isJump);
@@ -626,6 +652,16 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	//ダメージを受けた瞬間を返す
+	public bool IsDamageTrigger()
+	{
+		if (cntDamageFrame == DamageFrame)
+		{
+			return true;
+		}
+		return false;
+	}
+
 	//ダメージ中かどうかを返す
 	public bool IsDamage()
 	{
@@ -641,4 +677,12 @@ public class Player : MonoBehaviour
     public int GetPlayerIndex() {
         return PlayerIndex;
     }
+
+	private void Step()
+	{
+		if (IsOnGround())
+		{
+			SoundManager.Get.PlaySE("dash");
+		}
+	}
 }
