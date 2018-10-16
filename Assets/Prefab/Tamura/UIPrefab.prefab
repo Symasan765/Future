@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224280506068465220}
+  - component: {fileID: 114653537340106232}
   m_Layer: 5
   m_Name: Player1_UI
   m_TagString: Untagged
@@ -34,6 +35,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224043849932640906}
+  - component: {fileID: 114697633931581812}
   m_Layer: 5
   m_Name: Player3_UI
   m_TagString: Untagged
@@ -51,7 +53,6 @@ GameObject:
   - component: {fileID: 224514284690246764}
   - component: {fileID: 222234014065016698}
   - component: {fileID: 114143157843128588}
-  - component: {fileID: 114442788813967770}
   m_Layer: 5
   m_Name: StressGaugeCircle
   m_TagString: Untagged
@@ -67,6 +68,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224734609465893504}
+  - component: {fileID: 114192171392130202}
   m_Layer: 5
   m_Name: Player4_UI
   m_TagString: Untagged
@@ -117,6 +119,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224478193859479442}
+  - component: {fileID: 114362737806322014}
   m_Layer: 5
   m_Name: Player2_UI
   m_TagString: Untagged
@@ -493,6 +496,21 @@ MonoBehaviour:
   m_FillAmount: 0.208
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114192171392130202
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1090291369460174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b429944308bd2954a9a41d61dc150a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnitude: 0
+  shakeTimeFromStart: 0
+  shakeTime: 0
+  charaPortrait: {fileID: 114568114296560860}
 --- !u!114 &114341522465800706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -504,6 +522,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 963e132d1630256409f2914ce8f9caed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114362737806322014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1326827026335622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b429944308bd2954a9a41d61dc150a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnitude: 0
+  shakeTimeFromStart: 0
+  shakeTime: 0
+  charaPortrait: {fileID: 114086372964267278}
 --- !u!114 &114427510989161248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -531,17 +564,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114442788813967770
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1037774604163466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58e8185339780344db489978feb29c23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114536687904984540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -684,6 +706,36 @@ MonoBehaviour:
   m_FillAmount: 0.244
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114653537340106232
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1003847325986708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b429944308bd2954a9a41d61dc150a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnitude: 0
+  shakeTimeFromStart: 0
+  shakeTime: 0
+  charaPortrait: {fileID: 114616331305182136}
+--- !u!114 &114697633931581812
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1015156094177902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b429944308bd2954a9a41d61dc150a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnitude: 0
+  shakeTimeFromStart: 0
+  shakeTime: 0
+  charaPortrait: {fileID: 114427510989161248}
 --- !u!114 &114703957520185200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -776,6 +828,13 @@ MonoBehaviour:
   - {fileID: 114843693590370688}
   - {fileID: 114039998630314944}
   - {fileID: 114062633384117994}
+  UIArray:
+  - {fileID: 114653537340106232}
+  - {fileID: 114362737806322014}
+  - {fileID: 114697633931581812}
+  - {fileID: 114192171392130202}
+  shakeMagnitude: 20
+  shakeTime: 0.8
 --- !u!114 &114914612713391668
 MonoBehaviour:
   m_ObjectHideFlags: 1

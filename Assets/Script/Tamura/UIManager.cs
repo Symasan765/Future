@@ -10,7 +10,13 @@ public class UIManager : MonoBehaviour {
     [SerializeField]
     Image[] GaugeArray;
     [SerializeField]
-    GameObject[] UIArray;
+    ShakeUI[] UIArray;
+
+    [SerializeField, HeaderAttribute("揺れの強さ")]
+    float shakeMagnitude;
+
+    [SerializeField, HeaderAttribute("揺れる時間(秒)")]
+    float shakeTime;
 
 	void Start () {
         playerArray = FindObjectsOfType<Player>();
@@ -26,7 +32,8 @@ public class UIManager : MonoBehaviour {
         foreach (var player in playerArray) {
             // ゲージの増減
             float mentalGauge = (float)player.GetMentalGauge();
-            GaugeArray[index].fillAmount = Mathf.Clamp((mentalGauge / 100.0f), 0.1f, 0.9f);
+            GaugeArray[index].fillAmount = Mathf.Lerp(GaugeArray[index].fillAmount, Mathf.Clamp((mentalGauge / 100.0f), 0.1f, 0.9f), 0.1f);
+            Debug.Log(GaugeArray[2].fillAmount);
             if (GaugeArray[index].fillAmount > 0.7f) {
                 GaugeArray[index].color = Color.red;
             }
@@ -38,8 +45,10 @@ public class UIManager : MonoBehaviour {
             }
 
             // UIの位置調整(揺らし)
-            Vector3 UIPos;
-            //UIArray[index].transform.position = UIPos;
+            if (player.IsDamage() && !UIArray[index].IsShake) {
+                UIArray[index].Shake(shakeTime, shakeMagnitude);
+            }
+
             index++;
         }
     }
