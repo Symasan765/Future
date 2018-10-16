@@ -510,6 +510,7 @@ MonoBehaviour:
   magnitude: 0
   shakeTimeFromStart: 0
   shakeTime: 0
+  charaPortrait: {fileID: 114568114296560860}
 --- !u!114 &114341522465800706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -535,6 +536,7 @@ MonoBehaviour:
   magnitude: 0
   shakeTimeFromStart: 0
   shakeTime: 0
+  charaPortrait: {fileID: 114086372964267278}
 --- !u!114 &114427510989161248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -718,6 +720,7 @@ MonoBehaviour:
   magnitude: 0
   shakeTimeFromStart: 0
   shakeTime: 0
+  charaPortrait: {fileID: 114616331305182136}
 --- !u!114 &114697633931581812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -732,6 +735,7 @@ MonoBehaviour:
   magnitude: 0
   shakeTimeFromStart: 0
   shakeTime: 0
+  charaPortrait: {fileID: 114427510989161248}
 --- !u!114 &114703957520185200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -829,6 +833,8 @@ MonoBehaviour:
   - {fileID: 114362737806322014}
   - {fileID: 114697633931581812}
   - {fileID: 114192171392130202}
+  shakeMagnitude: 20
+  shakeTime: 0.8
 --- !u!114 &114914612713391668
 MonoBehaviour:
   m_ObjectHideFlags: 1

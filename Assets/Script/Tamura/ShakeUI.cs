@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // しぇけなべいべぇ
 public class ShakeUI : MonoBehaviour {
@@ -15,6 +16,10 @@ public class ShakeUI : MonoBehaviour {
     // 振動する秒数
     [SerializeField]
     float shakeTime = 0.0f;
+    float maxShakeTime;
+
+    [SerializeField]
+    Image charaPortrait;
 
     // 前のフレームで揺れた量
     Vector3 beforeShake;
@@ -35,9 +40,13 @@ public class ShakeUI : MonoBehaviour {
 
             // 揺れ幅を減少
             magnitude *= 0.9f;
+
+            charaPortrait.color = Color.Lerp(Color.red, Color.white, shakeTimeFromStart / maxShakeTime);
         }
         else {
             beforeShake = Vector3.zero;
+
+            charaPortrait.color = Color.white;
         }
 	}
 
@@ -52,9 +61,11 @@ public class ShakeUI : MonoBehaviour {
     }
 
     public void Shake(float time, float mag) {
-        shakeTime = time;
+        maxShakeTime = shakeTime = time;
         shakeTimeFromStart = 0.0f;
         magnitude = mag;
+
+        charaPortrait.color = Color.red;
     }
 
     // UIを全部揺らす
