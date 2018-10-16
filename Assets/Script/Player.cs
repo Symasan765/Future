@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private float FallSpeedMax = 5.0f;
 	[SerializeField]
+	private int AirJumpNum = 1;
+	[SerializeField]
 	private float Gravity = 0.4f;		//キャラ固有重力
 	[SerializeField]
 	private float BrakePower = 0.4f;	//ブレーキの強さ
@@ -68,6 +70,7 @@ public class Player : MonoBehaviour
 	private int cntJumpCheckFrame = 0;
 	private int cntJumpTriggerFrame = 0;
 	private int cntInvincibleFrame = 0;
+	private int cntAirJumpNum = 1;
 	private Vector3 holdDeskDirction;	//机を持った時の移動方向
 	private Vector3 oldLeftStick;
 	private Vector3 respawnPosition;
@@ -246,7 +249,7 @@ public class Player : MonoBehaviour
 				nowMoveSpeed = DashSpeed;
 				if (!IsOnGround())
 				{
-					nowMoveSpeed = WalkSpeed;
+					//nowMoveSpeed = WalkSpeed;
 				}
 			} else
 			{
@@ -424,6 +427,19 @@ public class Player : MonoBehaviour
 	//ジャンプ中
 	private void Jump()
 	{
+		//空中ジャンプ
+		if (!IsOnGround() && cntAirJumpNum > 0 && !isAttack && !isDamage)
+		{
+			if (XPad.Get.GetTrigger(XPad.KeyData.X, PlayerIndex))
+			{
+				rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+				cntAirJumpNum--;
+				SoundManager.Get.PlaySE("jump");
+				jumpSpeed = JumpPower;
+				isJump = true;
+			}
+		}
+		//地上ジャンプの処理
 		if (IsOnGround() && !isJump && !isAttack && !isDamage)
 		{
 			if (XPad.Get.GetPress(XPad.KeyData.X, PlayerIndex))
@@ -445,6 +461,11 @@ public class Player : MonoBehaviour
 					isJump = true;
 				}
 			}
+		}
+
+		if (IsOnGround())
+		{
+			cntAirJumpNum = AirJumpNum;
 		}
 
 		animator.SetBool("isJump", isJump);
