@@ -10,7 +10,13 @@ public class UIManager : MonoBehaviour {
     [SerializeField]
     Image[] GaugeArray;
     [SerializeField]
-    GameObject[] UIArray;
+    ShakeUI[] UIArray;
+
+    [SerializeField, HeaderAttribute("揺れの強さ")]
+    float shakeMagnitude;
+
+    [SerializeField, HeaderAttribute("揺れる時間(秒)")]
+    float shakeTime;
 
 	void Start () {
         playerArray = FindObjectsOfType<Player>();
@@ -38,8 +44,10 @@ public class UIManager : MonoBehaviour {
             }
 
             // UIの位置調整(揺らし)
-            Vector3 UIPos;
-            //UIArray[index].transform.position = UIPos;
+            if (player.IsDamage() && !UIArray[index].IsShake) {
+                UIArray[index].Shake(0.8f, 30.0f);
+            }
+
             index++;
         }
     }

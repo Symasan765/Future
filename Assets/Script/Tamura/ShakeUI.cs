@@ -32,6 +32,9 @@ public class ShakeUI : MonoBehaviour {
 
             //揺れた時間を増やす
             shakeTimeFromStart += Time.deltaTime;
+
+            // 揺れ幅を減少
+            magnitude *= 0.9f;
         }
         else {
             beforeShake = Vector3.zero;
