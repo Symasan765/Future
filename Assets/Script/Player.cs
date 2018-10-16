@@ -333,6 +333,7 @@ public class Player : MonoBehaviour
 			cntGetItemBlankTime = 0;
 			XPad.Get.SetVibration(PlayerIndex, 1.0f, 1.0f, 0.5f);
 			cntDamageFrame = 40;
+			cntAttackFrame = 0;
 			isDamage = true;
 			mentalGauge += Random.Range(5, 15);
 			if (mentalGauge > MentalGaugeMax)
