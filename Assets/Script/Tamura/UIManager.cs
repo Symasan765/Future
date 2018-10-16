@@ -45,7 +45,7 @@ public class UIManager : MonoBehaviour {
             }
 
             // UIの位置調整(揺らし)
-            if (player.IsDamage() && !UIArray[index].IsShake) {
+            if (player.IsDamageTrigger() && !UIArray[index].IsShake) {
                 UIArray[index].Shake(shakeTime, shakeMagnitude);
             }
 
