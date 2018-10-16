@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
 	private int MentalGaugeAccumulateSpeed = 5;
 	[SerializeField]
 	private int InvincibleFrame = 90;
+	[SerializeField]
+	private int DamageFrame = 40;
 
 	private int AttackFrame = 25;		//攻撃持続フレーム
 	private int GetItemBlankFrame = 5;	//アイテムを持つ&捨てる時の硬直フレーム
@@ -335,7 +337,7 @@ public class Player : MonoBehaviour
 			rightSpeed = leftSpeed = 0.0f;
 			cntGetItemBlankTime = 0;
 			XPad.Get.SetVibration(PlayerIndex, 1.0f, 1.0f, 0.5f);
-			cntDamageFrame = 40;
+			cntDamageFrame = DamageFrame;
 			cntAttackFrame = 0;
 			isDamage = true;
 			mentalGauge += Random.Range(5, 15);
@@ -627,6 +629,16 @@ public class Player : MonoBehaviour
 
 			isRespawn = false;
 		}
+	}
+
+	//ダメージを受けた瞬間を返す
+	public bool IsDamageTrigger()
+	{
+		if (cntDamageFrame == DamageFrame)
+		{
+			return true;
+		}
+		return false;
 	}
 
 	//ダメージ中かどうかを返す
