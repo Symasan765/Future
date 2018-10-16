@@ -72,6 +72,8 @@ public class Player : MonoBehaviour
 
 	void Start ()
 	{
+		//SoundManager.Get.PlayBGM("testBGM", true);
+
 		//とりあえずリスポン位置をゲーム開始位置に
 		respawnPosition = transform.position;
 
@@ -138,8 +140,6 @@ public class Player : MonoBehaviour
 	//落下処理
 	private void Fall()
 	{
-		Debug.Log(rb.velocity);
-
 		if (rb.velocity.y < FallSpeedMax * -1)
 		{
 			rb.velocity = new Vector3(rb.velocity.x, FallSpeedMax * -1, rb.velocity.z);
@@ -374,7 +374,6 @@ public class Player : MonoBehaviour
 	//前方に机があるか調べる
 	private void SerchMoveDesk()
 	{
-		//Debug.DrawRay(transform.position, transform.forward);
 		if (isHoldDesk)
 		{
 			if (XPad.Get.GetRelease(XPad.KeyData.A, PlayerIndex))
@@ -459,12 +458,10 @@ public class Player : MonoBehaviour
 
 		if (!isAttack && !isHoldItem && cntGetItemBlankTime == 0)
 		{
-			//Debug.DrawRay(transform.position, transform.forward * CanHoldItemDistance, Color.red);
 			RaycastHit hit;
 			Physics.Raycast(transform.position, transform.forward, out hit, CanHoldItemDistance);
 			if (hit.collider)
 			{
-				//Debug.Log(hit.collider.name + "を取得可能");
 				if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
 				{
 					if (hit.collider.tag == "Player")
@@ -485,6 +482,7 @@ public class Player : MonoBehaviour
 		Item item = _itemObj.GetComponent<Item>();
 		if (item)
 		{
+			SoundManager.Get.PlaySE("get");
 			rightSpeed = leftSpeed = 0.0f;
 			isDash = false;
 			XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
@@ -518,6 +516,7 @@ public class Player : MonoBehaviour
 		Player player = passPlayerObj.GetComponent<Player>();
 		if (player.isHoldItem)
 		{
+			SoundManager.Get.PlaySE("releace");
 			XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
 			isHoldItem = true;
 			getItemObj = player.getItemObj;
@@ -534,6 +533,7 @@ public class Player : MonoBehaviour
 		{
 			if (isHoldItem)
 			{
+				SoundManager.Get.PlaySE("releace");
 				XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
 				getItemObj.transform.parent = null;
 				cntGetItemBlankTime = GetItemBlankFrame;
@@ -619,6 +619,12 @@ public class Player : MonoBehaviour
 
 			isRespawn = false;
 		}
+	}
+
+	//ダメージ中かどうかを返す
+	public bool IsDamage()
+	{
+		return isDamage;
 	}
 
 	//アイテムを取得しているかどうかを返す

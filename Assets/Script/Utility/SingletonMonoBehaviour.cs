@@ -29,6 +29,7 @@ public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBe
 		// 他のゲームオブジェクトにアタッチされているか調べる
 		// アタッチされている場合は破棄する。
 		CheckInstance();
+		DontDestroyOnLoad(gameObject);
 	}
 
 	protected bool CheckInstance()
