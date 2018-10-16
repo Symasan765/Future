@@ -52,7 +52,9 @@ public class BossAttackRange : MonoBehaviour {
 		}
 		else
 		{
+            // タイマーが0になった時にプレイヤーを攻撃
 			AttackPlayer();
+            SoundManager.Get.PlaySE("BossAttack");
 		}
 	}
 

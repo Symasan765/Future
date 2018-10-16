@@ -17,7 +17,7 @@ public class GetCamTarget : MonoBehaviour {
         tGroup = GetComponentInChildren<Cinemachine.CinemachineTargetGroup>();
         playerList = GameObject.FindGameObjectsWithTag("Player");
 
-        for (int plIndex = 0; plIndex < 4; plIndex++) {
+        for (int plIndex = 0; plIndex < playerList.Length; plIndex++) {
             target[plIndex].target = playerList[plIndex].transform;
             target[plIndex].weight = weight;
             target[plIndex].radius = radius;
