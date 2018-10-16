@@ -2803,7 +2803,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1928901944325868}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.1, y: 2.5, z: 0}
+  m_LocalPosition: {x: 0.1, y: 1.3, z: 0.7}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 4413312962081266}
@@ -4452,18 +4452,20 @@ MonoBehaviour:
   ForwardAngle: 55
   WalkSpeed: 3
   DashSpeed: 5
-  JumpPower: 15
+  JumpPower: 20
   JumpSpeed: 2
-  FallSpeed: 0.1
+  FallSpeed: 0.4
   FallSpeedMax: 5
   Gravity: 0.4
   BrakePower: 0.4
   MentalGaugeMax: 100
   MentalGaugeAccumulateSpeed: 10
+  InvincibleFrame: 90
   isRespawn: 0
   ItemPosition: {fileID: 1928901944325868}
   AttackCollisionObj: {fileID: 1645813745616584}
   RotateObj: {fileID: 1744731403096458}
+  cntInvincibleFrame: 0
 --- !u!114 &114150531013870058
 MonoBehaviour:
   m_ObjectHideFlags: 1

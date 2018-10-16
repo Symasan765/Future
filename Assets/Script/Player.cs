@@ -233,6 +233,7 @@ public class Player : MonoBehaviour
 		{
 			if (IsOnGround() && Mathf.Abs(LeftStick.x) - Mathf.Abs(oldLeftStick.x) > 0.65f)
 			{
+				SoundManager.Get.PlaySE("dash");
 				isDash = true;
 			}
 			if (isDash)
@@ -321,6 +322,7 @@ public class Player : MonoBehaviour
 	{
 		if (!IsInvincible())
 		{
+			SoundManager.Get.PlaySE("hit1");
 			PlayerDamage pd = GetComponent<PlayerDamage>();
 			pd.StartEffect();
 			if (isHoldItem)
@@ -331,6 +333,7 @@ public class Player : MonoBehaviour
 			cntGetItemBlankTime = 0;
 			XPad.Get.SetVibration(PlayerIndex, 1.0f, 1.0f, 0.5f);
 			cntDamageFrame = 40;
+			cntAttackFrame = 0;
 			isDamage = true;
 			mentalGauge += Random.Range(5, 15);
 			if (mentalGauge > MentalGaugeMax)
@@ -425,12 +428,14 @@ public class Player : MonoBehaviour
 
 			if (cntJumpCheckFrame > 4)
 			{
+				SoundManager.Get.PlaySE("jump");
 				jumpSpeed = JumpPower;
 				isJump = true;
 			} else
 			{
 				if (XPad.Get.GetRelease(XPad.KeyData.X, PlayerIndex))
 				{
+					SoundManager.Get.PlaySE("jump");
 					jumpSpeed = JumpPower - (JumpPower / 3);
 					isJump = true;
 				}
