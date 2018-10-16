@@ -222,6 +222,6 @@ Material:
     - _HighColor: {r: 0, g: 0, b: 0, a: 1}
     - _Line_Color: {r: 0.6901961, g: 0.5647059, b: 0.42745098, a: 1}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Outline_Color: {r: 1, g: 0, b: 0, a: 1}
+    - _Outline_Color: {r: 0, g: 0, b: 0, a: 1}
     - _RimLightColor: {r: 0.3602941, g: 0.26090264, b: 0, a: 1}
     - _Rim_Color: {r: 0.1764706, g: 0.14509805, b: 0.08627451, a: 1}

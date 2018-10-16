@@ -28,10 +28,15 @@ public class ToonMaterialAdj : MonoBehaviour
 		m_Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
 
 		render = GetComponent<SkinnedMeshRenderer>();
-		m_PlayerScript = GetComponent<Player>();
+		m_PlayerScript = transform.parent.parent.parent.gameObject.GetComponent<Player>();
 		if (m_PlayerScript != null)
 		{
+			Debug.Log("プレイヤー見つけた");
 			playerIndex = m_PlayerScript.PlayerIndex;
+			m_PlayerColor[0] = new Color(0.0f, 0.0f, 1.0f);
+			m_PlayerColor[1] = new Color(1.0f, 0.0f, 0.0f);
+			m_PlayerColor[2] = new Color(0.0f, 1.0f, 0.0f);
+			m_PlayerColor[3] = new Color(1.0f, 1.0f, 0.0f);
 		}
 	}
 
@@ -74,8 +79,8 @@ public class ToonMaterialAdj : MonoBehaviour
 		{
 			mat.SetFloat("_Outline_Width", val);
 
-			
-			mat.SetColor("_Outline_Color", m_PlayerColor[0]);
+			if (m_PlayerScript != null)
+				mat.SetColor("_Outline_Color", m_PlayerColor[playerIndex]);
 
 			mat.SetFloat("_Farthest_Distance", Difference.magnitude + 4.0f);
 
