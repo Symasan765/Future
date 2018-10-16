@@ -44,7 +44,8 @@ public class Player : MonoBehaviour
 	private bool isAttack = false;
 	private bool isDamage = false;
 	private bool isMove = false;
-	public bool isRespawn = false;
+	private bool isRespawn = false;
+
 	private int angleValue = 0;
 	public GameObject ItemPosition;
 	public GameObject AttackCollisionObj;
@@ -63,7 +64,8 @@ public class Player : MonoBehaviour
 	private int cntAttackFrame = 0;
 	private int cntDamageFrame = 0;
 	private int cntJumpCheckFrame = 0;
-	[SerializeField]private int cntInvincibleFrame = 0;
+	private int cntJumpTriggerFrame = 0;
+	private int cntInvincibleFrame = 0;
 	private Vector3 holdDeskDirction;	//机を持った時の移動方向
 	private Vector3 oldLeftStick;
 	private Vector3 respawnPosition;
@@ -85,6 +87,7 @@ public class Player : MonoBehaviour
 	{
 		animator.SetBool("isDamage", isDamage);
 		animator.SetInteger("cntGetItemBlankTime", cntGetItemBlankTime);
+
 		if (!isDamage)
 		{
 			if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
@@ -419,7 +422,7 @@ public class Player : MonoBehaviour
 	//ジャンプ中
 	private void Jump()
 	{
-		if (IsOnGround() && !isJump && !isAttack)
+		if (IsOnGround() && !isJump && !isAttack && !isDamage)
 		{
 			if (XPad.Get.GetPress(XPad.KeyData.X, PlayerIndex))
 			{
@@ -641,4 +644,12 @@ public class Player : MonoBehaviour
     public int GetPlayerIndex() {
         return PlayerIndex;
     }
+
+	private void Step()
+	{
+		if (IsOnGround())
+		{
+			SoundManager.Get.PlaySE("dash");
+		}
+	}
 }
