@@ -15,6 +15,7 @@ public class ToonMaterialAdj : MonoBehaviour
 	public float m_FlashingSec = 0.1f;
 
 	SkinnedMeshRenderer render;
+	Player m_PlayerScript;
 
 	// Use this for initialization
 	void Start()
@@ -23,6 +24,7 @@ public class ToonMaterialAdj : MonoBehaviour
 		m_Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
 
 		render = GetComponent<SkinnedMeshRenderer>();
+		m_PlayerScript = GetComponent<Player>();
 	}
 
 	// Update is called once per frame
@@ -73,6 +75,14 @@ public class ToonMaterialAdj : MonoBehaviour
 		else
 		{
 			render.enabled = true;
+		}
+	}
+
+	void PlayerOutline()
+	{
+		if(m_PlayerScript != null)
+		{
+
 		}
 	}
 }
