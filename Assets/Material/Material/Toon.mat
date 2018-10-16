@@ -132,7 +132,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Farthest_Distance: 10
+    - _Farthest_Distance: 653.79
     - _GI_Intensity: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -161,11 +161,11 @@ Material:
     - _MatCap: 0
     - _Metallic: 0
     - _Mode: 0
-    - _Nearest_Distance: 0.5
+    - _Nearest_Distance: 6.5
     - _OUTLINE: 0
     - _OcclusionStrength: 1
     - _Offset_Z: 0
-    - _Outline_Width: 40.86
+    - _Outline_Width: 379.9
     - _Parallax: 0.02
     - _RimLight: 0
     - _RimLight_FeatherOff: 0
