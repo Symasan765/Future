@@ -46,12 +46,6 @@ public class BossAttackManager : MonoBehaviour
 		{
 			AttackID(0);
 			yield return new WaitForSeconds(3); // これで引数分の秒数の間、処理を待つ
-			AttackID(1);
-			yield return new WaitForSeconds(3); // これで引数分の秒数の間、処理を待つ
-			AttackID(2);
-			yield return new WaitForSeconds(3); // これで引数分の秒数の間、処理を待つ
-			AttackID(3);
-			yield return new WaitForSeconds(3); // これで引数分の秒数の間、処理を待つ
 		}
 		yield return null;
 	}
@@ -62,6 +56,12 @@ public class BossAttackManager : MonoBehaviour
 	/// <param name="ID">攻撃ID。攻撃範囲オブジェクトに着けているID</param>
 	void AttackID(int ID)
 	{
+		if (ID > m_MaxAttackID)
+		{
+			Debug.Log("err:スクリプト上にてボス攻撃IDにシーン配置されている攻撃ID以上の値が入力されました");
+			return;
+		}
+
 		for (int i = 0; i < m_AttackList[ID].Count; i++)
 		{
 			var obj = m_AttackList[ID][i];
