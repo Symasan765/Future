@@ -45,7 +45,7 @@ public class BossAttackManager : MonoBehaviour
 		while (true)
 		{
 			AttackID(0);
-			yield return new WaitForSeconds(3); // これで引数分の秒数の間、処理を待つ
+			yield return new WaitForSeconds(5); // これで引数分の秒数の間、処理を待つ
 		}
 		yield return null;
 	}
@@ -68,6 +68,8 @@ public class BossAttackManager : MonoBehaviour
 			var boss = Instantiate(m_RangePrefab).GetComponent<BossAttackRange>();
 			boss.AttackCommand(obj.transform.position, obj.transform.localScale, obj.m_TimeSec);
 		}
+
+		SoundManager.Get.PlaySE("BossAttackDangerous");
 	}
 
 	/// <summary>
