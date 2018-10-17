@@ -14,7 +14,9 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private float DashSpeed = 10.0f;		//ダッシュ速度
 	[SerializeField]
-	private float JumpPower = 10.0f;	//ジャンプ力
+	private float GroundJumpPower = 20.0f;	//ジャンプ力
+	[SerializeField]
+	private float AirJumpPower = 15.0f;
 	[SerializeField]
 	private float JumpSpeed = 2.0f;
 	[SerializeField]
@@ -39,7 +41,7 @@ public class Player : MonoBehaviour
 	private int AttackFrame = 25;		//攻撃持続フレーム
 	private int GetItemBlankFrame = 5;	//アイテムを持つ&捨てる時の硬直フレーム
 	private float CanHoldItemDistance = 0.4f;	//机を運べるようになる範囲
-
+	
 	private int mentalGauge = 0;
 	private bool isJump = false;
 	private bool isDash = false;
@@ -51,6 +53,8 @@ public class Player : MonoBehaviour
 	private bool isRespawn = false;
 
 	private int angleValue = 0;
+
+	public GameObject[] EffectSweatObj = new GameObject[2];
 	public GameObject ItemPosition;
 	public GameObject AttackCollisionObj;
 	public GameObject RotateObj;
@@ -59,6 +63,7 @@ public class Player : MonoBehaviour
 	private GameObject holdDeskObj;
 	private Animator animator;
 	private Rigidbody rb;
+	private ParticleSystem[] effectSweetSystem = new ParticleSystem[2];
 
 	private float nowMoveSpeed;
 	private float rightSpeed;
@@ -80,9 +85,12 @@ public class Player : MonoBehaviour
 	void Start ()
 	{
 		//SoundManager.Get.PlayBGM("testBGM", true);
-
-		//とりあえずリスポン位置をゲーム開始位置に
-		respawnPosition = transform.position;
+		for (int i = 0; i < 2; i++)
+		{
+			effectSweetSystem[i] = EffectSweatObj[i].GetComponent<ParticleSystem>();
+		}
+			//とりあえずリスポン位置をゲーム開始位置に
+			respawnPosition = transform.position;
 
 		rb = GetComponent<Rigidbody>();
 		animator = GetComponent<Animator>();
@@ -90,7 +98,6 @@ public class Player : MonoBehaviour
 	
 	void Update ()
 	{
-		animator.SetBool("isDamage", isDamage);
 		animator.SetInteger("cntGetItemBlankTime", cntGetItemBlankTime);
 
 		if (!isDamage)
@@ -132,6 +139,8 @@ public class Player : MonoBehaviour
 		//キャラのZ座標は常に0
 		transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 		Rotate();
+		PlayEffect();
+		animator.SetBool("isDamage", IsDamageTrigger());
 	}
 
     void FixedUpdate()
@@ -300,7 +309,6 @@ public class Player : MonoBehaviour
 	//攻撃処理
 	private void Attack()
 	{
-		animator.SetBool("isAttack", isAttack);
 		if (isAttack)
 		{
 			cntAttackFrame++;
@@ -311,6 +319,13 @@ public class Player : MonoBehaviour
 				isAttack = false;
 				cntAttackFrame = 0;
 			}
+		}
+		if (cntAttackFrame == 1)
+		{
+			animator.SetBool("isAttack", true);
+		} else
+		{
+			animator.SetBool("isAttack", false);
 		}
 	}
 
@@ -411,13 +426,30 @@ public class Player : MonoBehaviour
 		return isMove;
 	}
 
+	void OnDrawGizmos()
+	{
+		float scr = 0.4f;
+		RaycastHit hit;
+		CapsuleCollider cc = GetComponent<CapsuleCollider>();
+		Vector3 sphirePos = new Vector3(transform.position.x, transform.position.y + scr, transform.position.z);
+		Physics.SphereCast(sphirePos, scr, Vector3.down, out hit);
+		if (hit.collider)
+		{
+			Debug.DrawRay(transform.position, Vector3.down * hit.distance);
+			Gizmos.DrawWireSphere(hit.point, scr);
+		}
+	}
 	//接地しているか
 	private bool IsOnGround()
 	{
+		float scr = 0.4f;
 		RaycastHit hit;
-		Physics.Raycast(transform.position, transform.up * -1, out hit, 0.08f);
+		CapsuleCollider cc = GetComponent<CapsuleCollider>();
+		Vector3 sphirePos = new Vector3(transform.position.x, transform.position.y + scr, transform.position.z);
+		Physics.SphereCast(sphirePos, scr, Vector3.down, out hit);
 
-		if(hit.collider){
+		if (hit.distance < 0.04f)
+		{
 			rb.velocity = Vector3.zero;
 			return true;
 		}
@@ -435,7 +467,7 @@ public class Player : MonoBehaviour
 				rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 				cntAirJumpNum--;
 				SoundManager.Get.PlaySE("jump");
-				jumpSpeed = JumpPower;
+				jumpSpeed = AirJumpPower;
 				isJump = true;
 			}
 		}
@@ -450,14 +482,14 @@ public class Player : MonoBehaviour
 			if (cntJumpCheckFrame > 4)
 			{
 				SoundManager.Get.PlaySE("jump");
-				jumpSpeed = JumpPower;
+				jumpSpeed = GroundJumpPower;
 				isJump = true;
 			} else
 			{
 				if (XPad.Get.GetRelease(XPad.KeyData.X, PlayerIndex))
 				{
 					SoundManager.Get.PlaySE("jump");
-					jumpSpeed = JumpPower - (JumpPower / 3);
+					jumpSpeed = GroundJumpPower - (GroundJumpPower / 3);
 					isJump = true;
 				}
 			}
@@ -620,6 +652,35 @@ public class Player : MonoBehaviour
 			holdDeskObj.transform.parent = null;
 			holdDeskObj = null;
 		}
+	}
+
+	//汗のエフェクト
+	private void PlayEffect()
+	{
+		if (mentalGauge > MentalGaugeMax / 2)
+		{
+			if (angleValue == 1)
+			{
+				if (!effectSweetSystem[1].isPlaying)
+				{
+					effectSweetSystem[0].Stop();
+					effectSweetSystem[1].Play();
+				}
+			} else
+			{
+				if (!effectSweetSystem[0].isPlaying)
+				{
+					effectSweetSystem[0].Play();
+					effectSweetSystem[1].Stop();
+				}
+			}
+			
+		} else
+		{
+			effectSweetSystem[0].Stop();
+			effectSweetSystem[1].Stop();
+		}
+
 	}
 
 	//リスポーン処理
