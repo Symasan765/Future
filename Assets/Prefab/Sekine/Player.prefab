@@ -4458,7 +4458,6 @@ MonoBehaviour:
   MentalGaugeAccumulateSpeed: 10
   InvincibleFrame: 90
   DamageFrame: 40
-  mentalGauge: 0
   EffectSweatObj:
   - {fileID: 1722394825694412}
   - {fileID: 1829228447725516}

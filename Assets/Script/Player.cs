@@ -51,8 +51,10 @@ public class Player : MonoBehaviour
 	private bool isDamage = false;
 	private bool isMove = false;
 	private bool isRespawn = false;
+	private bool isDown = false;
+	private bool isRescue = false;
 
-	private int angleValue = 0;
+	private int angleValue = 1;
 
 	public GameObject[] EffectSweatObj = new GameObject[2];
 	public GameObject ItemPosition;
@@ -99,59 +101,72 @@ public class Player : MonoBehaviour
 	void Update ()
 	{
 		animator.SetInteger("cntGetItemBlankTime", cntGetItemBlankTime);
-
-		if (!isDamage)
+		animator.SetBool("isDamage", IsDamageTrigger());
+		if (IsDown())
 		{
-			if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
-			{
-				if (cntGetItemBlankTime == 0)
-				{
-					ReleaseItem();
-				}
-			}
-
-			SerchItem();
-
-			if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
-			{
-				AttackStart();
-			}
-			Attack();
-			//証拠を持っている時メンタルゲージ増加(とりあえず何か持ってたら溜まる)
 			if (isHoldItem)
 			{
-				if (mentalGauge < MentalGaugeMax && Time.frameCount % MentalGaugeAccumulateSpeed == 0)
-				{
-					mentalGauge++;
-				}
-			}
-			//無敵フレームのカウント
-			if (cntInvincibleFrame > 0)
-			{
-				cntInvincibleFrame--;
+				ReleaseItem();
 			}
 		} else
 		{
-			Damage();
+			if (!isDamage)
+			{
+				RescuePlayer();
+				if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
+				{
+					if (cntGetItemBlankTime == 0)
+					{
+						ReleaseItem();
+					}
+				}
+
+				SerchItem();
+
+				if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
+				{
+					AttackStart();
+				}
+				Attack();
+				//証拠を持っている時メンタルゲージ増加(とりあえず何か持ってたら溜まる)
+				if (isHoldItem)
+				{
+					if (mentalGauge < MentalGaugeMax && Time.frameCount % MentalGaugeAccumulateSpeed == 0)
+					{
+						mentalGauge++;
+					}
+				}
+				//無敵フレームのカウント
+				if (cntInvincibleFrame > 0)
+				{
+					cntInvincibleFrame--;
+				}
+			} else
+			{
+				Damage();
+			}
 		}
+		Down();
 		Respawn();
-		
 		//キャラのZ座標は常に0
 		transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 		Rotate();
 		PlayEffect();
-		animator.SetBool("isDamage", IsDamageTrigger());
 	}
 
     void FixedUpdate()
 	{
 		Fall();
 
-		if (!isDamage && cntAttackFrame == 0 && cntGetItemBlankTime == 0)
+		if (!IsDown() && !isRescue)
 		{
-			Move();
+			if (!isDamage && cntAttackFrame == 0 && cntGetItemBlankTime == 0)
+			{
+				Move();
+			}
+
+			Jump();
 		}
-        Jump();
     }
 
 	//落下処理
@@ -294,7 +309,7 @@ public class Player : MonoBehaviour
 	//攻撃開始
 	private void AttackStart()
 	{
-		if (cntGetItemBlankTime == 0 && !isJump && !isAttack && !isHoldDesk && !isHoldItem)
+		if (cntGetItemBlankTime == 0 && !isJump && !isAttack && !isHoldDesk && !isHoldItem && !isRescue)
 		{
 			XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
 			BoxCollider col = AttackCollisionObj.GetComponent<BoxCollider>();
@@ -358,6 +373,7 @@ public class Player : MonoBehaviour
 			cntDamageFrame = DamageFrame;
 			cntAttackFrame = 0;
 			isDamage = true;
+			isRescue = false;
 			mentalGauge += Random.Range(5, 15);
 			if (mentalGauge > MentalGaugeMax)
 			{
@@ -383,6 +399,17 @@ public class Player : MonoBehaviour
 		return mentalGauge;
 	}
 
+	//メンタルゲージを回復
+	public void RecoveryMentalGauge(int _recoverySpeed)
+	{
+		if (mentalGauge > 0)
+		{
+			if (Time.frameCount % _recoverySpeed == 0)
+			{
+				mentalGauge--;
+			}
+		}
+	}
 	//ダメージ処理
 	private void Damage()
 	{
@@ -519,7 +546,7 @@ public class Player : MonoBehaviour
 	{
 		if (cntGetItemBlankTime > 0) cntGetItemBlankTime--;
 
-		if (!isAttack && !isHoldItem && cntGetItemBlankTime == 0)
+		if (!isRescue && !isAttack && !isHoldItem && cntGetItemBlankTime == 0)
 		{
 			RaycastHit hit;
 			Physics.Raycast(transform.position, transform.forward, out hit, CanHoldItemDistance);
@@ -577,7 +604,7 @@ public class Player : MonoBehaviour
 	private void ReceiveItem(GameObject passPlayerObj)
 	{
 		Player player = passPlayerObj.GetComponent<Player>();
-		if (player.isHoldItem)
+		if (player.isHoldItem && !player.IsDown())
 		{
 			SoundManager.Get.PlaySE("releace");
 			XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
@@ -610,6 +637,35 @@ public class Player : MonoBehaviour
 				itemRb.AddForce(transform.forward * 1, ForceMode.Impulse);
 				item.flgMoveToGetPos = false;
 				getItemObj = null;
+			}
+		}
+	}
+
+	//他プレイヤーを助ける
+	private void RescuePlayer()
+	{
+		if (XPad.Get.GetRelease(XPad.KeyData.A, PlayerIndex))
+		{
+			isRescue = false;
+		}
+		if (!isAttack && !isHoldItem && cntGetItemBlankTime == 0)
+		{
+			RaycastHit hit;
+			Physics.Raycast(transform.position, transform.forward, out hit, CanHoldItemDistance*2);
+			if (hit.collider)
+			{
+				if (hit.collider.tag == "Player")
+				{
+					Player player = hit.collider.gameObject.GetComponent<Player>();
+					if (player.IsDown())
+					{
+						if (XPad.Get.GetPress(XPad.KeyData.A, PlayerIndex))
+						{
+							isRescue = true;
+							player.RecoveryMentalGauge(2);
+						}
+					}
+				}
 			}
 		}
 	}
@@ -683,6 +739,25 @@ public class Player : MonoBehaviour
 
 	}
 
+	//操作不能中処理
+	private void Down()
+	{
+		if (IsDown())
+		{
+			isRescue = false;
+			if (mentalGauge < MentalGaugeMax / 2)
+			{
+				isDown = false;
+			}
+		} else
+		{
+			if (mentalGauge == MentalGaugeMax)
+			{
+				isDown = true;
+			}
+		}
+	}
+
 	//リスポーン処理
 	private void Respawn()
 	{
@@ -733,6 +808,12 @@ public class Player : MonoBehaviour
 	public bool IsHoldItem()
 	{
 		return isHoldItem;
+	}
+
+	//操作不能状態かどうか
+	public bool IsDown()
+	{
+		return isDown;
 	}
 
     public int GetPlayerIndex() {
