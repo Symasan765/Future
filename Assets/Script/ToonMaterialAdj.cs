@@ -31,7 +31,6 @@ public class ToonMaterialAdj : MonoBehaviour
 		m_PlayerScript = transform.parent.parent.parent.gameObject.GetComponent<Player>();
 		if (m_PlayerScript != null)
 		{
-			Debug.Log("プレイヤー見つけた");
 			playerIndex = m_PlayerScript.PlayerIndex;
 			m_PlayerColor[0] = new Color(0.0f, 0.0f, 1.0f);
 			m_PlayerColor[1] = new Color(1.0f, 0.0f, 0.0f);
