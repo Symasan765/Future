@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e19cba46dda6ea4b8e557807fcb746d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackPos: {x: 0, y: 0, z: 0}
   m_AttackRangePrefab: {fileID: 1156639297817462, guid: 3783cd0034a80fb47bb51765a0b5dc62,
     type: 2}
+  m_Shader: {fileID: 4800000, guid: eb029e7782cfa584c891a377344d2806, type: 3}
+  m_LimitTime: 0.5

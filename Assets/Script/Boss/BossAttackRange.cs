@@ -11,9 +11,13 @@ public class BossAttackRange : MonoBehaviour {
 
 	public GameObject m_AttackRangePrefab;
 	GameObject m_AttackRangeBoard;
+	Material m_Material;
 
 	bool m_AttackFlag;
 
+	public Shader m_Shader;
+	public float m_LimitTime;	// ギリギリのタイミングで攻撃範囲を全体に映す際の残り時間
+	
 	// Update is called once per frame
 	void Update () {
 		AttackUpdate();
@@ -30,6 +34,8 @@ public class BossAttackRange : MonoBehaviour {
 		// 初期化処理
 		m_AttackFlag = false;
 		m_AttackRangeBoard = Instantiate(m_AttackRangePrefab);
+
+		m_Material = m_AttackRangeBoard.GetComponent<Renderer>().material;
 
 		// 攻撃情報保持
 		m_AttackPos = new Vector3(atackPos.x, atackPos.y,0.5f);
@@ -49,6 +55,14 @@ public class BossAttackRange : MonoBehaviour {
 
 			m_AttackCount += Time.deltaTime;
 			m_AttackFlag = true;
+
+			// 攻撃ギリギリのタイミングになったら一瞬だけレーダー外も映るようにシェーダーを入れ替える
+			float remainingTime = m_AttackTime - m_AttackCount;
+			if (remainingTime < m_LimitTime)
+			{
+				LimitAnimation(remainingTime);
+				m_Material.shader = m_Shader;
+			}
 		}
 		else
 		{
@@ -56,6 +70,13 @@ public class BossAttackRange : MonoBehaviour {
 			AttackPlayer();
             SoundManager.Get.PlaySE("BossAttack");
 		}
+	}
+
+	void LimitAnimation(float remainingTime)
+	{
+		float t = remainingTime / m_LimitTime;
+		t = t * t * (3 - 2 * t);
+		m_AttackRangeBoard.transform.localScale = new Vector3(m_Range.x, m_Range.y * t, 1.0f) ;
 	}
 
 	void RangeFlashing()
