@@ -617,7 +617,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1055451304173084
 GameObject:
   m_ObjectHideFlags: 1
@@ -1457,7 +1457,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1127279117587582
 GameObject:
   m_ObjectHideFlags: 1
@@ -8558,7 +8558,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1789661176076622
 GameObject:
   m_ObjectHideFlags: 1
@@ -9962,7 +9962,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1919066643987014
 GameObject:
   m_ObjectHideFlags: 1
@@ -24744,20 +24744,24 @@ MonoBehaviour:
   ForwardAngle: 55
   WalkSpeed: 3
   DashSpeed: 5
-  JumpPower: 15
+  GroundJumpPower: 20
+  AirJumpPower: 15
   JumpSpeed: 2
   FallSpeed: 0.1
   FallSpeedMax: 5
+  AirJumpNum: 1
   Gravity: 0.4
   BrakePower: 0.4
   MentalGaugeMax: 100
   MentalGaugeAccumulateSpeed: 10
   InvincibleFrame: 90
-  isRespawn: 0
+  DamageFrame: 40
+  EffectSweatObj:
+  - {fileID: 0}
+  - {fileID: 0}
   ItemPosition: {fileID: 1908395148220888}
   AttackCollisionObj: {fileID: 1987512642970806}
   RotateObj: {fileID: 1395493668310306}
-  cntInvincibleFrame: 0
 --- !u!114 &114036566981843346
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -24844,20 +24848,24 @@ MonoBehaviour:
   ForwardAngle: 55
   WalkSpeed: 3
   DashSpeed: 5
-  JumpPower: 15
+  GroundJumpPower: 20
+  AirJumpPower: 15
   JumpSpeed: 2
   FallSpeed: 0.1
   FallSpeedMax: 5
+  AirJumpNum: 1
   Gravity: 0.4
   BrakePower: 0.4
   MentalGaugeMax: 100
   MentalGaugeAccumulateSpeed: 10
   InvincibleFrame: 90
-  isRespawn: 0
+  DamageFrame: 40
+  EffectSweatObj:
+  - {fileID: 0}
+  - {fileID: 0}
   ItemPosition: {fileID: 1099998903063434}
   AttackCollisionObj: {fileID: 1524521125899552}
   RotateObj: {fileID: 1245844586661404}
-  cntInvincibleFrame: 0
 --- !u!114 &114062261634993370
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -25130,8 +25138,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LadarPrefab: {fileID: 1622059966829596, guid: 67977d8d1406d044cb14f562417ba9ba,
     type: 2}
-  m_MaxRadius: 20
-  m_MinRadius: 5
+  m_MaxRadius: 7
+  m_MinRadius: 3
+  m_Offset: {x: 0, y: 0.4, z: 0}
 --- !u!114 &114180399553356992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -26503,20 +26512,24 @@ MonoBehaviour:
   ForwardAngle: 55
   WalkSpeed: 3
   DashSpeed: 5
-  JumpPower: 15
+  GroundJumpPower: 20
+  AirJumpPower: 15
   JumpSpeed: 2
   FallSpeed: 0.1
   FallSpeedMax: 5
+  AirJumpNum: 1
   Gravity: 0.4
   BrakePower: 0.4
   MentalGaugeMax: 100
   MentalGaugeAccumulateSpeed: 10
   InvincibleFrame: 90
-  isRespawn: 0
+  DamageFrame: 40
+  EffectSweatObj:
+  - {fileID: 0}
+  - {fileID: 0}
   ItemPosition: {fileID: 1363752030215286}
   AttackCollisionObj: {fileID: 1025552981983254}
   RotateObj: {fileID: 1484942226375432}
-  cntInvincibleFrame: 0
 --- !u!114 &114610568124504520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -27461,20 +27474,24 @@ MonoBehaviour:
   ForwardAngle: 55
   WalkSpeed: 3
   DashSpeed: 5
-  JumpPower: 15
+  GroundJumpPower: 20
+  AirJumpPower: 15
   JumpSpeed: 2
   FallSpeed: 0.1
   FallSpeedMax: 5
+  AirJumpNum: 1
   Gravity: 0.4
   BrakePower: 0.4
   MentalGaugeMax: 100
   MentalGaugeAccumulateSpeed: 10
   InvincibleFrame: 90
-  isRespawn: 0
+  DamageFrame: 40
+  EffectSweatObj:
+  - {fileID: 0}
+  - {fileID: 0}
   ItemPosition: {fileID: 1230509637507736}
   AttackCollisionObj: {fileID: 1271603060552332}
   RotateObj: {fileID: 1674923223898588}
-  cntInvincibleFrame: 0
 --- !u!114 &114888255027847634
 MonoBehaviour:
   m_ObjectHideFlags: 1

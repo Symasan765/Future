@@ -11,6 +11,7 @@ public class PlayerRadarScript : MonoBehaviour {
 
 	public float m_MaxRadius = 20.0f;
 	public float m_MinRadius = 5.0f;
+	public Vector3 m_Offset;
 
 	// Use this for initialization
 	void Start () {
@@ -36,7 +37,7 @@ public class PlayerRadarScript : MonoBehaviour {
 
 	void RadarUpdate(int i)
 	{
-		m_RadarObjs[i].transform.position = m_PlayerObjs[i].gameObject.transform.position;
+		m_RadarObjs[i].transform.position = m_PlayerObjs[i].gameObject.transform.position + m_Offset;
 		int gage = m_PlayerObjs[i].GetMentalGauge();
 		float rate = gage / 100.0f;
 		float radius = Mathf.Lerp(m_MinRadius, m_MaxRadius, rate);

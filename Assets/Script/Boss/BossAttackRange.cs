@@ -38,7 +38,7 @@ public class BossAttackRange : MonoBehaviour {
 		m_Material = m_AttackRangeBoard.GetComponent<Renderer>().material;
 
 		// 攻撃情報保持
-		m_AttackPos = new Vector3(atackPos.x, atackPos.y,0.5f);
+		m_AttackPos = new Vector3(atackPos.x, atackPos.y,5.5f);
 		m_Range = range;
 		m_AttackTime = atackTime;
 		m_AttackCount = 0.0f;
@@ -98,7 +98,7 @@ public class BossAttackRange : MonoBehaviour {
 	{
 		if (m_AttackFlag)
 		{
-			RaycastHit[] hitInfo = Physics.BoxCastAll(m_AttackPos, new Vector3(m_Range.x / 2.0f, m_Range.y / 2.0f, 0.0f), Vector3.back, Quaternion.identity, 5.0f);
+			RaycastHit[] hitInfo = Physics.BoxCastAll(m_AttackPos, new Vector3(m_Range.x / 2.0f, m_Range.y / 2.0f, 0.0f), Vector3.back, Quaternion.identity, 15.0f);
 			
 			// 当たったオブジェクトからプレイヤーを探してダメージ処理
 			for(int i = 0; i < hitInfo.Length; i++)
