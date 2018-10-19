@@ -60,6 +60,7 @@ public class Player : MonoBehaviour
 	public GameObject ItemPosition;
 	public GameObject AttackCollisionObj;
 	public GameObject RotateObj;
+	public GameObject testWordEffect;
 
 	private GameObject getItemObj;
 	private GameObject holdDeskObj;
@@ -508,6 +509,10 @@ public class Player : MonoBehaviour
 
 			if (cntJumpCheckFrame > 4)
 			{
+				WordParent wp = testWordEffect.GetComponent<WordParent>();
+				wp.transform.position = new Vector3(transform.position.x, transform.position.y, wp.transform.position.z);
+				wp.Play(PlayerIndex);
+
 				SoundManager.Get.PlaySE("jump");
 				jumpSpeed = GroundJumpPower;
 				isJump = true;
@@ -515,6 +520,9 @@ public class Player : MonoBehaviour
 			{
 				if (XPad.Get.GetRelease(XPad.KeyData.X, PlayerIndex))
 				{
+					WordParent wp = testWordEffect.GetComponent<WordParent>();
+					wp.transform.position = new Vector3(transform.position.x, transform.position.y, wp.transform.position.z);
+					wp.Play(PlayerIndex);
 					SoundManager.Get.PlaySE("jump");
 					jumpSpeed = GroundJumpPower - (GroundJumpPower / 3);
 					isJump = true;
