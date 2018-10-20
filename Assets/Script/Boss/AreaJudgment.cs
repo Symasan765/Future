@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class AreaJudgment : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	// ステージ中のエリアを判定するためのスクリプト
+	public int m_AreaNo = 0;
+
+	private void Start()
+	{
+		GetComponent<MeshRenderer>().enabled = false;
 	}
 }

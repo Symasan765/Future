@@ -136,4 +136,9 @@ public class BossAttackManager : MonoBehaviour
 			m_AttackList.Add(list);
 		}
 	}
+
+	int AreaIdentification(int tagetNo)
+	{
+		return 0;
+	}
 }
