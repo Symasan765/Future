@@ -111,7 +111,7 @@ public class BossAttackManager : MonoBehaviour
 
 		// 攻撃パターン数を取得する
 		m_AttackObjs = new AttackID[attackObjects.Length];
-		Debug.Log("数" + m_AttackObjs.Length);
+		
 		for (int i = 0; i < m_AttackObjs.Length; i++)
 		{
 			m_AttackObjs[i] = attackObjects[i].GetComponent<AttackID>();

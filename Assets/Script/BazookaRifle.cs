@@ -31,7 +31,7 @@ public class BazookaRifle : MonoBehaviour
 		BazookaAreaUpdate();
 
 		GameObject Boss = GameObject.FindGameObjectWithTag("BOSS");
-        Debug.Log(Boss);
+        //Debug.Log(Boss);
 		//証拠を探す。
 		DetectEvidence();
 
