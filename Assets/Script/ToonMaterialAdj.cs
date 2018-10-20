@@ -28,7 +28,7 @@ public class ToonMaterialAdj : MonoBehaviour
 		m_Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
 
 		render = GetComponent<SkinnedMeshRenderer>();
-		m_PlayerScript = transform.parent.parent.parent.gameObject.GetComponent<Player>();
+		m_PlayerScript = transform.root.gameObject.GetComponent<Player>();
 		if (m_PlayerScript != null)
 		{
 			playerIndex = m_PlayerScript.PlayerIndex;
