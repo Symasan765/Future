@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour {
             // ゲージの増減
             float mentalGauge = (float)player.GetMentalGauge();
             GaugeArray[index].fillAmount = Mathf.Lerp(GaugeArray[index].fillAmount, Mathf.Clamp((mentalGauge / 100.0f), 0.1f, 0.9f), 0.1f);
-            Debug.Log(GaugeArray[2].fillAmount);
+            //Debug.Log(GaugeArray[2].fillAmount);
             if (GaugeArray[index].fillAmount > 0.7f) {
                 GaugeArray[index].color = Color.red;
             }
