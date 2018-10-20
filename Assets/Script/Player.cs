@@ -60,6 +60,7 @@ public class Player : MonoBehaviour
 	public GameObject ItemPosition;
 	public GameObject AttackCollisionObj;
 	public GameObject RotateObj;
+	public GameObject FootPositionObj;
 
 	private GameObject getItemObj;
 	private GameObject holdDeskObj;
@@ -102,6 +103,7 @@ public class Player : MonoBehaviour
 	{
 		animator.SetInteger("cntGetItemBlankTime", cntGetItemBlankTime);
 		animator.SetBool("isDamage", IsDamageTrigger());
+		animator.SetBool("isOnGround", IsOnGround());
 		if (IsDown())
 		{
 			if (isHoldItem)
@@ -123,11 +125,15 @@ public class Player : MonoBehaviour
 
 				SerchItem();
 
+				//攻撃処理(今は仕様確定していないのでなし)
+				/*
 				if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
 				{
 					AttackStart();
 				}
 				Attack();
+				*/
+
 				//証拠を持っている時メンタルゲージ増加(とりあえず何か持ってたら溜まる)
 				if (isHoldItem)
 				{
@@ -458,27 +464,30 @@ public class Player : MonoBehaviour
 		float scr = 0.4f;
 		RaycastHit hit;
 		CapsuleCollider cc = GetComponent<CapsuleCollider>();
-		Vector3 sphirePos = new Vector3(transform.position.x, transform.position.y + scr, transform.position.z);
+		Vector3 sphirePos = new Vector3(FootPositionObj.transform.position.x, FootPositionObj.transform.position.y + scr, FootPositionObj.transform.position.z);
 		Physics.SphereCast(sphirePos, scr, Vector3.down, out hit);
 		if (hit.collider)
 		{
-			Debug.DrawRay(transform.position, Vector3.down * hit.distance);
+			Debug.DrawRay(FootPositionObj.transform.position, Vector3.down * hit.distance);
 			Gizmos.DrawWireSphere(hit.point, scr);
 		}
 	}
 	//接地しているか
 	private bool IsOnGround()
 	{
-		float scr = 0.4f;
-		RaycastHit hit;
-		CapsuleCollider cc = GetComponent<CapsuleCollider>();
-		Vector3 sphirePos = new Vector3(transform.position.x, transform.position.y + scr, transform.position.z);
-		Physics.SphereCast(sphirePos, scr, Vector3.down, out hit);
-
-		if (hit.distance < 0.04f)
+		if (!isJump)
 		{
-			rb.velocity = Vector3.zero;
-			return true;
+			float scr = 0.4f;
+			RaycastHit hit;
+			CapsuleCollider cc = GetComponent<CapsuleCollider>();
+			Vector3 sphirePos = new Vector3(FootPositionObj.transform.position.x, FootPositionObj.transform.position.y + scr, FootPositionObj.transform.position.z);
+			Physics.SphereCast(sphirePos, scr, Vector3.down, out hit);
+
+			if (hit.distance < 0.04f)
+			{
+				rb.velocity = Vector3.zero;
+				return true;
+			}
 		}
 		return false;
 	}
@@ -549,9 +558,10 @@ public class Player : MonoBehaviour
 		if (!isRescue && !isAttack && !isHoldItem && cntGetItemBlankTime == 0)
 		{
 			RaycastHit hit;
-			Physics.Raycast(transform.position, transform.forward, out hit, CanHoldItemDistance);
+			Physics.Raycast(FootPositionObj.transform.position, transform.forward, out hit, CanHoldItemDistance);
 			if (hit.collider)
 			{
+				Debug.Log(hit.collider.gameObject.name + "取得可能");
 				if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
 				{
 					if (hit.collider.tag == "Player")
