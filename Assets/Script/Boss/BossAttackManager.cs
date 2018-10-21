@@ -53,7 +53,7 @@ public class BossAttackManager : MonoBehaviour
 			if (AreaNo != -1)
 			{
 				AttackID(AreaNo);
-				yield return new WaitForSeconds(5); // これで引数分の秒数の間、処理を待つ
+				yield return new WaitForSeconds(3); // これで引数分の秒数の間、処理を待つ
 			}
 			else
 			{
