@@ -12,13 +12,22 @@ public class GetCamTarget : MonoBehaviour {
     float weight;
     [SerializeField]
     float radius;
+	[SerializeField]
+	Vector3 offset;
 
 	void Start () {
         tGroup = GetComponentInChildren<Cinemachine.CinemachineTargetGroup>();
         playerList = GameObject.FindGameObjectsWithTag("Player");
 
         for (int plIndex = 0; plIndex < playerList.Length; plIndex++) {
-            target[plIndex].target = playerList[plIndex].transform;
+			// プレイヤーの前に疑似オブジェクトを作成してそれをカメラのターゲットとする
+			GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+			cube.transform.position = playerList[plIndex].transform.position + offset;
+			cube.GetComponent<BoxCollider>().enabled = false;
+			cube.GetComponent<MeshRenderer>().enabled = false;
+			//cube.transform.parent = playerList[plIndex].transform;
+
+			target[plIndex].target = cube.transform;
             target[plIndex].weight = weight;
             target[plIndex].radius = radius;
         }
