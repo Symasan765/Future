@@ -358,7 +358,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 56, y: 35, z: 1}
+  m_Size: {x: 136.64, y: 35, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65783780616305604
 BoxCollider:
@@ -423,8 +423,8 @@ MonoBehaviour:
   m_MaximumDistance: 5000
   m_MinimumFOV: 3
   m_MaximumFOV: 60
-  m_MinimumOrthoSize: 8
-  m_MaximumOrthoSize: 8
+  m_MinimumOrthoSize: 10
+  m_MaximumOrthoSize: 10
 --- !u!114 &114282314053713884
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -453,7 +453,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
-  radius: 1
+  radius: 3
+  offset: {x: 0, y: 0, z: 0}
 --- !u!114 &114722135336309534
 MonoBehaviour:
   m_ObjectHideFlags: 1

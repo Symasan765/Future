@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class BossAttackManager : MonoBehaviour
 {
@@ -44,8 +45,20 @@ public class BossAttackManager : MonoBehaviour
 		// TODO 将来的にはボスが生きている間、みたいな条件に変更すること
 		while (true)
 		{
-			AttackID(0);
-			yield return new WaitForSeconds(5); // これで引数分の秒数の間、処理を待つ
+			// 攻撃対象のプレイヤーを確定させる
+			int targetNo = GetImportantPlayerNo();
+			// そのプレイヤーがステージのどこのエリアにいるかを特定する
+			int AreaNo = AreaIdentification(targetNo);
+			// プレイヤーが特定のエリアにいればそのエリアに攻撃を発生させる
+			if (AreaNo != -1)
+			{
+				AttackID(AreaNo);
+				yield return new WaitForSeconds(3); // これで引数分の秒数の間、処理を待つ
+			}
+			else
+			{
+				yield return new WaitForSeconds(0.5f);
+			}
 		}
 		yield return null;
 	}
@@ -103,6 +116,38 @@ public class BossAttackManager : MonoBehaviour
 		return new Vector2(pos.x, pos.y);
 	}
 
+	int GetImportantPlayerNo()
+	{
+		int retNo = -1;
+		int[] hp = new int[5];		// ソートに使用する体力値
+		int[] priority = new int[5];
+
+		hp[4] = 0;
+		priority[4] = 0;
+
+		for (int i = 0; i < m_PlayerObjs.Length; i++)
+		{
+			hp[i] = m_PlayerObjs[i].GetMentalGauge();
+			priority[i] = i;
+
+			// アイテム持ってたら強制的にそいつを狙う
+			if (m_PlayerObjs[i].IsHoldItem())
+			{
+				hp[4] = 1000;
+				priority[4] = i;
+			}
+		}
+
+		// 優先度でソートする
+		Array.Sort(hp, priority);
+
+		// 優先度に基づいて割合付けを行っている
+		int[] randomArray = new int[] { priority[4],priority[4],priority[4],priority[3],priority[3],priority[3],priority[2],priority[2],priority[1],priority[0]};
+
+		System.Random rand = new System.Random();
+		return randomArray[rand.Next(randomArray.Length)];
+	}
+
 	void SearchAttackObj()
 	{
 		GameObject[] attackObjects;
@@ -111,7 +156,7 @@ public class BossAttackManager : MonoBehaviour
 
 		// 攻撃パターン数を取得する
 		m_AttackObjs = new AttackID[attackObjects.Length];
-		Debug.Log("数" + m_AttackObjs.Length);
+
 		for (int i = 0; i < m_AttackObjs.Length; i++)
 		{
 			m_AttackObjs[i] = attackObjects[i].GetComponent<AttackID>();
@@ -135,5 +180,22 @@ public class BossAttackManager : MonoBehaviour
 			}
 			m_AttackList.Add(list);
 		}
+	}
+
+	int AreaIdentification(int targetNo)
+	{
+		// レイヤーマスクを設定
+		// レイを画面奥方向へ飛ばして範囲オブジェクトを探索
+		// オブジェクトが見つかったらエリアNoを返す
+		// 見つからなかったら異常値として-1を返す
+
+		int mask = LayerMask.GetMask("AreaJudge");
+		RaycastHit info;
+		Vector3 origin = m_PlayerObjs[targetNo].transform.position;
+		if (Physics.Raycast(origin, Vector3.forward, out info, 10.0f, mask))
+		{
+			return info.transform.GetComponent<AreaJudgment>().m_AreaNo;
+		}
+		return -1;
 	}
 }

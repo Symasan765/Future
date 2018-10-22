@@ -53,5 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LadarPrefab: {fileID: 1622059966829596, guid: 67977d8d1406d044cb14f562417ba9ba,
     type: 2}
-  m_MaxRadius: 20
+  m_MaxRadius: 9
   m_MinRadius: 5
+  m_Offset: {x: 0, y: 0.4, z: 0}
