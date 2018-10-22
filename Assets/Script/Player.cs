@@ -67,6 +67,7 @@ public class Player : MonoBehaviour
 	private Animator animator;
 	private Rigidbody rb;
 	private ParticleSystem[] effectSweetSystem = new ParticleSystem[2];
+	private EffectManager effectManager;
 
 	private float nowMoveSpeed;
 	private float rightSpeed;
@@ -93,8 +94,8 @@ public class Player : MonoBehaviour
 			effectSweetSystem[i] = EffectSweatObj[i].GetComponent<ParticleSystem>();
 		}
 			//とりあえずリスポン位置をゲーム開始位置に
-			respawnPosition = transform.position;
-
+		respawnPosition = transform.position;
+		effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
 		rb = GetComponent<Rigidbody>();
 		animator = GetComponent<Animator>();
 	}
@@ -500,6 +501,7 @@ public class Player : MonoBehaviour
 		{
 			if (XPad.Get.GetTrigger(XPad.KeyData.X, PlayerIndex))
 			{
+				effectManager.PlayPYON(PlayerIndex, FootPositionObj.transform.position);
 				rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 				cntAirJumpNum--;
 				SoundManager.Get.PlaySE("jump");
@@ -517,6 +519,7 @@ public class Player : MonoBehaviour
 
 			if (cntJumpCheckFrame > 4)
 			{
+				effectManager.PlayDUM(PlayerIndex, FootPositionObj.transform.position);
 				SoundManager.Get.PlaySE("jump");
 				jumpSpeed = GroundJumpPower;
 				isJump = true;
@@ -524,6 +527,7 @@ public class Player : MonoBehaviour
 			{
 				if (XPad.Get.GetRelease(XPad.KeyData.X, PlayerIndex))
 				{
+					effectManager.PlayDUM(PlayerIndex, FootPositionObj.transform.position);
 					SoundManager.Get.PlaySE("jump");
 					jumpSpeed = GroundJumpPower - (GroundJumpPower / 3);
 					isJump = true;
