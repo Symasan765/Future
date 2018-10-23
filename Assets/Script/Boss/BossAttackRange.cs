@@ -52,6 +52,8 @@ public class BossAttackRange : MonoBehaviour {
 		{
 			// 点滅処理
 			RangeFlashing();
+			// コントローラー振動処理
+			DangerSignal();
 
 			m_AttackCount += Time.deltaTime;
 			m_AttackFlag = true;
@@ -113,5 +115,25 @@ public class BossAttackRange : MonoBehaviour {
 		}
 	}
 
-	
+	// ボスの攻撃範囲に入っているプレイヤーのコントローラーを振動させる
+	void DangerSignal()
+	{
+		int timeStand = (int)(m_AttackCount / 0.2f);
+		if (timeStand % 2 == 0)
+		{
+			// 実際の攻撃範囲と同じだけ探索する
+			RaycastHit[] hitInfo = Physics.BoxCastAll(m_AttackPos, new Vector3(m_Range.x / 2.0f, m_Range.y / 2.0f, 0.0f), Vector3.back, Quaternion.identity, 15.0f);
+
+			// 当たったオブジェクトからプレイヤーを探してコントローラー振動処理
+			for (int i = 0; i < hitInfo.Length; i++)
+			{
+				if (hitInfo[i].collider.gameObject.tag == "Player")
+				{
+					int idx = hitInfo[i].collider.gameObject.GetComponent<Player>().PlayerIndex;
+					float t = m_AttackCount / m_AttackTime;     // 徐々に振動を強くする
+					XPad.Get.SetVibration(idx, 0.0f, t, 0.2f * (1.0f -t));		// タイムの式は後半ほど振動を細切れにしている
+				}
+			}
+		}
+	}
 }
