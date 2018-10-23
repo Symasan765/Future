@@ -717,7 +717,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1106051528358694}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.417, y: 0.269, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 4008294983271160}
@@ -1253,7 +1253,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerIndex: 0
   ForwardAngle: 55
-  WalkSpeed: 3
   DashSpeed: 8
   GroundJumpPower: 20
   AirJumpPower: 15
@@ -1265,8 +1264,8 @@ MonoBehaviour:
   BrakePower: 0.4
   MentalGaugeMax: 100
   MentalGaugeAccumulateSpeed: 10
-  InvincibleFrame: 90
-  DamageFrame: 40
+  InvincibleSec: 1
+  DamageSec: 0.8
   EffectSweatObj:
   - {fileID: 1259145426381936}
   - {fileID: 1313688708623838}

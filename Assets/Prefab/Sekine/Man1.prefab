@@ -710,7 +710,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1180589747255228}
   m_LocalRotation: {x: -0, y: 0.9602182, z: 0.27925083, w: 0}
-  m_LocalPosition: {x: 0.06, y: 1.84, z: -0.5}
+  m_LocalPosition: {x: 0.06, y: 1.159, z: -0.49}
   m_LocalScale: {x: 1, y: 1, z: 0.99999976}
   m_Children: []
   m_Father: {fileID: 4394998209719734}
@@ -904,7 +904,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1181545730777294}
   m_LocalRotation: {x: 0, y: 0.9602182, z: 0.27925083, w: 0}
-  m_LocalPosition: {x: 0.06, y: 1.84, z: -0.5}
+  m_LocalPosition: {x: 0.06, y: 1.159, z: -0.49}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4394998209719734}
@@ -930,7 +930,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1356394232252974}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.406, y: 0.518, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_Children:
   - {fileID: 4000683480150926}
@@ -1188,7 +1188,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerIndex: 0
   ForwardAngle: 55
-  WalkSpeed: 3
   DashSpeed: 8
   GroundJumpPower: 20
   AirJumpPower: 15
@@ -1200,8 +1199,8 @@ MonoBehaviour:
   BrakePower: 0.4
   MentalGaugeMax: 100
   MentalGaugeAccumulateSpeed: 10
-  InvincibleFrame: 90
-  DamageFrame: 40
+  InvincibleSec: 1
+  DamageSec: 0.8
   EffectSweatObj:
   - {fileID: 1181545730777294}
   - {fileID: 1180589747255228}
@@ -1632,7 +1631,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 937865113
+  randomSeed: 923250256
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4999,7 +4998,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 755694071
+  randomSeed: 1317547287
   InitialModule:
     serializedVersion: 3
     enabled: 1
