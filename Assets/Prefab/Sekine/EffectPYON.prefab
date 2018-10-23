@@ -176,17 +176,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EndAnimation: 1
-  LifeTime: 9
+  LifeTime: 0.1
   DerayTime: 0
   FadeIn: 0
   FadeInSpeed: 0.2
   FadeOut: 1
-  FadeOutSpeed: 0.2
-  ShakePower: {x: 0, y: 0.3}
-  ShakeSpeed: 1
+  FadeOutSpeed: 4
+  ShakePower: {x: 0, y: 0.2}
+  ShakeSpeed: 2
   StartScale: {x: 0.5, y: 0.5, z: 0.5}
   ScaleFadeIn: 1
-  ScaleFadeInSpeed: {x: 0.1, y: 0.1, z: 0.1}
+  ScaleFadeInSpeed: {x: 10, y: 10, z: 10}
   ScaleFadeOut: 0
   ScaleFadeOutSpeed: 0.2
   ScaleShake: 1
@@ -206,17 +206,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EndAnimation: 0
-  LifeTime: 9
+  LifeTime: 0.1
   DerayTime: 0
   FadeIn: 0
   FadeInSpeed: 0.2
   FadeOut: 1
-  FadeOutSpeed: 0.2
-  ShakePower: {x: 0, y: 0.3}
-  ShakeSpeed: 1
+  FadeOutSpeed: 4
+  ShakePower: {x: 0, y: 0.2}
+  ShakeSpeed: 2
   StartScale: {x: 0.5, y: 0.5, z: 0.5}
   ScaleFadeIn: 1
-  ScaleFadeInSpeed: {x: 0.1, y: 0.1, z: 0.1}
+  ScaleFadeInSpeed: {x: 10, y: 10, z: 10}
   ScaleFadeOut: 0
   ScaleFadeOutSpeed: 0.2
   ScaleShake: 1
@@ -236,17 +236,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EndAnimation: 0
-  LifeTime: 9
+  LifeTime: 0.1
   DerayTime: 0
   FadeIn: 0
   FadeInSpeed: 0.2
   FadeOut: 1
-  FadeOutSpeed: 0.2
-  ShakePower: {x: 0, y: 0.3}
-  ShakeSpeed: 1
+  FadeOutSpeed: 4
+  ShakePower: {x: 0, y: 0.2}
+  ShakeSpeed: 2
   StartScale: {x: 0.5, y: 0.5, z: 0.5}
   ScaleFadeIn: 1
-  ScaleFadeInSpeed: {x: 0.1, y: 0.1, z: 0.1}
+  ScaleFadeInSpeed: {x: 10, y: 10, z: 10}
   ScaleFadeOut: 0
   ScaleFadeOutSpeed: 0.2
   ScaleShake: 1
@@ -266,17 +266,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EndAnimation: 0
-  LifeTime: 9
+  LifeTime: 0.1
   DerayTime: 0
   FadeIn: 0
   FadeInSpeed: 0.2
   FadeOut: 1
-  FadeOutSpeed: 0.2
-  ShakePower: {x: 0, y: 0.3}
-  ShakeSpeed: 1
+  FadeOutSpeed: 4
+  ShakePower: {x: 0, y: 0.2}
+  ShakeSpeed: 2
   StartScale: {x: 0.5, y: 0.5, z: 0.5}
   ScaleFadeIn: 1
-  ScaleFadeInSpeed: {x: 0.1, y: 0.1, z: 0.1}
+  ScaleFadeInSpeed: {x: 10, y: 10, z: 10}
   ScaleFadeOut: 0
   ScaleFadeOutSpeed: 0.2
   ScaleShake: 1

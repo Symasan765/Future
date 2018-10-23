@@ -6,9 +6,9 @@ public class Word : MonoBehaviour {
 	[SerializeField]
 	private bool EndAnimation = false;
 	[SerializeField]
-	private int LifeTime = 0;
+	private float LifeTime = 0;
 	[SerializeField]
-	private int DerayTime = 0;
+	private float DerayTime = 0;
 	[SerializeField]
 	private bool FadeIn = true;
 	[SerializeField]
@@ -45,14 +45,15 @@ public class Word : MonoBehaviour {
 
 	[SerializeField]private bool flgPlay = false;
 
-	private int cntLifeTime = 0;
-	private int cntDerayTime = 0;
+	private float cntLifeTime = 0;
+	private float cntDerayTime = 0;
 	private float cntFadeOutTime = 0;
 	private int cntScaleShakeTime = 0;
 	private Color color;
 	private Vector3 startPosition;
 	private Vector3 nowScale;
 	private bool isFadeIn = false;
+	private bool endEffect = false;
 	// Use this for initialization
 	void Start ()
 	{
@@ -78,10 +79,10 @@ public class Word : MonoBehaviour {
 			//描画開始までの空白期間
 			if (cntDerayTime < DerayTime)
 			{
-				cntDerayTime++;
+				cntDerayTime += Time.deltaTime;
 			}
 			//描画開始
-			if (cntDerayTime == DerayTime)
+			if (cntDerayTime >= DerayTime)
 			{
 				spriteRenderer.enabled = true;
 				//フェードイン
@@ -90,7 +91,7 @@ public class Word : MonoBehaviour {
 					if (color.a < 1.0f)
 					{
 						isFadeIn = true;
-						color.a += FadeInSpeed;
+						color.a += FadeInSpeed * Time.deltaTime;
 						if (color.a >= 1.0f)
 						{
 							isFadeIn = false;
@@ -104,7 +105,7 @@ public class Word : MonoBehaviour {
 						if (nowScale.x < 1.0f)
 						{
 							isFadeIn = true;
-							nowScale.x += ScaleFadeInSpeed.x;
+							nowScale.x += ScaleFadeInSpeed.x * Time.deltaTime;
 							if (nowScale.x >= 1.0f)
 							{
 								isFadeIn = false;
@@ -114,7 +115,7 @@ public class Word : MonoBehaviour {
 						if (nowScale.y < 1.0f)
 						{
 							isFadeIn = true;
-							nowScale.y += ScaleFadeInSpeed.y;
+							nowScale.y += ScaleFadeInSpeed.y * Time.deltaTime;
 							if (nowScale.y >= 1.0f)
 							{
 								isFadeIn = false;
@@ -124,7 +125,7 @@ public class Word : MonoBehaviour {
 						if (nowScale.z < 1.0f)
 						{
 							isFadeIn = true;
-							nowScale.z += ScaleFadeInSpeed.z;
+							nowScale.z += ScaleFadeInSpeed.z * Time.deltaTime;
 							if (nowScale.z >= 1.0f)
 							{
 								isFadeIn = false;
@@ -173,20 +174,24 @@ public class Word : MonoBehaviour {
 				}
 
 				//描画時間終了
-				if (cntLifeTime == LifeTime)
+				if (cntLifeTime >= LifeTime)
 				{
 					//縮小
 					if (ScaleFadeOut)
 					{
 						nowScale = Vector3.Lerp(nowScale, new Vector3(0, 0, 0), cntFadeOutTime);
-						cntFadeOutTime += ScaleFadeOutSpeed;
+						cntFadeOutTime += ScaleFadeOutSpeed * Time.deltaTime;
+						if (cntFadeOutTime >= 1.0f)
+						{
+							cntFadeOutTime = 1.0f;
+						}
 					}
 					//フェードアウト
 					if (FadeOut)
 					{
 						if (color.a > 0)
 						{
-							color.a -= FadeOutSpeed;
+							color.a -= FadeOutSpeed * Time.deltaTime;
 							if (color.a <= 0)
 							{
 								color.a = 0;
@@ -197,12 +202,22 @@ public class Word : MonoBehaviour {
 					//描画終了
 					if (FadeOut || ScaleFadeOut)
 					{
-						if (cntFadeOutTime >= 1.0f)
+						if (cntFadeOutTime >= 1.0f || (nowScale.x <= 0 || nowScale.y <= 0 || nowScale.z <= 0))
 						{
 							if (EndAnimation)
 							{
 								wordParent.DestroyObject();
 							}
+							Destroy(gameObject);
+							flgPlay = false;
+						}
+						if (color.a <= 0)
+						{
+							if (EndAnimation)
+							{
+								wordParent.DestroyObject();
+							}
+							Destroy(gameObject);
 							flgPlay = false;
 						}
 					} else
@@ -211,6 +226,7 @@ public class Word : MonoBehaviour {
 						{
 							wordParent.DestroyObject();
 						}
+						Destroy(gameObject);
 						flgPlay = false;
 					}
 
@@ -218,7 +234,7 @@ public class Word : MonoBehaviour {
 				//描画時間をカウント
 				if (cntLifeTime < LifeTime)
 				{
-					cntLifeTime++;
+					cntLifeTime += Time.deltaTime;
 				}
 			}
 		} else
