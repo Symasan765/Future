@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
 	private bool isRespawn = false;
 	private bool isDown = false;
 	private bool isRescue = false;
+	private bool isOnCollisionStay = false;
 
 	private int angleValue = 1;
 
@@ -100,6 +101,12 @@ public class Player : MonoBehaviour
 		animator.SetFloat("cntGetItemBlankTime", cntGetItemBlankTime);
 		animator.SetBool("isDamage", IsDamageTrigger());
 		animator.SetBool("isOnGround", IsOnGround());
+
+		if (IsOnGround())
+		{
+			isOnCollisionStay = false;
+		}
+
 		if (IsDown())
 		{
 			if (isHoldItem)
@@ -269,7 +276,14 @@ public class Player : MonoBehaviour
 			SetMoveSpeed(angleValue, nowMoveSpeed);
 		}
 
-		this.transform.Translate(Vector3.forward * angleValue * Time.deltaTime * (rightSpeed + leftSpeed));
+		if (isOnCollisionStay)
+		{
+
+		} else
+		{
+			this.transform.Translate(Vector3.forward * angleValue * Time.deltaTime * (rightSpeed + leftSpeed));
+		}
+
 		oldLeftStick = LeftStick;
 	}
 
@@ -745,6 +759,22 @@ public class Player : MonoBehaviour
 	public bool IsDown()
 	{
 		return isDown;
+	}
+
+	public void OnCollisionStay(Collision other)
+	{
+		if (!IsOnGround() && !isJump)
+		{
+			if (other.gameObject.tag != "Player")
+			{
+				isOnCollisionStay = true;	
+			}
+		}
+	}
+
+	public void OnCollisionExit(Collision other)
+	{
+		isOnCollisionStay = false;
 	}
 
     public int GetPlayerIndex() {
