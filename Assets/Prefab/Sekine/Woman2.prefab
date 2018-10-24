@@ -1251,7 +1251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fac60ce12c6b19240842440b723994ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerIndex: 0
+  PlayerIndex: 2
   ForwardAngle: 55
   DashSpeed: 8
   GroundJumpPower: 20
@@ -1287,7 +1287,7 @@ MonoBehaviour:
   m_MinDistance: 1
   m_MaxDistance: 11
   m_MinWidth: 3
-  m_MaxWidth: 100
+  m_MaxWidth: 50
   m_FlashingSec: 0.1
   m_PlayerColor:
   - {r: 0, g: 0, b: 0, a: 0}
@@ -1320,7 +1320,7 @@ MonoBehaviour:
   m_MinDistance: 1
   m_MaxDistance: 11
   m_MinWidth: 3
-  m_MaxWidth: 100
+  m_MaxWidth: 50
   m_FlashingSec: 0.1
   m_PlayerColor:
   - {r: 0, g: 0, b: 0, a: 0}
@@ -1341,7 +1341,7 @@ MonoBehaviour:
   m_MinDistance: 1
   m_MaxDistance: 11
   m_MinWidth: 3
-  m_MaxWidth: 100
+  m_MaxWidth: 50
   m_FlashingSec: 0.1
   m_PlayerColor:
   - {r: 0, g: 0, b: 0, a: 0}
@@ -1361,8 +1361,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MinDistance: 1
   m_MaxDistance: 11
-  m_MinWidth: 3
-  m_MaxWidth: 100
+  m_MinWidth: 0
+  m_MaxWidth: 0
   m_FlashingSec: 0.1
   m_PlayerColor:
   - {r: 0, g: 0, b: 0, a: 0}
@@ -1383,7 +1383,7 @@ MonoBehaviour:
   m_MinDistance: 1
   m_MaxDistance: 11
   m_MinWidth: 3
-  m_MaxWidth: 100
+  m_MaxWidth: 50
   m_FlashingSec: 0.1
   m_PlayerColor:
   - {r: 0, g: 0, b: 0, a: 0}
@@ -1404,7 +1404,7 @@ MonoBehaviour:
   m_MinDistance: 1
   m_MaxDistance: 11
   m_MinWidth: 3
-  m_MaxWidth: 100
+  m_MaxWidth: 50
   m_FlashingSec: 0.1
   m_PlayerColor:
   - {r: 0, g: 0, b: 0, a: 0}
@@ -1435,8 +1435,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MinDistance: 1
   m_MaxDistance: 11
-  m_MinWidth: 3
-  m_MaxWidth: 100
+  m_MinWidth: 0
+  m_MaxWidth: 0
   m_FlashingSec: 0.1
   m_PlayerColor:
   - {r: 0, g: 0, b: 0, a: 0}
