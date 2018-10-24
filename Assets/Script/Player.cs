@@ -755,6 +755,7 @@ public class Player : MonoBehaviour
 	{
 		if (IsOnGround())
 		{
+			effectManager.PlayTap(PlayerIndex, FootPositionObj.transform.position);
 			SoundManager.Get.PlaySE("dash");
 		}
 	}
