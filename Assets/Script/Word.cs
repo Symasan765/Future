@@ -67,6 +67,7 @@ public class Word : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+		spriteRenderer.enabled = false;
 		Vector2 scaleShakePower = new Vector2(1.0f,1.0f);
 
 		if (ShakeSpeed < 1)
@@ -76,6 +77,7 @@ public class Word : MonoBehaviour {
 
 		if (flgPlay)
 		{
+			spriteRenderer.enabled = true;
 			//描画開始までの空白期間
 			if (cntDerayTime < DerayTime)
 			{
