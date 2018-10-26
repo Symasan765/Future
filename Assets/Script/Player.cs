@@ -482,6 +482,7 @@ public class Player : MonoBehaviour
 
 			if (cntJumpCheckFrame >= 0.1f)
 			{
+				cntAirJumpNum = AirJumpNum;
 				effectManager.PlayDUM(PlayerIndex, FootPositionObj.transform.position);
 				SoundManager.Get.PlaySE("jump");
 				jumpSpeed = GroundJumpPower;
@@ -490,17 +491,13 @@ public class Player : MonoBehaviour
 			{
 				if (XPad.Get.GetRelease(XPad.KeyData.X, PlayerIndex))
 				{
+					cntAirJumpNum = AirJumpNum;
 					effectManager.PlayDUM(PlayerIndex, FootPositionObj.transform.position);
 					SoundManager.Get.PlaySE("jump");
 					jumpSpeed = GroundJumpPower - (GroundJumpPower / 3);
 					isJump = true;
 				}
 			}
-		}
-
-		if (IsOnGround())
-		{
-			cntAirJumpNum = AirJumpNum;
 		}
 
 		animator.SetBool("isJump", isJump);
