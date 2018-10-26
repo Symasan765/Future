@@ -15,6 +15,8 @@ public class BazookaRifle : MonoBehaviour
     private int EvidenceNum = 0;                      //全体の証拠の数。
     public int NearEvidenceNum = 0;                  //近づいた証拠の数。
     private GameObject[] Evidence_temp = new GameObject[3];
+	public GameObject EffectObj;
+	private ParticleSystem particleSystem;
 
 	public GameObject m_AreaPrefab;
 	GameObject m_AreaEntity;
@@ -30,11 +32,11 @@ public class BazookaRifle : MonoBehaviour
     {
 		BazookaAreaUpdate();
 
-		GameObject Boss = GameObject.FindGameObjectWithTag("BOSS");
+		//GameObject Boss = GameObject.FindGameObjectWithTag("BOSS");
         //Debug.Log(Boss);
 		//証拠を探す。
-		DetectEvidence();
-
+		//DetectEvidence();
+		/*
         //証拠が3つ以上だとバズーカーを発射し、証拠を削除。
         if (NearEvidenceNum == 3)
         {
@@ -45,8 +47,16 @@ public class BazookaRifle : MonoBehaviour
             {
                 Destroy(Evidence_temp[i]);
             }
-        }
+        }*/
 
+		if (NearEvidenceNum == 1)
+		{
+			SoundManager.Get.PlaySE("launcher2");
+			GameObject obj = Instantiate(EffectObj, transform.position, transform.rotation);
+			particleSystem = obj.GetComponent<ParticleSystem>();
+			particleSystem.Play();
+			NearEvidenceNum = 0;
+		}
 
     }
 

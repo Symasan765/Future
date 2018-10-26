@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
 
 	private float AttackSec = 0.5f;		//攻撃持続フレーム
 	private float GetItemBlankSec = 0.25f;	//アイテムを持つ&捨てる時の硬直フレーム
-	private float CanHoldItemDistance = 0.4f;	//机を運べるようになる範囲
+	private float CanHoldItemDistance = 1.0f;	//机を運べるようになる範囲
 	
 	private int mentalGauge = 0;
 	private bool isJump = false;
@@ -61,10 +61,12 @@ public class Player : MonoBehaviour
 
 	private GameObject getItemObj;
 	private GameObject holdDeskObj;
+	private GameObject bazookaObj;
 	private Animator animator;
 	private Rigidbody rb;
 	private ParticleSystem[] effectSweetSystem = new ParticleSystem[2];
 	private EffectManager effectManager;
+	private BazookaRifle bazookaRifle;
 
 	private float nowMoveSpeed;
 	private float rightSpeed;
@@ -98,6 +100,8 @@ public class Player : MonoBehaviour
 		effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
 		rb = GetComponent<Rigidbody>();
 		animator = GetComponent<Animator>();
+		bazookaObj = GameObject.Find("BazookaRifle");
+		bazookaRifle = bazookaObj.GetComponent<BazookaRifle>();
 	}
 	
 	void Update ()
@@ -123,6 +127,7 @@ public class Player : MonoBehaviour
 
 			if (!isDamage)
 			{
+				InBazookaRange();
 				RescuePlayer();
 				if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
 				{
@@ -579,6 +584,8 @@ public class Player : MonoBehaviour
 	//持てるアイテムを探す
 	private void SerchItem()
 	{
+		Vector3 itemPositon = new Vector3(transform.position.x, ItemPosition.transform.position.y, transform.position.z);
+		Debug.DrawRay(itemPositon, transform.forward * CanHoldItemDistance, Color.blue);
 		if (cntGetItemBlankTime > 0)
 		{
 			animator.SetBool("isGetItem", true);
@@ -595,7 +602,7 @@ public class Player : MonoBehaviour
 		if (!isRescue && !isAttack && !isHoldItem && cntGetItemBlankTime == 0)
 		{
 			RaycastHit hit;
-			Physics.Raycast(FootPositionObj.transform.position, transform.forward, out hit, CanHoldItemDistance);
+			Physics.Raycast(itemPositon, transform.forward, out hit, CanHoldItemDistance);
 			if (hit.collider)
 			{
 				Debug.Log(hit.collider.gameObject.name + "取得可能");
@@ -634,6 +641,7 @@ public class Player : MonoBehaviour
 
 			item.SetItemLocalPosition(ItemPosition.transform.localPosition);
 			item.flgMoveToGetPos = true;
+			item.isHold = true;
 		}
 	}
 
@@ -683,6 +691,18 @@ public class Player : MonoBehaviour
 				itemRb.AddForce(transform.forward * 1, ForceMode.Impulse);
 				item.flgMoveToGetPos = false;
 				getItemObj = null;
+				item.isHold = false;
+			}
+		}
+	}
+
+	private void InBazookaRange()
+	{
+		if (Vector3.Distance(transform.position, bazookaObj.transform.position) <= bazookaRifle.EvidenceDistance && IsOnGround())
+		{
+			if (isHoldItem)
+			{
+				ReleaseItem();
 			}
 		}
 	}
