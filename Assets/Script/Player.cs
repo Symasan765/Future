@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
 	
 	private int mentalGauge = 0;
 	private bool isJump = false;
-	private bool isHoldItem = false;
+	[SerializeField]private bool isHoldItem = false;
 	private bool isAttack = false;
 	private bool isDamage = false;
 	private bool isMove = false;
@@ -77,6 +77,10 @@ public class Player : MonoBehaviour
 	private float cntJumpTriggerFrame = 0;
 	private float cntInvincibleFrame = 0;
 	private float cntAirJumpNum = 1;
+	private float cntDamageImpactTime = 0;
+
+	private Vector3 damageImpactPower;
+	private Vector3 damageImpactSpeed;
 	private Vector3 holdDeskDirction;	//机を持った時の移動方向
 	private Vector3 oldLeftStick;
 	private Vector3 respawnPosition;
@@ -99,7 +103,8 @@ public class Player : MonoBehaviour
 	void Update ()
 	{
 		animator.SetFloat("cntGetItemBlankTime", cntGetItemBlankTime);
-		animator.SetBool("isDamage", IsDamageTrigger());
+		animator.SetBool("isDamageTrigger", IsDamageTrigger());
+		animator.SetBool("isDamage", isDamage);
 		animator.SetBool("isOnGround", IsOnGround());
 
 		if (IsOnGround())
@@ -115,6 +120,7 @@ public class Player : MonoBehaviour
 			}
 		} else
 		{
+
 			if (!isDamage)
 			{
 				RescuePlayer();
@@ -160,6 +166,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
 	{
+		//DamageImpact();
 		Fall();
 
 		if (!IsDown() && !isRescue)
@@ -185,8 +192,10 @@ public class Player : MonoBehaviour
 		{
 			rb.velocity = new Vector3(rb.velocity.x, (FallSpeedMax * 2) * -1, rb.velocity.z);
 		}
-
-		rb.AddForce(Vector3.down * (Gravity * FallSpeed));
+		if (!isDamage)
+		{
+			rb.AddForce(Vector3.down * (Gravity * FallSpeed));
+		}
 	}
 
 	//キャラの向きを変える
@@ -356,10 +365,23 @@ public class Player : MonoBehaviour
 			SoundManager.Get.PlaySE("hit1");
 			PlayerDamage pd = GetComponent<PlayerDamage>();
 			pd.StartEffect();
+			//アイテムを落とす
 			if (isHoldItem)
 			{
 				ReleaseItem();
 			}
+			//ジャンプしている時は停止する
+			if (isJump)
+			{
+				isJump = false;
+				jumpSpeed = 0;
+			}
+			cntJumpCheckFrame = 0;
+
+			cntDamageImpactTime = 0.1f;
+			damageImpactPower = new Vector3(2 * angleValue, 6, 0);
+
+			//左右移動速度を0に
 			rightSpeed = leftSpeed = 0.0f;
 			cntGetItemBlankTime = 0;
 			XPad.Get.SetVibration(PlayerIndex, 1.0f, 1.0f, 0.5f);
@@ -407,12 +429,52 @@ public class Player : MonoBehaviour
 	private void Damage()
 	{
 		isMove = false;
+		rb.velocity = Vector3.zero;
 		if (cntDamageFrame > 0)
 		{
 			cntDamageFrame -= Time.deltaTime;
 			if (cntDamageFrame <= 0)
 			{
 				isDamage = false;
+			}
+		}
+	}
+
+	private void DamageImpact()
+	{
+		if (isDamage)
+		{
+			if (damageImpactPower.x != 0)
+			{
+				rb.MovePosition(rb.position + Vector3.right * Time.deltaTime * damageImpactPower.x * (angleValue * -1));
+				if (damageImpactPower.x > 0)
+				{
+					damageImpactPower.x -= 0.05f;
+					if (damageImpactPower.x <= 0)
+					{
+						damageImpactPower.x = 0;
+					}
+				}
+				if (damageImpactPower.x < 0)
+				{
+					damageImpactPower.x += 0.05f;
+					if (damageImpactPower.x >= 0)
+					{
+						damageImpactPower.x = 0;
+					}
+				}
+			}
+			if (damageImpactPower.y != 0)
+			{
+				rb.MovePosition(rb.position + Vector3.up * Time.deltaTime * damageImpactPower.y);
+				if (damageImpactPower.y > 0)
+				{
+					damageImpactPower.y -= 0.05f;
+					if (damageImpactPower.y <= 0)
+					{
+						damageImpactPower.y = 0;
+					}
+				}
 			}
 		}
 	}

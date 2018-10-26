@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 136874607336152198}
   - component: {fileID: 114861327178441636}
   - component: {fileID: 114782820943902396}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Man1
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1291,6 +1291,7 @@ MonoBehaviour:
   MentalGaugeAccumulateSpeed: 10
   InvincibleSec: 1
   DamageSec: 0.8
+  isHoldItem: 0
   EffectSweatObj:
   - {fileID: 1181545730777294}
   - {fileID: 1180589747255228}
