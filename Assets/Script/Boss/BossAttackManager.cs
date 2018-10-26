@@ -20,6 +20,10 @@ public class BossAttackManager : MonoBehaviour
 
 	List<List<AttackID>> m_AttackList;
 
+	int m_OldAreaNo;
+	bool m_XORFlag;
+	float[] m_AreaTime;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -33,7 +37,7 @@ public class BossAttackManager : MonoBehaviour
 		for (int i = 0; i < obj.Length; i++)
 			m_PlayerObjs[i] = obj[i].GetComponent<Player>();
 
-		StartCoroutine("BossAttack");
+		StartCoroutine("JikutoAttack");
 	}
 
 	/// <summary>
@@ -54,6 +58,42 @@ public class BossAttackManager : MonoBehaviour
 			{
 				AttackID(AreaNo);
 				yield return new WaitForSeconds(3); // これで引数分の秒数の間、処理を待つ
+			}
+			else
+			{
+				yield return new WaitForSeconds(0.5f);
+			}
+		}
+		yield return null;
+	}
+
+	IEnumerator JikutoAttack()
+	{
+		m_OldAreaNo = -1;
+		// TODO 将来的にはボスが生きている間、みたいな条件に変更すること
+		while (true)
+		{
+			for(int i = 0; i < 4; i++)
+			{
+				m_AreaTime[i] -= Time.deltaTime;
+			}
+
+			// 攻撃対象のプレイヤーを確定させる
+			int targetNo = GetImportantPlayerNo();
+			// そのプレイヤーがステージのどこのエリアにいるかを特定する
+			int AreaNo = AreaIdentification(targetNo);
+			// プレイヤーが特定のエリアにいればそのエリアに攻撃を発生させる
+			if (AreaNo != -1)
+			{
+				if (m_XORFlag)
+				{
+					AttackID(AreaNo);
+					Debug.Log("攻撃エリア" + AreaNo);
+					m_AreaTime[m_OldAreaNo] = 2.0f;
+					yield return new WaitForSeconds(0.5f); // これで引数分の秒数の間、処理を待つ
+				}
+				else
+					yield return new WaitForSeconds(0.5f); // これで引数分の秒数の間、処理を待つ
 			}
 			else
 			{
@@ -119,7 +159,7 @@ public class BossAttackManager : MonoBehaviour
 	int GetImportantPlayerNo()
 	{
 		int retNo = -1;
-		int[] hp = new int[5];		// ソートに使用する体力値
+		int[] hp = new int[5];      // ソートに使用する体力値
 		int[] priority = new int[5];
 
 		hp[4] = 0;
@@ -142,7 +182,7 @@ public class BossAttackManager : MonoBehaviour
 		Array.Sort(hp, priority);
 
 		// 優先度に基づいて割合付けを行っている
-		int[] randomArray = new int[] { priority[4],priority[4],priority[4],priority[3],priority[3],priority[3],priority[2],priority[2],priority[1],priority[0]};
+		int[] randomArray = new int[] { priority[4], priority[4], priority[4], priority[3], priority[3], priority[3], priority[2], priority[2], priority[1], priority[0] };
 
 		System.Random rand = new System.Random();
 		return randomArray[rand.Next(randomArray.Length)];
@@ -180,6 +220,8 @@ public class BossAttackManager : MonoBehaviour
 			}
 			m_AttackList.Add(list);
 		}
+
+		m_AreaTime = new float[4] { 0.0f ,0.0f,0.0f,0.0f};
 	}
 
 	int AreaIdentification(int targetNo)
@@ -194,6 +236,16 @@ public class BossAttackManager : MonoBehaviour
 		Vector3 origin = m_PlayerObjs[targetNo].transform.position;
 		if (Physics.Raycast(origin, Vector3.forward, out info, 10.0f, mask))
 		{
+			int newAreaNo = info.transform.GetComponent<AreaJudgment>().m_SelectAttackNo;
+			if (m_OldAreaNo == newAreaNo)
+			{
+				m_XORFlag = false;
+			}
+			else
+			{
+				m_XORFlag = true;
+				m_OldAreaNo = newAreaNo;
+			}
 			return info.transform.GetComponent<AreaJudgment>().m_AreaNo;
 		}
 		return -1;
