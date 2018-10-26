@@ -17,7 +17,7 @@ public class ThroughFloorCheck : MonoBehaviour {
 		m_Rigid = GetComponent<Rigidbody>();
 		m_Capsule = GetComponent<CapsuleCollider>();
 		ThroughFloorLayerNo = LayerMask.NameToLayer("ThroughFloor");
-		DefaultLayerNo = LayerMask.NameToLayer("Default");
+		DefaultLayerNo = LayerMask.NameToLayer("Player");
 		m_FallingTimeCntSec = 0;
 	}
 

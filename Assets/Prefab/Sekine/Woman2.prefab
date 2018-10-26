@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 136518792438971346}
   - component: {fileID: 114674503371143904}
   - component: {fileID: 114037348742382954}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Woman2
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1266,6 +1266,7 @@ MonoBehaviour:
   MentalGaugeAccumulateSpeed: 10
   InvincibleSec: 1
   DamageSec: 0.8
+  isHoldItem: 0
   EffectSweatObj:
   - {fileID: 1259145426381936}
   - {fileID: 1313688708623838}
