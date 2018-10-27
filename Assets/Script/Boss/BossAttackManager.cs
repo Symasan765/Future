@@ -24,9 +24,16 @@ public class BossAttackManager : MonoBehaviour
 	bool m_XORFlag;
 	float[] m_AreaTime;
 
+	public float m_BossMaxDamage = 100.0f;
+	float m_BossDamage;
+
+	public bool m_AttackFlag;	// ボスが攻撃してもいいかどうかのフラグ
+
 	// Use this for initialization
 	void Start()
 	{
+		m_AttackFlag = true;
+		m_BossDamage = m_BossMaxDamage;
 		GameObject[] obj = GameObject.FindGameObjectsWithTag("Player");
 		if (obj.Length != 4)
 			Debug.Log("キャラクターの人数が４人ではありません");
@@ -119,7 +126,7 @@ public class BossAttackManager : MonoBehaviour
 		{
 			var obj = m_AttackList[ID][i];
 			var boss = Instantiate(m_RangePrefab).GetComponent<BossAttackRange>();
-			boss.AttackCommand(obj.transform.position, obj.transform.localScale, obj.m_TimeSec);
+			boss.AttackCommand(this,obj.transform.position, obj.transform.localScale, obj.m_TimeSec);
 		}
 
 		SoundManager.Get.PlaySE("BossAttackDangerous");
@@ -257,6 +264,16 @@ public class BossAttackManager : MonoBehaviour
 	/// <param name="damage"></param>
 	public void BossDamage(float damage)
 	{
+		m_BossDamage -= damage;
+		// TODO 今度、ボスの攻撃を徐々に減らす、ボスにダメージエフェクトを出すなどする場合はここをいじる
+	}
 
+	/// <summary>
+	/// ボスの行動状態をコントロールするスクリプト
+	/// </summary>
+	/// <param name="ok"></param>
+	public void BossBehaviorSwitching(bool CanYouDoIt)
+	{
+		m_AttackFlag = CanYouDoIt;
 	}
 }

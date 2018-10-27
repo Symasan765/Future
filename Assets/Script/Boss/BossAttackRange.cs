@@ -16,10 +16,18 @@ public class BossAttackRange : MonoBehaviour {
 	bool m_AttackFlag;
 
 	public Shader m_Shader;
-	public float m_LimitTime;	// ギリギリのタイミングで攻撃範囲を全体に映す際の残り時間
+	public float m_LimitTime;   // ギリギリのタイミングで攻撃範囲を全体に映す際の残り時間
+
+	BossAttackManager m_BossAttackManager;
 	
 	// Update is called once per frame
 	void Update () {
+		// 攻撃中止！
+		if(m_BossAttackManager.m_AttackFlag == false)
+		{
+			Destroy(gameObject);
+		}
+
 		AttackUpdate();
 	}
 
@@ -29,11 +37,12 @@ public class BossAttackRange : MonoBehaviour {
 	/// <param name="atackPos">攻撃中心座標</param>
 	/// <param name="range">攻撃範囲</param>
 	/// <param name="atackTime">攻撃までの時間</param>
-	public void AttackCommand(Vector2 atackPos,Vector2 range,float atackTime)
+	public void AttackCommand(BossAttackManager bm,Vector2 atackPos,Vector2 range,float atackTime)
 	{
 		// 初期化処理
 		m_AttackFlag = false;
 		m_AttackRangeBoard = Instantiate(m_AttackRangePrefab);
+		m_BossAttackManager = bm;
 
 		m_Material = m_AttackRangeBoard.GetComponent<Renderer>().material;
 

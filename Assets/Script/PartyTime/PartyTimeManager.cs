@@ -7,6 +7,7 @@ public class PartyTimeManager : MonoBehaviour {
 	float SkyChangeTime = 0.5f;
 	public float m_FeverTimeSec = 10.0f;
 	FeverManager m_FeverManager;
+	BossAttackManager m_BossAttackManager;
 
 	float m_BossSky = 1.98f;
 	float m_PartySky = 2.55f;
@@ -23,6 +24,7 @@ public class PartyTimeManager : MonoBehaviour {
 	}
 
 	PartyState m_NowState;
+	float m_FeverCnt;
 
 	// Use this for initialization
 	void Start () {
@@ -37,6 +39,7 @@ public class PartyTimeManager : MonoBehaviour {
 		SkyMaterial.mainTextureScale = new Vector2(m_SkyDsc, 1.0f);
 
 		m_FeverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
+		m_BossAttackManager = GameObject.Find("BossAttackManager").GetComponent<BossAttackManager>();
 	}
 	
 	// Update is called once per frame
@@ -67,9 +70,12 @@ public class PartyTimeManager : MonoBehaviour {
 
 	void PlayerAttackTurn()
 	{
-		if(m_SkyTimeSec > m_FeverTimeSec)
+		// フィーバータイムを過ぎればボス攻撃状態に遷移
+		m_FeverCnt += Time.deltaTime;
+		if(m_FeverCnt > m_FeverTimeSec)
 		{
-
+			SwitchState(PartyState.BossAttack);
+			// TODO ここでボスの攻撃再開を指示する
 		}
 	}
 
@@ -80,9 +86,11 @@ public class PartyTimeManager : MonoBehaviour {
 		switch (newState)
 		{
 			case PartyState.BossAttack:
+				m_BossAttackManager.BossBehaviorSwitching(true);
 				SkySwitch();
 				break;
 			case PartyState.PlayerAttack:
+				m_BossAttackManager.BossBehaviorSwitching(false);
 				m_FeverManager.StartFever(m_FeverTimeSec);
 				SkySwitch();
 				break;
@@ -128,6 +136,8 @@ public class PartyTimeManager : MonoBehaviour {
 		{
 			m_FeverManager.StartFever(m_FeverTimeSec);
 			m_SkyTimeSec = m_FeverTimeSec;
+			m_FeverCnt = 0;
+			SwitchState(PartyState.PlayerAttack);
 		}
 	}
 }
