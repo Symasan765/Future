@@ -86,7 +86,7 @@ public class CharacterSelectManager : MonoBehaviour {
         // その間、PushStart的なUIを表示しておく
         for (int cursorIndex = 0; cursorIndex < 4; ) {
             if (arrowList[cursorIndex].GetStartGameFlg()) {
-                SceneManager.LoadScene("MainGameScene");
+                SceneManager.LoadScene("Alpha");
                 cursorIndex = 999;
             }
             cursorIndex++;
