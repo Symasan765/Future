@@ -27,11 +27,14 @@ public class BossAttackManager : MonoBehaviour
 	public float m_BossMaxDamage = 100.0f;
 	float m_BossDamage;
 
-	public bool m_AttackFlag;	// ボスが攻撃してもいいかどうかのフラグ
+	public bool m_AttackFlag;   // ボスが攻撃してもいいかどうかのフラグ
+
+	BossAttackManager m_This;
 
 	// Use this for initialization
 	void Start()
 	{
+		m_This = this;
 		m_AttackFlag = true;
 		m_BossDamage = m_BossMaxDamage;
 		GameObject[] obj = GameObject.FindGameObjectsWithTag("Player");
@@ -80,31 +83,38 @@ public class BossAttackManager : MonoBehaviour
 		// TODO 将来的にはボスが生きている間、みたいな条件に変更すること
 		while (true)
 		{
-			for(int i = 0; i < 4; i++)
+			if (m_This.m_AttackFlag)
 			{
-				m_AreaTime[i] -= Time.deltaTime;
-			}
-
-			// 攻撃対象のプレイヤーを確定させる
-			int targetNo = GetImportantPlayerNo();
-			// そのプレイヤーがステージのどこのエリアにいるかを特定する
-			int AreaNo = AreaIdentification(targetNo);
-			// プレイヤーが特定のエリアにいればそのエリアに攻撃を発生させる
-			if (AreaNo != -1)
-			{
-				if (m_XORFlag)
+				for (int i = 0; i < 4; i++)
 				{
-					AttackID(AreaNo);
-					Debug.Log("攻撃エリア" + AreaNo);
-					m_AreaTime[m_OldAreaNo] = 2.0f;
-					yield return new WaitForSeconds(0.5f); // これで引数分の秒数の間、処理を待つ
+					m_AreaTime[i] -= Time.deltaTime;
+				}
+
+				// 攻撃対象のプレイヤーを確定させる
+				int targetNo = GetImportantPlayerNo();
+				// そのプレイヤーがステージのどこのエリアにいるかを特定する
+				int AreaNo = AreaIdentification(targetNo);
+				// プレイヤーが特定のエリアにいればそのエリアに攻撃を発生させる
+				if (AreaNo != -1)
+				{
+					if (m_XORFlag)
+					{
+						AttackID(AreaNo);
+						Debug.Log("攻撃エリア" + AreaNo);
+						m_AreaTime[m_OldAreaNo] = 2.0f;
+						yield return new WaitForSeconds(0.5f); // これで引数分の秒数の間、処理を待つ
+					}
+					else
+						yield return new WaitForSeconds(0.5f); // これで引数分の秒数の間、処理を待つ
 				}
 				else
-					yield return new WaitForSeconds(0.5f); // これで引数分の秒数の間、処理を待つ
+				{
+					yield return new WaitForSeconds(0.5f);
+				}
 			}
 			else
 			{
-				yield return new WaitForSeconds(0.5f);
+				yield return new WaitForSeconds(2.0f);
 			}
 		}
 		yield return null;

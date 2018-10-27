@@ -25,6 +25,7 @@ public class BossAttackRange : MonoBehaviour {
 		// 攻撃中止！
 		if(m_BossAttackManager.m_AttackFlag == false)
 		{
+			Destroy(m_AttackRangeBoard);
 			Destroy(gameObject);
 		}
 
@@ -42,6 +43,7 @@ public class BossAttackRange : MonoBehaviour {
 		// 攻撃できなければ登録せず破棄して終了
 		if (bm.m_AttackFlag == false)
 		{
+			Destroy(m_AttackRangeBoard);
 			Destroy(gameObject);
 			return;
 		}
