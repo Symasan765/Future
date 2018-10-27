@@ -150,8 +150,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8248515, y: 0.9185071, z: 0.2566692}
-  m_Center: {x: -0.005838275, y: -0.066623926, z: 0.0051620156}
+  m_Size: {x: 0.8248515, y: 0.9185071, z: 0.8733828}
+  m_Center: {x: -0.005838275, y: -0.066623926, z: 0.010672078}
 --- !u!95 &95767996697322124
 Animator:
   serializedVersion: 3
@@ -196,3 +196,4 @@ MonoBehaviour:
   ModelObj: {fileID: 1776054614948772}
   isScaleDown: 0
   isHold: 0
+  isFeverEvidence: 0
