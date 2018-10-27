@@ -16,13 +16,13 @@ public class FeverManager : MonoBehaviour {
 
 	private bool isStart = false;
 
-
+	private float feverSec;
 	private float cntFeverSec = 0;
 	private float cntCreateEvidenceSec = 0;
 	// Use this for initialization
 	void Start ()
 	{
-		
+		feverSec = FeverSec;
 	}
 	
 	// Update is called once per frame
@@ -30,7 +30,7 @@ public class FeverManager : MonoBehaviour {
 	{
 		if (Input.GetKeyDown(KeyCode.F1))
 		{
-			StartFever();
+			StartFever(FeverSec);
 		}
 
 		if (isStart)
@@ -55,9 +55,9 @@ public class FeverManager : MonoBehaviour {
 		}
 	}
 
-	public void StartFever()
+	public void StartFever(float _feverSec)
 	{
-		cntFeverSec = FeverSec;
+		cntFeverSec = _feverSec;
 		isStart = true;
 	}
 }
