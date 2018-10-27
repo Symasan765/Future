@@ -116,4 +116,12 @@ public class PartyTimeManager : MonoBehaviour {
 
 		m_SkyTimeSec = 0.0f;
 	}
+
+	/// <summary>
+	/// ゲーム中でフィーバータイムにしたい場合に呼ぶ関数
+	/// </summary>
+	public void LetsParty()
+	{
+
+	}
 }

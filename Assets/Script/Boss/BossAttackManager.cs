@@ -250,4 +250,13 @@ public class BossAttackManager : MonoBehaviour
 		}
 		return -1;
 	}
+
+	/// <summary>
+	///  ボスへダメージを与える関数
+	/// </summary>
+	/// <param name="damage"></param>
+	public void BossDamage(float damage)
+	{
+
+	}
 }
