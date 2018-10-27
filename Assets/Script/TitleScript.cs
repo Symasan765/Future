@@ -22,26 +22,30 @@ public class TitleScript : MonoBehaviour {
         CameraObject.transform.position += MovingSpeed;
         for (int i = 0; i < 4; i++)
         {
-            if (XPad.Get.GetTrigger(XPad.KeyData.A, i)||Input.GetKeyDown(KeyCode.A))
-            {
-                FadeImage.GetComponent<Fade>().SetFade((int)Fade.FadeOption.FADEOUT,true);
-               // SceneManager.LoadScene((int)SceneList.CharactorSelect);
-                break;
-            }
+            //if (XPad.Get.GetTrigger(XPad.KeyData.A, i)||Input.GetKeyDown(KeyCode.A))
+            //{
+            //    FadeImage.GetComponent<Fade>().SetFade((int)Fade.FadeOption.FADEOUT,0.1f,true);
+            //}
         }
-        if(Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            FadeImage.GetComponent<Fade>().SetFade((int)Fade.FadeOption.FADEIN, true);
+            FadeImage.GetComponent<Fade>().SetFade((int)Fade.FadeOption.FADEOUT, 0.1f, true);
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            FadeImage.GetComponent<Fade>().SetFade((int)Fade.FadeOption.FADEIN,0.1f, true);
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
-            FadeImage2.GetComponent<Fade>().SetFade((int)Fade.FadeOption.FADEOUT, false);
+            FadeImage2.GetComponent<Fade>().SetFade((int)Fade.FadeOption.FADEOUT,0.01f, false);
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
-            FadeImage2.GetComponent<Fade>().SetFade((int)Fade.FadeOption.FADEIN, false);
+            FadeImage2.GetComponent<Fade>().SetFade((int)Fade.FadeOption.FADEIN,0.01f, false);
+        }
+        if(FadeImage.GetComponent<Fade>().IsFadeDone()==true)
+        {
+            SceneManager.LoadScene((int)SceneList.CharactorSelect);
         }
     }
-
-  
 }
