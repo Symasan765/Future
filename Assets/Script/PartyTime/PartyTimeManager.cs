@@ -5,6 +5,8 @@ using UnityEngine;
 public class PartyTimeManager : MonoBehaviour {
 	public Material SkyMaterial;
 	public float SkyChangeTime = 0.5f;
+	public float m_FeverTimeSec = 10.0f;
+	FeverManager m_FeverManager;
 
 	float m_BossSky = 1.98f;
 	float m_PartySky = 2.55f;
@@ -32,6 +34,8 @@ public class PartyTimeManager : MonoBehaviour {
 		m_SkyDsc = m_BossSky;
 
 		SkyMaterial.mainTextureScale = new Vector2(m_SkyDsc, 1.0f);
+
+		m_FeverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
 	}
 	
 	// Update is called once per frame
@@ -78,6 +82,7 @@ public class PartyTimeManager : MonoBehaviour {
 				SkySwitch();
 				break;
 			case PartyState.PlayerAttack:
+				m_FeverManager.StartFever(m_FeverTimeSec);
 				SkySwitch();
 				break;
 			default:
