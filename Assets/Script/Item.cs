@@ -23,6 +23,7 @@ public class Item : MonoBehaviour {
 	private float cntScaleDownTime = 0;
 
 	private bool isFever = false;
+	public bool isFeverEvidence = false;
 
 	private float feverFallSec = 0;
 	private float cntFeverFallSec = 0;
@@ -135,6 +136,7 @@ public class Item : MonoBehaviour {
 					{
 						evidenceSpawner.DeleteEvidenceObj();
 					}
+					bazookaRifle.nowEvidenceFever = isFeverEvidence;
 					bazookaRifle.NearEvidenceNum++;
 					Destroy(gameObject);
 				}
@@ -169,6 +171,7 @@ public class Item : MonoBehaviour {
 
 	public void SetFeverValue(float _fallSec)
 	{
+		isFeverEvidence = true;
 		isFever = true;
 		feverFallSec = _fallSec;
 	}
