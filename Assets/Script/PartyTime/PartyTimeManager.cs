@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PartyTimeManager : MonoBehaviour {
 	public Material SkyMaterial;
-	public float SkyChangeTime = 0.5f;
+	float SkyChangeTime = 0.5f;
 	public float m_FeverTimeSec = 10.0f;
 	FeverManager m_FeverManager;
 
@@ -28,6 +28,7 @@ public class PartyTimeManager : MonoBehaviour {
 	void Start () {
 		m_NowState = PartyState.BossAttack;
 
+		SkyChangeTime = m_FeverTimeSec;
 		m_SkyTimeSec = SkyChangeTime;
 		// ボス空へ移動が終わったていで進めてる
 		m_SkySrc = m_PartySky;
@@ -66,9 +67,9 @@ public class PartyTimeManager : MonoBehaviour {
 
 	void PlayerAttackTurn()
 	{
-		if (XPad.Get.GetTrigger(XPad.KeyData.UP, 0))
+		if(m_SkyTimeSec > m_FeverTimeSec)
 		{
-			SwitchState(PartyState.BossAttack);
+
 		}
 	}
 
@@ -122,6 +123,11 @@ public class PartyTimeManager : MonoBehaviour {
 	/// </summary>
 	public void LetsParty()
 	{
-
+		// ボスが攻撃中ならダウンさせてパーティを始める
+		if(m_NowState == PartyState.BossAttack)
+		{
+			m_FeverManager.StartFever(m_FeverTimeSec);
+			m_SkyTimeSec = m_FeverTimeSec;
+		}
 	}
 }
