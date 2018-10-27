@@ -30,7 +30,6 @@ public class PartyTimeManager : MonoBehaviour {
 	void Start () {
 		m_NowState = PartyState.BossAttack;
 
-		SkyChangeTime = m_FeverTimeSec;
 		m_SkyTimeSec = SkyChangeTime;
 		// ボス空へ移動が終わったていで進めてる
 		m_SkySrc = m_PartySky;

@@ -39,6 +39,13 @@ public class BossAttackRange : MonoBehaviour {
 	/// <param name="atackTime">攻撃までの時間</param>
 	public void AttackCommand(BossAttackManager bm,Vector2 atackPos,Vector2 range,float atackTime)
 	{
+		// 攻撃できなければ登録せず破棄して終了
+		if (bm.m_AttackFlag == false)
+		{
+			Destroy(gameObject);
+			return;
+		}
+
 		// 初期化処理
 		m_AttackFlag = false;
 		m_AttackRangeBoard = Instantiate(m_AttackRangePrefab);
