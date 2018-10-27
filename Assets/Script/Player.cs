@@ -133,12 +133,14 @@ public class Player : MonoBehaviour
 				{
 					if (cntGetItemBlankTime == 0)
 					{
-						ReleaseItem();
+						//ReleaseItem();
 					}
 				}
 
 				SerchItem();
 
+				//証拠持ってる時のメンタルゲージ増加は仕様決定まで消す
+				/*
 				//証拠を持っている時メンタルゲージ増加(とりあえず何か持ってたら溜まる)
 				if (isHoldItem)
 				{
@@ -146,7 +148,7 @@ public class Player : MonoBehaviour
 					{
 						mentalGauge++;
 					}
-				}
+				}*/
 				//無敵フレームのカウント
 				if (cntInvincibleFrame > 0)
 				{
@@ -192,13 +194,12 @@ public class Player : MonoBehaviour
 		{
 			rb.velocity = new Vector3(rb.velocity.x, FallSpeedMax * -1, rb.velocity.z);
 		}
-
-		if (!isJump && !IsOnGround() && XPad.Get.GetLeftStick(PlayerIndex).y < -0.8f)
-		{
-			rb.velocity = new Vector3(rb.velocity.x, (FallSpeedMax * 2) * -1, rb.velocity.z);
-		}
 		if (!isDamage)
 		{
+			if (!isJump && !IsOnGround() && XPad.Get.GetLeftStick(PlayerIndex).y < -0.8f)
+			{
+				rb.velocity = new Vector3(rb.velocity.x, (FallSpeedMax * 2) * -1, rb.velocity.z);
+			}
 			rb.AddForce(Vector3.down * (Gravity * FallSpeed));
 		}
 	}
@@ -273,10 +274,10 @@ public class Player : MonoBehaviour
 			GetComponent<ThroughFloorCheck>().IsFall(0.5f);
 		}
 
-		//アイテムを持った&机を持った時移動速度を半減(仮)
+		//アイテムを持った時移動速度を半減(仮)
 		if (isHoldItem)
 		{
-			nowMoveSpeed = DashSpeed / 2;
+			nowMoveSpeed = DashSpeed / 4 * XPad.Get.GetLeftStick(PlayerIndex).x;
 		} else
 		{
 			nowMoveSpeed = DashSpeed * XPad.Get.GetLeftStick(PlayerIndex).x;
@@ -626,22 +627,30 @@ public class Player : MonoBehaviour
 		Item item = _itemObj.GetComponent<Item>();
 		if (item)
 		{
-			SoundManager.Get.PlaySE("get");
-			rightSpeed = leftSpeed = 0.0f;
-			XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
-			getItemObj = _itemObj.gameObject;
-			cntGetItemBlankTime = GetItemBlankSec;
-			isHoldItem = true;
-			_itemObj.transform.parent = transform;
-			Rigidbody itemRb = _itemObj.GetComponent<Rigidbody>();
-			BoxCollider col = _itemObj.GetComponent<BoxCollider>();
-			col.isTrigger = true;
-			itemRb.useGravity = false;
-			itemRb.isKinematic = true;
+			if (item.IsHold())
+			{
+				ReceiveItem(_itemObj.transform.parent.gameObject);
 
-			item.SetItemLocalPosition(ItemPosition.transform.localPosition);
-			item.flgMoveToGetPos = true;
-			item.isHold = true;
+			} else
+			{
+
+				SoundManager.Get.PlaySE("get");
+				rightSpeed = leftSpeed = 0.0f;
+				XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
+				getItemObj = _itemObj.gameObject;
+				cntGetItemBlankTime = GetItemBlankSec;
+				isHoldItem = true;
+				_itemObj.transform.parent = transform;
+				Rigidbody itemRb = _itemObj.GetComponent<Rigidbody>();
+				BoxCollider col = _itemObj.GetComponent<BoxCollider>();
+				col.isTrigger = true;
+				itemRb.useGravity = false;
+				itemRb.isKinematic = true;
+
+				item.SetItemLocalPosition(ItemPosition.transform.localPosition);
+				item.flgMoveToGetPos = true;
+				item.isHold = true;
+			}
 		}
 	}
 
@@ -654,7 +663,7 @@ public class Player : MonoBehaviour
 		getItemObj = null;
 	}
 
-	//アイテムを渡す
+	//アイテムを受け取る
 	private void ReceiveItem(GameObject passPlayerObj)
 	{
 		Player player = passPlayerObj.GetComponent<Player>();
@@ -667,6 +676,15 @@ public class Player : MonoBehaviour
 			player.ChangeItemParent(this.gameObject);
 			cntGetItemBlankTime = GetItemBlankSec;
 			rightSpeed = leftSpeed = 0.0f;
+
+			if (player.transform.position.x > transform.position.x)
+			{
+				player.SetAngleValue(-1);
+			} else
+			{
+				player.SetAngleValue(1);
+			}
+
 		}
 	}
 
@@ -698,7 +716,7 @@ public class Player : MonoBehaviour
 
 	private void InBazookaRange()
 	{
-		if (Vector3.Distance(transform.position, bazookaObj.transform.position) <= bazookaRifle.EvidenceDistance && IsOnGround())
+		if (Vector3.Distance(transform.position, bazookaObj.transform.position) <= bazookaRifle.EvidenceDistance / 2 && IsOnGround())
 		{
 			if (isHoldItem)
 			{
@@ -838,6 +856,11 @@ public class Player : MonoBehaviour
 	public bool IsDown()
 	{
 		return isDown;
+	}
+
+	public void SetAngleValue(int _angle)
+	{
+		angleValue = _angle;
 	}
 
 	public void OnCollisionStay(Collision other)
