@@ -193,5 +193,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flgMoveToGetPos: 0
+  ModelObj: {fileID: 1776054614948772}
   isScaleDown: 0
   isHold: 0
