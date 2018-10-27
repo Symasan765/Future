@@ -14,6 +14,9 @@ public class Item : MonoBehaviour {
 	[HideInInspector]
 	public bool flgMoveToGetPos;
 
+	public GameObject ModelObj;
+	private MeshRenderer meshRenderer;
+
 	public bool isScaleDown = false;
 	public bool isHold = false;
 	private BoxCollider boxCollider;
@@ -25,9 +28,13 @@ public class Item : MonoBehaviour {
 	private float cntFeverFallSec = 0;
 	private bool isTriggerStay = false;
 	private Rigidbody rb;
+	private float lifeTime = 0;
+	private float LifeTime = 5.0f;
+	private float nowLifeTimeMax;
 
 	void Start ()
 	{
+		meshRenderer = ModelObj.GetComponent<MeshRenderer>();
 		rb = GetComponent<Rigidbody>();
 		boxCollider = GetComponent<BoxCollider>();
 		bazookaObj = GameObject.Find("BazookaRifle");
@@ -55,14 +62,55 @@ public class Item : MonoBehaviour {
 			{
 				if (!isTriggerStay)
 				{
+					nowLifeTimeMax = LifeTime + Vector3.Distance(transform.position,bazookaObj.transform.position) * 0.5f;
+					lifeTime = nowLifeTimeMax;
 					isFever = false;
 					boxCollider.isTrigger = false;
 				}
 			}
-
-
 		} else
 		{
+			if (lifeTime > 0)
+			{
+				//点滅処理
+				if (lifeTime > nowLifeTimeMax / 4 && lifeTime < nowLifeTimeMax / 2)
+				{
+					if (Time.frameCount % 10 >= 5)
+					{
+						meshRenderer.enabled = false;
+					} else
+					{
+						meshRenderer.enabled = true;
+					}
+				}
+				if (lifeTime < nowLifeTimeMax / 4)
+				{
+					if (Time.frameCount % 4 >= 2)
+					{
+						meshRenderer.enabled = false;
+					} else
+					{
+						meshRenderer.enabled = true;
+					}
+				}
+
+				lifeTime -= Time.deltaTime;
+				if (lifeTime <= 0)
+				{
+					Destroy(gameObject);
+				}
+				if (isHold)
+				{
+					nowLifeTimeMax = LifeTime + Vector3.Distance(transform.position, bazookaObj.transform.position) * 0.5f;
+					lifeTime = nowLifeTimeMax;
+				}
+			}
+
+			if (isHold)
+			{
+				meshRenderer.enabled = true;
+			}
+
 			//証拠スポナーから生成される証拠の処理
 			if (flgMoveToGetPos)
 			{
