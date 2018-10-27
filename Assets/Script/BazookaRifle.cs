@@ -17,12 +17,18 @@ public class BazookaRifle : MonoBehaviour
     private GameObject[] Evidence_temp = new GameObject[3];
 	public GameObject EffectObj;
 	private ParticleSystem particleSystem;
+	private BossAttackManager bossAttackManager;
+	private PartyTimeManager partyTimeManager;
 
 	public GameObject m_AreaPrefab;
 	GameObject m_AreaEntity;
 
+	public bool nowEvidenceFever = false;
+
 	private void Start()
 	{
+		bossAttackManager = GameObject.Find("BossAttackManager").GetComponent<BossAttackManager>();
+		partyTimeManager = GameObject.Find("PartyTimeManager").GetComponent<PartyTimeManager>();
 		m_AreaEntity = Instantiate(m_AreaPrefab);
 		m_AreaEntity.transform.parent = transform;
 		BazookaAreaUpdate();
@@ -51,6 +57,18 @@ public class BazookaRifle : MonoBehaviour
 
 		if (NearEvidenceNum == 1)
 		{
+			if (nowEvidenceFever)
+			{
+				//フィーバー証拠
+
+			} else
+			{
+				//普通の証拠
+				partyTimeManager.LetsParty();
+			}
+
+			bossAttackManager.BossDamage(5);
+
 			SoundManager.Get.PlaySE("launcher2");
 			GameObject obj = Instantiate(EffectObj, transform.position, transform.rotation);
 			particleSystem = obj.GetComponent<ParticleSystem>();
