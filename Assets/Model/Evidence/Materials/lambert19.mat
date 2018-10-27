@@ -125,8 +125,8 @@ Material:
     - _Add_Antipodean_RimLight: 0
     - _Ap_RimLight_FeatherOff: 0
     - _Ap_RimLight_Power: 0.1
-    - _BaseColor_Step: 0.6
-    - _BaseShade_Feather: 0.0001
+    - _BaseColor_Step: 0.642
+    - _BaseShade_Feather: 0.275
     - _BumpScale: 1
     - _CullMode: 2
     - _Cutoff: 0.5
@@ -165,7 +165,7 @@ Material:
     - _OUTLINE: 0
     - _OcclusionStrength: 1
     - _Offset_Z: 0
-    - _Outline_Width: 51.43
+    - _Outline_Width: 100
     - _Parallax: 0.02
     - _RimLight: 0
     - _RimLight_FeatherOff: 0
@@ -193,7 +193,7 @@ Material:
     - _1st_ShadeColor: {r: 0, g: 0, b: 0, a: 1}
     - _2nd_ShadeColor: {r: 0, g: 0, b: 0, a: 1}
     - _Ap_RimLightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColor: {r: 1, g: 0, b: 0, a: 1}
+    - _BaseColor: {r: 0.6764706, g: 0.6764706, b: 0.6764706, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _Emissive_Color: {r: 0, g: 0, b: 0, a: 1}
