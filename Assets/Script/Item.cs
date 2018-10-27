@@ -49,7 +49,7 @@ public class Item : MonoBehaviour {
 			}
 		}
 
-		if (Vector3.Distance(transform.position, bazookaObj.transform.position) <= bazookaRifle.EvidenceDistance && !IsHold())
+		if (Vector3.Distance(transform.position, bazookaObj.transform.position) <= bazookaRifle.EvidenceDistance / 2 && !IsHold())
 		{
 			isHold = true;
 			boxCollider.enabled = false;
