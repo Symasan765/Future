@@ -45,7 +45,9 @@ public class TitleScript : MonoBehaviour {
         }
         if(FadeImage.GetComponent<Fade>().IsFadeDone()==true)
         {
-            SceneManager.LoadScene((int)SceneList.CharactorSelect);
+			SceneManager.LoadScene("CharacterSelect");
+
+			//SceneManager.LoadScene((int)SceneList.CharactorSelect);
         }
     }
 }
