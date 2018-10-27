@@ -17,7 +17,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 
 	Queue<int> seRequestQueue = new Queue<int>();
 	
-	void Awake ()
+	private void Start ()
 	{
 		bgmSource = gameObject.AddComponent<AudioSource>();
 
