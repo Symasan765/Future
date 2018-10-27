@@ -528,7 +528,7 @@ public class Player : MonoBehaviour
 	private void Jump()
 	{
 		//空中ジャンプ
-		if (!IsOnGround() && cntAirJumpNum > 0 && !isAttack && !isDamage)
+		if (!isHoldItem && !IsOnGround() && cntAirJumpNum > 0 && !isAttack && !isDamage)
 		{
 			if (XPad.Get.GetTrigger(XPad.KeyData.X, PlayerIndex))
 			{
@@ -714,6 +714,7 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	//バズーカの範囲に入った
 	private void InBazookaRange()
 	{
 		if (Vector3.Distance(transform.position, bazookaObj.transform.position) <= bazookaRifle.EvidenceDistance / 2 && IsOnGround())
@@ -728,6 +729,8 @@ public class Player : MonoBehaviour
 	//他プレイヤーを助ける
 	private void RescuePlayer()
 	{
+		animator.SetBool("isRescue", isRescue);
+		Vector3 itemPositon = new Vector3(transform.position.x, ItemPosition.transform.position.y, transform.position.z);
 		if (XPad.Get.GetRelease(XPad.KeyData.A, PlayerIndex))
 		{
 			isRescue = false;
@@ -735,7 +738,7 @@ public class Player : MonoBehaviour
 		if (!isAttack && !isHoldItem && cntGetItemBlankTime == 0)
 		{
 			RaycastHit hit;
-			Physics.Raycast(transform.position, transform.forward, out hit, CanHoldItemDistance*2);
+			Physics.Raycast(itemPositon, transform.forward, out hit, CanHoldItemDistance);
 			if (hit.collider)
 			{
 				if (hit.collider.tag == "Player")
