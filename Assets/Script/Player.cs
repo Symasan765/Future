@@ -108,7 +108,6 @@ public class Player : MonoBehaviour
 	void Update ()
 	{
 		animator.SetFloat("cntGetItemBlankTime", cntGetItemBlankTime);
-		animator.SetBool("isDamageTrigger", IsDamageTrigger());
 		animator.SetBool("isDamage", isDamage);
 		animator.SetBool("isOnGround", IsOnGround());
 
@@ -370,6 +369,7 @@ public class Player : MonoBehaviour
 	{
 		if (!IsInvincible())
 		{
+			animator.SetBool("isDamageTrigger", true);
 			SoundManager.Get.PlaySE("hit1");
 			PlayerDamage pd = GetComponent<PlayerDamage>();
 			pd.StartEffect();
@@ -389,6 +389,8 @@ public class Player : MonoBehaviour
 
 			cntDamageImpactTime = 0.1f;
 			damageImpactPower = new Vector3(2 * angleValue, 6, 0);
+
+			EndAirJumpRotationTrigger();
 
 			//左右移動速度を0に
 			rightSpeed = leftSpeed = 0.0f;
@@ -901,6 +903,11 @@ public class Player : MonoBehaviour
 			effectManager.PlayTap(PlayerIndex, FootPositionObj.transform.position);
 			SoundManager.Get.PlaySE("dash");
 		}
+	}
+
+	private void EndIsDamageTrigger()
+	{
+		animator.SetBool("isDamageTrigger", false);
 	}
 
 	private void EndAirJumpRotation()
