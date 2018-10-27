@@ -26,10 +26,12 @@ public class Arrow : MonoBehaviour {
     }
 
     void Update() {
+        // キャラ未選択状態なら
         if (!isCharacterSelected) {
             MoveCursor();
             SelectCharacter();
         }
+        // キャラ選択済みなら
         else {
             UnselectCharacter();
             StartGame();
@@ -73,18 +75,14 @@ public class Arrow : MonoBehaviour {
     // キャラ選択
     void SelectCharacter() {
         if (XPad.Get.GetTrigger(XPad.KeyData.A, playerIndex)) {
-            CharacterManager.SetCharacter(playerIndex, cursorPos);
             csManager.SelectCharater(playerIndex, cursorPos);
-            isCharacterSelected = true;
         }
     }
 
     // キャラ選択を解除
     void UnselectCharacter() {
         if (XPad.Get.GetTrigger(XPad.KeyData.B, playerIndex)) {
-            CharacterManager.ResetCharacter(playerIndex);
             csManager.UnselectCharacter(playerIndex, cursorPos);
-            isCharacterSelected = false;
         }
     }
 
@@ -101,6 +99,10 @@ public class Arrow : MonoBehaviour {
 
     public bool GetIsCharacterSelected() {
         return isCharacterSelected;
+    }
+
+    public void SetIsCharacterSelected(bool _flg) {
+        isCharacterSelected = _flg;
     }
 
     public int GetCursorPos() {
