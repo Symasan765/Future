@@ -50,6 +50,7 @@ public class Player : MonoBehaviour
 	private bool isDown = false;
 	private bool isRescue = false;
 	private bool isOnCollisionStay = false;
+	private bool isAirjumpRotation = false;
 
 	private int angleValue = 1;
 
@@ -210,13 +211,14 @@ public class Player : MonoBehaviour
 		if (angleValue == 1)
 		{
 			transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, new Vector3(0, 90, 0), 0.4f);
-			RotateObj.transform.localEulerAngles = new Vector3(0, ForwardAngle + 360, 0);
+			RotateObj.transform.localEulerAngles = new Vector3(RotateObj.transform.localEulerAngles.x, ForwardAngle + 360, RotateObj.transform.localEulerAngles.z);
 		}
 		if(angleValue == -1)
 		{
 			transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, new Vector3(0, 270, 0), 0.4f);
-			RotateObj.transform.localEulerAngles = new Vector3(0, 360 - ForwardAngle, 0);
+			RotateObj.transform.localEulerAngles = new Vector3(RotateObj.transform.localEulerAngles.x, 360 - ForwardAngle, RotateObj.transform.localEulerAngles.z);
 		}
+
 	}
 
 	//移動
@@ -383,6 +385,7 @@ public class Player : MonoBehaviour
 				jumpSpeed = 0;
 			}
 			cntJumpCheckFrame = 0;
+			isAirjumpRotation = false;
 
 			cntDamageImpactTime = 0.1f;
 			damageImpactPower = new Vector3(2 * angleValue, 6, 0);
@@ -527,6 +530,9 @@ public class Player : MonoBehaviour
 	//ジャンプ中
 	private void Jump()
 	{
+		//animator.SetBool("isAirJumpRotationTrigger", false);
+		animator.SetBool("isAirJumpRotation", isAirjumpRotation);
+		
 		//空中ジャンプ
 		if (!isHoldItem && !IsOnGround() && cntAirJumpNum > 0 && !isAttack && !isDamage)
 		{
@@ -538,6 +544,8 @@ public class Player : MonoBehaviour
 				SoundManager.Get.PlaySE("jump");
 				jumpSpeed = AirJumpPower;
 				isJump = true;
+				isAirjumpRotation = true;
+				animator.SetBool("isAirJumpRotationTrigger", true);
 			}
 		}
 		//地上ジャンプの処理
@@ -893,5 +901,14 @@ public class Player : MonoBehaviour
 			effectManager.PlayTap(PlayerIndex, FootPositionObj.transform.position);
 			SoundManager.Get.PlaySE("dash");
 		}
+	}
+
+	private void EndAirJumpRotation()
+	{
+		isAirjumpRotation = false;
+	}
+	private void EndAirJumpRotationTrigger()
+	{
+		animator.SetBool("isAirJumpRotationTrigger", false);
 	}
 }
