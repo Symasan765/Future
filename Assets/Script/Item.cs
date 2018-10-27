@@ -9,6 +9,8 @@ public class Item : MonoBehaviour {
 	private GameObject bazookaObj;
 	private BazookaRifle bazookaRifle;
 	private Vector3 getPosition;
+	private GameObject evidenceSpawnerObj;
+	private EvidenceSpawner evidenceSpawner;
 	[HideInInspector]
 	public bool flgMoveToGetPos;
 
@@ -44,12 +46,13 @@ public class Item : MonoBehaviour {
 			transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(0, 0, 0), cntScaleDownTime);
 			if (cntScaleDownTime >= 1)
 			{
+				evidenceSpawner.DeleteEvidenceObj();
 				bazookaRifle.NearEvidenceNum++;
 				Destroy(gameObject);
 			}
 		}
 
-		if (Vector3.Distance(transform.position, bazookaObj.transform.position) <= bazookaRifle.EvidenceDistance && !IsHold())
+		if (Vector3.Distance(transform.position, bazookaObj.transform.position) <= bazookaRifle.EvidenceDistance / 2 && !IsHold())
 		{
 			isHold = true;
 			boxCollider.enabled = false;
@@ -69,4 +72,10 @@ public class Item : MonoBehaviour {
 	{
 		getPosition = _pos;
 	}
+
+	public void SetEvidenceSpawnerObject(GameObject _obj)
+	{
+		evidenceSpawner = _obj.GetComponent<EvidenceSpawner>();
+	}
+
 }

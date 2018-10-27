@@ -79,8 +79,8 @@ MonoBehaviour:
   motionBlur:
     m_Enabled: 0
     m_Settings:
-      shutterAngle: 270
-      sampleCount: 10
+      shutterAngle: 160
+      sampleCount: 12
       frameBlending: 0
   eyeAdaptation:
     m_Enabled: 0
@@ -100,10 +100,10 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       bloom:
-        intensity: 0.22
+        intensity: 0.55
         threshold: 1.1
-        softKnee: 0.5
-        radius: 4
+        softKnee: 0
+        radius: 7
         antiFlicker: 0
       lensDirt:
         texture: {fileID: 0}
@@ -284,7 +284,7 @@ MonoBehaviour:
     m_Enabled: 0
     m_Settings:
       spectralTexture: {fileID: 0}
-      intensity: 0.1
+      intensity: 0
   grain:
     m_Enabled: 0
     m_Settings:
