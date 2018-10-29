@@ -9,6 +9,12 @@ public class PartyTimeManager : MonoBehaviour {
 	FeverManager m_FeverManager;
 	BossAttackManager m_BossAttackManager;
 
+	public GameObject m_BossAudioPrefab;
+	public GameObject m_PlayerAudioPrefab;
+
+	AudioSource m_NowBGM;
+	AudioSource m_NextBGM;
+
 	float m_BossSky = 1.98f;
 	float m_PartySky = 2.55f;
 
@@ -34,6 +40,10 @@ public class PartyTimeManager : MonoBehaviour {
 		// ボス空へ移動が終わったていで進めてる
 		m_SkySrc = m_PartySky;
 		m_SkyDsc = m_BossSky;
+		m_NowBGM = Instantiate(m_PlayerAudioPrefab).GetComponent<AudioSource>();
+		m_NowBGM.Stop();
+		m_NextBGM = Instantiate(m_BossAudioPrefab).GetComponent<AudioSource>();
+		m_NextBGM.Play();
 
 		SkyMaterial.mainTextureScale = new Vector2(m_SkyDsc, 1.0f);
 
@@ -108,6 +118,9 @@ public class PartyTimeManager : MonoBehaviour {
 			float t = m_SkyTimeSec / SkyChangeTime;
 			SkyMaterial.mainTextureScale = new Vector2(Mathf.Lerp(m_SkySrc, m_SkyDsc, t),1.0f);
 
+			m_NowBGM.volume = 1.0f - t;
+			m_NextBGM.volume = t;
+
 			m_SkyTimeSec += Time.deltaTime;
 			if (m_SkyTimeSec > SkyChangeTime)
 			{
@@ -123,6 +136,17 @@ public class PartyTimeManager : MonoBehaviour {
 		m_SkyDsc = tmp;
 
 		m_SkyTimeSec = 0.0f;
+
+		AudioSwitch();
+	}
+
+	void AudioSwitch()
+	{
+		AudioSource tmp = m_NowBGM;
+		m_NowBGM = m_NextBGM;
+		m_NextBGM = tmp;
+		m_NextBGM.Stop();
+		m_NextBGM.Play();
 	}
 
 	/// <summary>
