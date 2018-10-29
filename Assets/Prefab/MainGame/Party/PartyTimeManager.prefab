@@ -53,3 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkyMaterial: {fileID: 2100000, guid: e68f77e240a7f8643b5cc4253dc37516, type: 2}
   m_FeverTimeSec: 10
+  m_BossAudioPrefab: {fileID: 1828156374723630, guid: 76a0bd22b5d344a41b84c202baa9befd,
+    type: 2}
+  m_PlayerAudioPrefab: {fileID: 1459056170767438, guid: 1bec041ce50075149973874d15e75211,
+    type: 2}

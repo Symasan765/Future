@@ -2626,30 +2626,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114870783872662372, guid: 64152214e55e91e46b5ad44e9263bf63,
-        type: 2}
-      propertyPath: m_BossAudio
-      value: 
-      objectReference: {fileID: 82772165884856644, guid: 76a0bd22b5d344a41b84c202baa9befd,
-        type: 2}
-    - target: {fileID: 114870783872662372, guid: 64152214e55e91e46b5ad44e9263bf63,
-        type: 2}
-      propertyPath: m_PlayerAudio
-      value: 
-      objectReference: {fileID: 82654855626372658, guid: 1bec041ce50075149973874d15e75211,
-        type: 2}
-    - target: {fileID: 114870783872662372, guid: 64152214e55e91e46b5ad44e9263bf63,
-        type: 2}
-      propertyPath: m_BossAudioPrefab
-      value: 
-      objectReference: {fileID: 1828156374723630, guid: 76a0bd22b5d344a41b84c202baa9befd,
-        type: 2}
-    - target: {fileID: 114870783872662372, guid: 64152214e55e91e46b5ad44e9263bf63,
-        type: 2}
-      propertyPath: m_PlayerAudioPrefab
-      value: 
-      objectReference: {fileID: 1459056170767438, guid: 1bec041ce50075149973874d15e75211,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 64152214e55e91e46b5ad44e9263bf63, type: 2}
   m_IsPrefabParent: 0
