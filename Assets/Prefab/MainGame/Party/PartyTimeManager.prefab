@@ -57,3 +57,5 @@ MonoBehaviour:
     type: 2}
   m_PlayerAudioPrefab: {fileID: 1459056170767438, guid: 1bec041ce50075149973874d15e75211,
     type: 2}
+  m_ParticlePrefab: {fileID: 1622285358806166, guid: 1071053792ee0574c9881556084ab565,
+    type: 2}
