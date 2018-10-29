@@ -11,6 +11,7 @@ public class PartyTimeManager : MonoBehaviour {
 
 	public GameObject m_BossAudioPrefab;
 	public GameObject m_PlayerAudioPrefab;
+	public GameObject m_ParticlePrefab;
 
 	AudioSource m_NowBGM;
 	AudioSource m_NextBGM;
@@ -99,6 +100,8 @@ public class PartyTimeManager : MonoBehaviour {
 				SkySwitch();
 				break;
 			case PartyState.PlayerAttack:
+				GameObject particle = Instantiate(m_ParticlePrefab);
+				Destroy(particle, m_FeverTimeSec + 1.0f);
 				m_BossAttackManager.BossBehaviorSwitching(false);
 				m_FeverManager.StartFever(m_FeverTimeSec);
 				SkySwitch();
