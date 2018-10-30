@@ -51,6 +51,7 @@ public class Player : MonoBehaviour
 	private bool isRescue = false;
 	private bool isOnCollisionStay = false;
 	private bool isAirjumpRotation = false;
+	private bool isReleaceItem = false;
 
 	private int angleValue = 1;
 
@@ -130,12 +131,17 @@ public class Player : MonoBehaviour
 			{
 				InBazookaRange();
 				RescuePlayer();
-				if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
+				if (XPad.Get.GetRelease(XPad.KeyData.A, PlayerIndex))
 				{
-					if (cntGetItemBlankTime == 0)
+					if (isHoldItem)
 					{
-						//ReleaseItem();
+						isReleaceItem = true;
 					}
+				}
+
+				if (isReleaceItem)
+				{
+					ReleaseItem();
 				}
 
 				SerchItem();
@@ -513,7 +519,7 @@ public class Player : MonoBehaviour
 		Physics.SphereCast(sphirePos, scr, Vector3.down, out hit);
 		if (hit.collider)
 		{
-			Debug.DrawRay(FootPositionObj.transform.position, Vector3.down * hit.distance);
+			//Debug.DrawRay(FootPositionObj.transform.position, Vector3.down * hit.distance);
 			Gizmos.DrawWireSphere(hit.point, scr);
 		}
 	}
@@ -620,7 +626,7 @@ public class Player : MonoBehaviour
 	private void SerchItem()
 	{
 		Vector3 itemPositon = new Vector3(transform.position.x, ItemPosition.transform.position.y, transform.position.z);
-		Debug.DrawRay(itemPositon, transform.forward * CanHoldItemDistance, Color.blue);
+		//Debug.DrawRay(itemPositon, transform.forward * CanHoldItemDistance, Color.blue);
 		if (cntGetItemBlankTime > 0)
 		{
 			animator.SetBool("isGetItem", true);
@@ -640,7 +646,7 @@ public class Player : MonoBehaviour
 			Physics.Raycast(itemPositon, transform.forward, out hit, CanHoldItemDistance);
 			if (hit.collider)
 			{
-				Debug.Log(hit.collider.gameObject.name + "取得可能");
+				//Debug.Log(hit.collider.gameObject.name + "取得可能");
 				if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
 				{
 					if (hit.collider.tag == "Player")
@@ -744,6 +750,7 @@ public class Player : MonoBehaviour
 				item.flgMoveToGetPos = false;
 				getItemObj = null;
 				item.isHold = false;
+				isReleaceItem = false;
 			}
 		}
 	}
@@ -851,7 +858,7 @@ public class Player : MonoBehaviour
 
 		if (isRespawn)
 		{
-			Debug.Log(gameObject.name + "がリスポーンした");
+			//Debug.Log(gameObject.name + "がリスポーンした");
 			rightSpeed = leftSpeed = 0.0f;
 			transform.position = respawnPosition;
 			cntAttackFrame = 0;
