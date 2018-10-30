@@ -18,6 +18,7 @@ public class WordParent : MonoBehaviour {
 	void Update ()
 	{
 		transform.eulerAngles = new Vector3(0,0,nowRotate);
+		//color = new Color(1, 1, 1, 1);
 	}
 
 	public void Play(int _playerIndex)
@@ -76,6 +77,10 @@ public class WordParent : MonoBehaviour {
 		if (_playerIndex == 3)
 		{
 			color = Color.yellow;
+		}
+		if (_playerIndex == -1)
+		{
+			color = new Color(1, 1, 1, 1);
 		}
 	}
 }

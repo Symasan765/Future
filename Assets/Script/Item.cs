@@ -156,14 +156,13 @@ public class Item : MonoBehaviour {
 				flgMoveToGetPos = true;
 				isScaleDown = true;
 			}
-
-			if (isFeverEvidence)
+		}
+		if (isFeverEvidence)
+		{
+			if (!isHold && !isInBazooka && !feverManager.IsFever())
 			{
-				if (!isHold && !isInBazooka && !feverManager.IsFever())
-				{
-					effectManager.PlayDelete(transform.position);
-					Destroy(gameObject);
-				}
+				effectManager.PlayDelete(transform.position);
+				Destroy(gameObject);
 			}
 		}
 	}

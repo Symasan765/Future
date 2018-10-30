@@ -20,6 +20,7 @@ public class BazookaRifle : MonoBehaviour
 	private ParticleSystem particleSystem;
 	private BossAttackManager bossAttackManager;
 	private PartyTimeManager partyTimeManager;
+	private EffectManager effectManager;
 
 	public GameObject m_AreaPrefab;
 	GameObject m_AreaEntity;
@@ -28,6 +29,7 @@ public class BazookaRifle : MonoBehaviour
 
 	private void Start()
 	{
+		effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
 		bossAttackManager = GameObject.Find("BossAttackManager").GetComponent<BossAttackManager>();
 		partyTimeManager = GameObject.Find("PartyTimeManager").GetComponent<PartyTimeManager>();
 		m_AreaEntity = Instantiate(m_AreaPrefab);
@@ -103,6 +105,7 @@ public class BazookaRifle : MonoBehaviour
 		GameObject obj = Instantiate(EffectObj, transform.position, transform.rotation);
 		particleSystem = obj.GetComponent<ParticleSystem>();
 		particleSystem.Play();
+		effectManager.PlayBOOM(-1, transform.position);
 	}
 
 	public void SetEvidence(bool _feverEvidence)
