@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4964761912099010}
+  - component: {fileID: 114236696083635034}
   m_Layer: 0
   m_Name: Cloud1
   m_TagString: Untagged
@@ -98,6 +99,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4241725360835828}
+  - component: {fileID: 114446445018987930}
   m_Layer: 0
   m_Name: Cloud1 (1)
   m_TagString: Untagged
@@ -230,7 +232,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1440432674701086}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.86, y: -7.98, z: 25.675}
+  m_LocalPosition: {x: -12.083165, y: -4.46, z: 50}
   m_LocalScale: {x: -2, y: 2, z: 1}
   m_Children:
   - {fileID: 4911833268234472}
@@ -273,7 +275,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1624667717397180}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.88, z: 30.125}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4241725360835828}
@@ -301,7 +303,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1061680955316132}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.7, y: 6.09, z: 25.675}
+  m_LocalPosition: {x: 11.387606, y: 8.06, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4427757385381376}
@@ -337,6 +339,32 @@ Transform:
   m_Father: {fileID: 4964761912099010}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114236696083635034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1061680955316132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ce063ba3671fc14e95a74fed11a27a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovePosition: 0.1
+  Speed: 0.2
+--- !u!114 &114446445018987930
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1440432674701086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ce063ba3671fc14e95a74fed11a27a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovePosition: 0.3
+  Speed: 0.2
 --- !u!212 &212364694476094524
 SpriteRenderer:
   m_ObjectHideFlags: 1
