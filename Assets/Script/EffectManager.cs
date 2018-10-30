@@ -7,6 +7,15 @@ public class EffectManager : MonoBehaviour {
 	public GameObject EffectDUM;
 	public GameObject EffectPYON;
 	public GameObject EffectTap;
+	public GameObject EffectDelete;
+
+	private ParticleSystem psDelete;
+
+	public void PlayDelete(Vector3 _pos)
+	{
+		psDelete = Instantiate(EffectDelete, _pos, transform.rotation).GetComponent<ParticleSystem>();
+		psDelete.Play();
+	}
 
 	public void PlayDUM(int _index, Vector3 _pos)
 	{

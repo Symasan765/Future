@@ -2038,7 +2038,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1189333943818486}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.78, y: 1.57, z: 0}
+  m_LocalPosition: {x: 0, y: 13.54, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4311159123843226}
@@ -5457,11 +5457,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BazookaPrefab: {fileID: 1298366636574104, guid: 567e6c65deb35664bb64e266a92ba19d,
     type: 2}
-  EvidenceDistance: 3
+  EvidenceDistance: 5
+  BazookaEvidenceNum: 0
   NearEvidenceNum: 0
   EffectObj: {fileID: 1247311384876784, guid: 4adffb0018aeda44e9263f901167af1f, type: 2}
   m_AreaPrefab: {fileID: 1721768353711984, guid: 8e2c5320afe59b64eba03ea1a65acca0,
     type: 2}
+  nowEvidenceFever: 0
 --- !u!136 &136717696598867596
 CapsuleCollider:
   m_ObjectHideFlags: 1

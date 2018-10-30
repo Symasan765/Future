@@ -8,6 +8,7 @@ TagManager:
   - SYOUKO
   - ThroughFloor
   - BossAttackObj
+  - NormalEvidenceSpawner
   layers:
   - Default
   - TransparentFX

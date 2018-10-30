@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114517785565494732}
   m_Layer: 0
   m_Name: EvidenceSpawner
-  m_TagString: Untagged
+  m_TagString: NormalEvidenceSpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1258858051332874}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.26, y: 13.03, z: 0}
+  m_LocalPosition: {x: -13.45, y: 0.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4715868915724680}
@@ -83,6 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0932cf64467f3147809fbf0c3ff02dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnDeraySec: 3
   evidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
     type: 2}
   EffectObj: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 2}

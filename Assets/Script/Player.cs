@@ -68,6 +68,7 @@ public class Player : MonoBehaviour
 	private ParticleSystem[] effectSweetSystem = new ParticleSystem[2];
 	private EffectManager effectManager;
 	private BazookaRifle bazookaRifle;
+	private FeverManager feverManager;
 
 	private float nowMoveSpeed;
 	private float rightSpeed;
@@ -103,6 +104,7 @@ public class Player : MonoBehaviour
 		animator = GetComponent<Animator>();
 		bazookaObj = GameObject.Find("BazookaRifle");
 		bazookaRifle = bazookaObj.GetComponent<BazookaRifle>();
+		feverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
 	}
 	
 	void Update ()
@@ -124,7 +126,6 @@ public class Player : MonoBehaviour
 			}
 		} else
 		{
-
 			if (!isDamage)
 			{
 				InBazookaRange();
@@ -283,6 +284,12 @@ public class Player : MonoBehaviour
 		{
 			nowMoveSpeed = DashSpeed * XPad.Get.GetLeftStick(PlayerIndex).x;
 		}
+
+		if (feverManager.IsFever())
+		{
+			nowMoveSpeed *= 1.6f;
+		}
+
 		if (nowMoveSpeed < 0)
 		{
 			nowMoveSpeed *= -1;
@@ -534,9 +541,25 @@ public class Player : MonoBehaviour
 	{
 		//animator.SetBool("isAirJumpRotationTrigger", false);
 		animator.SetBool("isAirJumpRotation", isAirjumpRotation);
-		
+
+		bool holdItemJump = false;
+		if (feverManager.IsFever())
+		{
+			holdItemJump = true;
+		} else
+		{
+			if (isHoldItem)
+			{
+				holdItemJump = false;
+			} else
+			{
+				holdItemJump = true;
+			}
+		}
+
+
 		//空中ジャンプ
-		if (!isHoldItem && !IsOnGround() && cntAirJumpNum > 0 && !isAttack && !isDamage)
+		if (holdItemJump && !IsOnGround() && cntAirJumpNum > 0 && !isAttack && !isDamage)
 		{
 			if (XPad.Get.GetTrigger(XPad.KeyData.X, PlayerIndex))
 			{

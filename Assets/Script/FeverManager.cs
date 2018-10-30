@@ -28,11 +28,6 @@ public class FeverManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		if (Input.GetKeyDown(KeyCode.F1))
-		{
-			StartFever(FeverSec);
-		}
-
 		if (isStart)
 		{
 			cntFeverSec -= Time.deltaTime;
@@ -60,4 +55,14 @@ public class FeverManager : MonoBehaviour {
 		cntFeverSec = _feverSec;
 		isStart = true;
 	}
+
+	public bool IsFever()
+	{
+		if (cntFeverSec > 0)
+		{
+			return true;
+		}
+		return false;
+	}
+
 }

@@ -54,3 +54,4 @@ MonoBehaviour:
   EffectDUM: {fileID: 1176411404718806, guid: d5b8383c9be27a341a5273a37b0b2758, type: 2}
   EffectPYON: {fileID: 1067528749318104, guid: 13cab90537989a345b10adaa1a84c1b5, type: 2}
   EffectTap: {fileID: 1437388818376034, guid: a48957fd80831c94a8b4828ea3f14315, type: 2}
+  EffectDelete: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 2}

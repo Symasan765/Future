@@ -13,6 +13,7 @@ public class BazookaRifle : MonoBehaviour
     private GameObject BazookaPrefab;               //ここにバズーカーのPrefabをUnityのInspectorで割当しておく。（またはResourece.Loadでロードするといい）
 	public float EvidenceDistance = 3.0f;            //証拠を認識する範囲。
     private int EvidenceNum = 0;                      //全体の証拠の数。
+	[SerializeField] private int BazookaEvidenceNum;
     public int NearEvidenceNum = 0;                  //近づいた証拠の数。
     private GameObject[] Evidence_temp = new GameObject[3];
 	public GameObject EffectObj;
@@ -32,6 +33,7 @@ public class BazookaRifle : MonoBehaviour
 		m_AreaEntity = Instantiate(m_AreaPrefab);
 		m_AreaEntity.transform.parent = transform;
 		BazookaAreaUpdate();
+		BazookaEvidenceNum = GameObject.FindGameObjectsWithTag("NormalEvidenceSpawner").Length;
 	}
 
 	void Update()
@@ -55,7 +57,7 @@ public class BazookaRifle : MonoBehaviour
             }
         }*/
 
-		if (NearEvidenceNum == 1)
+		if (NearEvidenceNum == BazookaEvidenceNum)
 		{
 			if (nowEvidenceFever)
 			{

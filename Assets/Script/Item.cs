@@ -5,12 +5,12 @@ using UnityEngine;
 public class Item : MonoBehaviour {
 
 	private float MoveSpeed = 5.0f;
-
 	private GameObject bazookaObj;
 	private BazookaRifle bazookaRifle;
 	private Vector3 getPosition;
 	private GameObject evidenceSpawnerObj = null;
 	private EvidenceSpawner evidenceSpawner;
+	private EffectManager effectManager;
 	[HideInInspector]
 	public bool flgMoveToGetPos;
 
@@ -30,8 +30,9 @@ public class Item : MonoBehaviour {
 	private bool isTriggerStay = false;
 	private Rigidbody rb;
 	private float lifeTime = 0;
-	private float LifeTime = 5.0f;
+	private float LifeTime = 2.0f;
 	private float nowLifeTimeMax;
+	private FeverManager feverManager;
 
 	void Start ()
 	{
@@ -40,6 +41,8 @@ public class Item : MonoBehaviour {
 		boxCollider = GetComponent<BoxCollider>();
 		bazookaObj = GameObject.Find("BazookaRifle");
 		bazookaRifle = bazookaObj.GetComponent<BazookaRifle>();
+		feverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
+		effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
 	}
 	
 	void Update ()
@@ -48,6 +51,16 @@ public class Item : MonoBehaviour {
 		{
 			rb.velocity = new Vector3(rb.velocity.x, -4, rb.velocity.z);
 		}
+
+		if (isFeverEvidence)
+		{
+			if (!feverManager.IsFever())
+			{
+				effectManager.PlayDelete(transform.position);
+				Destroy(gameObject);
+			}
+		}
+
 		if (isFever)
 		{
 			if (isHold)
@@ -98,6 +111,7 @@ public class Item : MonoBehaviour {
 				lifeTime -= Time.deltaTime;
 				if (lifeTime <= 0)
 				{
+					effectManager.PlayDelete(transform.position);
 					Destroy(gameObject);
 				}
 				if (isHold)
@@ -137,7 +151,10 @@ public class Item : MonoBehaviour {
 						evidenceSpawner.DeleteEvidenceObj();
 					}
 					bazookaRifle.nowEvidenceFever = isFeverEvidence;
-					bazookaRifle.NearEvidenceNum++;
+					if (!feverManager.IsFever())
+					{
+						bazookaRifle.NearEvidenceNum++;
+					}
 					Destroy(gameObject);
 				}
 			}
