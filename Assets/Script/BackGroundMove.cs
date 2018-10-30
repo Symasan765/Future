@@ -21,6 +21,6 @@ public class BackGroundMove : MonoBehaviour {
 	{
 		Vector3 cameraMovePos = new Vector3(CameraObj.transform.position.x - startCameraPosition.x, CameraObj.transform.position.y - startCameraPosition.y, CameraObj.transform.position.z);
 
-		transform.position = Vector3.Lerp(transform.position, new Vector3(startPosition.x + cameraMovePos.x * MovePosition, startPosition.y, startPosition.z), Speed);
+		transform.position = Vector3.Lerp(transform.position, new Vector3(startPosition.x + cameraMovePos.x * MovePosition, startPosition.y + cameraMovePos.y * MovePosition, startPosition.z), Speed);
 	}
 }

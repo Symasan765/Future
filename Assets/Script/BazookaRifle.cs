@@ -97,6 +97,7 @@ public class BazookaRifle : MonoBehaviour
 
 	private void ShotBazooka(float _bossDamage)
 	{
+		ShakeCamera.Impact(0.05f, 0.5f);
 		bossAttackManager.BossDamage(_bossDamage);
 		SoundManager.Get.PlaySE("launcher2");
 		GameObject obj = Instantiate(EffectObj, transform.position, transform.rotation);

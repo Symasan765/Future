@@ -376,6 +376,7 @@ public class Player : MonoBehaviour
 	{
 		if (!IsInvincible())
 		{
+			ShakeCamera.Impact(0.005f, 0.3f);
 			animator.SetBool("isDamageTrigger", true);
 			SoundManager.Get.PlaySE("hit1");
 			PlayerDamage pd = GetComponent<PlayerDamage>();
