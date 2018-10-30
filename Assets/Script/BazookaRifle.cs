@@ -59,22 +59,9 @@ public class BazookaRifle : MonoBehaviour
 
 		if (NearEvidenceNum == BazookaEvidenceNum)
 		{
-			if (nowEvidenceFever)
-			{
-				//フィーバー証拠
-
-			} else
-			{
-				//普通の証拠
-				partyTimeManager.LetsParty();
-			}
-
-			bossAttackManager.BossDamage(5);
-
-			SoundManager.Get.PlaySE("launcher2");
-			GameObject obj = Instantiate(EffectObj, transform.position, transform.rotation);
-			particleSystem = obj.GetComponent<ParticleSystem>();
-			particleSystem.Play();
+			//普通の証拠
+			ShotBazooka(5);
+			partyTimeManager.LetsParty();
 			NearEvidenceNum = 0;
 		}
 
@@ -106,5 +93,25 @@ public class BazookaRifle : MonoBehaviour
 		Vector3 pos = transform.position;
 		pos.z += 1.5f;		// バズーカモデルと重ねないために少し座標を奥にずらす
 		m_AreaEntity.transform.position = pos;
+	}
+
+	private void ShotBazooka(float _bossDamage)
+	{
+		bossAttackManager.BossDamage(_bossDamage);
+		SoundManager.Get.PlaySE("launcher2");
+		GameObject obj = Instantiate(EffectObj, transform.position, transform.rotation);
+		particleSystem = obj.GetComponent<ParticleSystem>();
+		particleSystem.Play();
+	}
+
+	public void SetEvidence(bool _feverEvidence)
+	{
+		if (_feverEvidence)
+		{
+			ShotBazooka(5);
+		} else
+		{
+			NearEvidenceNum++;
+		}
 	}
 }

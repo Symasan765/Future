@@ -19,6 +19,7 @@ public class Item : MonoBehaviour {
 
 	public bool isScaleDown = false;
 	public bool isHold = false;
+	private bool isInBazooka = false;
 	private BoxCollider boxCollider;
 	private float cntScaleDownTime = 0;
 
@@ -50,15 +51,6 @@ public class Item : MonoBehaviour {
 		if (rb.velocity.y < -4)
 		{
 			rb.velocity = new Vector3(rb.velocity.x, -4, rb.velocity.z);
-		}
-
-		if (isFeverEvidence)
-		{
-			if (!feverManager.IsFever())
-			{
-				effectManager.PlayDelete(transform.position);
-				Destroy(gameObject);
-			}
 		}
 
 		if (isFever)
@@ -138,6 +130,7 @@ public class Item : MonoBehaviour {
 
 			if (isScaleDown)
 			{
+				isInBazooka = true;
 				cntScaleDownTime += Time.deltaTime;
 				if (cntScaleDownTime >= 1.0f)
 				{
@@ -150,11 +143,7 @@ public class Item : MonoBehaviour {
 					{
 						evidenceSpawner.DeleteEvidenceObj();
 					}
-					bazookaRifle.nowEvidenceFever = isFeverEvidence;
-					if (!feverManager.IsFever())
-					{
-						bazookaRifle.NearEvidenceNum++;
-					}
+					bazookaRifle.SetEvidence(isFeverEvidence);
 					Destroy(gameObject);
 				}
 			}
@@ -166,6 +155,15 @@ public class Item : MonoBehaviour {
 				SetItemLocalPosition(bazookaObj.transform.position);
 				flgMoveToGetPos = true;
 				isScaleDown = true;
+			}
+
+			if (isFeverEvidence)
+			{
+				if (!isHold && !isInBazooka && !feverManager.IsFever())
+				{
+					effectManager.PlayDelete(transform.position);
+					Destroy(gameObject);
+				}
 			}
 		}
 	}
