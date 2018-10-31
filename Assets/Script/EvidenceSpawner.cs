@@ -31,11 +31,11 @@ public class EvidenceSpawner : MonoBehaviour {
 	
 	void Update ()
 	{
-
 		if (FeverSpawner)
 		{
 			//フィーバータイム時のスポナー処理
 			
+
 		} else
 		{
 			//通常時のスポナー処理
@@ -55,6 +55,11 @@ public class EvidenceSpawner : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	public void SetIsFeverSpawner(bool _flg)
+	{
+		FeverSpawner = _flg;
 	}
 
 	private void Spawn()

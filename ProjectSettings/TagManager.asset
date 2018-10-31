@@ -9,6 +9,8 @@ TagManager:
   - ThroughFloor
   - BossAttackObj
   - NormalEvidenceSpawner
+  - FeverEvidenceSpawner
+  - MoveDesk
   layers:
   - Default
   - TransparentFX

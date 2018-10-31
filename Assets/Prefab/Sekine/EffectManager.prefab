@@ -56,3 +56,4 @@ MonoBehaviour:
   EffectTap: {fileID: 1437388818376034, guid: a48957fd80831c94a8b4828ea3f14315, type: 2}
   EffectDelete: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 2}
   EffectBOOM: {fileID: 1394334679624724, guid: 32016b83a1dbf5144a611ee176375164, type: 2}
+  EffectCreateEvidence: {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 2}

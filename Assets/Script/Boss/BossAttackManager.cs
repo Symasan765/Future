@@ -47,7 +47,7 @@ public class BossAttackManager : MonoBehaviour
 		for (int i = 0; i < obj.Length; i++)
 			m_PlayerObjs[i] = obj[i].GetComponent<Player>();
 
-		StartCoroutine("JikutoAttack");
+		StartCoroutine("BossAttack");
 	}
 
 	/// <summary>
@@ -59,19 +59,24 @@ public class BossAttackManager : MonoBehaviour
 		// TODO 将来的にはボスが生きている間、みたいな条件に変更すること
 		while (true)
 		{
-			// 攻撃対象のプレイヤーを確定させる
-			int targetNo = GetImportantPlayerNo();
-			// そのプレイヤーがステージのどこのエリアにいるかを特定する
-			int AreaNo = AreaIdentification(targetNo);
-			// プレイヤーが特定のエリアにいればそのエリアに攻撃を発生させる
-			if (AreaNo != -1)
+			if (m_This.m_AttackFlag)
 			{
-				AttackID(AreaNo);
-				yield return new WaitForSeconds(3); // これで引数分の秒数の間、処理を待つ
-			}
-			else
+				// 攻撃対象のプレイヤーを確定させる
+				int targetNo = GetImportantPlayerNo();
+				// そのプレイヤーがステージのどこのエリアにいるかを特定する
+				int AreaNo = AreaIdentification(targetNo);
+				// プレイヤーが特定のエリアにいればそのエリアに攻撃を発生させる
+				if (AreaNo != -1)
+				{
+					AttackID(AreaNo);
+					yield return new WaitForSeconds(3); // これで引数分の秒数の間、処理を待つ
+				} else
+				{
+					yield return new WaitForSeconds(0.5f);
+				}
+			} else
 			{
-				yield return new WaitForSeconds(0.5f);
+				yield return new WaitForSeconds(2.0f);
 			}
 		}
 		yield return null;

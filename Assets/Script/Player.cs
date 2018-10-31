@@ -192,6 +192,7 @@ public class Player : MonoBehaviour
 
 			Jump();
 		}
+		rb.position = new Vector3(rb.position.x, rb.position.y, 0);
     }
 
 	//落下処理
@@ -293,7 +294,7 @@ public class Player : MonoBehaviour
 
 		if (feverManager.IsFever())
 		{
-			nowMoveSpeed *= 1.6f;
+			nowMoveSpeed *= 1.4f;
 		}
 
 		if (nowMoveSpeed < 0)
@@ -510,19 +511,6 @@ public class Player : MonoBehaviour
 		return isMove;
 	}
 
-	void OnDrawGizmos()
-	{
-		float scr = 0.4f;
-		RaycastHit hit;
-		CapsuleCollider cc = GetComponent<CapsuleCollider>();
-		Vector3 sphirePos = new Vector3(FootPositionObj.transform.position.x, FootPositionObj.transform.position.y + scr, FootPositionObj.transform.position.z);
-		Physics.SphereCast(sphirePos, scr, Vector3.down, out hit);
-		if (hit.collider)
-		{
-			//Debug.DrawRay(FootPositionObj.transform.position, Vector3.down * hit.distance);
-			Gizmos.DrawWireSphere(hit.point, scr);
-		}
-	}
 	//接地しているか
 	private bool IsOnGround()
 	{
@@ -534,10 +522,13 @@ public class Player : MonoBehaviour
 			Vector3 sphirePos = new Vector3(FootPositionObj.transform.position.x, FootPositionObj.transform.position.y + scr, FootPositionObj.transform.position.z);
 			Physics.SphereCast(sphirePos, scr, Vector3.down, out hit);
 
-			if (hit.distance < 0.04f)
+			if (hit.collider.tag != "Player")
 			{
-				rb.velocity = Vector3.zero;
-				return true;
+				if (hit.distance < 0.04f)
+				{
+					rb.velocity = Vector3.zero;
+					return true;
+				}
 			}
 		}
 		return false;

@@ -4,46 +4,70 @@ using UnityEngine;
 
 public class Item : MonoBehaviour {
 
-	private float MoveSpeed = 5.0f;
-	private GameObject bazookaObj;
-	private BazookaRifle bazookaRifle;
+	
+	private GameObject bazookaObj = null;
+	private BazookaRifle bazookaRifle = null;
 	private Vector3 getPosition;
 	private GameObject evidenceSpawnerObj = null;
-	private EvidenceSpawner evidenceSpawner;
-	private EffectManager effectManager;
+	private EvidenceSpawner evidenceSpawner = null;
+	private EffectManager effectManager = null;
+	private MeshRenderer meshRenderer = null;
+	private BoxCollider boxCollider = null;
+	private Rigidbody rb = null;
+	private FeverManager feverManager;
+
 	[HideInInspector]
 	public bool flgMoveToGetPos;
 
+	private float MoveSpeed = 5.0f;
+
 	public GameObject ModelObj;
-	private MeshRenderer meshRenderer;
+
 
 	public bool isScaleDown = false;
 	public bool isHold = false;
-	private bool isInBazooka = false;
-	private BoxCollider boxCollider;
-	private float cntScaleDownTime = 0;
-
-	private bool isFever = false;
 	public bool isFeverEvidence = false;
 
+	private bool isInBazooka = false;
+	private bool isTriggerStay = false;
+	private bool isCheckCreatePosition = false;
+
+	private float cntScaleDownTime = 0;
 	private float feverFallSec = 0;
 	private float cntFeverFallSec = 0;
-	private bool isTriggerStay = false;
-	private Rigidbody rb;
 	private float lifeTime = 0;
 	private float LifeTime = 2.0f;
 	private float nowLifeTimeMax;
-	private FeverManager feverManager;
+	private float cntCheckCreatePositionSec = 0;
+
 
 	void Start ()
 	{
-		meshRenderer = ModelObj.GetComponent<MeshRenderer>();
-		rb = GetComponent<Rigidbody>();
-		boxCollider = GetComponent<BoxCollider>();
-		bazookaObj = GameObject.Find("BazookaRifle");
+		if (meshRenderer == null)
+		{
+			meshRenderer = ModelObj.GetComponent<MeshRenderer>();
+		}
+		if (rb == null)
+		{
+			rb = GetComponent<Rigidbody>();
+		}
+		if (boxCollider == null)
+		{
+			boxCollider = GetComponent<BoxCollider>();
+		}
+		if (bazookaObj == null)
+		{
+			bazookaObj = GameObject.Find("BazookaRifle");
+		}
 		bazookaRifle = bazookaObj.GetComponent<BazookaRifle>();
-		feverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
-		effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
+		if (feverManager == null)
+		{
+			feverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
+		}
+		if (effectManager == null)
+		{
+			effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
+		}
 	}
 	
 	void Update ()
@@ -53,25 +77,21 @@ public class Item : MonoBehaviour {
 			rb.velocity = new Vector3(rb.velocity.x, -4, rb.velocity.z);
 		}
 
-		if (isFever)
+		if (isCheckCreatePosition)
 		{
-			if (isHold)
+			rb.velocity = Vector3.zero;
+			cntCheckCreatePositionSec += Time.deltaTime;
+			if (cntCheckCreatePositionSec >= 1 / 60)
 			{
-				isFever = false;
-			}
-			cntFeverFallSec += Time.deltaTime;
-			//フィーバータイム時に降ってくる証拠の処理
-			if (cntFeverFallSec < feverFallSec)
-			{
-				boxCollider.isTrigger = true;
-			} else
-			{
-				if (!isTriggerStay)
+				if (isTriggerStay)
 				{
-					nowLifeTimeMax = LifeTime + Vector3.Distance(transform.position,bazookaObj.transform.position) * 0.5f;
-					lifeTime = nowLifeTimeMax;
-					isFever = false;
+					Destroy(gameObject);
+				} else
+				{
 					boxCollider.isTrigger = false;
+					effectManager.PlayCreateEvidence(transform.position);
+					isCheckCreatePosition = false;
+					meshRenderer.enabled = true;
 				}
 			}
 		} else
@@ -183,27 +203,37 @@ public class Item : MonoBehaviour {
 		evidenceSpawner = _obj.GetComponent<EvidenceSpawner>();
 	}
 
+	public void SetNecessaryComponent(GameObject _bazookaObj, FeverManager _feverManager, EffectManager _effectManager)
+	{
+		rb = GetComponent<Rigidbody>();
+		boxCollider = GetComponent<BoxCollider>();
+		meshRenderer = ModelObj.GetComponent<MeshRenderer>();
+		bazookaObj = _bazookaObj;
+		feverManager = _feverManager;
+		effectManager = _effectManager;
+	}
+
 	public void SetFeverValue(float _fallSec)
 	{
+		boxCollider.isTrigger = true;
+		meshRenderer.enabled = false;
+		isCheckCreatePosition = true;
 		isFeverEvidence = true;
-		isFever = true;
 		feverFallSec = _fallSec;
+		nowLifeTimeMax = LifeTime + Vector3.Distance(transform.position, bazookaObj.transform.position) * 0.5f;
+		lifeTime = nowLifeTimeMax;
 	}
 
 	void OnTriggerStay(Collider other)
 	{
-		if (isFever)
+		if (isCheckCreatePosition)
 		{
-			if (cntFeverFallSec >= feverFallSec)
+			feverManager.SetCreateEvidenceSecMax();
+			if (other.gameObject.tag == "Player")
 			{
-				isTriggerStay = true;
+				Destroy(gameObject);
 			}
+			isTriggerStay = true;
 		}
 	}
-
-	void OnTriggerExit(Collider other)
-	{
-		isTriggerStay = false;
-	}
-
 }

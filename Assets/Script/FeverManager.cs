@@ -8,24 +8,30 @@ public class FeverManager : MonoBehaviour {
 	private float FeverSec = 10;
 	[SerializeField]
 	private float CreateEviDeraySec = 0.2f;
-
+	[SerializeField]
+	private float HorizontalRange = 10;
+	[SerializeField]
+	private float VirticalRange = 10;
+	[SerializeField]
+	private float VirtivalOriginPosition = 7;
 	public GameObject EvidenceObj;
 
-	public GameObject MaxRangeObj;
-	public GameObject MinRangeObj;
-
 	private bool isStart = false;
-
+	
 	private float feverSec;
 	private float cntFeverSec = 0;
 	private float cntCreateEvidenceSec = 0;
-	// Use this for initialization
+	private GameObject BazookaObj;
+	private EffectManager effectManager;
+	private FeverManager feverManager;
 	void Start ()
 	{
 		feverSec = FeverSec;
+		BazookaObj = GameObject.Find("BazookaRifle");
+		effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
+		feverManager = GetComponent<FeverManager>();
 	}
 	
-	// Update is called once per frame
 	void Update ()
 	{
 		if (isStart)
@@ -42,11 +48,11 @@ public class FeverManager : MonoBehaviour {
 			if (cntCreateEvidenceSec >= CreateEviDeraySec)
 			{
 				cntCreateEvidenceSec = 0;
-				Vector3 pos = new Vector3(Random.Range(MinRangeObj.transform.position.x,MaxRangeObj.transform.position.x),MaxRangeObj.transform.position.y,MaxRangeObj.transform.position.z);
+				Vector3 pos = new Vector3(Random.Range(HorizontalRange / 2 * -1,HorizontalRange / 2),Random.Range(VirticalRange / 2 * -1,VirticalRange / 2) + VirtivalOriginPosition,transform.position.z);
 				Item item = Instantiate(EvidenceObj, pos, transform.rotation).GetComponent<Item>();
+				item.SetNecessaryComponent(BazookaObj, feverManager, effectManager);
 				item.SetFeverValue(Random.Range(1, 4));
 			}
-
 		}
 	}
 
@@ -54,6 +60,11 @@ public class FeverManager : MonoBehaviour {
 	{
 		cntFeverSec = _feverSec;
 		isStart = true;
+	}
+
+	public void SetCreateEvidenceSecMax()
+	{
+		cntCreateEvidenceSec = CreateEviDeraySec;
 	}
 
 	public bool IsFever()

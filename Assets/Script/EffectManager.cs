@@ -9,8 +9,16 @@ public class EffectManager : MonoBehaviour {
 	public GameObject EffectTap;
 	public GameObject EffectDelete;
 	public GameObject EffectBOOM;
+	public GameObject EffectCreateEvidence;
 
 	private ParticleSystem psDelete;
+	private ParticleSystem psCreateEvidence;
+
+	public void PlayCreateEvidence(Vector3 _pos)
+	{
+		psCreateEvidence = Instantiate(EffectCreateEvidence, _pos, transform.rotation).GetComponent<ParticleSystem>();
+		psCreateEvidence.Play();
+	}
 
 	public void PlayDelete(Vector3 _pos)
 	{
