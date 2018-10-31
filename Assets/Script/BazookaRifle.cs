@@ -11,21 +11,27 @@ public class BazookaRifle : MonoBehaviour
 {
     [SerializeField]
     private GameObject BazookaPrefab;               //ここにバズーカーのPrefabをUnityのInspectorで割当しておく。（またはResourece.Loadでロードするといい）
-	public float EvidenceDistance = 3.0f;            //証拠を認識する範囲。
-    private int EvidenceNum = 0;                      //全体の証拠の数。
-	[SerializeField] private int BazookaEvidenceNum;
-    public int NearEvidenceNum = 0;                  //近づいた証拠の数。
-    private GameObject[] Evidence_temp = new GameObject[3];
+	private GameObject[] Evidence_temp = new GameObject[3];
 	public GameObject EffectObj;
+	public GameObject m_AreaPrefab;
+	public GameObject BulletObj;
+	GameObject m_AreaEntity;
+	public GameObject BossObj;
+	public GameObject[] CurvePointObj = new GameObject[2];
+
 	private ParticleSystem particleSystem;
 	private BossAttackManager bossAttackManager;
 	private PartyTimeManager partyTimeManager;
 	private EffectManager effectManager;
+	private BazookaBullet bazookaBullet;
 
-	public GameObject m_AreaPrefab;
-	GameObject m_AreaEntity;
+	public float EvidenceDistance = 3.0f;            //証拠を認識する範囲。
+    private int EvidenceNum = 0;                      //全体の証拠の数。
+	[SerializeField]
+	private int BazookaEvidenceNum;
+    public int NearEvidenceNum = 0;                  //近づいた証拠の数。
 
-	public bool nowEvidenceFever = false;
+	public bool nowEvidenceNormal = false;
 
 	private void Start()
 	{
@@ -62,8 +68,8 @@ public class BazookaRifle : MonoBehaviour
 		if (NearEvidenceNum == BazookaEvidenceNum)
 		{
 			//普通の証拠
-			ShotBazooka(5);
-			partyTimeManager.LetsParty();
+			ShotBazooka(false);
+			//partyTimeManager.LetsParty();
 			NearEvidenceNum = 0;
 		}
 
@@ -97,22 +103,43 @@ public class BazookaRifle : MonoBehaviour
 		m_AreaEntity.transform.position = pos;
 	}
 
-	private void ShotBazooka(float _bossDamage)
+	public void HitBullet(bool _isFever,Vector3 _hitPos)
+	{
+		if (_isFever)
+		{
+
+		} else
+		{
+			partyTimeManager.LetsParty();
+		}
+		effectManager.PlayExplosion(_hitPos);
+		SoundManager.Get.PlaySE("BulletHit1");
+		SoundManager.Get.PlaySE("BulletHit2");
+		ShakeCamera.Impact(0.05f, 1.0f);
+		bossAttackManager.BossDamage(5);
+	}
+
+	private void ShotBazooka(bool _isFeverEvidence)
 	{
 		ShakeCamera.Impact(0.05f, 0.5f);
-		bossAttackManager.BossDamage(_bossDamage);
 		SoundManager.Get.PlaySE("launcher2");
 		GameObject obj = Instantiate(EffectObj, transform.position, transform.rotation);
 		particleSystem = obj.GetComponent<ParticleSystem>();
 		particleSystem.Play();
 		effectManager.PlayBOOM(-1, transform.position);
+
+		BazookaBullet bullet = Instantiate(BulletObj, transform.position, transform.rotation).GetComponent<BazookaBullet>();
+		bullet.SetBazookaRifleObj(gameObject);
+		bullet.SetCurvePointObj(CurvePointObj[0], CurvePointObj[1]);
+		bullet.SetBazooka(BossObj.transform.position);
+		bullet.SetFeverEvidenceFlg(_isFeverEvidence);
 	}
 
 	public void SetEvidence(bool _feverEvidence)
 	{
 		if (_feverEvidence)
 		{
-			ShotBazooka(5);
+			ShotBazooka(true);
 		} else
 		{
 			NearEvidenceNum++;

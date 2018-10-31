@@ -15,8 +15,16 @@ public class BazookaBullet : MonoBehaviour {
     public Vector3 MyPos;
 
     public bool isPosSet = false;
+	private bool isFever = false;
+	private float cntShotSec = 0;
 
-    
+	private Vector3 startPosition;
+	private Vector3 EndScale = new Vector3(0.5f, 0.5f, 0.5f);
+	private float speed = 0.8f;
+
+	private GameObject[] curvePoint = new GameObject[2];
+	private BazookaRifle bazookaRifle;
+
     //Updateでがターゲッティング関数をずっと呼び出す。
     void Update()
     {
@@ -29,28 +37,71 @@ public class BazookaBullet : MonoBehaviour {
     //的に向かっていく処理。
     void Targetting()
     {
+
+		float value = 1 - (Vector3.Distance(transform.position, TargetPos) / Vector3.Distance(startPosition, TargetPos));
+
+		transform.localScale = Vector3.Lerp(transform.localScale, EndScale, value);
+		//transform.position = Vector3.Lerp(transform.position, TargetPos, cntShotSec);
+		transform.position = GetPoint(startPosition, curvePoint[0].transform.position, curvePoint[1].transform.position, TargetPos, cntShotSec);
+		cntShotSec += Time.deltaTime * speed;
+
+		if (value >= 1)
+		{
+			bazookaRifle.HitBullet(isFever, transform.position);
+			Destroy(gameObject);
+		}
+
+		/*
         //自分から敵へのベクトルを求める。
-        TargetVector = TargetPos - MyPos;
+        TargetVector = TargetPos - transform.position;
         Vector3.Normalize(TargetVector);
-        TargetVector = TargetVector * 1 / 100;
+        //TargetVector = TargetVector * 1 / 100;
 
         //敵に近づく。
         if (Vector3.Distance(TargetPos, this.transform.position) > 0.5f)
         {
-            this.transform.position += TargetVector;
+			this.transform.position += TargetVector * Time.deltaTime * 2;
         }
-        if (Vector3.Distance(TargetPos, this.transform.position) <= 0.5f)
+        if (Vector3.Distance(TargetPos, this.transform.position) <= 0.1f)
         {
             Destroy(this.gameObject);
-        }
+        }*/
+
     }
 
+	public void SetBazookaRifleObj(GameObject _obj)
+	{
+		bazookaRifle = _obj.GetComponent<BazookaRifle>();
+	}
+
     //敵の座標をセット
-    public void SetBazooka(Vector3 in_TargetPos, Vector3 in_MyPos)
+	public void SetCurvePointObj(GameObject _obj1, GameObject _obj2)
+	{
+		curvePoint[0] = _obj1;
+		curvePoint[1] = _obj2;
+	}
+    public void SetBazooka(Vector3 in_TargetPos)
     {
+		startPosition = transform.position;
+		cntShotSec = 0;
         TargetPos = in_TargetPos;
-        MyPos = in_MyPos;
-        TargetVector = TargetPos - MyPos;
         isPosSet = true;
-    }
+	}
+
+	public void SetFeverEvidenceFlg(bool _flg)
+	{
+		isFever = _flg;
+	}
+
+	Vector3 GetPoint(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
+	{
+		var a = Vector3.Lerp(p0, p1, t); // 緑色の点1
+		var b = Vector3.Lerp(p1, p2, t); // 緑色の点2
+		var c = Vector3.Lerp(p2, p3, t); // 緑色の点3
+
+		var d = Vector3.Lerp(a, b, t);   // 青色の点1
+		var e = Vector3.Lerp(b, c, t);   // 青色の点2
+
+		return Vector3.Lerp(d, e, t);    // 黒色の点
+	}
 }

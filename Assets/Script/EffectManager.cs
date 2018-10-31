@@ -10,9 +10,18 @@ public class EffectManager : MonoBehaviour {
 	public GameObject EffectDelete;
 	public GameObject EffectBOOM;
 	public GameObject EffectCreateEvidence;
+	public GameObject EffectExplosion;
 
 	private ParticleSystem psDelete;
 	private ParticleSystem psCreateEvidence;
+	private ParticleSystem psExplosion;
+
+
+	public void PlayExplosion(Vector3 _pos)
+	{
+		psExplosion = Instantiate(EffectExplosion, _pos, transform.rotation).GetComponent<ParticleSystem>();
+		psExplosion.Play();
+	}
 
 	public void PlayCreateEvidence(Vector3 _pos)
 	{

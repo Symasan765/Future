@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FeverSec: 10
-  CreateEviDeraySec: 0.8
+  CreateEviDeraySec: 1
   HorizontalRange: 22
   VirticalRange: 16
   VirtivalOriginPosition: 7

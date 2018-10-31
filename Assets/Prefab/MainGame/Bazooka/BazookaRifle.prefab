@@ -332,6 +332,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1218570591331652
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4404235130136482}
+  m_Layer: 0
+  m_Name: CurvePoint2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1230544956607612
 GameObject:
   m_ObjectHideFlags: 1
@@ -1314,6 +1329,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1969162318859186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4572702321226078}
+  m_Layer: 0
+  m_Name: CurvePoint1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1976980606731620
 GameObject:
   m_ObjectHideFlags: 1
@@ -1692,6 +1722,19 @@ Transform:
   m_Father: {fileID: 4948820202333120}
   m_RootOrder: 45
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4404235130136482
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1218570591331652}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.88, y: 16.66, z: 12.78}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4679080112093546}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4416353514585666
 Transform:
   m_ObjectHideFlags: 1
@@ -1874,6 +1917,19 @@ Transform:
   m_Father: {fileID: 4948820202333120}
   m_RootOrder: 51
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4572702321226078
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1969162318859186}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.85, y: 20.44, z: 5.91}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4679080112093546}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4576085702412302
 Transform:
   m_ObjectHideFlags: 1
@@ -2038,10 +2094,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1189333943818486}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 13.54, z: 1.5}
+  m_LocalPosition: {x: -11.4, y: 1.56, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4311159123843226}
+  - {fileID: 4572702321226078}
+  - {fileID: 4404235130136482}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5457,13 +5515,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BazookaPrefab: {fileID: 1298366636574104, guid: 567e6c65deb35664bb64e266a92ba19d,
     type: 2}
-  EvidenceDistance: 5
-  BazookaEvidenceNum: 0
-  NearEvidenceNum: 0
   EffectObj: {fileID: 1247311384876784, guid: 4adffb0018aeda44e9263f901167af1f, type: 2}
   m_AreaPrefab: {fileID: 1721768353711984, guid: 8e2c5320afe59b64eba03ea1a65acca0,
     type: 2}
-  nowEvidenceFever: 0
+  BulletObj: {fileID: 1398252756194622, guid: 281784580f20d5e4cb5d2ee972c332c6, type: 2}
+  BossObj: {fileID: 0}
+  CurvePointObj:
+  - {fileID: 1969162318859186}
+  - {fileID: 1218570591331652}
+  EvidenceDistance: 5
+  BazookaEvidenceNum: 0
+  NearEvidenceNum: 0
+  nowEvidenceNormal: 0
 --- !u!136 &136717696598867596
 CapsuleCollider:
   m_ObjectHideFlags: 1
