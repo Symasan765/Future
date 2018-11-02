@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraVibration : MonoBehaviour {
 	GameObject m_Parent;
-	float m_MaxRange = 0.01f;
+	public float m_MaxRange = 0.01f;
 
 	// Use this for initialization
 	void Start () {
