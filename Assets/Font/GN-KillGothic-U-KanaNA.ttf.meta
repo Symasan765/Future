@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 2a3baa81824c27147bcda2f2d33d6af6
+timeCreated: 1540950044
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: GN-KMBFont-UB-NewstyleKanaA
+  fontNames:
+  - GN-KMBFont-UB-NewstyleKanaA
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
