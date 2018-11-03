@@ -11,6 +11,7 @@ public class EffectManager : MonoBehaviour {
 	public GameObject EffectBOOM;
 	public GameObject EffectCreateEvidence;
 	public GameObject EffectExplosion;
+	public GameObject EffectFEVER;
 
 	private ParticleSystem psDelete;
 	private ParticleSystem psCreateEvidence;
@@ -33,6 +34,11 @@ public class EffectManager : MonoBehaviour {
 	{
 		psDelete = Instantiate(EffectDelete, _pos, transform.rotation).GetComponent<ParticleSystem>();
 		psDelete.Play();
+	}
+
+	public void PlayFEVER(int _index, Vector3 _pos)
+	{
+		CreateEffect(EffectFEVER, _index, _pos);
 	}
 
 	public void PlayBOOM(int _index, Vector3 _pos)

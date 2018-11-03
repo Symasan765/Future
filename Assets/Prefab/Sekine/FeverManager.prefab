@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a994d81ab89fe4880d9cfde6626551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraObj: {fileID: 0}
   FeverSec: 10
   CreateEviDeraySec: 1
   HorizontalRange: 22

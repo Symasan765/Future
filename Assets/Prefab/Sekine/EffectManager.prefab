@@ -59,3 +59,5 @@ MonoBehaviour:
   EffectCreateEvidence: {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 2}
   EffectExplosion: {fileID: 1134129239631916, guid: 7e48ba6b1b968764490bbc70b66e3fe1,
     type: 2}
+  EffectFEVER: {fileID: 1192392144146242, guid: 3bea27417fd83c242917956a9f207768,
+    type: 2}

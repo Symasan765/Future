@@ -4221,6 +4221,11 @@ Transform:
   m_Father: {fileID: 1617193146}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1126287537 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1854095824535836, guid: 20147953ff61ca449a053d050f12a287,
+    type: 2}
+  m_PrefabInternal: {fileID: 624891833}
 --- !u!1 &1174302111
 GameObject:
   m_ObjectHideFlags: 0
@@ -7670,6 +7675,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 114016757905886660, guid: 53a35c3b5c501eb4e8ab035c20b22bc8,
+        type: 2}
+      propertyPath: cameraObj
+      value: 
+      objectReference: {fileID: 1126287537}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 53a35c3b5c501eb4e8ab035c20b22bc8, type: 2}
   m_IsPrefabParent: 0

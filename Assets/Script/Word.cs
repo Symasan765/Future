@@ -6,6 +6,8 @@ public class Word : MonoBehaviour {
 	[SerializeField]
 	private bool EndAnimation = false;
 	[SerializeField]
+	private Vector3 Size = new Vector3(1, 1, 1);
+	[SerializeField]
 	private float LifeTime = 0;
 	[SerializeField]
 	private float DerayTime = 0;
@@ -77,7 +79,6 @@ public class Word : MonoBehaviour {
 
 		if (flgPlay)
 		{
-			spriteRenderer.enabled = true;
 			//描画開始までの空白期間
 			if (cntDerayTime < DerayTime)
 			{
@@ -263,7 +264,7 @@ public class Word : MonoBehaviour {
 			}
 			spriteRenderer.enabled = false;
 		}
-		transform.localScale = new Vector3(nowScale.x * scaleShakePower.x, nowScale.y * scaleShakePower.y, nowScale.z);
+		transform.localScale = new Vector3(Size.x * nowScale.x * scaleShakePower.x,Size.y * nowScale.y * scaleShakePower.y, nowScale.z);
 		spriteRenderer.color = color;
 	}
 }

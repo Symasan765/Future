@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FeverManager : MonoBehaviour {
 
+	public GameObject cameraObj;
+
 	[SerializeField]
 	private float FeverSec = 10;
 	[SerializeField]
@@ -58,8 +60,14 @@ public class FeverManager : MonoBehaviour {
 
 	public void StartFever(float _feverSec)
 	{
-		cntFeverSec = _feverSec;
-		isStart = true;
+		if (!isStart)
+		{
+			Vector3 pos = new Vector3(cameraObj.transform.position.x, cameraObj.transform.position.y, 0);
+			Debug.Log("FEVER開始(⋈◍＞◡＜◍)。✧♡");
+			effectManager.PlayFEVER(-1, pos);
+			cntFeverSec = _feverSec;
+			isStart = true;
+		}
 	}
 
 	public void SetCreateEvidenceSecMax()
