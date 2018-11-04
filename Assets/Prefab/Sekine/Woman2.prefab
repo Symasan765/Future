@@ -1210,7 +1210,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!65 &65194909350043936
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1257,11 +1257,11 @@ MonoBehaviour:
   GroundJumpPower: 20
   AirJumpPower: 15
   JumpSpeed: 2
-  FallSpeed: 0.4
+  FallSpeed: 0.6
   FallSpeedMax: 7
   AirJumpNum: 1
   Gravity: 0.4
-  BrakePower: 0.4
+  BrakePower: 0.6
   MentalGaugeMax: 100
   MentalGaugeAccumulateSpeed: 10
   InvincibleSec: 1

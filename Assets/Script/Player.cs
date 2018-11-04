@@ -146,16 +146,6 @@ public class Player : MonoBehaviour
 
 				SerchItem();
 
-				//証拠持ってる時のメンタルゲージ増加は仕様決定まで消す
-				/*
-				//証拠を持っている時メンタルゲージ増加(とりあえず何か持ってたら溜まる)
-				if (isHoldItem)
-				{
-					if (mentalGauge < MentalGaugeMax && Time.frameCount % MentalGaugeAccumulateSpeed == 0)
-					{
-						mentalGauge++;
-					}
-				}*/
 				//無敵フレームのカウント
 				if (cntInvincibleFrame > 0)
 				{
@@ -840,9 +830,21 @@ public class Player : MonoBehaviour
 	//リスポーン処理
 	private void Respawn()
 	{
+		if (Input.GetKeyDown(KeyCode.Q))
+		{
+			mentalGauge += 10;
+		}
+		/*
 		Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
 
+		//カメラより下に移動した
 		if (pos.y < 0)
+		{
+			isRespawn = true;
+		}*/
+
+		//メンタルゲージがMAXになった時リスポン
+		if (mentalGauge >= MentalGaugeMax)
 		{
 			isRespawn = true;
 		}
@@ -850,16 +852,27 @@ public class Player : MonoBehaviour
 		if (isRespawn)
 		{
 			//Debug.Log(gameObject.name + "がリスポーンした");
+			if (isHoldItem)
+			{
+				ReleaseItem();
+			}
+			mentalGauge = 0;
 			rightSpeed = leftSpeed = 0.0f;
 			transform.position = respawnPosition;
 			cntAttackFrame = 0;
 			cntDamageFrame = 0;
 			cntGetItemBlankTime = 0;
+			cntJumpCheckFrame = 0;
+			cntAirJumpNum = 0;
+			jumpSpeed = 0;
 			isAttack = false;
 			isDamage = false;
 			isHoldItem = false;
 			isJump = false;
 			isMove = false;
+			isReleaceItem = false;
+			isDown = false;
+			isAirjumpRotation = false;
 
 			isRespawn = false;
 		}
