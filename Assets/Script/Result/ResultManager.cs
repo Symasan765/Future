@@ -8,7 +8,7 @@ public class ResultManager : MonoBehaviour {
 
 	public float m_Rank2Value = 5;
 	public float m_Rank3Value = 10;
-	public float m_ReflectTimeSec = 0.3f;       // 数値が上昇する数値
+	public float m_ReflectTimeSec = 1.5f;       // 数値が上昇する数値
 	float m_AttackNum = 0;      // メインゲームで攻撃した回数
 	float m_DamageNum = 0;      // ダメージを受けた数
 
@@ -17,15 +17,15 @@ public class ResultManager : MonoBehaviour {
 	public TextMesh m_RankStarText;
 
 	// こいつらにメインシーンでの数値を入れ込む
-	int m_TargetAttackValue = 0;
-	int m_TargetDamageValue = 0;
+	int m_TargetAttackValue = 50;
+	int m_TargetDamageValue = 10;
 
 	float m_AttackTimeCnt = 0;
 	float m_DamageTimeCnt = 0;
 
 	// TODO ここのフラグを外部からtrueに出来るオブジェクトを作成し、タイムラインから変更する
-	bool m_AttackFlag = false;
-	bool m_DamageFlag = false;
+	bool m_AttackFlag = true;
+	bool m_DamageFlag = true;
 
 	// Use this for initialization
 	void Start () {
@@ -45,6 +45,7 @@ public class ResultManager : MonoBehaviour {
 		{
 			// 数値が上昇しきってなかったら数値を上げる
 			float t = m_AttackTimeCnt / m_ReflectTimeSec;
+			if (t > 1.0f) t = 1.0f;
 			int attackText = (int)(m_TargetAttackValue * t);
 			m_AttacNumText.text = attackText.ToString();
 			m_AttackTimeCnt += Time.deltaTime;
@@ -57,6 +58,7 @@ public class ResultManager : MonoBehaviour {
 		{
 			// 数値が上昇しきってなかったら数値を上げる
 			float t = m_DamageTimeCnt / m_ReflectTimeSec;
+			if (t > 1.0f) t = 1.0f;
 			int damageText = (int)(m_TargetDamageValue * t);
 			m_DamageNumText.text = damageText.ToString();
 			m_DamageTimeCnt += Time.deltaTime;

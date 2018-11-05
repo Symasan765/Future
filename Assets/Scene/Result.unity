@@ -2870,10 +2870,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Rank2Value: 5
   m_Rank3Value: 10
-  m_ReflectTimeSec: 0.3
-  m_AttacNumText: {fileID: 0}
-  m_DamageNumText: {fileID: 0}
-  m_RankStarText: {fileID: 0}
+  m_ReflectTimeSec: 1
+  m_AttacNumText: {fileID: 1163220652}
+  m_DamageNumText: {fileID: 487571340}
+  m_RankStarText: {fileID: 1371852482}
 --- !u!1001 &1815655551
 Prefab:
   m_ObjectHideFlags: 0
