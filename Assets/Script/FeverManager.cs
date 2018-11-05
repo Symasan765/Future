@@ -64,7 +64,7 @@ public class FeverManager : MonoBehaviour {
 		{
 			Vector3 pos = new Vector3(cameraObj.transform.position.x, cameraObj.transform.position.y, 0);
 			Debug.Log("FEVER開始(⋈◍＞◡＜◍)。✧♡");
-			effectManager.PlayFEVER(-1, pos);
+			effectManager.PlayFEVER(-1, pos, -5);
 			cntFeverSec = _feverSec;
 			isStart = true;
 		}

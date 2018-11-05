@@ -95,7 +95,7 @@ public class Item : MonoBehaviour {
 					Physics.BoxCast(new Vector3(transform.position.x,transform.position.y - 0.8f,transform.position.z), new Vector3(0.8f, 0.8f, 0.8f), transform.up * -1, out hit);
 					if (hit.collider)
 					{
-						Debug.Log(hit.collider);
+						//Debug.Log(hit.collider);
 						if (hit.collider.tag == "SYOUKO")
 						{
 							flg = false;

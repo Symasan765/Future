@@ -61,3 +61,5 @@ MonoBehaviour:
     type: 2}
   EffectFEVER: {fileID: 1192392144146242, guid: 3bea27417fd83c242917956a9f207768,
     type: 2}
+  EffectSMASH: {fileID: 1148862361744008, guid: 765a26df763b9914faa0ae6aafe43ab9,
+    type: 2}

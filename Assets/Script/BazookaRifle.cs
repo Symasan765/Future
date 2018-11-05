@@ -137,7 +137,7 @@ public class BazookaRifle : MonoBehaviour
 	{
 		if (_isFever)
 		{
-
+			effectManager.PlaySMASH(-1, _hitPos, -1);
 		} else
 		{
 			partyTimeManager.LetsParty();

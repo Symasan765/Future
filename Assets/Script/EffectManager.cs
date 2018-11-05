@@ -12,6 +12,7 @@ public class EffectManager : MonoBehaviour {
 	public GameObject EffectCreateEvidence;
 	public GameObject EffectExplosion;
 	public GameObject EffectFEVER;
+	public GameObject EffectSMASH;
 
 	private ParticleSystem psDelete;
 	private ParticleSystem psCreateEvidence;
@@ -36,9 +37,14 @@ public class EffectManager : MonoBehaviour {
 		psDelete.Play();
 	}
 
-	public void PlayFEVER(int _index, Vector3 _pos)
+	public void PlayFEVER(int _index, Vector3 _pos, float _zpos)
 	{
-		CreateEffect(EffectFEVER, _index, _pos);
+		CreateEffect(EffectFEVER, _index, _pos, _zpos);
+	}
+
+	public void PlaySMASH(int _index, Vector3 _pos,float _zpos)
+	{
+		CreateEffect(EffectSMASH, _index, _pos, _zpos);
 	}
 
 	public void PlayBOOM(int _index, Vector3 _pos)
@@ -68,5 +74,12 @@ public class EffectManager : MonoBehaviour {
 		WordParent w = e.GetComponent<WordParent>();
 		w.Play(_index);
 	}
-
+	private void CreateEffect(GameObject _obj, int _index, Vector3 _pos,float _zPos)
+	{
+		Vector3 p = new Vector3(_pos.x, _pos.y, _zPos);
+		GameObject e = Instantiate(_obj, p, transform.rotation);
+		e.transform.parent = transform;
+		WordParent w = e.GetComponent<WordParent>();
+		w.Play(_index);
+	}
 }
