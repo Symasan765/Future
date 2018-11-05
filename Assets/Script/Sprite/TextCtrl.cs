@@ -12,6 +12,7 @@ public class TextCtrl : MonoBehaviour {
 	public Vector3 m_ShakeTime = Vector3.one;			// 揺れるのが一周する時間
 	public float m_StartTime = 0.2f;        // スプライトが出現しきるまでの時間
 	public float m_LostTime = 2.0f;         // スプライトが消えるまでの時間
+	public string m_SEName;					// ここに名前が登録されればSEを鳴らす
 
 	float ExpansTimeRate = 0.8f;
 
@@ -48,6 +49,11 @@ public class TextCtrl : MonoBehaviour {
 			yield return null;
 		}   //縮小終わり
 
+		// ここのタイミングで音鳴らす
+		if(m_SEName != "")
+		{
+			SoundManager.Get.PlaySE(m_SEName);
+		}
 
 		// 次は自由に拡大縮小させる
 		for (float timeCnt = 0.0f; timeCnt < m_LostTime; timeCnt += Time.deltaTime)
