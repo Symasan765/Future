@@ -572,7 +572,7 @@ public class Player : MonoBehaviour
 			{
 				cntAirJumpNum = AirJumpNum;
 				effectManager.PlayDUM(PlayerIndex, FootPositionObj.transform.position);
-				SoundManager.Get.PlaySE("jump");
+				SoundManager.Get.PlaySE("AirJump");
 				jumpSpeed = GroundJumpPower;
 				isJump = true;
 			} else
@@ -581,7 +581,7 @@ public class Player : MonoBehaviour
 				{
 					cntAirJumpNum = AirJumpNum;
 					effectManager.PlayDUM(PlayerIndex, FootPositionObj.transform.position);
-					SoundManager.Get.PlaySE("jump");
+					SoundManager.Get.PlaySE("AirJump");
 					jumpSpeed = GroundJumpPower - (GroundJumpPower / 3);
 					isJump = true;
 				}
