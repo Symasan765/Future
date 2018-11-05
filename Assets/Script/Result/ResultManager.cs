@@ -24,8 +24,8 @@ public class ResultManager : MonoBehaviour {
 	float m_DamageTimeCnt = 0;
 
 	// TODO ここのフラグを外部からtrueに出来るオブジェクトを作成し、タイムラインから変更する
-	bool m_AttackFlag = true;
-	bool m_DamageFlag = true;
+	bool m_AttackFlag = false;
+	bool m_DamageFlag = false;
 
 	// Use this for initialization
 	void Start () {
@@ -63,5 +63,15 @@ public class ResultManager : MonoBehaviour {
 			m_DamageNumText.text = damageText.ToString();
 			m_DamageTimeCnt += Time.deltaTime;
 		}
+	}
+
+	public void AttacaActive()
+	{
+		m_AttackFlag = true;
+	}
+
+	public void DamageActive()
+	{
+		m_DamageFlag = true;
 	}
 }
