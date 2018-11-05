@@ -25,6 +25,7 @@ public class ShakeCamera : MonoBehaviour {
             // 時間をオーバーしたら揺れ停止
             if (shakePercentage <= 0.0f) {
                 vcam.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0.0f;
+                vcam.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0.0f;
                 isShakeCamera = false;
             }
             else {
