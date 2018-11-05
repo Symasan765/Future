@@ -398,7 +398,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.791
+  m_FillAmount: 0.1
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!114 &114062633384117994
@@ -425,7 +425,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.512
+  m_FillAmount: 0.1
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!114 &114070541029939786
@@ -493,7 +493,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.208
+  m_FillAmount: 0.1
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!114 &114192171392130202
@@ -808,7 +808,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.44
+  m_FillAmount: 0.1
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!114 &114910428946624168
