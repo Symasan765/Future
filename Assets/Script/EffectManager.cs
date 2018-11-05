@@ -13,11 +13,18 @@ public class EffectManager : MonoBehaviour {
 	public GameObject EffectExplosion;
 	public GameObject EffectFEVER;
 	public GameObject EffectSMASH;
+	public GameObject EffectLightning;
 
 	private ParticleSystem psDelete;
 	private ParticleSystem psCreateEvidence;
 	private ParticleSystem psExplosion;
+	private ParticleSystem psLightning;
 
+	public void PlayLightning(Vector3 _pos)
+	{
+		psLightning = Instantiate(EffectLightning, _pos, transform.rotation).GetComponent<ParticleSystem>();
+		psLightning.Play();
+	}
 
 	public void PlayExplosion(Vector3 _pos)
 	{

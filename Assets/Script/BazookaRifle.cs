@@ -24,6 +24,7 @@ public class BazookaRifle : MonoBehaviour
 	private PartyTimeManager partyTimeManager;
 	private EffectManager effectManager;
 	private BazookaBullet bazookaBullet;
+	private FeverManager feverManager;
 
 	public float EvidenceDistance = 3.0f;            //証拠を認識する範囲。
     private int EvidenceNum = 0;                      //全体の証拠の数。
@@ -32,13 +33,14 @@ public class BazookaRifle : MonoBehaviour
     public int NearEvidenceNum = 0;                  //近づいた証拠の数。
 
 	public bool nowEvidenceNormal = false;
-	private Vector3 targetPos;
 	[SerializeField]
 	private float ExplosionSec = 2;
 	private float cntExplosionSec = 0;
 
+	private bool isFirstFeverEvidenceHit = false;
 	private void Start()
 	{
+		feverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
 		effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
 		bossAttackManager = GameObject.Find("BossAttackManager").GetComponent<BossAttackManager>();
 		partyTimeManager = GameObject.Find("PartyTimeManager").GetComponent<PartyTimeManager>();
@@ -50,7 +52,12 @@ public class BazookaRifle : MonoBehaviour
 
 	void Update()
     {
+		if (!feverManager.IsFever())
+		{
+			isFirstFeverEvidenceHit = false;
+		}
 		BazookaAreaUpdate();
+		Lightning();
 		Explosion();
 		//GameObject Boss = GameObject.FindGameObjectWithTag("BOSS");
         //Debug.Log(Boss);
@@ -107,6 +114,19 @@ public class BazookaRifle : MonoBehaviour
 		m_AreaEntity.transform.position = pos;
 	}
 
+	private void Lightning()
+	{
+		if (feverManager.IsFever() && isFirstFeverEvidenceHit)
+		{
+			if (Time.frameCount % (int)Random.Range(5,12) == 0)
+			{
+				Vector3 effpos = new Vector3(BossObj.transform.position.x + Random.Range(-5, 5), BossObj.transform.position.y + Random.Range(-5, 5), BossObj.transform.position.z);
+				effectManager.PlayLightning(effpos);
+				SoundManager.Get.PlaySE("kanden");
+			}
+		}
+	}
+
 	private void Explosion()
 	{
 		if (cntExplosionSec > 0)
@@ -121,13 +141,11 @@ public class BazookaRifle : MonoBehaviour
 			{
 				if (Time.frameCount % 5 == 0)
 				{
-
 					ShakeCamera.Impact(0.03f, 0.2f);
-					Vector3 effpos = new Vector3(targetPos.x + Random.Range(-5, 5), targetPos.y + Random.Range(-5, 5), targetPos.z);
+					Vector3 effpos = new Vector3(BossObj.transform.position.x + Random.Range(-5, 5), BossObj.transform.position.y + Random.Range(-5, 5), BossObj.transform.position.z);
 					effectManager.PlayExplosion(effpos);
 					SoundManager.Get.PlaySE("BulletHit1");
 					SoundManager.Get.PlaySE("BulletHit2");
-
 				}
 			}
 		}
@@ -140,6 +158,7 @@ public class BazookaRifle : MonoBehaviour
 			effectManager.PlaySMASH(-1, _hitPos, -1);
 		} else
 		{
+			isFirstFeverEvidenceHit = true;
 			partyTimeManager.LetsParty();
 		}
 		for (int i = 0; i < 4; i++)
@@ -147,7 +166,6 @@ public class BazookaRifle : MonoBehaviour
 			XPad.Get.SetVibration(i, 1.0f, 1.0f, 0.5f);
 		}
 		cntExplosionSec = ExplosionSec + 1;
-		targetPos = _hitPos;
 		effectManager.PlayExplosion(_hitPos);
 		SoundManager.Get.PlaySE("BulletHit1");
 		SoundManager.Get.PlaySE("BulletHit2");

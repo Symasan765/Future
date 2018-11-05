@@ -63,3 +63,5 @@ MonoBehaviour:
     type: 2}
   EffectSMASH: {fileID: 1148862361744008, guid: 765a26df763b9914faa0ae6aafe43ab9,
     type: 2}
+  EffectLightning: {fileID: 1376804535803542, guid: eb2a8b1913617be409593bd4d6a7c2c3,
+    type: 2}
