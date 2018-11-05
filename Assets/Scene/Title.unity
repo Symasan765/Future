@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43217134, g: 0.4681279, b: 0.50233495, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -24831,7 +24831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -33127,8 +33127,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraObject: {fileID: 1679514838}
   MovingSpeed: {x: 0.01, y: 0, z: 0}
-  FadeImage: {fileID: 655389695}
-  FadeImage2: {fileID: 1949027755}
+  AllFadeImage: {fileID: 655389695}
+  TitleLogo: {fileID: 2049131396}
+  StartButton: {fileID: 1949027755}
+  SceneIndex: 0
 --- !u!4 &932453918
 Transform:
   m_ObjectHideFlags: 0
@@ -57357,6 +57359,8 @@ GameObject:
   - component: {fileID: 1679514838}
   - component: {fileID: 1679514837}
   - component: {fileID: 1679514836}
+  - component: {fileID: 1679514840}
+  - component: {fileID: 1679514841}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -57427,6 +57431,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 1.1860001, y: 0, z: 0}
+--- !u!114 &1679514840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1679514835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a007ff6d740a06248934843c4b1c852f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MaxRange: 1
+--- !u!114 &1679514841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1679514835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d707743035a634e43bc8fe86bef4f507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MaxRange: 0.01
+  VibrationTrigger: 0
 --- !u!21 &1689274376
 Material:
   serializedVersion: 6
@@ -68096,7 +68125,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -271.95}
+  m_AnchoredPosition: {x: 0, y: -1000}
   m_SizeDelta: {x: 400, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1949027757
@@ -71664,7 +71693,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 180}
+  m_AnchoredPosition: {x: 0, y: -1000}
   m_SizeDelta: {x: 3508, y: 2480}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2049131398

@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scene/CharacterSelect.unity
     guid: 06cf9f9cbaf08cd48aacdf819870d568
   - enabled: 0
