@@ -349,7 +349,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 0.4, y: 0.55, z: 1}
   m_StartTime: 0.25
   m_LostTime: 500
-  m_SEName: 
+  m_SEName: slap1
 --- !u!212 &202936491
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -440,7 +440,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 1, y: 1, z: 1}
   m_StartTime: 0.2
   m_LostTime: 500
-  m_SEName: 
+  m_SEName: slap1
 --- !u!102 &247246432
 TextMesh:
   serializedVersion: 3
@@ -863,7 +863,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 1, y: 1, z: 1}
   m_StartTime: 0.2
   m_LostTime: 500
-  m_SEName: 
+  m_SEName: sword-clash2
 --- !u!102 &487571340
 TextMesh:
   serializedVersion: 3
@@ -1366,7 +1366,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 1, y: 1, z: 1}
   m_StartTime: 0.2
   m_LostTime: 500
-  m_SEName: 
+  m_SEName: slap1
 --- !u!1 &696768399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1673,7 +1673,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 1, y: 1, z: 1}
   m_StartTime: 0.2
   m_LostTime: 500
-  m_SEName: 
+  m_SEName: slap1
 --- !u!1 &892533590
 GameObject:
   m_ObjectHideFlags: 0
@@ -1972,7 +1972,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 1, y: 1, z: 1}
   m_StartTime: 0.2
   m_LostTime: 500
-  m_SEName: 
+  m_SEName: slap1
 --- !u!4 &991417970
 Transform:
   m_ObjectHideFlags: 0
@@ -2341,7 +2341,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 1, y: 1, z: 1}
   m_StartTime: 0.2
   m_LostTime: 500
-  m_SEName: 
+  m_SEName: sword-clash2
 --- !u!102 &1163220652
 TextMesh:
   serializedVersion: 3
@@ -2545,7 +2545,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 1, y: 1, z: 1}
   m_StartTime: 0.2
   m_LostTime: 500
-  m_SEName: 
+  m_SEName: punch-high2
 --- !u!102 &1371852482
 TextMesh:
   serializedVersion: 3
