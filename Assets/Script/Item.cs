@@ -109,7 +109,7 @@ public class Item : MonoBehaviour {
 						meshRenderer.enabled = true;
 					} else
 					{
-						Debug.Log("証拠があるので削除");
+						//Debug.Log("証拠があるので削除");
 						feverManager.SetCreateEvidenceSecMax();
 						Destroy(gameObject);
 					}
