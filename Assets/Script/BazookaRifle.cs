@@ -32,6 +32,10 @@ public class BazookaRifle : MonoBehaviour
     public int NearEvidenceNum = 0;                  //近づいた証拠の数。
 
 	public bool nowEvidenceNormal = false;
+	private Vector3 targetPos;
+	[SerializeField]
+	private float ExplosionSec = 2;
+	private float cntExplosionSec = 0;
 
 	private void Start()
 	{
@@ -47,7 +51,7 @@ public class BazookaRifle : MonoBehaviour
 	void Update()
     {
 		BazookaAreaUpdate();
-
+		Explosion();
 		//GameObject Boss = GameObject.FindGameObjectWithTag("BOSS");
         //Debug.Log(Boss);
 		//証拠を探す。
@@ -103,6 +107,32 @@ public class BazookaRifle : MonoBehaviour
 		m_AreaEntity.transform.position = pos;
 	}
 
+	private void Explosion()
+	{
+		if (cntExplosionSec > 0)
+		{
+			cntExplosionSec -= Time.deltaTime;
+			if (cntExplosionSec <= 0)
+			{
+				cntExplosionSec = 0;
+			}
+
+			if (cntExplosionSec <= ExplosionSec)
+			{
+				if (Time.frameCount % 5 == 0)
+				{
+
+					ShakeCamera.Impact(0.03f, 0.2f);
+					Vector3 effpos = new Vector3(targetPos.x + Random.Range(-5, 5), targetPos.y + Random.Range(-5, 5), targetPos.z);
+					effectManager.PlayExplosion(effpos);
+					SoundManager.Get.PlaySE("BulletHit1");
+					SoundManager.Get.PlaySE("BulletHit2");
+
+				}
+			}
+		}
+	}
+
 	public void HitBullet(bool _isFever,Vector3 _hitPos)
 	{
 		if (_isFever)
@@ -112,6 +142,12 @@ public class BazookaRifle : MonoBehaviour
 		{
 			partyTimeManager.LetsParty();
 		}
+		for (int i = 0; i < 4; i++)
+		{
+			XPad.Get.SetVibration(i, 1.0f, 1.0f, 0.5f);
+		}
+		cntExplosionSec = ExplosionSec + 1;
+		targetPos = _hitPos;
 		effectManager.PlayExplosion(_hitPos);
 		SoundManager.Get.PlaySE("BulletHit1");
 		SoundManager.Get.PlaySE("BulletHit2");
@@ -121,6 +157,10 @@ public class BazookaRifle : MonoBehaviour
 
 	private void ShotBazooka(bool _isFeverEvidence)
 	{
+		for (int i = 0; i < 4; i++)
+		{
+			XPad.Get.SetVibration(i, 0.7f, 0.7f, 0.2f);
+		}
 		ShakeCamera.Impact(0.05f, 0.5f);
 		SoundManager.Get.PlaySE("launcher2");
 		GameObject obj = Instantiate(EffectObj, transform.position, transform.rotation);
