@@ -69,9 +69,11 @@ public class Item : MonoBehaviour {
 			effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
 		}
 	}
-	
+
 	void Update ()
 	{
+		transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+		transform.eulerAngles = new Vector3(0, 0, 0);
 		if (rb.velocity.y < -4)
 		{
 			rb.velocity = new Vector3(rb.velocity.x, -4, rb.velocity.z);
@@ -88,10 +90,29 @@ public class Item : MonoBehaviour {
 					Destroy(gameObject);
 				} else
 				{
-					boxCollider.isTrigger = false;
-					effectManager.PlayCreateEvidence(transform.position);
-					isCheckCreatePosition = false;
-					meshRenderer.enabled = true;
+					bool flg = true;
+					RaycastHit hit;
+					Physics.BoxCast(new Vector3(transform.position.x,transform.position.y - 0.8f,transform.position.z), new Vector3(0.8f, 0.8f, 0.8f), transform.up * -1, out hit);
+					if (hit.collider)
+					{
+						Debug.Log(hit.collider);
+						if (hit.collider.tag == "SYOUKO")
+						{
+							flg = false;
+						}
+					}
+					if (flg)
+					{
+						boxCollider.isTrigger = false;
+						effectManager.PlayCreateEvidence(transform.position);
+						isCheckCreatePosition = false;
+						meshRenderer.enabled = true;
+					} else
+					{
+						//Debug.Log("証拠があるので削除");
+						feverManager.SetCreateEvidenceSecMax();
+						Destroy(gameObject);
+					}
 				}
 			}
 		} else

@@ -545,7 +545,6 @@ public class Player : MonoBehaviour
 			}
 		}
 
-
 		//空中ジャンプ
 		if (holdItemJump && !IsOnGround() && cntAirJumpNum > 0 && !isAttack && !isDamage)
 		{
@@ -573,7 +572,7 @@ public class Player : MonoBehaviour
 			{
 				cntAirJumpNum = AirJumpNum;
 				effectManager.PlayDUM(PlayerIndex, FootPositionObj.transform.position);
-				SoundManager.Get.PlaySE("jump");
+				SoundManager.Get.PlaySE("AirJump");
 				jumpSpeed = GroundJumpPower;
 				isJump = true;
 			} else
@@ -582,7 +581,7 @@ public class Player : MonoBehaviour
 				{
 					cntAirJumpNum = AirJumpNum;
 					effectManager.PlayDUM(PlayerIndex, FootPositionObj.transform.position);
-					SoundManager.Get.PlaySE("jump");
+					SoundManager.Get.PlaySE("AirJump");
 					jumpSpeed = GroundJumpPower - (GroundJumpPower / 3);
 					isJump = true;
 				}
@@ -818,10 +817,15 @@ public class Player : MonoBehaviour
 			{
 				isDown = false;
 			}
+			 
 		} else
 		{
 			if (mentalGauge == MentalGaugeMax)
 			{
+				if (!isDown)
+				{
+					animator.SetBool("isDownTrigger", true);
+				}
 				isDown = true;
 			}
 		}
@@ -832,7 +836,7 @@ public class Player : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Q))
 		{
-			mentalGauge += 10;
+			HitBossAttack();
 		}
 		/*
 		Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
@@ -852,29 +856,32 @@ public class Player : MonoBehaviour
 		if (isRespawn)
 		{
 			//Debug.Log(gameObject.name + "がリスポーンした");
-			if (isHoldItem)
+			if (cntInvincibleFrame <= 0)
 			{
-				ReleaseItem();
-			}
-			mentalGauge = 0;
-			rightSpeed = leftSpeed = 0.0f;
-			transform.position = respawnPosition;
-			cntAttackFrame = 0;
-			cntDamageFrame = 0;
-			cntGetItemBlankTime = 0;
-			cntJumpCheckFrame = 0;
-			cntAirJumpNum = 0;
-			jumpSpeed = 0;
-			isAttack = false;
-			isDamage = false;
-			isHoldItem = false;
-			isJump = false;
-			isMove = false;
-			isReleaceItem = false;
-			isDown = false;
-			isAirjumpRotation = false;
+				if (isHoldItem)
+				{
+					ReleaseItem();
+				}
+				mentalGauge = 0;
+				rightSpeed = leftSpeed = 0.0f;
+				transform.position = respawnPosition;
+				cntAttackFrame = 0;
+				cntDamageFrame = 0;
+				cntGetItemBlankTime = 0;
+				cntJumpCheckFrame = 0;
+				cntAirJumpNum = 0;
+				jumpSpeed = 0;
+				isAttack = false;
+				isDamage = false;
+				isHoldItem = false;
+				isJump = false;
+				isMove = false;
+				isReleaceItem = false;
+				isDown = false;
+				isAirjumpRotation = false;
 
-			isRespawn = false;
+				isRespawn = false;
+			}
 		}
 	}
 
@@ -952,5 +959,13 @@ public class Player : MonoBehaviour
 	private void EndAirJumpRotationTrigger()
 	{
 		animator.SetBool("isAirJumpRotationTrigger", false);
+	}
+	private void EndIsDownTrigger()
+	{
+		animator.SetBool("isDownTrigger", false);
+	}
+	private void EndIsInvincibleInDown()
+	{
+		cntInvincibleFrame = 0;
 	}
 }
