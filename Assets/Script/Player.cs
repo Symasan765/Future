@@ -456,6 +456,8 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	/*
+	//ダメージを受けた時の吹っ飛び
 	private void DamageImpact()
 	{
 		if (isDamage)
@@ -494,7 +496,7 @@ public class Player : MonoBehaviour
 			}
 		}
 	}
-
+	*/
 	//移動しているか
 	public bool IsMove()
 	{
@@ -820,7 +822,7 @@ public class Player : MonoBehaviour
 			 
 		} else
 		{
-			if (mentalGauge == MentalGaugeMax)
+			if (mentalGauge >= MentalGaugeMax)
 			{
 				if (!isDown)
 				{
