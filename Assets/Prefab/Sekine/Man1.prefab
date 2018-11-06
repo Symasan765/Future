@@ -716,7 +716,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1180589747255228}
   m_LocalRotation: {x: -0, y: 0.9602182, z: 0.27925083, w: 0}
-  m_LocalPosition: {x: 0.06, y: 1.159, z: -0.49}
+  m_LocalPosition: {x: 0.06, y: 1.4, z: -0.49}
   m_LocalScale: {x: 1, y: 1, z: 0.99999976}
   m_Children: []
   m_Father: {fileID: 4394998209719734}
@@ -910,7 +910,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1181545730777294}
   m_LocalRotation: {x: 0, y: 0.9602182, z: 0.27925083, w: 0}
-  m_LocalPosition: {x: 0.06, y: 1.159, z: -0.49}
+  m_LocalPosition: {x: 0.06, y: 1.4, z: -0.49}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4394998209719734}
@@ -936,7 +936,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1356394232252974}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4000683480150926}
@@ -1299,6 +1299,7 @@ MonoBehaviour:
   AttackCollisionObj: {fileID: 1637487930801148}
   RotateObj: {fileID: 1878250661458648}
   FootPositionObj: {fileID: 1859521185737578}
+  cntCantMoveSec: 0
 --- !u!114 &114782820943902396
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -121,6 +121,7 @@ public class Player : MonoBehaviour
 			cntCantMoveSec -= Time.deltaTime;
 			if (cntCantMoveSec <= 0)
 			{
+				animator.SetBool("isStandUp", false);
 				cntCantMoveSec = 0;
 			}
 		}
@@ -903,7 +904,8 @@ public class Player : MonoBehaviour
 				isAirjumpRotation = false;
 
 				isRespawn = false;
-				cntCantMoveSec = 2;
+				cntCantMoveSec = 3;
+				animator.SetBool("isStandUp", true);
 			}
 		}
 	}
