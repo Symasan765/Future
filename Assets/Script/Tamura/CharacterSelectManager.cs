@@ -57,7 +57,7 @@ public class CharacterSelectManager : MonoBehaviour {
 
             if (!aElement.GetIsCharacterSelected()) {
                 // n番のカーソルの位置を履歴書の顔写真の横に移動
-                aElement.transform.position = portraitList[unselectCharaList[aElement.GetCursorPos()]].arrowPosList[cursorIndex].transform.position;
+                aElement.cursorTransform = Vector3.Lerp(aElement.cursorTransform, portraitList[unselectCharaList[aElement.GetCursorPos()]].arrowPosList[cursorIndex].transform.position, 0.5f);
             }
         }
     }
