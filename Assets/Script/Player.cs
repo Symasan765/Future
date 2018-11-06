@@ -276,7 +276,7 @@ public class Player : MonoBehaviour
 		//アイテムを持った時移動速度を半減(仮)
 		if (isHoldItem)
 		{
-			nowMoveSpeed = DashSpeed / 3 * XPad.Get.GetLeftStick(PlayerIndex).x;
+			nowMoveSpeed = DashSpeed / 2 * XPad.Get.GetLeftStick(PlayerIndex).x;
 		} else
 		{
 			nowMoveSpeed = DashSpeed * XPad.Get.GetLeftStick(PlayerIndex).x;

@@ -123,7 +123,7 @@ public class BazookaRifle : MonoBehaviour
 				Vector3 effpos = new Vector3(BossObj.transform.position.x + Random.Range(-5, 5), BossObj.transform.position.y + Random.Range(-5, 5), BossObj.transform.position.z);
 				effectManager.PlayLightning(effpos);
 			}
-			if (Time.frameCount % (int)Random.Range(10, 20) == 0)
+			if (Time.frameCount % (int)Random.Range(9, 17) == 0)
 			{
 				SoundManager.Get.PlaySE("kanden");
 			}
