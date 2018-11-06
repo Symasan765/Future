@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Item : MonoBehaviour {
 
-	
 	private GameObject bazookaObj = null;
 	private BazookaRifle bazookaRifle = null;
 	private Vector3 getPosition;
@@ -23,14 +22,13 @@ public class Item : MonoBehaviour {
 
 	public GameObject ModelObj;
 
-
 	public bool isScaleDown = false;
 	public bool isHold = false;
 	public bool isFeverEvidence = false;
 
 	private bool isInBazooka = false;
 	private bool isTriggerStay = false;
-	private bool isCheckCreatePosition = false;
+	public bool isCheckCreatePosition = false;
 
 	private float cntScaleDownTime = 0;
 	private float feverFallSec = 0;
@@ -39,6 +37,7 @@ public class Item : MonoBehaviour {
 	private float LifeTime = 2.0f;
 	private float nowLifeTimeMax;
 	private float cntCheckCreatePositionSec = 0;
+
 
 
 	void Start ()
@@ -72,8 +71,17 @@ public class Item : MonoBehaviour {
 
 	void Update ()
 	{
-		transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+		//角度とZ座標を固定
 		transform.eulerAngles = new Vector3(0, 0, 0);
+		transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+		//持たれていない時モデルを回転
+		if (isHold)
+		{
+			ModelObj.transform.localEulerAngles = new Vector3(0, 0, 0);
+		} else
+		{
+			ModelObj.transform.localEulerAngles = new Vector3(0, ModelObj.transform.localEulerAngles.y + 2, 0);
+		}
 		if (rb.velocity.y < -4)
 		{
 			rb.velocity = new Vector3(rb.velocity.x, -4, rb.velocity.z);
@@ -122,7 +130,7 @@ public class Item : MonoBehaviour {
 				//点滅処理
 				if (lifeTime > nowLifeTimeMax / 4 && lifeTime < nowLifeTimeMax / 2)
 				{
-					if (Time.frameCount % 10 >= 5)
+					if (Time.frameCount % 8 > 4)
 					{
 						meshRenderer.enabled = false;
 					} else
@@ -132,7 +140,7 @@ public class Item : MonoBehaviour {
 				}
 				if (lifeTime < nowLifeTimeMax / 4)
 				{
-					if (Time.frameCount % 4 >= 2)
+					if (Time.frameCount % 3 > 1)
 					{
 						meshRenderer.enabled = false;
 					} else
