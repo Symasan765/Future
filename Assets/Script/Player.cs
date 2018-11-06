@@ -601,6 +601,12 @@ public class Player : MonoBehaviour
 				isJump = false;
 			}
 		}
+
+		if (IsOnGround())
+		{
+			cntAirJumpNum = AirJumpNum;
+		}
+
 	}
 
 
