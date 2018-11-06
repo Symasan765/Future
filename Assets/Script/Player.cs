@@ -83,6 +83,7 @@ public class Player : MonoBehaviour
 	private float cntInvincibleFrame = 0;
 	private float cntAirJumpNum = 1;
 	private float cntDamageImpactTime = 0;
+	[SerializeField]private float cntCantMoveSec = 0;
 
 	private Vector3 damageImpactPower;
 	private Vector3 damageImpactSpeed;
@@ -114,6 +115,16 @@ public class Player : MonoBehaviour
 		animator.SetBool("isDamage", isDamage);
 		animator.SetBool("isOnGround", IsOnGround());
 
+		//操作不能時間のカウント
+		if (cntCantMoveSec > 0)
+		{
+			cntCantMoveSec -= Time.deltaTime;
+			if (cntCantMoveSec <= 0)
+			{
+				cntCantMoveSec = 0;
+			}
+		}
+
 		if (IsOnGround())
 		{
 			isOnCollisionStay = false;
@@ -129,23 +140,25 @@ public class Player : MonoBehaviour
 		{
 			if (!isDamage)
 			{
-				InBazookaRange();
-				RescuePlayer();
-				if (XPad.Get.GetRelease(XPad.KeyData.A, PlayerIndex))
+				if (CanIMove())
 				{
-					if (isHoldItem)
+					InBazookaRange();
+					RescuePlayer();
+					if (XPad.Get.GetRelease(XPad.KeyData.A, PlayerIndex))
 					{
-						isReleaceItem = true;
+						if (isHoldItem)
+						{
+							isReleaceItem = true;
+						}
 					}
+
+					if (isReleaceItem)
+					{
+						ReleaseItem();
+					}
+
+					SerchItem();
 				}
-
-				if (isReleaceItem)
-				{
-					ReleaseItem();
-				}
-
-				SerchItem();
-
 				//無敵フレームのカウント
 				if (cntInvincibleFrame > 0)
 				{
@@ -175,9 +188,9 @@ public class Player : MonoBehaviour
 
 		if (!IsDown() && !isRescue)
 		{
-			if (!isDamage && cntAttackFrame == 0 && cntGetItemBlankTime == 0)
+			if (!isDamage && cntAttackFrame == 0 && cntGetItemBlankTime == 0 && CanIMove())
 			{
-				Move();
+				Move();	
 			}
 
 			Jump();
@@ -402,6 +415,7 @@ public class Player : MonoBehaviour
 			cntGetItemBlankTime = 0;
 			XPad.Get.SetVibration(PlayerIndex, 1.0f, 1.0f, 0.5f);
 			cntDamageFrame = DamageSec;
+			cntCantMoveSec = DamageSec;
 			cntAttackFrame = 0;
 			isDamage = true;
 			isRescue = false;
@@ -548,7 +562,7 @@ public class Player : MonoBehaviour
 		}
 
 		//空中ジャンプ
-		if (holdItemJump && !IsOnGround() && cntAirJumpNum > 0 && !isAttack && !isDamage)
+		if (holdItemJump && !IsOnGround() && cntAirJumpNum > 0 && !isAttack && !isDamage && CanIMove())
 		{
 			if (XPad.Get.GetTrigger(XPad.KeyData.X, PlayerIndex))
 			{
@@ -563,7 +577,7 @@ public class Player : MonoBehaviour
 			}
 		}
 		//地上ジャンプの処理
-		if (IsOnGround() && !isJump && !isAttack && !isDamage)
+		if (IsOnGround() && !isJump && !isAttack && !isDamage && CanIMove())
 		{
 			if (XPad.Get.GetPress(XPad.KeyData.X, PlayerIndex))
 			{
@@ -889,8 +903,19 @@ public class Player : MonoBehaviour
 				isAirjumpRotation = false;
 
 				isRespawn = false;
+				cntCantMoveSec = 2;
 			}
 		}
+	}
+
+	//今移動可能かどうかを返す
+	public bool CanIMove()
+	{
+		if (cntCantMoveSec > 0)
+		{
+			return false;
+		}
+		return true;
 	}
 
 	//ダメージを受けた瞬間を返す
