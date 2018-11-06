@@ -17,12 +17,18 @@ public class Arrow : MonoBehaviour {
 
     bool startGameflg;          // 開始決定フラグ
 
+    public Vector3 cursorTransform;
+    Vector3 cursorAnimateTransform;
+
+    float animAngle;
 
     // 初期化
     void Awake() {
         inputDelay = 0;
         cursorPos = 0;
         csManager = FindObjectOfType<CharacterSelectManager>();
+
+        animAngle = 0.0f/* + playerIndex * 1.0f*/;
     }
 
     void Update() {
@@ -30,6 +36,7 @@ public class Arrow : MonoBehaviour {
         if (!isCharacterSelected) {
             MoveCursor();
             SelectCharacter();
+            AnimateCursor();
         }
         // キャラ選択済みなら
         else {
@@ -95,6 +102,17 @@ public class Arrow : MonoBehaviour {
                 startGameflg = true;
             }
         }
+    }
+
+    // カーソルのアニメーション(左右)
+    void AnimateCursor() {
+        float range = 0.25f;
+        float xSpeed = 0.2f; /*+ Random.Range(-0.1f, 0.1f);*/
+
+        cursorAnimateTransform = new Vector3(Mathf.Sin(animAngle) * range, 0.0f, 0.0f);
+
+        animAngle += xSpeed;
+        this.transform.position = cursorTransform + cursorAnimateTransform;
     }
 
     public bool GetIsCharacterSelected() {
