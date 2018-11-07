@@ -22,6 +22,8 @@ public class Arrow : MonoBehaviour {
 
     float animAngle;
 
+    public bool canSelect;
+
     // 初期化
     void Awake() {
         inputDelay = 0;
@@ -81,7 +83,7 @@ public class Arrow : MonoBehaviour {
 
     // キャラ選択
     void SelectCharacter() {
-        if (XPad.Get.GetTrigger(XPad.KeyData.A, playerIndex)) {
+        if (XPad.Get.GetTrigger(XPad.KeyData.A, playerIndex) && canSelect) {
             csManager.SelectCharater(playerIndex, cursorPos);
         }
     }
