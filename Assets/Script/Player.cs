@@ -763,6 +763,7 @@ public class Player : MonoBehaviour
 			//Debug.Log(gameObject.name + "がリスポーンした");
 			if (cntInvincibleSec <= 0)
 			{
+				effectManager.PlayDown(new Vector3(transform.position.x, transform.position.y, -2));
 				if (isHoldItem)
 				{
 					ReleaseItem();
@@ -770,6 +771,7 @@ public class Player : MonoBehaviour
 				mentalGauge = 0;
 				rightSpeed = leftSpeed = 0.0f;
 				transform.position = respawnPosition;
+				effectManager.PlayRespawnHeart(new Vector3(transform.position.x, transform.position.y, -2));
 				cntDamageSec = 0;
 				cntGetItemBlankSec = 0;
 				cntJumpCheckSec = 0;

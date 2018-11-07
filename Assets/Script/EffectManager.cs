@@ -14,11 +14,27 @@ public class EffectManager : MonoBehaviour {
 	public GameObject EffectFEVER;
 	public GameObject EffectSMASH;
 	public GameObject EffectLightning;
+	public GameObject EffectDown;
+	public GameObject EffectRespawnHeart;
 
 	private ParticleSystem psDelete;
 	private ParticleSystem psCreateEvidence;
 	private ParticleSystem psExplosion;
 	private ParticleSystem psLightning;
+	private ParticleSystem psDown;
+	private ParticleSystem psRespawnHeart;
+
+	public void PlayRespawnHeart(Vector3 _pos)
+	{
+		psRespawnHeart = Instantiate(EffectRespawnHeart, _pos, transform.rotation).GetComponent<ParticleSystem>();
+		psRespawnHeart.Play();
+	}
+
+	public void PlayDown(Vector3 _pos)
+	{
+		psDown = Instantiate(EffectDown, _pos, transform.rotation).GetComponent<ParticleSystem>();
+		psDown.Play();
+	}
 
 	public void PlayLightning(Vector3 _pos)
 	{
