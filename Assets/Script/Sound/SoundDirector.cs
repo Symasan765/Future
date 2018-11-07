@@ -32,6 +32,15 @@ public class SoundDirector : MonoBehaviour {
 		m_BossInitHp = m_BossManager.m_BossMaxDamage;
 		m_BossHP = m_BossInitHp;
 
+		Init(out m_FeverStartBGM, transform.Find("FeverStart"));
+		Init(out m_FeverMiddleBGM, transform.Find("FeverMiddle"));
+		Init(out m_FeverEndBGM, transform.Find("FeverEnd"));
+
+		Init(out m_BossStartBGM, transform.Find("BossStart"));
+		Init(out m_BossMiddleBGM, transform.Find("BossMiddle"));
+		Init(out m_BossEndBGM, transform.Find("BossEnd"));
+
+
 		if (m_FeverStartBGM.Length == 0)
 			Debug.LogError("BGMが登録されてない");
 		if (m_FeverMiddleBGM.Length == 0)
@@ -45,6 +54,17 @@ public class SoundDirector : MonoBehaviour {
 			Debug.LogError("BGMが登録されてない");
 		if (m_BossEndBGM.Length == 0)
 			Debug.LogError("BGMが登録されてない");
+	}
+
+	private void Init(out GameObject[] objs,Transform child)
+	{
+		int num = child.childCount;
+		objs = new GameObject[num];
+
+		for(int i = 0; i < num; i++)
+		{
+			objs[i] = child.transform.GetChild(i).gameObject;
+		}
 	}
 	
 	public AudioSource NextBGM()
