@@ -36,14 +36,12 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private float DamageSec = 40;
 
-	private float AttackSec = 0.5f;		//攻撃持続フレーム
 	private float GetItemBlankSec = 0.25f;	//アイテムを持つ&捨てる時の硬直フレーム
 	private float CanHoldItemDistance = 1.0f;	//机を運べるようになる範囲
 	
 	private int mentalGauge = 0;
 	private bool isJump = false;
 	[SerializeField]private bool isHoldItem = false;
-	private bool isAttack = false;
 	private bool isDamage = false;
 	private bool isMove = false;
 	private bool isRespawn = false;
@@ -57,7 +55,6 @@ public class Player : MonoBehaviour
 
 	public GameObject[] EffectSweatObj = new GameObject[2];
 	public GameObject ItemPosition;
-	public GameObject AttackCollisionObj;
 	public GameObject RotateObj;
 	public GameObject FootPositionObj;
 
@@ -76,19 +73,14 @@ public class Player : MonoBehaviour
 	private float leftSpeed;
 	private float jumpSpeed;
 	private float cntGetItemBlankTime = 0;
-	private float cntAttackFrame = 0;
 	private float cntDamageFrame = 0;
 	private float cntJumpCheckFrame = 0;
 	private float cntJumpTriggerFrame = 0;
 	private float cntInvincibleFrame = 0;
 	private float cntAirJumpNum = 1;
 	private float cntDamageImpactTime = 0;
-	[SerializeField]private float cntCantMoveSec = 0;
+	private float cntCantMoveSec = 0;
 
-	private Vector3 damageImpactPower;
-	private Vector3 damageImpactSpeed;
-	private Vector3 holdDeskDirction;	//机を持った時の移動方向
-	private Vector3 oldLeftStick;
 	private Vector3 respawnPosition;
 	private float rotationValue = 0;
 	private float dashBrakeSpeed = 1.0f;
@@ -189,7 +181,7 @@ public class Player : MonoBehaviour
 
 		if (!IsDown() && !isRescue)
 		{
-			if (!isDamage && cntAttackFrame == 0 && cntGetItemBlankTime == 0 && CanIMove())
+			if (!isDamage && cntGetItemBlankTime == 0 && CanIMove())
 			{
 				Move();	
 			}
@@ -317,8 +309,6 @@ public class Player : MonoBehaviour
 		{
 			this.transform.Translate(Vector3.forward * angleValue * Time.deltaTime * (rightSpeed + leftSpeed));
 		}
-
-		oldLeftStick = LeftStick;
 	}
 
 	//向きごとに速度をセットする
@@ -331,54 +321,6 @@ public class Player : MonoBehaviour
 		if (_angleValue == -1)
 		{
 			leftSpeed = _speed * -1;
-		}
-	}
-
-	//攻撃開始
-	private void AttackStart()
-	{
-		if (cntGetItemBlankTime == 0 && !isJump && !isAttack && !isHoldItem && !isRescue)
-		{
-			XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
-			BoxCollider col = AttackCollisionObj.GetComponent<BoxCollider>();
-			col.enabled = true;
-			cntAttackFrame = AttackSec;
-			isAttack = true;
-			rightSpeed = leftSpeed = 0.0f;
-		}
-	}
-
-	//攻撃処理
-	private void Attack()
-	{
-		if (isAttack)
-		{
-			cntAttackFrame -= Time.deltaTime;
-			if (cntAttackFrame <= 0 || isHoldItem)
-			{
-				BoxCollider col = AttackCollisionObj.GetComponent<BoxCollider>();
-				col.enabled = false;
-				isAttack = false;
-				cntAttackFrame = 0;
-			}
-		}
-		if (cntAttackFrame == 1)
-		{
-			animator.SetBool("isAttack", true);
-		} else
-		{
-			animator.SetBool("isAttack", false);
-		}
-	}
-
-	//攻撃が敵にヒットした
-	public void HitPlayerAttack()
-	{
-		XPad.Get.SetVibration(PlayerIndex, 0.7f, 0.7f, 0.2f);
-		mentalGauge -= Random.Range(20, 40);
-		if (mentalGauge < 0)
-		{
-			mentalGauge = 0;
 		}
 	}
 
@@ -407,7 +349,6 @@ public class Player : MonoBehaviour
 			isAirjumpRotation = false;
 
 			cntDamageImpactTime = 0.1f;
-			damageImpactPower = new Vector3(2 * angleValue, 6, 0);
 
 			EndAirJumpRotationTrigger();
 
@@ -417,7 +358,6 @@ public class Player : MonoBehaviour
 			XPad.Get.SetVibration(PlayerIndex, 1.0f, 1.0f, 0.5f);
 			cntDamageFrame = DamageSec;
 			cntCantMoveSec = DamageSec;
-			cntAttackFrame = 0;
 			isDamage = true;
 			isRescue = false;
 			mentalGauge += Random.Range(5, 15);
@@ -471,47 +411,6 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	/*
-	//ダメージを受けた時の吹っ飛び
-	private void DamageImpact()
-	{
-		if (isDamage)
-		{
-			if (damageImpactPower.x != 0)
-			{
-				rb.MovePosition(rb.position + Vector3.right * Time.deltaTime * damageImpactPower.x * (angleValue * -1));
-				if (damageImpactPower.x > 0)
-				{
-					damageImpactPower.x -= 0.05f;
-					if (damageImpactPower.x <= 0)
-					{
-						damageImpactPower.x = 0;
-					}
-				}
-				if (damageImpactPower.x < 0)
-				{
-					damageImpactPower.x += 0.05f;
-					if (damageImpactPower.x >= 0)
-					{
-						damageImpactPower.x = 0;
-					}
-				}
-			}
-			if (damageImpactPower.y != 0)
-			{
-				rb.MovePosition(rb.position + Vector3.up * Time.deltaTime * damageImpactPower.y);
-				if (damageImpactPower.y > 0)
-				{
-					damageImpactPower.y -= 0.05f;
-					if (damageImpactPower.y <= 0)
-					{
-						damageImpactPower.y = 0;
-					}
-				}
-			}
-		}
-	}
-	*/
 	//移動しているか
 	public bool IsMove()
 	{
@@ -544,7 +443,6 @@ public class Player : MonoBehaviour
 	//ジャンプ中
 	private void Jump()
 	{
-		//animator.SetBool("isAirJumpRotationTrigger", false);
 		animator.SetBool("isAirJumpRotation", isAirjumpRotation);
 
 		bool holdItemJump = false;
@@ -563,7 +461,7 @@ public class Player : MonoBehaviour
 		}
 
 		//空中ジャンプ
-		if (holdItemJump && !IsOnGround() && cntAirJumpNum > 0 && !isAttack && !isDamage && CanIMove())
+		if (holdItemJump && !IsOnGround() && cntAirJumpNum > 0 && !isDamage && CanIMove())
 		{
 			if (XPad.Get.GetTrigger(XPad.KeyData.X, PlayerIndex))
 			{
@@ -578,7 +476,7 @@ public class Player : MonoBehaviour
 			}
 		}
 		//地上ジャンプの処理
-		if (IsOnGround() && !isJump && !isAttack && !isDamage && CanIMove())
+		if (IsOnGround() && !isJump && !isDamage && CanIMove())
 		{
 			if (XPad.Get.GetPress(XPad.KeyData.X, PlayerIndex))
 			{
@@ -643,7 +541,7 @@ public class Player : MonoBehaviour
 			animator.SetBool("isGetItem", false);
 		}
 
-		if (!isRescue && !isAttack && !isHoldItem && cntGetItemBlankTime == 0)
+		if (!isRescue && !isHoldItem && cntGetItemBlankTime == 0)
 		{
 			RaycastHit hit;
 			Physics.Raycast(itemPositon, transform.forward, out hit, CanHoldItemDistance);
@@ -779,7 +677,7 @@ public class Player : MonoBehaviour
 		{
 			isRescue = false;
 		}
-		if (!isAttack && !isHoldItem && cntGetItemBlankTime == 0)
+		if (!isHoldItem && cntGetItemBlankTime == 0)
 		{
 			RaycastHit hit;
 			Physics.Raycast(itemPositon, transform.forward, out hit, CanHoldItemDistance);
@@ -888,13 +786,11 @@ public class Player : MonoBehaviour
 				mentalGauge = 0;
 				rightSpeed = leftSpeed = 0.0f;
 				transform.position = respawnPosition;
-				cntAttackFrame = 0;
 				cntDamageFrame = 0;
 				cntGetItemBlankTime = 0;
 				cntJumpCheckFrame = 0;
 				cntAirJumpNum = 0;
 				jumpSpeed = 0;
-				isAttack = false;
 				isDamage = false;
 				isHoldItem = false;
 				isJump = false;
