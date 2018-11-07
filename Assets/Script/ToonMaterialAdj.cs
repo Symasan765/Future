@@ -11,7 +11,7 @@ public class ToonMaterialAdj : MonoBehaviour
 	public float m_MinDistance = 1.0f;
 	public float m_MaxDistance = 11.0f;
 	public float m_MinWidth = 3.0f;
-	public float m_MaxWidth = 100.0f;
+	public float m_MaxWidth = 50.0f;
 
 	public float m_FlashingSec = 0.1f;
 
