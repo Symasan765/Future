@@ -1489,8 +1489,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MinDistance: 1
   m_MaxDistance: 11
-  m_MinWidth: 3
-  m_MaxWidth: 50
+  m_MinWidth: 0
+  m_MaxWidth: 0
   m_FlashingSec: 0.1
   m_PlayerColor:
   - {r: 0, g: 0, b: 0, a: 0}

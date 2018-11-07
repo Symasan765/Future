@@ -475,7 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 2
-  m_SelectAttackNo: 0
+  m_SelectAttackNo: 
 --- !u!23 &155292035
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -799,7 +799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 6
-  m_SelectAttackNo: 2
+  m_SelectAttackNo: 
 --- !u!23 &194596494
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -903,7 +903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 3
-  m_SelectAttackNo: 0
+  m_SelectAttackNo: 
 --- !u!23 &209913404
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1239,7 +1239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 10
-  m_SelectAttackNo: 3
+  m_SelectAttackNo: 
 --- !u!23 &265809750
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1969,7 +1969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 1
-  m_SelectAttackNo: 0
+  m_SelectAttackNo: 
 --- !u!23 &493349986
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2620,7 +2620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 5
-  m_SelectAttackNo: 1
+  m_SelectAttackNo: 
 --- !u!23 &646580624
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2814,7 +2814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 8
-  m_SelectAttackNo: 2
+  m_SelectAttackNo: 
 --- !u!23 &708784759
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2918,7 +2918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 7
-  m_SelectAttackNo: 2
+  m_SelectAttackNo: 
 --- !u!23 &732626487
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3022,7 +3022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 9
-  m_SelectAttackNo: 3
+  m_SelectAttackNo: 
 --- !u!23 &759136044
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3216,7 +3216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 1
-  m_SelectAttackNo: 0
+  m_SelectAttackNo: 
 --- !u!23 &798752142
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3519,6 +3519,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1096030790}
     m_Modifications:
+    - target: {fileID: 114797855458948158, guid: c254c0772521d9b4cbc92cccee934835,
+        type: 2}
+      propertyPath: m_SelectAttackNo.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4386588756161456, guid: c254c0772521d9b4cbc92cccee934835, type: 2}
       propertyPath: m_LocalPosition.x
       value: -3.5
@@ -3842,7 +3847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 2
-  m_SelectAttackNo: 0
+  m_SelectAttackNo: 
 --- !u!23 &1000297088
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4684,7 +4689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 8
-  m_SelectAttackNo: 2
+  m_SelectAttackNo: 
 --- !u!23 &1294455584
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4788,7 +4793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 3
-  m_SelectAttackNo: 0
+  m_SelectAttackNo: 
 --- !u!23 &1294986295
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5360,7 +5365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 11
-  m_SelectAttackNo: 3
+  m_SelectAttackNo: 
 --- !u!23 &1457922856
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5642,7 +5647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 4
-  m_SelectAttackNo: 1
+  m_SelectAttackNo: 
 --- !u!23 &1512900665
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6704,7 +6709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 0
-  m_SelectAttackNo: 0
+  m_SelectAttackNo: 
 --- !u!23 &1797136247
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6939,7 +6944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 0
-  m_SelectAttackNo: 0
+  m_SelectAttackNo: 
 --- !u!23 &1859538626
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7271,7 +7276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 6
-  m_SelectAttackNo: 2
+  m_SelectAttackNo: 
 --- !u!23 &2018891178
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7644,7 +7649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 7
-  m_SelectAttackNo: 2
+  m_SelectAttackNo: 
 --- !u!23 &2109341856
 MeshRenderer:
   m_ObjectHideFlags: 0
