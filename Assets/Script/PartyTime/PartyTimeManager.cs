@@ -52,9 +52,9 @@ public class PartyTimeManager : MonoBehaviour {
 
 		if (soundDirector != null)
 		{
-			m_NowBGM = Instantiate(m_PlayerAudioPrefab).GetComponent<AudioSource>();
-			m_NowBGM.Stop();
 			m_NextBGM = soundDirector.NextBGM();
+			m_NextBGM.Play();
+			Debug.Log("再生" + m_NextBGM.gameObject.name);
 		}
 		else
 		{

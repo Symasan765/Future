@@ -22,7 +22,7 @@ public class SoundDirector : MonoBehaviour {
 	int m_BossMiddleCnt = 0;
 	int m_BossEndCnt = 0;
 
-	bool EnemyAttack = true;	// ボスの攻撃からスタート
+	bool EnemyAttack = true;
 	float m_BossHP = 0;
 	float m_BossInitHp = 0;
 
