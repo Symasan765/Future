@@ -46,10 +46,10 @@ public class Player : MonoBehaviour
 	private bool isMove = false;
 	private bool isRespawn = false;
 	private bool isDown = false;
-	private bool isRescue = false;
 	private bool isOnCollisionStay = false;
 	private bool isAirjumpRotation = false;
 	private bool isReleaceItem = false;
+	private bool isStandUp;
 
 	private int angleValue = 1;
 
@@ -72,13 +72,12 @@ public class Player : MonoBehaviour
 	private float rightSpeed;
 	private float leftSpeed;
 	private float jumpSpeed;
-	private float cntGetItemBlankTime = 0;
-	private float cntDamageFrame = 0;
-	private float cntJumpCheckFrame = 0;
-	private float cntJumpTriggerFrame = 0;
-	private float cntInvincibleFrame = 0;
+	private float cntGetItemBlankSec = 0;
+	private float cntDamageSec = 0;
+	private float cntJumpCheckSec = 0;
+	private float cntJumpTriggerSec = 0;
+	private float cntInvincibleSec = 0;
 	private float cntAirJumpNum = 1;
-	private float cntDamageImpactTime = 0;
 	private float cntCantMoveSec = 0;
 
 	private Vector3 respawnPosition;
@@ -103,7 +102,7 @@ public class Player : MonoBehaviour
 	
 	void Update ()
 	{
-		animator.SetFloat("cntGetItemBlankTime", cntGetItemBlankTime);
+		animator.SetFloat("cntGetItemBlankTime", cntGetItemBlankSec);
 		animator.SetBool("isDamage", isDamage);
 		animator.SetBool("isOnGround", IsOnGround());
 
@@ -113,6 +112,7 @@ public class Player : MonoBehaviour
 			cntCantMoveSec -= Time.deltaTime;
 			if (cntCantMoveSec <= 0)
 			{
+				isStandUp = false;
 				animator.SetBool("isStandUp", false);
 				cntCantMoveSec = 0;
 			}
@@ -136,7 +136,6 @@ public class Player : MonoBehaviour
 				if (CanIMove())
 				{
 					InBazookaRange();
-					RescuePlayer();
 					if (XPad.Get.GetRelease(XPad.KeyData.A, PlayerIndex))
 					{
 						if (isHoldItem)
@@ -153,12 +152,12 @@ public class Player : MonoBehaviour
 					SerchItem();
 				}
 				//無敵フレームのカウント
-				if (cntInvincibleFrame > 0)
+				if (cntInvincibleSec > 0)
 				{
-					cntInvincibleFrame -= Time.deltaTime;
-					if (cntInvincibleFrame <= 0)
+					cntInvincibleSec -= Time.deltaTime;
+					if (cntInvincibleSec <= 0)
 					{
-						cntInvincibleFrame = 0;
+						cntInvincibleSec = 0;
 					}
 				}
 			} else
@@ -177,13 +176,13 @@ public class Player : MonoBehaviour
     void FixedUpdate()
 	{
 		//DamageImpact();
-		Fall();
 
-		if (!IsDown() && !isRescue)
+		if (!IsDown())
 		{
-			if (!isDamage && cntGetItemBlankTime == 0 && CanIMove())
+			if (!isDamage && cntGetItemBlankSec == 0 && CanIMove())
 			{
-				Move();	
+				Move();
+				Fall();
 			}
 
 			Jump();
@@ -345,34 +344,31 @@ public class Player : MonoBehaviour
 				isJump = false;
 				jumpSpeed = 0;
 			}
-			cntJumpCheckFrame = 0;
+			cntJumpCheckSec = 0;
 			isAirjumpRotation = false;
-
-			cntDamageImpactTime = 0.1f;
 
 			EndAirJumpRotationTrigger();
 
 			//左右移動速度を0に
 			rightSpeed = leftSpeed = 0.0f;
-			cntGetItemBlankTime = 0;
+			cntGetItemBlankSec = 0;
 			XPad.Get.SetVibration(PlayerIndex, 1.0f, 1.0f, 0.5f);
-			cntDamageFrame = DamageSec;
+			cntDamageSec = DamageSec;
 			cntCantMoveSec = DamageSec;
 			isDamage = true;
-			isRescue = false;
 			mentalGauge += Random.Range(5, 15);
 			if (mentalGauge > MentalGaugeMax)
 			{
 				mentalGauge = MentalGaugeMax;
 			}
-			cntInvincibleFrame = InvincibleSec;
+			cntInvincibleSec = InvincibleSec;
 		}
 	}
 
 	//無敵時間かどうかを返す
 	public bool IsInvincible()
 	{
-		if (cntInvincibleFrame > 0)
+		if (cntInvincibleSec > 0)
 		{
 			return true;
 		}
@@ -401,10 +397,10 @@ public class Player : MonoBehaviour
 	{
 		isMove = false;
 		rb.velocity = Vector3.zero;
-		if (cntDamageFrame > 0)
+		if (cntDamageSec > 0)
 		{
-			cntDamageFrame -= Time.deltaTime;
-			if (cntDamageFrame <= 0)
+			cntDamageSec -= Time.deltaTime;
+			if (cntDamageSec <= 0)
 			{
 				isDamage = false;
 			}
@@ -480,10 +476,10 @@ public class Player : MonoBehaviour
 		{
 			if (XPad.Get.GetPress(XPad.KeyData.X, PlayerIndex))
 			{
-				cntJumpCheckFrame += Time.deltaTime;
+				cntJumpCheckSec += Time.deltaTime;
 			}
 
-			if (cntJumpCheckFrame >= 0.1f)
+			if (cntJumpCheckSec >= 0.1f)
 			{
 				cntAirJumpNum = AirJumpNum;
 				effectManager.PlayDUM(PlayerIndex, FootPositionObj.transform.position);
@@ -510,7 +506,7 @@ public class Player : MonoBehaviour
 			jumpSpeed -= Gravity * JumpSpeed;
 			if (jumpSpeed <= 0)
 			{
-				cntJumpCheckFrame = 0;
+				cntJumpCheckSec = 0;
 				isJump = false;
 			}
 		}
@@ -528,20 +524,20 @@ public class Player : MonoBehaviour
 	{
 		Vector3 itemPositon = new Vector3(transform.position.x, ItemPosition.transform.position.y, transform.position.z);
 		//Debug.DrawRay(itemPositon, transform.forward * CanHoldItemDistance, Color.blue);
-		if (cntGetItemBlankTime > 0)
+		if (cntGetItemBlankSec > 0)
 		{
 			animator.SetBool("isGetItem", true);
-			cntGetItemBlankTime -= Time.deltaTime;
-			if (cntGetItemBlankTime <= 0)
+			cntGetItemBlankSec -= Time.deltaTime;
+			if (cntGetItemBlankSec <= 0)
 			{
-				cntGetItemBlankTime = 0;
+				cntGetItemBlankSec = 0;
 			}
 		} else
 		{
 			animator.SetBool("isGetItem", false);
 		}
 
-		if (!isRescue && !isHoldItem && cntGetItemBlankTime == 0)
+		if (!isHoldItem && cntGetItemBlankSec == 0)
 		{
 			RaycastHit hit;
 			Physics.Raycast(itemPositon, transform.forward, out hit, CanHoldItemDistance);
@@ -579,7 +575,7 @@ public class Player : MonoBehaviour
 				rightSpeed = leftSpeed = 0.0f;
 				XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
 				getItemObj = _itemObj.gameObject;
-				cntGetItemBlankTime = GetItemBlankSec;
+				cntGetItemBlankSec = GetItemBlankSec;
 				isHoldItem = true;
 				_itemObj.transform.parent = transform;
 				Rigidbody itemRb = _itemObj.GetComponent<Rigidbody>();
@@ -599,7 +595,7 @@ public class Player : MonoBehaviour
 	public void ChangeItemParent(GameObject _newParentObj)
 	{
 		isHoldItem = false;
-		cntGetItemBlankTime = GetItemBlankSec;
+		cntGetItemBlankSec = GetItemBlankSec;
 		getItemObj.transform.parent = _newParentObj.transform;
 		getItemObj = null;
 	}
@@ -615,7 +611,7 @@ public class Player : MonoBehaviour
 			isHoldItem = true;
 			getItemObj = player.getItemObj;
 			player.ChangeItemParent(this.gameObject);
-			cntGetItemBlankTime = GetItemBlankSec;
+			cntGetItemBlankSec = GetItemBlankSec;
 			rightSpeed = leftSpeed = 0.0f;
 
 			if (player.transform.position.x > transform.position.x)
@@ -639,7 +635,7 @@ public class Player : MonoBehaviour
 				SoundManager.Get.PlaySE("releace");
 				XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
 				getItemObj.transform.parent = null;
-				cntGetItemBlankTime = GetItemBlankSec;
+				cntGetItemBlankSec = GetItemBlankSec;
 				isHoldItem = false;
 				Rigidbody itemRb = getItemObj.GetComponent<Rigidbody>();
 				Item item = getItemObj.GetComponent<Item>();
@@ -669,6 +665,7 @@ public class Player : MonoBehaviour
 	}
 
 	//他プレイヤーを助ける
+	/*
 	private void RescuePlayer()
 	{
 		animator.SetBool("isRescue", isRescue);
@@ -697,7 +694,7 @@ public class Player : MonoBehaviour
 				}
 			}
 		}
-	}
+	}*/
 
 	//汗のエフェクト
 	private void PlayEffect()
@@ -733,11 +730,6 @@ public class Player : MonoBehaviour
 	{
 		if (IsDown())
 		{
-			isRescue = false;
-			if (mentalGauge < MentalGaugeMax / 2)
-			{
-				isDown = false;
-			}
 			 
 		} else
 		{
@@ -759,14 +751,6 @@ public class Player : MonoBehaviour
 		{
 			HitBossAttack();
 		}
-		/*
-		Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-
-		//カメラより下に移動した
-		if (pos.y < 0)
-		{
-			isRespawn = true;
-		}*/
 
 		//メンタルゲージがMAXになった時リスポン
 		if (mentalGauge >= MentalGaugeMax)
@@ -777,7 +761,7 @@ public class Player : MonoBehaviour
 		if (isRespawn)
 		{
 			//Debug.Log(gameObject.name + "がリスポーンした");
-			if (cntInvincibleFrame <= 0)
+			if (cntInvincibleSec <= 0)
 			{
 				if (isHoldItem)
 				{
@@ -786,9 +770,9 @@ public class Player : MonoBehaviour
 				mentalGauge = 0;
 				rightSpeed = leftSpeed = 0.0f;
 				transform.position = respawnPosition;
-				cntDamageFrame = 0;
-				cntGetItemBlankTime = 0;
-				cntJumpCheckFrame = 0;
+				cntDamageSec = 0;
+				cntGetItemBlankSec = 0;
+				cntJumpCheckSec = 0;
 				cntAirJumpNum = 0;
 				jumpSpeed = 0;
 				isDamage = false;
@@ -800,7 +784,9 @@ public class Player : MonoBehaviour
 				isAirjumpRotation = false;
 
 				isRespawn = false;
+				cntInvincibleSec = 3;
 				cntCantMoveSec = 3;
+				isStandUp = true;
 				animator.SetBool("isStandUp", true);
 			}
 		}
@@ -819,7 +805,7 @@ public class Player : MonoBehaviour
 	//ダメージを受けた瞬間を返す
 	public bool IsDamageTrigger()
 	{
-		if (cntDamageFrame == DamageSec)
+		if (cntDamageSec == DamageSec)
 		{
 			return true;
 		}
@@ -897,6 +883,6 @@ public class Player : MonoBehaviour
 	}
 	private void EndIsInvincibleInDown()
 	{
-		cntInvincibleFrame = 0;
+		cntInvincibleSec = 0;
 	}
 }
