@@ -91,10 +91,7 @@ public class PartyTimeManager : MonoBehaviour {
 
 	void BossAttackTurn()
 	{
-		if (XPad.Get.GetTrigger(XPad.KeyData.UP,0))
-		{
-			SwitchState(PartyState.PlayerAttack);
-		}
+		
 	}
 
 	void PlayerAttackTurn()
