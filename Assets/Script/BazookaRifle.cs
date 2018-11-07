@@ -125,7 +125,7 @@ public class BazookaRifle : MonoBehaviour
 			}
 			if (Time.frameCount % (int)Random.Range(9, 17) == 0)
 			{
-				SoundManager.Get.PlaySE("kanden");
+				SoundManager.Get.PlaySE("kanden", 0.25f);
 			}
 		}
 	}
@@ -147,8 +147,8 @@ public class BazookaRifle : MonoBehaviour
 					ShakeCamera.Impact(0.03f, 0.2f);
 					Vector3 effpos = new Vector3(BossObj.transform.position.x + Random.Range(-5, 5), BossObj.transform.position.y + Random.Range(-5, 5), BossObj.transform.position.z);
 					effectManager.PlayExplosion(effpos);
-					SoundManager.Get.PlaySE("BulletHit1");
-					SoundManager.Get.PlaySE("BulletHit2");
+					SoundManager.Get.PlaySE("BulletHit1",0.35f);
+					SoundManager.Get.PlaySE("BulletHit2",0.35f);
 				}
 			}
 		}
@@ -170,8 +170,8 @@ public class BazookaRifle : MonoBehaviour
 		}
 		cntExplosionSec = ExplosionSec + 1;
 		effectManager.PlayExplosion(_hitPos);
-		SoundManager.Get.PlaySE("BulletHit1");
-		SoundManager.Get.PlaySE("BulletHit2");
+		SoundManager.Get.PlaySE("BulletHit1",0.7f);
+		SoundManager.Get.PlaySE("BulletHit2",0.7f);
 		ShakeCamera.Impact(0.05f, 1.0f);
 		bossAttackManager.BossDamage(5);
 	}
@@ -183,7 +183,7 @@ public class BazookaRifle : MonoBehaviour
 			XPad.Get.SetVibration(i, 0.7f, 0.7f, 0.2f);
 		}
 		ShakeCamera.Impact(0.05f, 0.5f);
-		SoundManager.Get.PlaySE("launcher2");
+		SoundManager.Get.PlaySE("launcher2",0.8f);
 		GameObject obj = Instantiate(EffectObj, transform.position, transform.rotation);
 		particleSystem = obj.GetComponent<ParticleSystem>();
 		particleSystem.Play();
