@@ -127,7 +127,7 @@ public class PartyTimeManager : MonoBehaviour {
 			m_SkyTimeSec += Time.deltaTime;
 			if (m_SkyTimeSec > SkyChangeTime)
 			{
-
+				m_NowBGM.Stop();
 			}
 		}
 	}
@@ -145,10 +145,12 @@ public class PartyTimeManager : MonoBehaviour {
 
 	void AudioSwitch()
 	{
+		// Nowがこの関数を呼んだあとにイチから音量が下がっていく
+		// Nextがこの関数を呼んだあとにゼロから音量が上がっていく
 		AudioSource tmp = m_NowBGM;
 		m_NowBGM = m_NextBGM;
-		m_NextBGM = tmp;
-		m_NextBGM.Stop();
+		m_NextBGM = tmp;        // TODO ここにサウンドマネージャーによるサウンド変更機能を追加する
+		m_NextBGM.Stop();			// こいつは↑が終われば不要
 		m_NextBGM.Play();
 	}
 

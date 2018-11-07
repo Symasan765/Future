@@ -31,12 +31,22 @@ public class BossAttackManager : MonoBehaviour
 
 	BossAttackManager m_This;
 
+	public enum BossCondition
+	{
+		Margin,     // ボス余裕
+		Spicy,      //ボス辛い
+		Dying		// しにかけ
+	}
+
+	BossCondition m_Condition;
+
 	// Use this for initialization
 	void Start()
 	{
 		m_This = this;
 		m_AttackFlag = true;
 		m_BossDamage = m_BossMaxDamage;
+		m_Condition = BossCondition.Margin;
 		GameObject[] obj = GameObject.FindGameObjectsWithTag("Player");
 		if (obj.Length != 4)
 			Debug.Log("キャラクターの人数が４人ではありません");
@@ -48,6 +58,11 @@ public class BossAttackManager : MonoBehaviour
 			m_PlayerObjs[i] = obj[i].GetComponent<Player>();
 
 		StartCoroutine("BossAttack");
+	}
+
+	private void Update()
+	{
+		ConditionUpdate();
 	}
 
 	/// <summary>
@@ -293,5 +308,18 @@ public class BossAttackManager : MonoBehaviour
 	public void BossBehaviorSwitching(bool CanYouDoIt)
 	{
 		m_AttackFlag = CanYouDoIt;
+	}
+
+	void ConditionUpdate()
+	{
+		float t = m_BossDamage / m_BossMaxDamage;
+
+		if (t < 0.66f) m_Condition = BossCondition.Spicy;
+		if (t < 0.33f) m_Condition = BossCondition.Dying;
+	}
+
+	public BossCondition GetCondition()
+	{
+		return m_Condition;
 	}
 }
