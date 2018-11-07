@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterManager : MonoBehaviour {
-    static int[] SelectedCharacters = { -1, -1, -1, -1 };
+    static public int[] SelectedCharacters = { -1, -1, -1, -1 };
 
     // キャラ選択を設定
     public static void SetCharacter(int _playerIndex, int _charaIndex) {

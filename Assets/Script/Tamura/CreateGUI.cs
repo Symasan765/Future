@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// CanvasRendererとRectTransformを強制的に付けるようにする 
+// CanvasRendererとRectTransformを強制的に付けるようにする
 [RequireComponent( typeof( CanvasRenderer ) )]
 [RequireComponent( typeof( RectTransform ) )]
 public class CreateGUI : Graphic {

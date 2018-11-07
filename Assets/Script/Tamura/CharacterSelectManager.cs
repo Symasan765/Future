@@ -33,7 +33,8 @@ public class CharacterSelectManager : MonoBehaviour {
     // 未選択キャラのリストをこのフレームでいじるかどうか
     bool ChangeUnselectListFlg;
 
-    //changeData[] cdList = new ;
+    bool sceneChangeFlg;
+    SceneChanger sc;
 
 	void Update () {
         UpdateCursor();
@@ -45,6 +46,8 @@ public class CharacterSelectManager : MonoBehaviour {
         }
         //履歴書を上に飛ばしていく
         //sheetList[0].transform.position = sheetList[0].transform.position + sheetList[0].transform.up;
+
+        sc = FindObjectOfType<SceneChanger>();
 	}
 
     // カーソルの位置を更新
@@ -54,7 +57,13 @@ public class CharacterSelectManager : MonoBehaviour {
 
             if (!aElement.GetIsCharacterSelected()) {
                 // n番のカーソルの位置を履歴書の顔写真の横に移動
-                aElement.transform.position = portraitList[unselectCharaList[aElement.GetCursorPos()]].arrowPosList[cursorIndex].transform.position;
+                aElement.cursorTransform = Vector3.Lerp(aElement.cursorTransform, portraitList[unselectCharaList[aElement.GetCursorPos()]].arrowPosList[cursorIndex].transform.position, 0.75f);
+                if (aElement.cursorTransform == portraitList[unselectCharaList[aElement.GetCursorPos()]].arrowPosList[cursorIndex].transform.position) {
+                    aElement.canSelect = true;
+                }
+                else{
+                    aElement.canSelect = false;
+                }
             }
         }
     }
@@ -99,7 +108,10 @@ public class CharacterSelectManager : MonoBehaviour {
         // その間、PushStart的なUIを表示しておく
         for (int cursorIndex = 0; cursorIndex < 4; ) {
             if (arrowList[cursorIndex].GetStartGameFlg()) {
-                SceneManager.LoadScene("Alpha");
+                if (sceneChangeFlg == false) {
+                    sc.ChangeScene("Alpha");
+                    sceneChangeFlg = true;
+                }
                 cursorIndex = 999;
             }
             cursorIndex++;
