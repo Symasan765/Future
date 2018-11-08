@@ -21,23 +21,25 @@ public class PerspectiveOutline : MonoBehaviour {
 	void Update()
 	{
 		// カメラに近づけばアウトラインを短くして遠くなれば大きくする
-		Vector3 cameraPos = m_Camera.transform.position;
-		Vector3 objPos = transform.position;
-
-		// 仮に距離0の時に1、距離10の時に50の太さに変えるとする
-		Vector3 Difference = cameraPos - objPos;
-		float t = Difference.magnitude / m_MaxDistance;
-		float val = Mathf.Lerp(m_MinWidth, m_MaxWidth, t);
-
-		foreach (var mat in mats)
+		if (ResultTransManager.m_InTheGame == true)
 		{
-			mat.SetFloat("_Outline_Width", val);
+			Vector3 cameraPos = m_Camera.transform.position;
+			Vector3 objPos = transform.position;
 
-			mat.SetFloat("_Farthest_Distance", Difference.magnitude + 4.0f);
+			// 仮に距離0の時に1、距離10の時に50の太さに変えるとする
+			Vector3 Difference = cameraPos - objPos;
+			float t = Difference.magnitude / m_MaxDistance;
+			float val = Mathf.Lerp(m_MinWidth, m_MaxWidth, t);
 
-			mat.SetFloat("_Nearest_Distance", Difference.magnitude - 1.0f);
+			foreach (var mat in mats)
+			{
+				mat.SetFloat("_Outline_Width", val);
 
+				mat.SetFloat("_Farthest_Distance", Difference.magnitude + 4.0f);
+
+				mat.SetFloat("_Nearest_Distance", Difference.magnitude - 1.0f);
+
+			}
 		}
-
 	}
 }

@@ -16,11 +16,14 @@ public class BackGroundMove : MonoBehaviour {
 		startPosition = transform.position;
 		startCameraPosition = CameraObj.transform.position;
 	}
-	
-	void Update ()
-	{
-		Vector3 cameraMovePos = new Vector3(CameraObj.transform.position.x - startCameraPosition.x, CameraObj.transform.position.y - startCameraPosition.y, CameraObj.transform.position.z);
 
-		transform.position = Vector3.Lerp(transform.position, new Vector3(startPosition.x + cameraMovePos.x * MovePosition, startPosition.y + cameraMovePos.y * MovePosition, startPosition.z), Speed);
+	void Update()
+	{
+		if (ResultTransManager.m_InTheGame == true)
+		{
+			Vector3 cameraMovePos = new Vector3(CameraObj.transform.position.x - startCameraPosition.x, CameraObj.transform.position.y - startCameraPosition.y, CameraObj.transform.position.z);
+
+			transform.position = Vector3.Lerp(transform.position, new Vector3(startPosition.x + cameraMovePos.x * MovePosition, startPosition.y + cameraMovePos.y * MovePosition, startPosition.z), Speed);
+		}
 	}
 }

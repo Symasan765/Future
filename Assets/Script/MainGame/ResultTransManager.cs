@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ResultTransManager : MonoBehaviour {
 
+	public static bool m_InTheGame = false;
+
 	BossAttackManager m_BossManager;
 	public GameObject m_FadeOut;
 	public GameObject m_BackLoader;
@@ -26,6 +28,7 @@ public class ResultTransManager : MonoBehaviour {
 			// フェードアウトが終わった
 			if (m_FadeOut.GetComponent<FadeObj>().IsEnd())
 			{
+				m_InTheGame = false;
 				SoundManager.Get.PlayBGM("Result", true);
 				m_BackLoader.GetComponent<SceneBackLoder>().SceneChange();
 			}

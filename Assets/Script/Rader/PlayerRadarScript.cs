@@ -37,10 +37,13 @@ public class PlayerRadarScript : MonoBehaviour {
 
 	void RadarUpdate(int i)
 	{
-		m_RadarObjs[i].transform.position = m_PlayerObjs[i].gameObject.transform.position + m_Offset;
-		int gage = m_PlayerObjs[i].GetMentalGauge();
-		float rate = gage / 100.0f;
-		float radius = Mathf.Lerp(m_MinRadius, m_MaxRadius, rate);
-		m_RadarObjs[i].transform.localScale = new Vector3(radius, radius, 0.0f);
+		if (ResultTransManager.m_InTheGame == true)
+		{
+			m_RadarObjs[i].transform.position = m_PlayerObjs[i].gameObject.transform.position + m_Offset;
+			int gage = m_PlayerObjs[i].GetMentalGauge();
+			float rate = gage / 100.0f;
+			float radius = Mathf.Lerp(m_MinRadius, m_MaxRadius, rate);
+			m_RadarObjs[i].transform.localScale = new Vector3(radius, radius, 0.0f);
+		}
 	}
 }
