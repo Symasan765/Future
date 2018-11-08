@@ -55,6 +55,7 @@ public class ResultManager : MonoBehaviour
 			// フェードアウトも終わった
 			if (m_FadeOutObj.GetComponent<FadeObj>().IsEnd())
 			{
+				SoundManager.Get.StopBGM();
 				GetComponent<SceneBackLoder>().SceneChange();
 			}
 		}

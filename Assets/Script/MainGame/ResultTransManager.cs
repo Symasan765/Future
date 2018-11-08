@@ -23,6 +23,7 @@ public class ResultTransManager : MonoBehaviour {
 			// フェードアウトが終わった
 			if (m_FadeOut.GetComponent<FadeObj>().IsEnd())
 			{
+				SoundManager.Get.PlayBGM("Result", true);
 				GetComponent<SceneBackLoder>().SceneChange();
 			}
 		}
