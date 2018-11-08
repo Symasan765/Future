@@ -9,6 +9,7 @@ public class SceneBackLoder : MonoBehaviour {
 
 	private AsyncOperation async;
 	string m_NowSceneName;
+	bool m_DebugFlag = false;
 
 	// Use this for initialization
 	void Start()
@@ -22,13 +23,21 @@ public class SceneBackLoder : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
-		
+		if(async.progress >= 0.9f)
+		{
+			if(m_DebugFlag == false)
+			{
+				Debug.Log(m_NextSceneName + "シーン読み込み完了。待機中");
+				m_DebugFlag = true;
+			}
+		}
 	}
 
 	void ScenePreLoad(string changeScn)
 	{
 		async = SceneManager.LoadSceneAsync(changeScn, LoadSceneMode.Additive);
 		async.allowSceneActivation = false;
+		Debug.Log(changeScn + "シーンの読み込みを開始！");
 	}
 
 	IEnumerator SceneLoad()

@@ -6,6 +6,9 @@ public class ResultTransManager : MonoBehaviour {
 
 	BossAttackManager m_BossManager;
 	public GameObject m_FadeOut;
+	public GameObject m_BackLoader;
+
+	bool m_LoadFlag = false;
 
 	// Use this for initialization
 	void Start () {
@@ -24,7 +27,22 @@ public class ResultTransManager : MonoBehaviour {
 			if (m_FadeOut.GetComponent<FadeObj>().IsEnd())
 			{
 				SoundManager.Get.PlayBGM("Result", true);
-				GetComponent<SceneBackLoder>().SceneChange();
+				m_BackLoader.GetComponent<SceneBackLoder>().SceneChange();
+			}
+		}
+
+		BackLoaderUpdate();
+	}
+
+	void BackLoaderUpdate()
+	{
+		if (m_LoadFlag == false)
+		{
+			// ボスの体力が半分を過ぎた
+			if (m_BossManager.GetBossHP() / m_BossManager.m_BossMaxDamage <= 0.5f)
+			{
+				m_BackLoader.SetActive(true);
+				m_LoadFlag = true;
 			}
 		}
 	}
