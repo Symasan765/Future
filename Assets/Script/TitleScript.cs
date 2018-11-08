@@ -9,8 +9,12 @@ public class TitleScript : MonoBehaviour {
 
     public Vector3 MovingSpeed;     //カメラが動く速度。Unityのインスペクターで数値を設定
     public GameObject AllFadeImage; //画面全体のフェード用画像    
-    public GameObject TitleLogo;
-    public GameObject StartButton;
+    public GameObject TitleLogo;    //ロゴ画像
+    public GameObject StartButton;  //スタートボタン画像
+    public GameObject StartFade;    //スタートボタンを点滅させるための透明画像
+
+    bool PushedStart = false;
+
     //start : -271 title : 180
     [SerializeField]
     int SceneIndex = 0;
@@ -30,6 +34,7 @@ public class TitleScript : MonoBehaviour {
     {
         
         AcceptInputFunc();
+        FlashingButton();
         CameraObject.transform.position += MovingSpeed;
         
     }
@@ -41,7 +46,7 @@ public class TitleScript : MonoBehaviour {
             switch (SceneIndex)
             {
                 case 0:
-                    AllFadeImage.GetComponent<Fade>().SetFade((int)Fade.FadeOption.FADEIN, 0.02f, true);
+                    AllFadeImage.GetComponent<Fade>().SetFade((int)Fade.FadeOption.FADEIN, 0.02f, true,false);
                     if (AllFadeImage.GetComponent<Fade>().IsFadeDone())
                     {
                         SceneIndex++;
@@ -73,15 +78,37 @@ public class TitleScript : MonoBehaviour {
         }
      
     }
+    IEnumerator GoNextScene()
+    {
+        yield return new WaitForSeconds(2.0f);
+        Debug.Log("GoNextScene");
+    }
     void AcceptInputFunc()
     {
         for (int i = 0; i < 4; i++)
         {
             if (XPad.Get.GetTrigger(XPad.KeyData.A, i) || Input.GetKeyDown(KeyCode.A))
             {
-                SceneManager.LoadScene("CharacterSelect");
+                //SceneManager.LoadScene("CharacterSelect");
+                PushedStart = true;
             }
         }
        
     }
+    void FlashingButton()
+    {
+        Fade Start = StartFade.GetComponent<Fade>();
+        
+        if(PushedStart==true)
+        {
+            Start.SetFadeSpeed(0.1f);
+            StartCoroutine(GoNextScene());
+            
+        }
+        if(PushedStart==false)
+        {
+            Start.SetFade((int)Fade.FadeOption.FLASH, 0.03f, false,false);
+        }
+    }
+
 }
