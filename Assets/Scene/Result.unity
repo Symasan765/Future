@@ -3437,6 +3437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f24c9795e80cf429202719a7a6def5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_PushAUI: {fileID: 959637812}
   m_Rank2Value: 5
   m_Rank3Value: 10
   m_ReflectTimeSec: 1

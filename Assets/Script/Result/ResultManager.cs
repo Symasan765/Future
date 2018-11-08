@@ -5,7 +5,7 @@ using UnityEngine.Playables;
 
 public class ResultManager : MonoBehaviour
 {
-	PlayableDirector m_ResultTimeline;
+	public GameObject m_PushAUI;
 
 	// Resultで必要な情報をここで取得してリザルト画面へ反映させる
 
@@ -35,7 +35,7 @@ public class ResultManager : MonoBehaviour
 	void Start()
 	{
 		// TODO ここでダメージと攻撃回数をメインシーンから取得して変数に入れる
-		m_ResultTimeline = GameObject.Find("ResultTimeline").GetComponent<PlayableDirector>();
+		
 	}
 
 	// Update is called once per frame
@@ -44,7 +44,7 @@ public class ResultManager : MonoBehaviour
 		AttackTextUpdate();
 		DamageTextUpdate();
 
-		if (m_ResultTimeline.state != PlayState.Playing)
+		if (m_PushAUI.active == true)
 		{
 			// タイムラインが終了している
 			if (XPad.Get.GetTrigger(XPad.KeyData.A, 0))
