@@ -135,7 +135,7 @@ public class Player : MonoBehaviour
 			{
 				if (CanIMove())
 				{
-					InBazookaRange();
+					//InBazookaRange();
 					if (XPad.Get.GetRelease(XPad.KeyData.A, PlayerIndex))
 					{
 						if (isHoldItem)
@@ -424,7 +424,7 @@ public class Player : MonoBehaviour
 			Vector3 sphirePos = new Vector3(FootPositionObj.transform.position.x, FootPositionObj.transform.position.y + scr, FootPositionObj.transform.position.z);
 			Physics.SphereCast(sphirePos, scr, Vector3.down, out hit);
 
-			if (hit.collider.tag != "Player")
+			if (hit.collider.tag != "Player" && hit.collider.tag != "Bazooka")
 			{
 				if (hit.distance < 0.04f)
 				{
@@ -835,6 +835,21 @@ public class Player : MonoBehaviour
 	public void SetAngleValue(int _angle)
 	{
 		angleValue = _angle;
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (isHoldItem)
+		{
+			if (other.gameObject.tag == "Bazooka")
+			{
+				Debug.Log("(^_-)-☆");
+				GameObject io = getItemObj;
+				Item i = io.GetComponent<Item>();
+				ReleaseItem();
+				i.SetBazooka(other.gameObject);
+			}
+		}
 	}
 
 	public void OnCollisionStay(Collision other)

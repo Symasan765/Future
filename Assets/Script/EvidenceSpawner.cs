@@ -14,6 +14,7 @@ public class EvidenceSpawner : MonoBehaviour {
 	private ParticleSystem particleSystem;
 	private FeverManager feverManager;
 	private bool isSpawn = false;
+	public bool isSetBazooka = false;
 
 	private float cntSpawnDeraySec = 0;
 	// Use this for initialization
@@ -22,7 +23,8 @@ public class EvidenceSpawner : MonoBehaviour {
 		if (this.tag == "NormalEvidenceSpawner")
 		{
 			FeverSpawner = false;
-		} else
+		}
+		if (this.tag == "FeverEvidenceSpawner")
 		{
 			FeverSpawner = true;
 		}
@@ -34,8 +36,21 @@ public class EvidenceSpawner : MonoBehaviour {
 		if (FeverSpawner)
 		{
 			//フィーバータイム時のスポナー処理
-			
-
+			if (!feverManager.IsFever())
+			{
+				isSpawn = false;
+			} else
+			{
+				cntSpawnDeraySec += Time.deltaTime;
+				if (cntSpawnDeraySec >= SpawnDeraySec)
+				{
+					if (!isSpawn)
+					{
+						Spawn(true);
+						isSpawn = true;
+					}
+				}
+			}
 		} else
 		{
 			//通常時のスポナー処理
@@ -49,7 +64,7 @@ public class EvidenceSpawner : MonoBehaviour {
 				{
 					if (!isSpawn)
 					{
-						Spawn();
+						Spawn(false);
 						isSpawn = true;
 					}
 				}
@@ -62,17 +77,25 @@ public class EvidenceSpawner : MonoBehaviour {
 		FeverSpawner = _flg;
 	}
 
-	private void Spawn()
+	private void Spawn(bool _isFever)
 	{
 		if (eviObj == null)
 		{
+			isSetBazooka = false;
 			cntSpawnDeraySec = 0;
 			particleSystem = Instantiate(EffectObj, transform.position, transform.rotation).GetComponent<ParticleSystem>();
 			particleSystem.Play();
 			eviObj = Instantiate(evidenceObj, transform.position, transform.rotation);
 			Item item = eviObj.GetComponent<Item>();
 			item.SetEvidenceSpawnerObject(gameObject);
-			
+			if (_isFever)
+			{
+				eviObj.name = "FeverEvidence";
+				item.SetFeverValue();
+			} else
+			{
+				eviObj.name = "NormalEvidence";
+			}
 		}
 	}
 

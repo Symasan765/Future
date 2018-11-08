@@ -32,18 +32,6 @@ public class EvidenceArrow : MonoBehaviour {
 		{
 			boxCollider.enabled = true;
 		}
-
-		if (!isStayTrigger)
-		{
-			if (parentItem.isCheckCreatePosition)
-			{
-				spRenderer.enabled = false;
-			} else
-			{
-				spRenderer.enabled = true;
-			}
-			//spRenderer.enabled = modelMeshRenderer.enabled;
-		}
 	}
 
 	void OnTriggerStay(Collider other)

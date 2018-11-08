@@ -14,6 +14,7 @@ public class PlayerManager : MonoBehaviour {
 		//プレイヤーの生成
 		for (int i = 0; i < PlayerNum; i++)
 		{
+			Debug.Log("CharacterNum" + i + ":" + CharacterManager.SelectedCharacters[i]);
 			SpawnPositoin[i] = GameObject.Find("SpawnPlayer" + (i + 1));
 
 			GameObject playerObj = Instantiate(PlayerObjects[CharacterManager.SelectedCharacters[i]], SpawnPositoin[i].transform.position, transform.rotation);
