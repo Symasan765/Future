@@ -47,6 +47,7 @@ public class TimelineManager : MonoBehaviour
 
 		if (IsEnd1 && m_Scene2.state != PlayState.Playing)
 		{
+			m_Parent2.SetActive(false);
 			m_BackLoder.SceneChange();
 		}
 	}
