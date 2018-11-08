@@ -27,6 +27,11 @@ public class TitleScript : MonoBehaviour {
             //    FadeImage.GetComponent<Fade>().SetFade((int)Fade.FadeOption.FADEOUT,0.1f,true);
             //}
         }
+		if (XPad.Get.AnyoneTrigger(XPad.KeyData.A))
+		{
+			FadeImage.GetComponent<Fade>().SetFade((int)Fade.FadeOption.FADEOUT, 0.1f, true);
+		}
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             FadeImage.GetComponent<Fade>().SetFade((int)Fade.FadeOption.FADEOUT, 0.1f, true);
