@@ -13,24 +13,45 @@ public class PlayerRadarScript : MonoBehaviour {
 	public float m_MinRadius = 5.0f;
 	public Vector3 m_Offset;
 
+	bool m_InitFlag = false;
+
+	public void Init()
+	{
+		if (m_InitFlag == false)
+		{
+			GameObject[] obj = GameObject.FindGameObjectsWithTag("Player");
+
+			if (obj == null || obj.Length == 0)
+				return;		// 初期化は出来なかった
+
+			m_PlayerObjs = new Player[obj.Length];
+			m_RadarObjs = new GameObject[obj.Length];
+			for (int i = 0; i < obj.Length; i++)
+			{
+				m_PlayerObjs[i] = obj[i].GetComponent<Player>();
+				m_RadarObjs[i] = Instantiate(m_LadarPrefab);
+			}
+			m_InitFlag = true;
+		}
+	}
+
 	// Use this for initialization
 	void Start () {
-		GameObject[] obj = GameObject.FindGameObjectsWithTag("Player");
-
-		m_PlayerObjs = new Player[obj.Length];
-		m_RadarObjs = new GameObject[obj.Length];
-		for (int i = 0; i < obj.Length; i++)
-		{
-			m_PlayerObjs[i] = obj[i].GetComponent<Player>();
-			m_RadarObjs[i] = Instantiate(m_LadarPrefab);
-		}
+	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		for (int i = 0; i < m_PlayerObjs.Length; i++)
+		if (m_InitFlag)
 		{
-			RadarUpdate(i);
+			for (int i = 0; i < m_PlayerObjs.Length; i++)
+			{
+				RadarUpdate(i);
+			}
+		}
+		else
+		{
+			Init();
 		}
 	}
 
