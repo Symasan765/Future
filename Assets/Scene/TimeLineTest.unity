@@ -4882,6 +4882,10 @@ Transform:
   m_Father: {fileID: 447948697}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -12, y: 43, z: 0}
+--- !u!1 &1115738511 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100002, guid: ec0b6b0429dd6eb4fa2d551f61a0af1e, type: 3}
+  m_PrefabInternal: {fileID: 920900642}
 --- !u!1 &1121184884
 GameObject:
   m_ObjectHideFlags: 0
@@ -7855,7 +7859,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 7454021dad7a12047a57d96a237ba22e, type: 2}
-  m_InitialState: 0
+  m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -7904,6 +7908,8 @@ PlayableDirector:
     value: {fileID: 330766618}
   - key: {fileID: 114263675336173074, guid: 7454021dad7a12047a57d96a237ba22e, type: 2}
     value: {fileID: 1595013376}
+  - key: {fileID: 114095557304657768, guid: 7454021dad7a12047a57d96a237ba22e, type: 2}
+    value: {fileID: 1115738511}
   m_ExposedReferences:
     m_References: []
 --- !u!1001 &1908997078
