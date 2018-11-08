@@ -489,6 +489,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 0.8, y: 0.001, z: 0.8}
   m_StartTime: 0.2
   m_LostTime: 3
+  m_SEName: 
 --- !u!1 &141473691
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,6 +839,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 0.5, y: 0.6, z: 1}
   m_StartTime: 0.2
   m_LostTime: 3
+  m_SEName: 
 --- !u!212 &269155749
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1532,6 +1534,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 0.5, y: 0.6, z: 1}
   m_StartTime: 0.2
   m_LostTime: 1.5
+  m_SEName: 
 --- !u!212 &411956995
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1874,6 +1877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_InitBloom: 0
+  SkyMaterial: {fileID: 2100000, guid: e68f77e240a7f8643b5cc4253dc37516, type: 2}
 --- !u!4 &596722803
 Transform:
   m_ObjectHideFlags: 0
@@ -2668,6 +2672,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 0.8, y: 0.001, z: 0.8}
   m_StartTime: 0.2
   m_LostTime: 3
+  m_SEName: 
 --- !u!1 &945123615
 GameObject:
   m_ObjectHideFlags: 0
@@ -3235,6 +3240,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 0.35, y: 0.3, z: 1}
   m_StartTime: 0.2
   m_LostTime: 3
+  m_SEName: 
 --- !u!212 &1121184887
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3325,6 +3331,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 0.8, y: 0.001, z: 0.8}
   m_StartTime: 0.2
   m_LostTime: 2
+  m_SEName: 
 --- !u!1 &1145913244
 GameObject:
   m_ObjectHideFlags: 0
@@ -3928,6 +3935,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 0.8, y: 0.001, z: 0.8}
   m_StartTime: 0.2
   m_LostTime: 1.1
+  m_SEName: 
 --- !u!4 &1309592551 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4180429738409906, guid: 9ea0deace3751bc41ad1f2fd5625684d,
@@ -4611,6 +4619,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 0.4, y: 0.6, z: 1}
   m_StartTime: 0.2
   m_LostTime: 0.25
+  m_SEName: 
 --- !u!212 &1486918664
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5469,6 +5478,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 0.8, y: 0.001, z: 0.8}
   m_StartTime: 0.2
   m_LostTime: 1.5
+  m_SEName: 
 --- !u!1 &1895023860
 GameObject:
   m_ObjectHideFlags: 0
@@ -6315,6 +6325,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 0.5, y: 0.6, z: 1}
   m_StartTime: 0.2
   m_LostTime: 1.1
+  m_SEName: 
 --- !u!212 &2060148635
 SpriteRenderer:
   m_ObjectHideFlags: 0
