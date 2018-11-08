@@ -12,7 +12,7 @@ public class BloomInit : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
-		behaviour = GameObject.Find("Main Camera").GetComponent<PostProcessingBehaviour>();
+		behaviour = GameObject.Find("Camera").GetComponent<PostProcessingBehaviour>();
 
 		var Settings = behaviour.profile.bloom.settings;
 		Settings.bloom.intensity = m_InitBloom;

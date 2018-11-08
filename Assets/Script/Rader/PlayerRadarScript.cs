@@ -23,7 +23,6 @@ public class PlayerRadarScript : MonoBehaviour {
 		{
 			m_PlayerObjs[i] = obj[i].GetComponent<Player>();
 			m_RadarObjs[i] = Instantiate(m_LadarPrefab);
-			RadarUpdate(i);
 		}
 	}
 	
