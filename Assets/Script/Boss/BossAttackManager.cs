@@ -25,7 +25,7 @@ public class BossAttackManager : MonoBehaviour
 	float[] m_AreaTime;
 
 	public float m_BossMaxDamage = 100.0f;
-	float m_BossDamage;
+	public float m_BossDamage;
 
 	public bool m_AttackFlag;   // ボスが攻撃してもいいかどうかのフラグ
 
@@ -321,5 +321,10 @@ public class BossAttackManager : MonoBehaviour
 	public BossCondition GetCondition()
 	{
 		return m_Condition;
+	}
+
+	public float GetBossHP()
+	{
+		return m_BossDamage;
 	}
 }

@@ -33,6 +33,7 @@ public class SceneBackLoder : MonoBehaviour {
 
 	IEnumerator SceneLoad()
 	{
+		m_NowSceneName = SceneManager.GetActiveScene().name;
 		SceneManager.UnloadScene(m_NowSceneName);
 		async.allowSceneActivation = true;
 		yield return null;
