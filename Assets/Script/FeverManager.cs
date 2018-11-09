@@ -18,9 +18,11 @@ public class FeverManager : MonoBehaviour {
 	private GameObject[] NormalEvidenceSpawnerObjects = null;
 	private EvidenceSpawner[] evidenceSpawners;
 	private GameObject BossHitPositionObj;
+	private Animator animator;
 	void Start ()
 	{
 		BossHitPositionObj = GameObject.FindGameObjectWithTag("BossHitPosition");
+		animator = BossHitPositionObj.transform.parent.GetComponent<Animator>();
 		//ステージ上にある通常証拠スポナーを全部取得
 		NormalEvidenceSpawnerObjects = GameObject.FindGameObjectsWithTag("NormalEvidenceSpawner");
 		Debug.Log("ノーマル証拠の数：" + NormalEvidenceSpawnerObjects.Length);
@@ -32,6 +34,7 @@ public class FeverManager : MonoBehaviour {
 	
 	void Update ()
 	{
+		animator.SetBool("isFever", isStart);
 		Lightning();
 		if (isStart)
 		{
