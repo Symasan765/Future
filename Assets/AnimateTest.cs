@@ -9,11 +9,6 @@ public class AnimateTest : MonoBehaviour {
     void Start() {
         animator = GetComponent<Animator>();
     }
-    void Update() {
-        if (Input.GetButtonDown("Fire1")) {
-            animator.SetBool("isSelected", true);
-        }
-    }
 
     void Step() {
 
