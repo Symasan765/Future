@@ -37,7 +37,7 @@ public class CharacterSelectManager : MonoBehaviour {
     List<Camera> renderCamList = new List<Camera>();
 
     // 未選択キャラのリストをこのフレームでいじるかどうか
-    bool ChangeUnselectListFlg;
+    bool changeUnselectListFlg;
 
     bool sceneChangeFlg;
     SceneChanger sc;
@@ -77,12 +77,14 @@ public class CharacterSelectManager : MonoBehaviour {
 
     // キャラクターの選択状態を更新
     void UpdateCharacterSelectStatus() {
-        // SelectCharacter/UnselectCharacterで編集願いフラグをオン/オフする
-        // unselectリストからRemoveして、それが重複なく成功したらArrow側にそれを通知する
-        // 重複したらIndexの小さい順にキャラを割り振り、Indexの大きい人は未選択ってことにする
+        if (changeUnselectListFlg) {
+            // SelectCharacter/UnselectCharacterで編集願いフラグをオン/オフする
+            // unselectリストからRemoveして、それが重複なく成功したらArrow側にそれを通知する
+            // 重複したらIndexの小さい順にキャラを割り振り、Indexの大きい人は未選択ってことにする
 
-        // unselectリストをいじり終わった後にフラグを戻す
-        ChangeUnselectListFlg = false;
+            // unselectリストをいじり終わった後にフラグを戻す
+            changeUnselectListFlg = false;
+        }
     }
 
     // 全員がキャラ選択したか確認
@@ -136,7 +138,7 @@ public class CharacterSelectManager : MonoBehaviour {
     // 下2つはいずれ放棄、UpdateCharacterselectStatusに統合？　これら2つの処理は同フレームで順番に行いたい
     // playerIndexとcursorPosを持つ構造体にいじり情報を格納する？
     public void SelectCharater(int _playerIndex, int _cursorPos) {
-        ChangeUnselectListFlg = true;
+        changeUnselectListFlg = true;
         //--------------------------------------------------------------------
 
         // 操作が同フレームで重複しなかった場合の処理
@@ -150,7 +152,7 @@ public class CharacterSelectManager : MonoBehaviour {
     }
 
     public void UnselectCharacter(int _playerIndex, int _cursorPos) {
-        ChangeUnselectListFlg = true;
+        changeUnselectListFlg = true;
         //--------------------------------------------------------------------
 
         // 操作が同フレームで重複しても大丈夫なように未選択リストをいじるタイミングは統一すること
