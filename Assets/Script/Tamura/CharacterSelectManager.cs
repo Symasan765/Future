@@ -42,6 +42,10 @@ public class CharacterSelectManager : MonoBehaviour {
     bool sceneChangeFlg;
     SceneChanger sc;
 
+    void Start() {
+        //SoundManager.Get.PlayBGM("はりきっちゃう時のテーマ", true);
+    }
+
 	void Update () {
         UpdateCursor();
         UpdateCharacterSelectStatus();
