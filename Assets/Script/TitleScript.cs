@@ -55,7 +55,7 @@ public class TitleScript : MonoBehaviour {
                 case 1:
                     if (TitleLogo.GetComponent<RectTransform>().localPosition.y<180.0f)
                     {
-                        TitleLogo.GetComponent<RectTransform>().localPosition += new Vector3(0.0f, 30.0f,0.0f);
+                        TitleLogo.GetComponent<RectTransform>().localPosition += new Vector3(0.0f, 60.0f,0.0f);
                     }
                     else
                     {
@@ -65,12 +65,13 @@ public class TitleScript : MonoBehaviour {
                     }
                     break;
                 case 2:
-                    TitleLogo.GetComponent<Vibration>().VibrationTrigger = false;
-                    if (StartButton.GetComponent<RectTransform>().localPosition.y < -270.0f)
-                    {
-                        StartButton.GetComponent<RectTransform>().localPosition += new Vector3(0.0f, 30.0f, 0.0f);
-                        
-                    }
+                    //TitleLogo.GetComponent<Vibration>().VibrationTrigger = false;
+                    //if (StartButton.GetComponent<RectTransform>().localPosition.y < -270.0f)
+                    //{
+                    //    StartButton.GetComponent<RectTransform>().localPosition += new Vector3(0.0f, 30.0f, 0.0f);
+
+                    //}
+                    StartButton.SetActive(true);
                     break;
             }
             yield return null;
