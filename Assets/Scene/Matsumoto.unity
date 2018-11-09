@@ -332,6 +332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 10
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &147195094
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1180,6 +1181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 10
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &390409713
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1270,6 +1272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 10
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &398083104
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1464,6 +1467,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 8
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &417912287
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1658,6 +1662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 7
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &440217818
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1894,6 +1899,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 9
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &505731390
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1984,6 +1990,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 7
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &577298349
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2252,6 +2259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 9
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &654096051
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2471,7 +2479,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1073530971796426, guid: 7766eb126c552c6439f90d26ff19a210, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1128856744014192, guid: 7766eb126c552c6439f90d26ff19a210, type: 2}
       propertyPath: m_IsActive
@@ -2675,6 +2683,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 4
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &683928762
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3008,6 +3017,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 1
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &822474171
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3248,6 +3258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 3
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &892883894
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4124,6 +4135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 6
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &1073404839
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4214,6 +4226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 10
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &1081180266
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4499,6 +4512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 1
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &1180147171
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4851,6 +4865,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 5
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &1286795015
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5373,6 +5388,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 9
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &1385830842
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6029,6 +6045,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 2
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &1496887276
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6414,6 +6431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 3
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &1559663733
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6504,6 +6522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 11
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &1584938132
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6647,6 +6666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 6
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &1633858660
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6779,6 +6799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 0
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &1650197088
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7405,6 +7426,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 3
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &1856590050
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7892,6 +7914,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 0
   m_TimeSec: 2
+  m_AttackType: 0
 --- !u!23 &2122825243
 MeshRenderer:
   m_ObjectHideFlags: 0
