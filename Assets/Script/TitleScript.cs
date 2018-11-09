@@ -35,7 +35,6 @@ public class TitleScript : MonoBehaviour {
         
         AcceptInputFunc();
         FlashingButton();
-        CameraObject.transform.position += MovingSpeed;
         
     }
 
