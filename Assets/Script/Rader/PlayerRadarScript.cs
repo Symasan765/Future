@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRadarScript : MonoBehaviour {
+public class PlayerRadarScript : MonoBehaviour
+{
 
 	Player[] m_PlayerObjs;
 	GameObject[] m_RadarObjs;
@@ -22,7 +23,7 @@ public class PlayerRadarScript : MonoBehaviour {
 			GameObject[] obj = GameObject.FindGameObjectsWithTag("Player");
 
 			if (obj == null || obj.Length == 0)
-				return;		// 初期化は出来なかった
+				return;     // 初期化は出来なかった
 
 			m_PlayerObjs = new Player[obj.Length];
 			m_RadarObjs = new GameObject[obj.Length];
@@ -36,12 +37,14 @@ public class PlayerRadarScript : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Start () {
-	
+	void Start()
+	{
+		Init();
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
+	void Update()
+	{
 		if (m_InitFlag)
 		{
 			for (int i = 0; i < m_PlayerObjs.Length; i++)
@@ -57,7 +60,7 @@ public class PlayerRadarScript : MonoBehaviour {
 
 	void RadarUpdate(int i)
 	{
-		if (ResultTransManager.m_InTheGame == true)
+		if (m_InitFlag)
 		{
 			m_RadarObjs[i].transform.position = m_PlayerObjs[i].gameObject.transform.position + m_Offset;
 			int gage = m_PlayerObjs[i].GetMentalGauge();
