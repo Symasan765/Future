@@ -30,6 +30,12 @@ public class CharacterSelectManager : MonoBehaviour {
     [SerializeField]
     bool isWaiting = false;
 
+    [SerializeField]
+    List<Animator> animatorList = new List<Animator>();
+
+    [SerializeField]
+    List<Camera> renderCamList = new List<Camera>();
+
     // 未選択キャラのリストをこのフレームでいじるかどうか
     bool ChangeUnselectListFlg;
 

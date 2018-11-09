@@ -347,6 +347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerIndex: 0
   cursorTransform: {x: 0, y: 0, z: 0}
+  canSelect: 0
 --- !u!1 &140490874
 GameObject:
   m_ObjectHideFlags: 0
@@ -1141,6 +1142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerIndex: 1
   cursorTransform: {x: 0, y: 0, z: 0}
+  canSelect: 0
 --- !u!1 &571704475
 GameObject:
   m_ObjectHideFlags: 0
@@ -1328,6 +1330,11 @@ Prefab:
     - {fileID: 114774967995697136, guid: 66e6b92df4636c647afbea6840414365, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 66e6b92df4636c647afbea6840414365, type: 2}
   m_IsPrefabParent: 0
+--- !u!95 &628683072 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 95444729249226000, guid: 66e6b92df4636c647afbea6840414365,
+    type: 2}
+  m_PrefabInternal: {fileID: 628683071}
 --- !u!1 &637284683
 GameObject:
   m_ObjectHideFlags: 0
@@ -1705,6 +1712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerIndex: 3
   cursorTransform: {x: 0, y: 0, z: 0}
+  canSelect: 0
 --- !u!1 &876957108
 GameObject:
   m_ObjectHideFlags: 0
@@ -1960,6 +1968,11 @@ Prefab:
     - {fileID: 114824534412255554, guid: bb97692cf5cf87740b3eb903a936bcc9, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: bb97692cf5cf87740b3eb903a936bcc9, type: 2}
   m_IsPrefabParent: 0
+--- !u!95 &950830526 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 95928765832404706, guid: bb97692cf5cf87740b3eb903a936bcc9,
+    type: 2}
+  m_PrefabInternal: {fileID: 950830525}
 --- !u!1 &1034678206
 GameObject:
   m_ObjectHideFlags: 0
@@ -2501,6 +2514,11 @@ Prefab:
     - {fileID: 114771468955765048, guid: 452aadf55a23cb146b652cd9b14143f2, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 452aadf55a23cb146b652cd9b14143f2, type: 2}
   m_IsPrefabParent: 0
+--- !u!95 &1429364069 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 95155043803887646, guid: 452aadf55a23cb146b652cd9b14143f2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1429364068}
 --- !u!1 &1431039101
 GameObject:
   m_ObjectHideFlags: 0
@@ -2645,6 +2663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerIndex: 2
   cursorTransform: {x: 0, y: 0, z: 0}
+  canSelect: 0
 --- !u!1 &1445393325
 GameObject:
   m_ObjectHideFlags: 0
@@ -2916,6 +2935,11 @@ Prefab:
     - {fileID: 114005056543997684, guid: 7ce2a45e0026bc44e9c26be37a3ad294, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 7ce2a45e0026bc44e9c26be37a3ad294, type: 2}
   m_IsPrefabParent: 0
+--- !u!95 &1626145362 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 95475969641692580, guid: 7ce2a45e0026bc44e9c26be37a3ad294,
+    type: 2}
+  m_PrefabInternal: {fileID: 1626145361}
 --- !u!1 &1653977818
 GameObject:
   m_ObjectHideFlags: 0
@@ -3132,6 +3156,16 @@ MonoBehaviour:
   unselectCharaList: 00000000010000000200000003000000
   TextCanvas: {fileID: 1111102325}
   isWaiting: 0
+  animatorList:
+  - {fileID: 628683072}
+  - {fileID: 1429364069}
+  - {fileID: 950830526}
+  - {fileID: 1626145362}
+  renderCamList:
+  - {fileID: 1475957733}
+  - {fileID: 1952179571}
+  - {fileID: 1984605576}
+  - {fileID: 1916617917}
 --- !u!1 &1910459578
 GameObject:
   m_ObjectHideFlags: 0
