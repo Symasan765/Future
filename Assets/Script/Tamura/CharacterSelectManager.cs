@@ -21,12 +21,6 @@ public class CharacterSelectManager : MonoBehaviour {
     // 履歴書用リスト
     List<GameObject> sheetList = new List<GameObject>();
 
-    [SerializeField]
-    List<Animator> animaterList = new List<Animator>();
-
-    [SerializeField]
-    List<Camera> renderCamList = new List<Camera>();
-
     public List<int> unselectCharaList = new List<int>() { 0, 1, 2, 3 };
 
     [SerializeField]
@@ -69,7 +63,8 @@ public class CharacterSelectManager : MonoBehaviour {
 
             if (!aElement.GetIsCharacterSelected()) {
                 // n番のカーソルの位置を履歴書の顔写真の横に移動
-                aElement.cursorTransform = Vector3.Lerp(aElement.cursorTransform, portraitList[unselectCharaList[aElement.GetCursorPos()]].arrowPosList[cursorIndex].transform.position, 0.25f);
+                aElement.cursorTransform = Vector3.Lerp(aElement.cursorTransform, portraitList[unselectCharaList[aElement.GetCursorPos()]].arrowPosList[cursorIndex].transform.position, 0.5f);
+                renderCamList[cursorIndex].transform.position = new Vector3(-60.0f + 10.0f * unselectCharaList[aElement.GetCursorPos()], 0.0f, -1.0f);
                 if (aElement.cursorTransform == portraitList[unselectCharaList[aElement.GetCursorPos()]].arrowPosList[cursorIndex].transform.position) {
                     aElement.canSelect = true;
                 }
@@ -146,6 +141,7 @@ public class CharacterSelectManager : MonoBehaviour {
 
         // 操作が同フレームで重複しなかった場合の処理
         CharacterManager.SetCharacter(_playerIndex, unselectCharaList[_cursorPos]);
+        animatorList[unselectCharaList[_cursorPos]].SetBool("isSelected", true);
 
         unselectCharaList.RemoveAt(_cursorPos);
 
@@ -158,10 +154,11 @@ public class CharacterSelectManager : MonoBehaviour {
         //--------------------------------------------------------------------
 
         // 操作が同フレームで重複しても大丈夫なように未選択リストをいじるタイミングは統一すること
-        CharacterManager.ResetCharacter(_playerIndex);
-
-        unselectCharaList.Add(_cursorPos);
+        unselectCharaList.Add(CharacterManager.SelectedCharacters[_playerIndex]);
         unselectCharaList.Sort();
+
+        CharacterManager.ResetCharacter(_playerIndex);
+        animatorList[unselectCharaList[_cursorPos]].SetBool("isSelected", false);
 
         // キャラ選択フラグをオフに
         arrowList[_playerIndex].SetIsCharacterSelected(false);
