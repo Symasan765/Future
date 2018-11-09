@@ -10,15 +10,6 @@ public class AreaJudgment : MonoBehaviour {
 
 	int m_AttackNum = 0;
 
-	public enum AttackType
-	{
-		DownSwing,
-		SideSwing,
-		Beam
-	}
-
-	public AttackType m_AttackType = AttackType.DownSwing;
-
 	private void Start()
 	{
 		GetComponent<MeshRenderer>().enabled = false;
