@@ -187,4 +187,16 @@ public class Item : MonoBehaviour {
 		flgMoveToGetPos = true;
 		isScaleDown = true;
 	}
+
+	void OnTriggerStay(Collider other)
+	{
+		if (!isHold)
+		{
+			if (other.tag == "Bazooka")
+			{
+				SetBazooka(other.gameObject);
+			}
+		}
+	}
+
 }
