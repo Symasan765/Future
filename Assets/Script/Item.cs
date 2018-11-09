@@ -30,8 +30,8 @@ public class Item : MonoBehaviour {
 	private bool isTriggerStay = false;
 
 	private float cntScaleDownTime = 0;
-	private float lifeTime = 0;
-	private float LifeTime = 8.0f;
+	private float cntLifeTimeSec = 0;
+	private float LifeTime = 0;
 
 	void Start ()
 	{
@@ -76,10 +76,10 @@ public class Item : MonoBehaviour {
 			rb.velocity = new Vector3(rb.velocity.x, -4, rb.velocity.z);
 		}
 
-		if (lifeTime > 0)
+		if (cntLifeTimeSec > 0)
 		{
 			//点滅処理
-			if (lifeTime > LifeTime / 4 && lifeTime < LifeTime / 2)
+			if (cntLifeTimeSec > LifeTime / 4 && cntLifeTimeSec < LifeTime / 2)
 			{
 				if (Time.frameCount % 8 > 4)
 				{
@@ -89,7 +89,7 @@ public class Item : MonoBehaviour {
 					meshRenderer.enabled = true;
 				}
 			}
-			if (lifeTime < LifeTime / 4)
+			if (cntLifeTimeSec < LifeTime / 4)
 			{
 				if (Time.frameCount % 3 > 1)
 				{
@@ -100,15 +100,15 @@ public class Item : MonoBehaviour {
 				}
 			}
 
-			lifeTime -= Time.deltaTime;
-			if (lifeTime <= 0)
+			cntLifeTimeSec -= Time.deltaTime;
+			if (cntLifeTimeSec <= 0)
 			{
 				effectManager.PlayDelete(transform.position);
 				Destroy(gameObject);
 			}
 			if (isHold)
 			{
-				lifeTime = LifeTime;
+				cntLifeTimeSec = LifeTime;
 			}
 		}
 
@@ -171,10 +171,11 @@ public class Item : MonoBehaviour {
 		evidenceSpawner = _obj.GetComponent<EvidenceSpawner>();
 	}
 
-	public void SetFeverValue()
+	public void SetFeverValue(float _lifeTime)
 	{
+		LifeTime = _lifeTime;
 		isFeverEvidence = true;
-		lifeTime = LifeTime;
+		cntLifeTimeSec = _lifeTime;
 	}
 
 	public void SetBazooka(GameObject _obj)

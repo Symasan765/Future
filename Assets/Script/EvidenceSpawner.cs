@@ -6,6 +6,8 @@ public class EvidenceSpawner : MonoBehaviour {
 
 	[SerializeField]
 	private float SpawnDeraySec = 3;
+	[SerializeField]
+	private float FeverEvidenceLifeTime = 10.0f;
 	private bool FeverSpawner = false;
 	public GameObject evidenceObj;
 	public GameObject EffectObj;
@@ -91,7 +93,7 @@ public class EvidenceSpawner : MonoBehaviour {
 			if (_isFever)
 			{
 				eviObj.name = "FeverEvidence";
-				item.SetFeverValue();
+				item.SetFeverValue(FeverEvidenceLifeTime);
 			} else
 			{
 				eviObj.name = "NormalEvidence";
