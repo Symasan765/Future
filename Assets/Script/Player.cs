@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
 	public GameObject[] EffectSweatObj = new GameObject[2];
 	public GameObject ItemPosition;
 	public GameObject RotateObj;
-	public GameObject FootPositionObj;
+	public GameObject[] FootPositionObj = new GameObject[2];	//着地判定用にキャラの左右に配置
 
 	private GameObject getItemObj;
 	private GameObject holdDeskObj;
@@ -309,14 +309,7 @@ public class Player : MonoBehaviour
 
 		if (isOnCollisionStay)
 		{
-			float scr = 0.4f;
-			RaycastHit hit;
-			Vector3 sphirePos = new Vector3(FootPositionObj.transform.position.x, FootPositionObj.transform.position.y + scr, FootPositionObj.transform.position.z);
-			Physics.SphereCast(sphirePos, scr, Vector3.down, out hit);
-			if (hit.collider)
-			{
-				
-			}
+	
 		} else
 		{
 			//transform.position += Vector3.forward * angleValue * Time.deltaTime * (rightSpeed + leftSpeed);
@@ -431,11 +424,28 @@ public class Player : MonoBehaviour
 	//接地しているか
 	private bool IsOnGround()
 	{
+		bool flgOnGround = false;
 		if (!isJump)
 		{
+			RaycastHit hit;
+			//着地判定用のオブジェクトが2つあるので2回ループさせる
+			for (int i = 0; i < 2; i++)
+			{
+				Vector3 checkPos = new Vector3(FootPositionObj[i].transform.position.x, FootPositionObj[i].transform.position.y, FootPositionObj[i].transform.position.z);
+
+				Physics.Raycast(checkPos, Vector3.down, out hit, 10, OnGroundLayer);
+				if (hit.collider)
+				{
+					if (hit.distance < 0.04f)
+					{
+						flgOnGround = true;
+						break;
+					}
+				}
+			}
+			/*
 			float scr = 0.4f;
 			RaycastHit hit;
-			CapsuleCollider cc = GetComponent<CapsuleCollider>();
 			Vector3 sphirePos = new Vector3(FootPositionObj.transform.position.x, FootPositionObj.transform.position.y + scr, FootPositionObj.transform.position.z);
 
 			int layerMask = LayerMask.GetMask(new string[] {"StageObject"});
@@ -447,14 +457,16 @@ public class Player : MonoBehaviour
 					//rb.velocity = Vector3.zero;
 					return true;
 				}
-			}
+			}*/
 		}
-		return false;
+		return flgOnGround;
 	}
 
 	//ジャンプ中
 	private void Jump()
 	{
+		Vector3 effectPos = new Vector3(transform.position.x, FootPositionObj[0].transform.position.y, FootPositionObj[0].transform.position.z);
+
 		animator.SetBool("isAirJumpRotation", isAirjumpRotation);
 
 		bool holdItemJump = false;
@@ -477,7 +489,7 @@ public class Player : MonoBehaviour
 		{
 			if (XPad.Get.GetTrigger(XPad.KeyData.X, PlayerIndex))
 			{
-				effectManager.PlayPYON(PlayerIndex, FootPositionObj.transform.position);
+				effectManager.PlayPYON(PlayerIndex, effectPos);
 				rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 				cntAirJumpNum--;
 				SoundManager.Get.PlaySE("jump");
@@ -498,7 +510,7 @@ public class Player : MonoBehaviour
 			if (cntJumpCheckSec >= 0.1f)
 			{
 				cntAirJumpNum = AirJumpNum;
-				effectManager.PlayDUM(PlayerIndex, FootPositionObj.transform.position);
+				effectManager.PlayDUM(PlayerIndex, effectPos);
 				SoundManager.Get.PlaySE("AirJump");
 				jumpSpeed = GroundJumpPower;
 				isJump = true;
@@ -507,7 +519,7 @@ public class Player : MonoBehaviour
 				if (XPad.Get.GetRelease(XPad.KeyData.X, PlayerIndex))
 				{
 					cntAirJumpNum = AirJumpNum;
-					effectManager.PlayDUM(PlayerIndex, FootPositionObj.transform.position);
+					effectManager.PlayDUM(PlayerIndex, effectPos);
 					SoundManager.Get.PlaySE("AirJump");
 					jumpSpeed = GroundJumpPower - (GroundJumpPower / 3);
 					isJump = true;
@@ -890,9 +902,10 @@ public class Player : MonoBehaviour
 
 	private void Step()
 	{
+		Vector3 effectPos = new Vector3(transform.position.x, FootPositionObj[0].transform.position.y, FootPositionObj[0].transform.position.z);
 		if (IsOnGround())
 		{
-			effectManager.PlayTap(PlayerIndex, FootPositionObj.transform.position);
+			effectManager.PlayTap(PlayerIndex, effectPos);
 			SoundManager.Get.PlaySE("dash");
 		}
 	}
