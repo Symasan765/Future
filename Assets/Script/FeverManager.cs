@@ -15,7 +15,7 @@ public class FeverManager : MonoBehaviour {
 	private float cntFeverSec = 0;
 	private EffectManager effectManager;
 	private FeverManager feverManager;
-	private GameObject[] NormalEvidenceSpawnerObjects;
+	private GameObject[] NormalEvidenceSpawnerObjects = null;
 	private EvidenceSpawner[] evidenceSpawners;
 	private GameObject BossHitPositionObj;
 	void Start ()
@@ -50,11 +50,13 @@ public class FeverManager : MonoBehaviour {
 	{
 		for (int i = 0; i < NormalEvidenceSpawnerObjects.Length; i++)
 		{
-
-			EvidenceSpawner e = NormalEvidenceSpawnerObjects[i].GetComponent<EvidenceSpawner>();
-			if (!e.isSetBazooka)
+			if (NormalEvidenceSpawnerObjects != null)
 			{
-				return false;
+				EvidenceSpawner e = NormalEvidenceSpawnerObjects[i].GetComponent<EvidenceSpawner>();
+				if (!e.isSetBazooka)
+				{
+					return false;
+				}
 			}
 		}
 		return true;

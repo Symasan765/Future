@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
 	private float InvincibleSec = 90;
 	[SerializeField]
 	private float DamageSec = 40;
+	[SerializeField]
+	private LayerMask OnGroundLayer;
 
 	private float GetItemBlankSec = 0.25f;	//アイテムを持つ&捨てる時の硬直フレーム
 	private float CanHoldItemDistance = 1.0f;	//机を運べるようになる範囲
@@ -50,6 +52,8 @@ public class Player : MonoBehaviour
 	private bool isAirjumpRotation = false;
 	private bool isReleaceItem = false;
 	private bool isStandUp;
+	[SerializeField]
+	private bool isOnGround = false;
 
 	private int angleValue = 1;
 
@@ -105,6 +109,8 @@ public class Player : MonoBehaviour
 		animator.SetFloat("cntGetItemBlankTime", cntGetItemBlankSec);
 		animator.SetBool("isDamage", isDamage);
 		animator.SetBool("isOnGround", IsOnGround());
+
+		isOnGround = IsOnGround();
 
 		//操作不能時間のカウント
 		if (cntCantMoveSec > 0)
@@ -422,7 +428,7 @@ public class Player : MonoBehaviour
 			RaycastHit hit;
 			CapsuleCollider cc = GetComponent<CapsuleCollider>();
 			Vector3 sphirePos = new Vector3(FootPositionObj.transform.position.x, FootPositionObj.transform.position.y + scr, FootPositionObj.transform.position.z);
-			Physics.SphereCast(sphirePos, scr, Vector3.down, out hit);
+			Physics.SphereCast(sphirePos, scr, Vector3.down, out hit, OnGroundLayer);
 
 			if (hit.collider.tag != "Player" && hit.collider.tag != "Bazooka")
 			{
@@ -502,7 +508,8 @@ public class Player : MonoBehaviour
 		animator.SetBool("isJump", isJump);
 		if (isJump)
 		{
-			transform.position += Vector3.up * jumpSpeed * Time.deltaTime;
+			this.transform.Translate(Vector3.up * jumpSpeed * Time.deltaTime);
+			//transform.position += Vector3.up * jumpSpeed * Time.deltaTime;
 			jumpSpeed -= Gravity * JumpSpeed;
 			if (jumpSpeed <= 0)
 			{
