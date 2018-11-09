@@ -7,8 +7,11 @@ using UnityEngine;
 /// バズーカーの発射に関する動作を定義している。
 /// バズーカーのオブジェクトにコンポネントとして当てておく。
 /// </summary>
-public class BazookaRifle : MonoBehaviour
-{
+public class BazookaRifle : MonoBehaviour{
+
+	[SerializeField]
+	private float BulletAttackPower = 10.0f;	//弾の攻撃力
+
     [SerializeField]
     private GameObject BazookaPrefab;               //ここにバズーカーのPrefabをUnityのInspectorで割当しておく。（またはResourece.Loadでロードするといい）
 	private GameObject[] Evidence_temp = new GameObject[3];
@@ -126,11 +129,11 @@ public class BazookaRifle : MonoBehaviour
 	{
 		if (_isFever)
 		{
-			bossAttackManager.BossDamage(5);
+			bossAttackManager.BossDamage(BulletAttackPower);
 			effectManager.PlaySMASH(-1, _hitPos, -1);
 		} else
 		{
-			bossAttackManager.BossDamage(5 * nowSetEvidenceNum);
+			bossAttackManager.BossDamage(BulletAttackPower * nowSetEvidenceNum);
 			isFirstFeverEvidenceHit = true;
 			partyTimeManager.LetsParty();
 		}

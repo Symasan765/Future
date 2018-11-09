@@ -8,6 +8,7 @@ public class EvidenceSpawner : MonoBehaviour {
 	private float SpawnDeraySec = 3;
 	[SerializeField]
 	private float FeverEvidenceLifeTime = 10.0f;
+	
 	private bool FeverSpawner = false;
 	public GameObject evidenceObj;
 	public GameObject EffectObj;
