@@ -309,10 +309,19 @@ public class Player : MonoBehaviour
 
 		if (isOnCollisionStay)
 		{
-
+			float scr = 0.4f;
+			RaycastHit hit;
+			Vector3 sphirePos = new Vector3(FootPositionObj.transform.position.x, FootPositionObj.transform.position.y + scr, FootPositionObj.transform.position.z);
+			Physics.SphereCast(sphirePos, scr, Vector3.down, out hit);
+			if (hit.collider)
+			{
+				
+			}
 		} else
 		{
+			//transform.position += Vector3.forward * angleValue * Time.deltaTime * (rightSpeed + leftSpeed);
 			this.transform.Translate(Vector3.forward * angleValue * Time.deltaTime * (rightSpeed + leftSpeed));
+			//rb.MovePosition(rb.position + Vector3.forward * angleValue * Time.deltaTime * (rightSpeed + leftSpeed));
 		}
 	}
 
@@ -428,13 +437,14 @@ public class Player : MonoBehaviour
 			RaycastHit hit;
 			CapsuleCollider cc = GetComponent<CapsuleCollider>();
 			Vector3 sphirePos = new Vector3(FootPositionObj.transform.position.x, FootPositionObj.transform.position.y + scr, FootPositionObj.transform.position.z);
-			Physics.SphereCast(sphirePos, scr, Vector3.down, out hit, OnGroundLayer);
 
-			if (hit.collider.tag != "Player" && hit.collider.tag != "Bazooka")
+			int layerMask = LayerMask.GetMask(new string[] {"StageObject"});
+			Physics.SphereCast(sphirePos, scr, Vector3.down, out hit, 10, layerMask);
+			if (hit.collider)
 			{
 				if (hit.distance < 0.04f)
 				{
-					rb.velocity = Vector3.zero;
+					//rb.velocity = Vector3.zero;
 					return true;
 				}
 			}
