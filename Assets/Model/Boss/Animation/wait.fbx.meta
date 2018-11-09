@@ -413,7 +413,77 @@ ModelImporter:
     13700062: polySurface19
     13700064: polySurface20
     13700066: polySurface9
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boss_blinn1
+    second: {fileID: 2100000, guid: a489832c9a984864ab842590b7907f00, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boss_lambert2
+    second: {fileID: 2100000, guid: 5ed2605abefea844aa415bcc7ad7d2ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boss_lambert3
+    second: {fileID: 2100000, guid: 19ca3d7b9c7463d4384a15fe1dedb7df, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boss_lambert4
+    second: {fileID: 2100000, guid: 7a80363ed173a054588cd92bc8ac751e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boss_lambert5
+    second: {fileID: 2100000, guid: cc52346f458b7024f92d375a63527e51, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eye2
+    second: {fileID: 2100000, guid: ea29f37814d30b24884307c039794aec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ha
+    second: {fileID: 2100000, guid: 8a9602d5da8e9bc4e807836ce07d0de3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: huku_onnna2_2
+    second: {fileID: 2100000, guid: 293cf678a6982c74bbdabf61ec330371, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kuti
+    second: {fileID: 2100000, guid: d2763c411c483fd4daabedaf8433eac5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: l
+    second: {fileID: 2100000, guid: 39ef6d181b66be942947c95cfc92fba5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mayu
+    second: {fileID: 2100000, guid: ff6cc97a35251eb4ca65439103fdb3ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: skin
+    second: {fileID: 2100000, guid: 8b933135a234cc14e9d65cc86cda7b61, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: syatyou_hair
+    second: {fileID: 2100000, guid: e9ccae4f0f70c2c42b2fa1875a19319b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: syatyou_huku
+    second: {fileID: 2100000, guid: 44beb3743a885804da5d39702f9d50f2, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
