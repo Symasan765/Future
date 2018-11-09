@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
-public class ResultManager : MonoBehaviour {
+public class ResultManager : MonoBehaviour
+{
+	public GameObject m_PushAUI;
 
 	// Resultで必要な情報をここで取得してリザルト画面へ反映させる
 
@@ -16,26 +19,46 @@ public class ResultManager : MonoBehaviour {
 	public TextMesh m_DamageNumText;
 	public TextMesh m_RankStarText;
 
+	public GameObject m_FadeOutObj;
+
 	// こいつらにメインシーンでの数値を入れ込む
 	int m_TargetAttackValue = 50;
 	int m_TargetDamageValue = 10;
 
 	float m_AttackTimeCnt = 0;
 	float m_DamageTimeCnt = 0;
-
-	// TODO ここのフラグを外部からtrueに出来るオブジェクトを作成し、タイムラインから変更する
+	
 	bool m_AttackFlag = false;
 	bool m_DamageFlag = false;
 
 	// Use this for initialization
-	void Start () {
+	void Start()
+	{
 		// TODO ここでダメージと攻撃回数をメインシーンから取得して変数に入れる
+		
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
+	void Update()
+	{
 		AttackTextUpdate();
 		DamageTextUpdate();
+
+		if (m_PushAUI.active == true)
+		{
+			// タイムラインが終了している
+			if (XPad.Get.GetTrigger(XPad.KeyData.A, 0))
+			{
+				m_FadeOutObj.SetActive(true);
+			}
+
+			// フェードアウトも終わった
+			if (m_FadeOutObj.GetComponent<FadeObj>().IsEnd())
+			{
+				SoundManager.Get.StopBGM();
+				GetComponent<SceneBackLoder>().SceneChange();
+			}
+		}
 	}
 
 	// 数値スコアを徐々上げていく

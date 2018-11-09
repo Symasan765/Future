@@ -109,12 +109,62 @@ ModelImporter:
     13700014: pPlane3
     13700016: pSphere32
     13700018: pSphere33
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eye2
+    second: {fileID: 2100000, guid: 82af189d67485f2488f1ac78679093f3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eye3
+    second: {fileID: 2100000, guid: 5e65de0790c57e644bec9047d3e9e259, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: huku_man
+    second: {fileID: 2100000, guid: eff70ace3fe6f9b428c901fdcadb5e0b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: huku_mann2_2
+    second: {fileID: 2100000, guid: 828c8d1eefc9d4443a62bb5f720ff210, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: huku_onnna2_2
+    second: {fileID: 2100000, guid: 7c3832ac153ef1f469a7bad72c4045c2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kutu
+    second: {fileID: 2100000, guid: c086bda59d635b34ea81f097007dd21c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: man2_hair1
+    second: {fileID: 2100000, guid: 09975c64c0a0d724ab0d83ce17532479, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: man2_hair2
+    second: {fileID: 2100000, guid: 1074a9d8b0c10ac40ac1cb96803e448f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mayu
+    second: {fileID: 2100000, guid: 0be0c650890c50641936b35e3a321ed9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: skin
+    second: {fileID: 2100000, guid: aca0a8503d57614458bb366d66bbb874, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

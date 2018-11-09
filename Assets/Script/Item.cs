@@ -28,17 +28,10 @@ public class Item : MonoBehaviour {
 
 	private bool isInBazooka = false;
 	private bool isTriggerStay = false;
-	public bool isCheckCreatePosition = false;
 
 	private float cntScaleDownTime = 0;
-	private float feverFallSec = 0;
-	private float cntFeverFallSec = 0;
 	private float lifeTime = 0;
-	private float LifeTime = 2.0f;
-	private float nowLifeTimeMax;
-	private float cntCheckCreatePositionSec = 0;
-
-
+	private float LifeTime = 8.0f;
 
 	void Start ()
 	{
@@ -54,11 +47,6 @@ public class Item : MonoBehaviour {
 		{
 			boxCollider = GetComponent<BoxCollider>();
 		}
-		if (bazookaObj == null)
-		{
-			bazookaObj = GameObject.Find("BazookaRifle");
-		}
-		bazookaRifle = bazookaObj.GetComponent<BazookaRifle>();
 		if (feverManager == null)
 		{
 			feverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
@@ -82,130 +70,81 @@ public class Item : MonoBehaviour {
 		{
 			ModelObj.transform.localEulerAngles = new Vector3(0, ModelObj.transform.localEulerAngles.y + 2, 0);
 		}
+		//落下速度を固定
 		if (rb.velocity.y < -4)
 		{
 			rb.velocity = new Vector3(rb.velocity.x, -4, rb.velocity.z);
 		}
 
-		if (isCheckCreatePosition)
+		if (lifeTime > 0)
 		{
-			rb.velocity = Vector3.zero;
-			cntCheckCreatePositionSec += Time.deltaTime;
-			if (cntCheckCreatePositionSec >= 1 / 60)
+			//点滅処理
+			if (lifeTime > LifeTime / 4 && lifeTime < LifeTime / 2)
 			{
-				if (isTriggerStay)
+				if (Time.frameCount % 8 > 4)
 				{
-					Destroy(gameObject);
+					meshRenderer.enabled = false;
 				} else
 				{
-					bool flg = true;
-					RaycastHit hit;
-					Physics.BoxCast(new Vector3(transform.position.x,transform.position.y - 0.8f,transform.position.z), new Vector3(0.8f, 0.8f, 0.8f), transform.up * -1, out hit);
-					if (hit.collider)
-					{
-						//Debug.Log(hit.collider);
-						if (hit.collider.tag == "SYOUKO")
-						{
-							flg = false;
-						}
-					}
-					if (flg)
-					{
-						boxCollider.isTrigger = false;
-						effectManager.PlayCreateEvidence(transform.position);
-						isCheckCreatePosition = false;
-						meshRenderer.enabled = true;
-					} else
-					{
-						//Debug.Log("証拠があるので削除");
-						feverManager.SetCreateEvidenceSecMax();
-						Destroy(gameObject);
-					}
+					meshRenderer.enabled = true;
 				}
 			}
-		} else
-		{
-			if (lifeTime > 0)
+			if (lifeTime < LifeTime / 4)
 			{
-				//点滅処理
-				if (lifeTime > nowLifeTimeMax / 4 && lifeTime < nowLifeTimeMax / 2)
+				if (Time.frameCount % 3 > 1)
 				{
-					if (Time.frameCount % 8 > 4)
-					{
-						meshRenderer.enabled = false;
-					} else
-					{
-						meshRenderer.enabled = true;
-					}
-				}
-				if (lifeTime < nowLifeTimeMax / 4)
+					meshRenderer.enabled = false;
+				} else
 				{
-					if (Time.frameCount % 3 > 1)
-					{
-						meshRenderer.enabled = false;
-					} else
-					{
-						meshRenderer.enabled = true;
-					}
-				}
-
-				lifeTime -= Time.deltaTime;
-				if (lifeTime <= 0)
-				{
-					effectManager.PlayDelete(transform.position);
-					Destroy(gameObject);
-				}
-				if (isHold)
-				{
-					nowLifeTimeMax = LifeTime + Vector3.Distance(transform.position, bazookaObj.transform.position) * 0.5f;
-					lifeTime = nowLifeTimeMax;
+					meshRenderer.enabled = true;
 				}
 			}
 
+			lifeTime -= Time.deltaTime;
+			if (lifeTime <= 0)
+			{
+				effectManager.PlayDelete(transform.position);
+				Destroy(gameObject);
+			}
 			if (isHold)
 			{
-				meshRenderer.enabled = true;
-			}
-
-			//証拠スポナーから生成される証拠の処理
-			if (flgMoveToGetPos)
-			{
-				if (transform.position != getPosition)
-				{
-					Vector3 vec = getPosition - transform.localPosition;
-					transform.localPosition += vec * MoveSpeed * Time.deltaTime;
-				}
-			}
-
-			if (isScaleDown)
-			{
-				isInBazooka = true;
-				cntScaleDownTime += Time.deltaTime;
-				if (cntScaleDownTime >= 1.0f)
-				{
-					cntScaleDownTime = 1.0f;
-				}
-				transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(0, 0, 0), cntScaleDownTime);
-				if (cntScaleDownTime >= 1)
-				{
-					if (evidenceSpawnerObj != null)
-					{
-						evidenceSpawner.DeleteEvidenceObj();
-					}
-					bazookaRifle.SetEvidence(isFeverEvidence);
-					Destroy(gameObject);
-				}
-			}
-
-			if (Vector3.Distance(transform.position, bazookaObj.transform.position) <= bazookaRifle.EvidenceDistance / 2 && !IsHold())
-			{
-				isHold = true;
-				boxCollider.enabled = false;
-				SetItemLocalPosition(bazookaObj.transform.position);
-				flgMoveToGetPos = true;
-				isScaleDown = true;
+				lifeTime = LifeTime;
 			}
 		}
+
+		//指定された場所へ移動
+		if (flgMoveToGetPos)
+		{
+			if (transform.position != getPosition)
+			{
+				Vector3 vec = getPosition - transform.localPosition;
+				transform.localPosition += vec * MoveSpeed * Time.deltaTime;
+			}
+		}
+
+		//バズーカに入った時の縮小と削除処理
+		if (isScaleDown)
+		{
+			isInBazooka = true;
+			cntScaleDownTime += Time.deltaTime;
+			if (cntScaleDownTime >= 1.0f)
+			{
+				cntScaleDownTime = 1.0f;
+			}
+			transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(0, 0, 0), cntScaleDownTime);
+			if (cntScaleDownTime >= 1)
+			{
+				if (evidenceSpawnerObj != null)
+				{
+					evidenceSpawner.isSetBazooka = true;
+					evidenceSpawner.DeleteEvidenceObj();
+				}
+				bazookaRifle.SetEvidence(isFeverEvidence);
+				Destroy(gameObject);
+			}
+		}
+
+		//フィーバタイムが終わったら、持たれていないフィーバ証拠を全て削除
 		if (isFeverEvidence)
 		{
 			if (!isHold && !isInBazooka && !feverManager.IsFever())
@@ -232,37 +171,47 @@ public class Item : MonoBehaviour {
 		evidenceSpawner = _obj.GetComponent<EvidenceSpawner>();
 	}
 
-	public void SetNecessaryComponent(GameObject _bazookaObj, FeverManager _feverManager, EffectManager _effectManager)
+	/*
+	public void SetNecessaryComponent(FeverManager _feverManager, EffectManager _effectManager)
 	{
 		rb = GetComponent<Rigidbody>();
 		boxCollider = GetComponent<BoxCollider>();
 		meshRenderer = ModelObj.GetComponent<MeshRenderer>();
-		bazookaObj = _bazookaObj;
 		feverManager = _feverManager;
 		effectManager = _effectManager;
+	}*/
+
+	public void SetFeverValue()
+	{
+		isFeverEvidence = true;
+		lifeTime = LifeTime;
 	}
 
-	public void SetFeverValue(float _fallSec)
+	public void SetBazooka(GameObject _obj)
 	{
 		boxCollider.isTrigger = true;
-		meshRenderer.enabled = false;
-		isCheckCreatePosition = true;
-		isFeverEvidence = true;
-		feverFallSec = _fallSec;
-		nowLifeTimeMax = LifeTime + Vector3.Distance(transform.position, bazookaObj.transform.position) * 0.5f;
-		lifeTime = nowLifeTimeMax;
+		bazookaRifle = _obj.gameObject.GetComponent<BazookaRifle>();
+		isHold = true;
+		SetItemLocalPosition(_obj.transform.position);
+		flgMoveToGetPos = true;
+		isScaleDown = true;
 	}
 
+	/*
 	void OnTriggerStay(Collider other)
 	{
-		if (isCheckCreatePosition)
+		//バズーカに入っていない時にバズーカに触れた時
+		if (!flgMoveToGetPos)
 		{
-			feverManager.SetCreateEvidenceSecMax();
-			if (other.gameObject.tag == "Player")
+			if (other.tag == "Bazooka")
 			{
-				Destroy(gameObject);
+				bazookaRifle = other.gameObject.GetComponent<BazookaRifle>();
+				isHold = true;
+				SetItemLocalPosition(other.transform.position);
+				flgMoveToGetPos = true;
+				isScaleDown = true;
 			}
-			isTriggerStay = true;
 		}
-	}
+		
+	}*/
 }

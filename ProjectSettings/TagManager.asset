@@ -11,6 +11,9 @@ TagManager:
   - NormalEvidenceSpawner
   - FeverEvidenceSpawner
   - MoveDesk
+  - FxTemporaire
+  - Bazooka
+  - BossHitPosition
   layers:
   - Default
   - TransparentFX

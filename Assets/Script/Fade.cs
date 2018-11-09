@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
 /// フェード用スクリプト。
@@ -14,7 +12,7 @@ using UnityEngine.UI;
 /// 
 /// </summary>
 public class Fade : MonoBehaviour {
-    public enum FadeOption { FADEIN,FADEOUT};               //フェードの種類を定義
+    public enum FadeOption { FADEIN,FADEOUT,FLASH};               //フェードの種類を定義
     GameObject thisObject;                               //このスクリプトがついているゲームオブジェクト
     Image thisImage;                                     //そのオブジェクトからImageコンポネントを持ってきて確保する用途
     bool DoFadeIn = false;                                //フェードイン中
@@ -22,6 +20,10 @@ public class Fade : MonoBehaviour {
     bool FadeDone = false;                               //フェードが完了したかどうか
     bool FadeAll = false;                                 //このオブジェクトが画面全体のフェードのものかどうか
     bool NowFadeing = false;
+    bool Flash = false;
+    bool FadeSetted = false;
+    bool InitFadeSetting = false;
+
     Color FadeSpeed = new Color(0.0f, 0.0f, 0.0f, 0.01f);  //フェードする速さ
 
     Vector3 initPos;
@@ -101,6 +103,24 @@ public class Fade : MonoBehaviour {
                 }
                 
         }		
+        
+        if(Flash==true)
+        {
+            Color col = thisImage.color;
+            thisImage.color += FadeSpeed;
+            if (thisImage.color.a < 0.0f) 
+            {
+                FadeSpeed.a *= -1;
+                col.a = 0.0f;
+                thisImage.color = col;
+            }
+            if(thisImage.color.a>1.0f)
+            {
+                FadeSpeed.a *= -1;
+                col.a = 1.0f;
+                thisImage.color = col;
+            }
+        }
     }
 
     /// <summary>
@@ -108,22 +128,34 @@ public class Fade : MonoBehaviour {
     /// </summary>
     /// <param name="Option">フェードイン・フェードアウト</param>
     /// <param name="isThisImageAll">画面全体のフェードかどうか</param>
-    public void SetFade(int Option,float Speed, bool isThisImageAll)
+    public void SetFade(int Option,float Speed, bool isThisImageAll, bool InitSetting)
     {
-        FadeSpeed = new Color(0.0f, 0.0f, 0.0f, Speed);
-        switch (Option)
+        if(InitSetting==true)
         {
-            case (int)FadeOption.FADEIN:
-                DoFadeIn = true;
-                break;
-            case (int)FadeOption.FADEOUT:
-                DoFadeOut = true;
-                break;
+            FadeSetted = false;
         }
-        if (isThisImageAll == true)
+        if(FadeSetted==false)
         {
-            FadeAll = true;
+            FadeSpeed = new Color(0.0f, 0.0f, 0.0f, Speed);
+            switch (Option)
+            {
+                case (int)FadeOption.FADEIN:
+                    DoFadeIn = true;
+                    break;
+                case (int)FadeOption.FADEOUT:
+                    DoFadeOut = true;
+                    break;
+                case (int)FadeOption.FLASH:
+                    Flash = true;
+                    break;
+            }
+            if (isThisImageAll == true)
+            {
+                FadeAll = true;
+            }
+            FadeSetted = true;
         }
+        
     }
     
     /// <summary>
@@ -138,5 +170,18 @@ public class Fade : MonoBehaviour {
     public void SetFadeFlag(bool temp)
     {
         FadeDone = temp;
+    }
+
+    public void SetFadeSpeed(float Speed)
+    {
+        if(FadeSpeed.a<0)
+        {
+            FadeSpeed.a = -Speed;
+        }
+        else
+        {
+            FadeSpeed.a = Speed;
+        }
+        
     }
 }

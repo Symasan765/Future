@@ -25,11 +25,20 @@ public class BossAttackManager : MonoBehaviour
 	float[] m_AreaTime;
 
 	public float m_BossMaxDamage = 100.0f;
-	float m_BossDamage;
+	public float m_BossDamage;
 
 	public bool m_AttackFlag;   // ボスが攻撃してもいいかどうかのフラグ
 
 	BossAttackManager m_This;
+
+	public enum BossCondition
+	{
+		Margin,     // ボス余裕
+		Spicy,      //ボス辛い
+		Dying		// しにかけ
+	}
+
+	BossCondition m_Condition;
 
 	// Use this for initialization
 	void Start()
@@ -37,6 +46,7 @@ public class BossAttackManager : MonoBehaviour
 		m_This = this;
 		m_AttackFlag = true;
 		m_BossDamage = m_BossMaxDamage;
+		m_Condition = BossCondition.Margin;
 		GameObject[] obj = GameObject.FindGameObjectsWithTag("Player");
 		if (obj.Length != 4)
 			Debug.Log("キャラクターの人数が４人ではありません");
@@ -48,6 +58,11 @@ public class BossAttackManager : MonoBehaviour
 			m_PlayerObjs[i] = obj[i].GetComponent<Player>();
 
 		StartCoroutine("BossAttack");
+	}
+
+	private void Update()
+	{
+		ConditionUpdate();
 	}
 
 	/// <summary>
@@ -68,8 +83,8 @@ public class BossAttackManager : MonoBehaviour
 				// プレイヤーが特定のエリアにいればそのエリアに攻撃を発生させる
 				if (AreaNo != -1)
 				{
-					AttackID(AreaNo);
-					yield return new WaitForSeconds(3); // これで引数分の秒数の間、処理を待つ
+					float waitSec = AttackID(AreaNo);
+					yield return new WaitForSeconds(waitSec); // これで引数分の秒数の間、処理を待つ
 				} else
 				{
 					yield return new WaitForSeconds(0.5f);
@@ -129,22 +144,25 @@ public class BossAttackManager : MonoBehaviour
 	/// 
 	/// </summary>
 	/// <param name="ID">攻撃ID。攻撃範囲オブジェクトに着けているID</param>
-	void AttackID(int ID)
+	float AttackID(int ID)
 	{
+		float ret = 0.5f;
 		if (ID > m_MaxAttackID)
 		{
 			Debug.Log("err:スクリプト上にてボス攻撃IDにシーン配置されている攻撃ID以上の値が入力されました");
-			return;
+			return ret;
 		}
 
 		for (int i = 0; i < m_AttackList[ID].Count; i++)
 		{
 			var obj = m_AttackList[ID][i];
+			ret = obj.m_TimeSec;
 			var boss = Instantiate(m_RangePrefab).GetComponent<BossAttackRange>();
 			boss.AttackCommand(this,obj.transform.position, obj.transform.localScale, obj.m_TimeSec);
 		}
 
 		SoundManager.Get.PlaySE("BossAttackDangerous");
+		return ret;
 	}
 
 	/// <summary>
@@ -258,7 +276,7 @@ public class BossAttackManager : MonoBehaviour
 		Vector3 origin = m_PlayerObjs[targetNo].transform.position;
 		if (Physics.Raycast(origin, Vector3.forward, out info, 10.0f, mask))
 		{
-			int newAreaNo = info.transform.GetComponent<AreaJudgment>().m_SelectAttackNo;
+			int newAreaNo = info.transform.GetComponent<AreaJudgment>().NextAttackNo();
 			if (m_OldAreaNo == newAreaNo)
 			{
 				m_XORFlag = false;
@@ -290,5 +308,23 @@ public class BossAttackManager : MonoBehaviour
 	public void BossBehaviorSwitching(bool CanYouDoIt)
 	{
 		m_AttackFlag = CanYouDoIt;
+	}
+
+	void ConditionUpdate()
+	{
+		float t = m_BossDamage / m_BossMaxDamage;
+
+		if (t < 0.66f) m_Condition = BossCondition.Spicy;
+		if (t < 0.33f) m_Condition = BossCondition.Dying;
+	}
+
+	public BossCondition GetCondition()
+	{
+		return m_Condition;
+	}
+
+	public float GetBossHP()
+	{
+		return m_BossDamage;
 	}
 }

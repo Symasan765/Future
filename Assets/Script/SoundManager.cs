@@ -14,6 +14,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 
 	private AudioSource bgmSource;
 	private AudioSource[] seSources = new AudioSource[NumChannel];
+	private float[] seVolume = new float[NumChannel];
 
 	Queue<int> seRequestQueue = new Queue<int>();
 	
@@ -62,6 +63,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 			if (false == source.isPlaying)
 			{
 				source.clip = seClips[index];
+				source.volume = seVolume[index];
 				source.Play();
 				return;
 			}
@@ -101,15 +103,26 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 	{
 		PlaySE(GetSEIndex(_name));
 	}
-
+	public void PlaySE(string _name,float _volume)
+	{
+		PlaySE(GetSEIndex(_name),_volume);
+	}
 	public void PlaySE(int _index)
 	{
 		if (!seRequestQueue.Contains(_index))
 		{
+			seVolume[_index] = 1.0f;
 			seRequestQueue.Enqueue(_index);
 		}
 	}
-
+	public void PlaySE(int _index,float _volume)
+	{
+		if (!seRequestQueue.Contains(_index))
+		{
+			seVolume[_index] = _volume;
+			seRequestQueue.Enqueue(_index);
+		}
+	}
 	private int GetBGMIndex(string _name)
 	{
 		return bgmIndexs[_name];

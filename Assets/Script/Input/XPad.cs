@@ -62,6 +62,23 @@ public class XPad : SingletonMonoBehaviour<XPad>
 	}
 
 	/// <summary>
+	/// 誰かが指定のボタンを押していれば真を返す関数
+	/// </summary>
+	/// <param name="key"></param>
+	/// <returns></returns>
+	public bool AnyoneTrigger(KeyData key)
+	{
+		for(int i = 0; i < MaxControllerNum; i++)
+		{
+			if (GetTrigger(key, i))
+				return true;
+		}
+
+		// ここまで来たってことは誰もボタン押してない
+		return false;
+	}
+
+	/// <summary>
 	/// キーのリリース判定を行う
 	/// </summary>
 	/// <param name="key">独自キーコード。KeyData.…で取得できる</param>

@@ -16,6 +16,8 @@ public class PartyTimeManager : MonoBehaviour {
 	AudioSource m_NowBGM;
 	AudioSource m_NextBGM;
 
+	SoundDirector soundDirector;
+
 	float m_BossSky = 1.98f;
 	float m_PartySky = 2.55f;
 
@@ -41,10 +43,27 @@ public class PartyTimeManager : MonoBehaviour {
 		// ボス空へ移動が終わったていで進めてる
 		m_SkySrc = m_PartySky;
 		m_SkyDsc = m_BossSky;
-		m_NowBGM = Instantiate(m_PlayerAudioPrefab).GetComponent<AudioSource>();
-		m_NowBGM.Stop();
-		m_NextBGM = Instantiate(m_BossAudioPrefab).GetComponent<AudioSource>();
-		m_NextBGM.Play();
+
+		GameObject sd = GameObject.Find("SoundDirector");
+		if (sd != null)
+			soundDirector = sd.GetComponent<SoundDirector>();
+		else
+			soundDirector = null;
+
+		if (soundDirector != null)
+		{
+			m_NextBGM = soundDirector.NextBGM();
+			m_NextBGM.Play();
+			Debug.Log("再生" + m_NextBGM.gameObject.name);
+		}
+		else
+		{
+			Debug.Log("サウンドディレクターなし");
+			m_NowBGM = Instantiate(m_PlayerAudioPrefab).GetComponent<AudioSource>();
+			m_NowBGM.Stop();
+			m_NextBGM = Instantiate(m_BossAudioPrefab).GetComponent<AudioSource>();
+			m_NextBGM.Play();
+		}
 
 		SkyMaterial.mainTextureScale = new Vector2(m_SkyDsc, 1.0f);
 
@@ -72,10 +91,7 @@ public class PartyTimeManager : MonoBehaviour {
 
 	void BossAttackTurn()
 	{
-		if (XPad.Get.GetTrigger(XPad.KeyData.UP,0))
-		{
-			SwitchState(PartyState.PlayerAttack);
-		}
+		
 	}
 
 	void PlayerAttackTurn()
@@ -127,7 +143,7 @@ public class PartyTimeManager : MonoBehaviour {
 			m_SkyTimeSec += Time.deltaTime;
 			if (m_SkyTimeSec > SkyChangeTime)
 			{
-
+				m_NowBGM.Stop();
 			}
 		}
 	}
@@ -145,10 +161,20 @@ public class PartyTimeManager : MonoBehaviour {
 
 	void AudioSwitch()
 	{
+		// Nowがこの関数を呼んだあとにイチから音量が下がっていく
+		// Nextがこの関数を呼んだあとにゼロから音量が上がっていく
 		AudioSource tmp = m_NowBGM;
 		m_NowBGM = m_NextBGM;
-		m_NextBGM = tmp;
-		m_NextBGM.Stop();
+		// サウンドディレクターを取得出来ていれば音声を切り替える
+		if (soundDirector != null)
+		{
+			m_NextBGM = soundDirector.NextBGM();
+		}
+		else
+		{
+			m_NextBGM = tmp;
+			m_NextBGM.Stop();
+		}
 		m_NextBGM.Play();
 	}
 

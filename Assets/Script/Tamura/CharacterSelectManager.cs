@@ -21,6 +21,12 @@ public class CharacterSelectManager : MonoBehaviour {
     // 履歴書用リスト
     List<GameObject> sheetList = new List<GameObject>();
 
+    [SerializeField]
+    List<Animator> animaterList = new List<Animator>();
+
+    [SerializeField]
+    List<Camera> renderCamList = new List<Camera>();
+
     public List<int> unselectCharaList = new List<int>() { 0, 1, 2, 3 };
 
     [SerializeField]
@@ -63,7 +69,7 @@ public class CharacterSelectManager : MonoBehaviour {
 
             if (!aElement.GetIsCharacterSelected()) {
                 // n番のカーソルの位置を履歴書の顔写真の横に移動
-                aElement.cursorTransform = Vector3.Lerp(aElement.cursorTransform, portraitList[unselectCharaList[aElement.GetCursorPos()]].arrowPosList[cursorIndex].transform.position, 0.75f);
+                aElement.cursorTransform = Vector3.Lerp(aElement.cursorTransform, portraitList[unselectCharaList[aElement.GetCursorPos()]].arrowPosList[cursorIndex].transform.position, 0.25f);
                 if (aElement.cursorTransform == portraitList[unselectCharaList[aElement.GetCursorPos()]].arrowPosList[cursorIndex].transform.position) {
                     aElement.canSelect = true;
                 }
@@ -96,6 +102,10 @@ public class CharacterSelectManager : MonoBehaviour {
                     // ここで全キャラ準備完了のフラグを立てる
                     isWaiting = true;
                     TextCanvas.enabled = true;
+
+                    for (int i = 0; i < 4; i++) {
+                        Debug.Log("プレイヤー番号：" + i + "キャラ番号：" + CharacterManager.SelectedCharacters[i]);
+                    }
                 }
             }
             // 誰か選択済みでないならループを抜ける
@@ -135,7 +145,7 @@ public class CharacterSelectManager : MonoBehaviour {
         //--------------------------------------------------------------------
 
         // 操作が同フレームで重複しなかった場合の処理
-        CharacterManager.SetCharacter(_playerIndex, _cursorPos);
+        CharacterManager.SetCharacter(_playerIndex, unselectCharaList[_cursorPos]);
 
         unselectCharaList.RemoveAt(_cursorPos);
 

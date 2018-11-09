@@ -30,8 +30,7 @@ public class ShakeCamera : MonoBehaviour {
             }
             else {
                 vcam.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = Mathf.Lerp(fixShakeFreqency, 0.0f, shakePercentage);
-                Debug.Log(vcam.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>().m_FrequencyGain);
-                Debug.Log(shakePercentage);
+              
             }
         }
     }

@@ -16,7 +16,7 @@ public class BazookaRifle : MonoBehaviour
 	public GameObject m_AreaPrefab;
 	public GameObject BulletObj;
 	GameObject m_AreaEntity;
-	public GameObject BossObj;
+	private GameObject BossObj;
 	public GameObject[] CurvePointObj = new GameObject[2];
 
 	private ParticleSystem particleSystem;
@@ -26,10 +26,8 @@ public class BazookaRifle : MonoBehaviour
 	private BazookaBullet bazookaBullet;
 	private FeverManager feverManager;
 
-	public float EvidenceDistance = 3.0f;            //証拠を認識する範囲。
+	public float EvidenceDistance = 2.0f;            //証拠を認識する範囲。
     private int EvidenceNum = 0;                      //全体の証拠の数。
-	[SerializeField]
-	private int BazookaEvidenceNum;
     public int NearEvidenceNum = 0;                  //近づいた証拠の数。
 
 	public bool nowEvidenceNormal = false;
@@ -40,6 +38,7 @@ public class BazookaRifle : MonoBehaviour
 	private bool isFirstFeverEvidenceHit = false;
 	private void Start()
 	{
+		BossObj = GameObject.FindGameObjectWithTag("BossHitPosition");
 		feverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
 		effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
 		bossAttackManager = GameObject.Find("BossAttackManager").GetComponent<BossAttackManager>();
@@ -47,7 +46,6 @@ public class BazookaRifle : MonoBehaviour
 		m_AreaEntity = Instantiate(m_AreaPrefab);
 		m_AreaEntity.transform.parent = transform;
 		BazookaAreaUpdate();
-		BazookaEvidenceNum = GameObject.FindGameObjectsWithTag("NormalEvidenceSpawner").Length;
 	}
 
 	void Update()
@@ -57,26 +55,10 @@ public class BazookaRifle : MonoBehaviour
 			isFirstFeverEvidenceHit = false;
 		}
 		BazookaAreaUpdate();
-		Lightning();
+		//Lightning();
 		Explosion();
-		//GameObject Boss = GameObject.FindGameObjectWithTag("BOSS");
-        //Debug.Log(Boss);
-		//証拠を探す。
-		//DetectEvidence();
-		/*
-        //証拠が3つ以上だとバズーカーを発射し、証拠を削除。
-        if (NearEvidenceNum == 3)
-        {
-            Instantiate(BazookaPrefab);
-            BazookaPrefab.transform.position = this.transform.position;
-            BazookaPrefab.GetComponent<BazookaBullet>().SetBazooka(Boss.gameObject.transform.position, this.transform.position);
-            for(int i=0;i<3;i++)
-            {
-                Destroy(Evidence_temp[i]);
-            }
-        }*/
 
-		if (NearEvidenceNum == BazookaEvidenceNum)
+		if (feverManager.CanBazookaShot() && NearEvidenceNum > 0)
 		{
 			//普通の証拠
 			ShotBazooka(false);
@@ -122,7 +104,10 @@ public class BazookaRifle : MonoBehaviour
 			{
 				Vector3 effpos = new Vector3(BossObj.transform.position.x + Random.Range(-5, 5), BossObj.transform.position.y + Random.Range(-5, 5), BossObj.transform.position.z);
 				effectManager.PlayLightning(effpos);
-				SoundManager.Get.PlaySE("kanden");
+			}
+			if (Time.frameCount % (int)Random.Range(9, 17) == 0)
+			{
+				SoundManager.Get.PlaySE("kanden", 0.25f);
 			}
 		}
 	}
@@ -144,8 +129,8 @@ public class BazookaRifle : MonoBehaviour
 					ShakeCamera.Impact(0.03f, 0.2f);
 					Vector3 effpos = new Vector3(BossObj.transform.position.x + Random.Range(-5, 5), BossObj.transform.position.y + Random.Range(-5, 5), BossObj.transform.position.z);
 					effectManager.PlayExplosion(effpos);
-					SoundManager.Get.PlaySE("BulletHit1");
-					SoundManager.Get.PlaySE("BulletHit2");
+					SoundManager.Get.PlaySE("BulletHit1",0.35f);
+					SoundManager.Get.PlaySE("BulletHit2",0.35f);
 				}
 			}
 		}
@@ -167,8 +152,8 @@ public class BazookaRifle : MonoBehaviour
 		}
 		cntExplosionSec = ExplosionSec + 1;
 		effectManager.PlayExplosion(_hitPos);
-		SoundManager.Get.PlaySE("BulletHit1");
-		SoundManager.Get.PlaySE("BulletHit2");
+		SoundManager.Get.PlaySE("BulletHit1",0.7f);
+		SoundManager.Get.PlaySE("BulletHit2",0.7f);
 		ShakeCamera.Impact(0.05f, 1.0f);
 		bossAttackManager.BossDamage(5);
 	}
@@ -180,7 +165,7 @@ public class BazookaRifle : MonoBehaviour
 			XPad.Get.SetVibration(i, 0.7f, 0.7f, 0.2f);
 		}
 		ShakeCamera.Impact(0.05f, 0.5f);
-		SoundManager.Get.PlaySE("launcher2");
+		SoundManager.Get.PlaySE("launcher2",0.8f);
 		GameObject obj = Instantiate(EffectObj, transform.position, transform.rotation);
 		particleSystem = obj.GetComponent<ParticleSystem>();
 		particleSystem.Play();

@@ -1,0 +1,171 @@
+fileFormatVersion: 2
+guid: ec0b6b0429dd6eb4fa2d551f61a0af1e
+timeCreated: 1541684398
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: group3_pCube27
+    100002: pCube44
+    100004: pCylinder121
+    100006: //RootNode
+    400000: group3_pCube27
+    400002: pCube44
+    400004: pCylinder121
+    400006: //RootNode
+    2100000: Boss_lambert4
+    2100002: huku_onnna2_2
+    2100004: skin
+    2100006: Boss_lambert3
+    2100008: l
+    2100010: syatyou_huku
+    2100012: eye2
+    2100014: syatyou_hair
+    2100016: mayu
+    2100018: kuti
+    2100020: ha
+    2300000: group3_pCube27
+    2300002: pCube44
+    2300004: pCylinder121
+    3300000: group3_pCube27
+    3300002: pCube44
+    3300004: pCylinder121
+    4300000: group3_pCube27
+    4300002: pCylinder121
+    4300004: pCube44
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boss_lambert3
+    second: {fileID: 2100000, guid: c6642c5609d79ea449baaefe4d011891, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boss_lambert4
+    second: {fileID: 2100000, guid: e5477a496f189034a9d8c6191924a7f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eye2
+    second: {fileID: 2100000, guid: 7b3d4cc4eae744041a0a31ae67d249d5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ha
+    second: {fileID: 2100000, guid: 8a9602d5da8e9bc4e807836ce07d0de3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: huku_onnna2_2
+    second: {fileID: 2100000, guid: 293cf678a6982c74bbdabf61ec330371, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kuti
+    second: {fileID: 2100000, guid: d2763c411c483fd4daabedaf8433eac5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: l
+    second: {fileID: 2100000, guid: 758916986672fdc45a4960eff89aaa19, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mayu
+    second: {fileID: 2100000, guid: ff6cc97a35251eb4ca65439103fdb3ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: skin
+    second: {fileID: 2100000, guid: 8b933135a234cc14e9d65cc86cda7b61, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: syatyou_hair
+    second: {fileID: 2100000, guid: e9ccae4f0f70c2c42b2fa1875a19319b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: syatyou_huku
+    second: {fileID: 2100000, guid: 856b702ab0b10ad49b8bf6c3c48e2e1a, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

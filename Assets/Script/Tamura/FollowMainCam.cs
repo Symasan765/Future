@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class FollowMainCam : MonoBehaviour {
 	void Update () {
-        this.transform.position = Camera.main.transform.position;
+		var maincam = Camera.main;
+		if(maincam != null)
+		{
+			this.transform.position = maincam.transform.position;
+		}
 	}
 }

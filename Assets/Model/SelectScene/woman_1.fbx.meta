@@ -1,0 +1,229 @@
+fileFormatVersion: 2
+guid: f6e89b03dbb3eff4fb8bd6170f0d4d56
+timeCreated: 1541578104
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: mixamorig:Head
+    100002: mixamorig:HeadTop_End
+    100004: mixamorig:Hips
+    100006: mixamorig:LeftArm
+    100008: mixamorig:LeftFoot
+    100010: mixamorig:LeftForeArm
+    100012: mixamorig:LeftHand
+    100014: mixamorig:LeftLeg
+    100016: mixamorig:LeftShoulder
+    100018: mixamorig:LeftToe_End
+    100020: mixamorig:LeftToeBase
+    100022: mixamorig:LeftUpLeg
+    100024: mixamorig:Neck
+    100026: mixamorig:RightArm
+    100028: mixamorig:RightFoot
+    100030: mixamorig:RightForeArm
+    100032: mixamorig:RightHand
+    100034: mixamorig:RightLeg
+    100036: mixamorig:RightShoulder
+    100038: mixamorig:RightToe_End
+    100040: mixamorig:RightToeBase
+    100042: mixamorig:RightUpLeg
+    100044: mixamorig:Spine
+    100046: mixamorig:Spine1
+    100048: mixamorig:Spine2
+    100050: pCube23
+    100052: pCylinder82
+    100054: pCylinder91
+    100056: pCylinder92
+    100058: polySurface3
+    100060: polySurface6
+    100062: polySurface8
+    100064: pSphere28
+    100066: pSphere31
+    100068: //RootNode
+    400000: mixamorig:Head
+    400002: mixamorig:HeadTop_End
+    400004: mixamorig:Hips
+    400006: mixamorig:LeftArm
+    400008: mixamorig:LeftFoot
+    400010: mixamorig:LeftForeArm
+    400012: mixamorig:LeftHand
+    400014: mixamorig:LeftLeg
+    400016: mixamorig:LeftShoulder
+    400018: mixamorig:LeftToe_End
+    400020: mixamorig:LeftToeBase
+    400022: mixamorig:LeftUpLeg
+    400024: mixamorig:Neck
+    400026: mixamorig:RightArm
+    400028: mixamorig:RightFoot
+    400030: mixamorig:RightForeArm
+    400032: mixamorig:RightHand
+    400034: mixamorig:RightLeg
+    400036: mixamorig:RightShoulder
+    400038: mixamorig:RightToe_End
+    400040: mixamorig:RightToeBase
+    400042: mixamorig:RightUpLeg
+    400044: mixamorig:Spine
+    400046: mixamorig:Spine1
+    400048: mixamorig:Spine2
+    400050: pCube23
+    400052: pCylinder82
+    400054: pCylinder91
+    400056: pCylinder92
+    400058: polySurface3
+    400060: polySurface6
+    400062: polySurface8
+    400064: pSphere28
+    400066: pSphere31
+    400068: //RootNode
+    2100000: huku_onnna2_2
+    2100002: skin
+    2100004: eye2
+    2100006: eye1
+    2100008: woman1_hair1
+    2100010: woman1_hair2
+    2100012: eye3
+    2100014: mayu
+    2100016: huku_woman1_1
+    4300000: polySurface6
+    4300002: polySurface8
+    4300004: pCylinder91
+    4300006: pCylinder92
+    4300008: pSphere28
+    4300010: pSphere31
+    4300012: pCube23
+    4300014: polySurface3
+    7400000: mixamo.com
+    9500000: //RootNode
+    13700000: pCube23
+    13700002: pCylinder91
+    13700004: pCylinder92
+    13700006: polySurface3
+    13700008: polySurface6
+    13700010: polySurface8
+    13700012: pSphere28
+    13700014: pSphere31
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eye1
+    second: {fileID: 2100000, guid: 946b3a51ef1efb949abdc7956b7b66c5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eye2
+    second: {fileID: 2100000, guid: 143b188559dca844e8457a526a3a7137, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eye3
+    second: {fileID: 2100000, guid: 76089f9680b77744f9d38a6e26e3aba8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: huku_onnna2_2
+    second: {fileID: 2100000, guid: 4a7dad72e59e2304a8a2b43124d9ddc6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: huku_woman1_1
+    second: {fileID: 2100000, guid: ab52e43090a320b49aa7ba3d2115efe3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mayu
+    second: {fileID: 2100000, guid: 8a9326d808cda8f42a114513d6fb339b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: skin
+    second: {fileID: 2100000, guid: cce3e6eaabf30774f87095818e36c8e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: woman1_hair1
+    second: {fileID: 2100000, guid: 068b5e222085fa044acbdec049e676d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: woman1_hair2
+    second: {fileID: 2100000, guid: 63fdf90170183c641b3fca132124f880, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

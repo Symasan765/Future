@@ -8,28 +8,22 @@ public class FeverManager : MonoBehaviour {
 
 	[SerializeField]
 	private float FeverSec = 10;
-	[SerializeField]
-	private float CreateEviDeraySec = 0.2f;
-	[SerializeField]
-	private float HorizontalRange = 10;
-	[SerializeField]
-	private float VirticalRange = 10;
-	[SerializeField]
-	private float VirtivalOriginPosition = 7;
-	public GameObject EvidenceObj;
 
 	private bool isStart = false;
 	
 	private float feverSec;
 	private float cntFeverSec = 0;
-	private float cntCreateEvidenceSec = 0;
-	private GameObject BazookaObj;
 	private EffectManager effectManager;
 	private FeverManager feverManager;
+	private GameObject[] NormalEvidenceSpawnerObjects;
+	private EvidenceSpawner[] evidenceSpawners;
 	void Start ()
 	{
+		//ステージ上にある通常証拠スポナーを全部取得
+		NormalEvidenceSpawnerObjects = GameObject.FindGameObjectsWithTag("NormalEvidenceSpawner");
+		Debug.Log("ノーマル証拠の数：" + NormalEvidenceSpawnerObjects.Length);
+
 		feverSec = FeverSec;
-		BazookaObj = GameObject.Find("BazookaRifle");
 		effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
 		feverManager = GetComponent<FeverManager>();
 	}
@@ -38,24 +32,29 @@ public class FeverManager : MonoBehaviour {
 	{
 		if (isStart)
 		{
+			//フィーバータイムのカウント
 			cntFeverSec -= Time.deltaTime;
 			if (cntFeverSec <= 0)
 			{
-				cntCreateEvidenceSec = 0;
 				cntFeverSec = 0;
 				isStart = false;
 			}
+		}
+	}
 
-			cntCreateEvidenceSec += Time.deltaTime;
-			if (cntCreateEvidenceSec >= CreateEviDeraySec)
+	//バズーカのショット可能かどうかを返す
+	public bool CanBazookaShot()
+	{
+		for (int i = 0; i < NormalEvidenceSpawnerObjects.Length; i++)
+		{
+
+			EvidenceSpawner e = NormalEvidenceSpawnerObjects[i].GetComponent<EvidenceSpawner>();
+			if (!e.isSetBazooka)
 			{
-				cntCreateEvidenceSec = 0;
-				Vector3 pos = new Vector3(Random.Range(HorizontalRange / 2 * -1,HorizontalRange / 2),Random.Range(VirticalRange / 2 * -1,VirticalRange / 2) + VirtivalOriginPosition,transform.position.z);
-				Item item = Instantiate(EvidenceObj, pos, transform.rotation).GetComponent<Item>();
-				item.SetNecessaryComponent(BazookaObj, feverManager, effectManager);
-				item.SetFeverValue(Random.Range(1, 4));
+				return false;
 			}
 		}
+		return true;
 	}
 
 	public void StartFever(float _feverSec)
@@ -63,16 +62,10 @@ public class FeverManager : MonoBehaviour {
 		if (!isStart)
 		{
 			Vector3 pos = new Vector3(cameraObj.transform.position.x, cameraObj.transform.position.y, 0);
-			Debug.Log("FEVER開始(⋈◍＞◡＜◍)。✧♡");
 			effectManager.PlayFEVER(-1, pos, -5);
 			cntFeverSec = _feverSec;
 			isStart = true;
 		}
-	}
-
-	public void SetCreateEvidenceSecMax()
-	{
-		cntCreateEvidenceSec = CreateEviDeraySec;
 	}
 
 	public bool IsFever()

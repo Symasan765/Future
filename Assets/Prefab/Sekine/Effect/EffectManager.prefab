@@ -65,3 +65,6 @@ MonoBehaviour:
     type: 2}
   EffectLightning: {fileID: 1376804535803542, guid: eb2a8b1913617be409593bd4d6a7c2c3,
     type: 2}
+  EffectDown: {fileID: 1107877012052426, guid: f07dc32b6d6330b4ab84b0836dc43ac1, type: 2}
+  EffectRespawnHeart: {fileID: 1273942130558040, guid: ab678d816ad1cbd47a1a7b5ab175888d,
+    type: 2}
