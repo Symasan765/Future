@@ -843,7 +843,6 @@ public class Player : MonoBehaviour
 		{
 			if (other.gameObject.tag == "Bazooka")
 			{
-				Debug.Log("(^_-)-☆");
 				GameObject io = getItemObj;
 				Item i = io.GetComponent<Item>();
 				ReleaseItem();

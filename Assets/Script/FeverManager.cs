@@ -17,8 +17,10 @@ public class FeverManager : MonoBehaviour {
 	private FeverManager feverManager;
 	private GameObject[] NormalEvidenceSpawnerObjects;
 	private EvidenceSpawner[] evidenceSpawners;
+	private GameObject BossHitPositionObj;
 	void Start ()
 	{
+		BossHitPositionObj = GameObject.FindGameObjectWithTag("BossHitPosition");
 		//ステージ上にある通常証拠スポナーを全部取得
 		NormalEvidenceSpawnerObjects = GameObject.FindGameObjectsWithTag("NormalEvidenceSpawner");
 		Debug.Log("ノーマル証拠の数：" + NormalEvidenceSpawnerObjects.Length);
@@ -30,6 +32,7 @@ public class FeverManager : MonoBehaviour {
 	
 	void Update ()
 	{
+		Lightning();
 		if (isStart)
 		{
 			//フィーバータイムのカウント
@@ -65,6 +68,22 @@ public class FeverManager : MonoBehaviour {
 			effectManager.PlayFEVER(-1, pos, -5);
 			cntFeverSec = _feverSec;
 			isStart = true;
+		}
+	}
+
+	private void Lightning()
+	{
+		if (feverManager.IsFever())
+		{
+			if (Time.frameCount % (int)Random.Range(5, 12) == 0)
+			{
+				Vector3 effpos = new Vector3(BossHitPositionObj.transform.position.x + Random.Range(-5, 5), BossHitPositionObj.transform.position.y + Random.Range(-5, 5), BossHitPositionObj.transform.position.z);
+				effectManager.PlayLightning(effpos);
+			}
+			if (Time.frameCount % (int)Random.Range(9, 17) == 0)
+			{
+				SoundManager.Get.PlaySE("kanden", 0.25f);
+			}
 		}
 	}
 

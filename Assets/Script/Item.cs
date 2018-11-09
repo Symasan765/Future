@@ -171,16 +171,6 @@ public class Item : MonoBehaviour {
 		evidenceSpawner = _obj.GetComponent<EvidenceSpawner>();
 	}
 
-	/*
-	public void SetNecessaryComponent(FeverManager _feverManager, EffectManager _effectManager)
-	{
-		rb = GetComponent<Rigidbody>();
-		boxCollider = GetComponent<BoxCollider>();
-		meshRenderer = ModelObj.GetComponent<MeshRenderer>();
-		feverManager = _feverManager;
-		effectManager = _effectManager;
-	}*/
-
 	public void SetFeverValue()
 	{
 		isFeverEvidence = true;
@@ -196,22 +186,4 @@ public class Item : MonoBehaviour {
 		flgMoveToGetPos = true;
 		isScaleDown = true;
 	}
-
-	/*
-	void OnTriggerStay(Collider other)
-	{
-		//バズーカに入っていない時にバズーカに触れた時
-		if (!flgMoveToGetPos)
-		{
-			if (other.tag == "Bazooka")
-			{
-				bazookaRifle = other.gameObject.GetComponent<BazookaRifle>();
-				isHold = true;
-				SetItemLocalPosition(other.transform.position);
-				flgMoveToGetPos = true;
-				isScaleDown = true;
-			}
-		}
-		
-	}*/
 }

@@ -35,6 +35,8 @@ public class BazookaRifle : MonoBehaviour
 	private float ExplosionSec = 2;
 	private float cntExplosionSec = 0;
 
+	private int nowSetEvidenceNum = 0;
+
 	private bool isFirstFeverEvidenceHit = false;
 	private void Start()
 	{
@@ -61,8 +63,8 @@ public class BazookaRifle : MonoBehaviour
 		if (feverManager.CanBazookaShot() && NearEvidenceNum > 0)
 		{
 			//普通の証拠
+			nowSetEvidenceNum = NearEvidenceNum;
 			ShotBazooka(false);
-			//partyTimeManager.LetsParty();
 			NearEvidenceNum = 0;
 		}
 
@@ -96,22 +98,6 @@ public class BazookaRifle : MonoBehaviour
 		m_AreaEntity.transform.position = pos;
 	}
 
-	private void Lightning()
-	{
-		if (feverManager.IsFever() && isFirstFeverEvidenceHit)
-		{
-			if (Time.frameCount % (int)Random.Range(5,12) == 0)
-			{
-				Vector3 effpos = new Vector3(BossObj.transform.position.x + Random.Range(-5, 5), BossObj.transform.position.y + Random.Range(-5, 5), BossObj.transform.position.z);
-				effectManager.PlayLightning(effpos);
-			}
-			if (Time.frameCount % (int)Random.Range(9, 17) == 0)
-			{
-				SoundManager.Get.PlaySE("kanden", 0.25f);
-			}
-		}
-	}
-
 	private void Explosion()
 	{
 		if (cntExplosionSec > 0)
@@ -140,9 +126,11 @@ public class BazookaRifle : MonoBehaviour
 	{
 		if (_isFever)
 		{
+			bossAttackManager.BossDamage(5);
 			effectManager.PlaySMASH(-1, _hitPos, -1);
 		} else
 		{
+			bossAttackManager.BossDamage(5 * nowSetEvidenceNum);
 			isFirstFeverEvidenceHit = true;
 			partyTimeManager.LetsParty();
 		}
@@ -155,7 +143,7 @@ public class BazookaRifle : MonoBehaviour
 		SoundManager.Get.PlaySE("BulletHit1",0.7f);
 		SoundManager.Get.PlaySE("BulletHit2",0.7f);
 		ShakeCamera.Impact(0.05f, 1.0f);
-		bossAttackManager.BossDamage(5);
+	
 	}
 
 	private void ShotBazooka(bool _isFeverEvidence)
