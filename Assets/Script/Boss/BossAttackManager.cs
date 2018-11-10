@@ -84,6 +84,7 @@ public class BossAttackManager : MonoBehaviour
 				// プレイヤーが特定のエリアにいればそのエリアに攻撃を発生させる
 				if (AreaNo != -1)
 				{
+					Debug.Log("攻撃エリア" + AreaNo);
 					float waitSec = AttackID(AreaNo);
 					yield return new WaitForSeconds(waitSec); // これで引数分の秒数の間、処理を待つ
 				} else
@@ -287,7 +288,7 @@ public class BossAttackManager : MonoBehaviour
 				m_XORFlag = true;
 				m_OldAreaNo = newAreaNo;
 			}
-			return info.transform.GetComponent<AreaJudgment>().m_AreaNo;
+			return info.transform.GetComponent<AreaJudgment>().NextAttackNo();
 		}
 		return -1;
 	}
