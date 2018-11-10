@@ -42,11 +42,11 @@ public class BazookaRifle : MonoBehaviour{
 	private int nowSetEvidenceNum = 0;
 
 	private bool isFirstFeverEvidenceHit = false;
+	private bool canShot = false;
 	private void Start()
 	{
 		stageChangeManager = GameObject.Find("StageChangeManager").GetComponent<StageChangeManager>();
 		BossObj = GameObject.FindGameObjectWithTag("BossHitPosition");
-		Debug.Log("ボスのヒット位置" + BossObj);
 		feverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
 		effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
 		bossAttackManager = GameObject.FindGameObjectWithTag("BossManager").GetComponent<BossAttackManager>();
