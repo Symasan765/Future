@@ -92,7 +92,6 @@ public class StageChangeManager : MonoBehaviour {
 		{
 			Destroy(nowStageObject);		//ステージの削除
 			CreateStage(_nextStageIndex);	//ステージ生成
-			bossAttackManager.SearchAttackObj();//AttackObjリロード
 			isChangeStage = false;
 		}
 	}
@@ -101,6 +100,7 @@ public class StageChangeManager : MonoBehaviour {
 	{
 		nowStageObject = Instantiate(StageObjects[_stageIndex], transform.position, transform.rotation);
 		nowStageObject.name = "Stage" + nowStageIndex;
+		bossAttackManager.SearchAttackObj();//AttackObjリロード
 	}
 
 	public bool CanBazookaShot()
