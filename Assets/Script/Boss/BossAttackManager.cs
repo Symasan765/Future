@@ -56,15 +56,6 @@ public class BossAttackManager : MonoBehaviour
 		m_AttackFlag = true;
 		m_BossDamage = m_BossMaxDamage;
 		m_Condition = BossCondition.Margin;
-		GameObject[] obj = GameObject.FindGameObjectsWithTag("Player");
-		if (obj.Length != 4)
-			Debug.Log("キャラクターの人数が４人ではありません");
-
-		SearchAttackObj();
-
-		m_PlayerObjs = new Player[obj.Length];
-		for (int i = 0; i < obj.Length; i++)
-			m_PlayerObjs[i] = obj[i].GetComponent<Player>();
 	}
 
 	private void Update()
@@ -115,6 +106,8 @@ public class BossAttackManager : MonoBehaviour
 			}
 			else
 			{
+				if (nowChangeNum != m_StageChangeNum)
+					yield return null;
 				yield return new WaitForSeconds(2.0f);
 			}
 		}
@@ -255,6 +248,15 @@ public class BossAttackManager : MonoBehaviour
 
 	public void SearchAttackObj()
 	{
+		GameObject[] obj = GameObject.FindGameObjectsWithTag("Player");
+		if (obj.Length != 4)
+			Debug.Log("キャラクターの人数が４人ではありません");
+
+		m_PlayerObjs = new Player[obj.Length];
+		for (int i = 0; i < obj.Length; i++)
+			m_PlayerObjs[i] = obj[i].GetComponent<Player>();
+
+
 		m_StageChangeNum += 1;	// ステージ変更回数カウント
 		GameObject[] attackObjects;
 		// 攻撃用オブジェクトの探索を行う
