@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossAttackRange : MonoBehaviour {
+public class BossAttackRange : MonoBehaviour
+{
 
-	Vector3 m_AttackPos;		// 攻撃中心位置
+	Vector3 m_AttackPos;        // 攻撃中心位置
 	Vector2 m_Range;          // 攻撃範囲
 	float m_AttackTime;      // 攻撃秒数
 	float m_AttackCount;        // 攻撃までのカウント
@@ -22,10 +23,13 @@ public class BossAttackRange : MonoBehaviour {
 
 	AttackID m_AttackID;
 
+	bool BeamInit = false;
+
 	// Update is called once per frame
-	void Update () {
+	void Update()
+	{
 		// 攻撃中止！
-		if(m_BossAttackManager.m_AttackFlag == false)
+		if (m_BossAttackManager.m_AttackFlag == false)
 		{
 			Destroy(m_AttackRangeBoard);
 			Destroy(gameObject);
@@ -40,7 +44,7 @@ public class BossAttackRange : MonoBehaviour {
 	/// <param name="atackPos">攻撃中心座標</param>
 	/// <param name="range">攻撃範囲</param>
 	/// <param name="atackTime">攻撃までの時間</param>
-	public void AttackCommand(BossAttackManager bm,Vector2 atackPos,Vector2 range,float atackTime, AttackID ID)
+	public void AttackCommand(BossAttackManager bm, Vector2 atackPos, Vector2 range, float atackTime, AttackID ID)
 	{
 		// 攻撃できなければ登録せず破棄して終了
 		if (bm.m_AttackFlag == false)
@@ -58,7 +62,7 @@ public class BossAttackRange : MonoBehaviour {
 		m_Material = m_AttackRangeBoard.GetComponent<Renderer>().material;
 
 		// 攻撃情報保持
-		m_AttackPos = new Vector3(atackPos.x, atackPos.y,5.5f);
+		m_AttackPos = new Vector3(atackPos.x, atackPos.y, 5.5f);
 		m_Range = range;
 		m_AttackTime = atackTime;
 		m_AttackCount = 0.0f;
@@ -70,7 +74,7 @@ public class BossAttackRange : MonoBehaviour {
 
 	void AttackUpdate()
 	{
-		if(m_AttackCount < m_AttackTime)
+		if (m_AttackCount < m_AttackTime)
 		{
 			// 点滅処理
 			RangeFlashing();
@@ -90,9 +94,9 @@ public class BossAttackRange : MonoBehaviour {
 		}
 		else
 		{
-            // タイマーが0になった時にプレイヤーを攻撃
+			// タイマーが0になった時にプレイヤーを攻撃
 			AttackPlayer();
-            SoundManager.Get.PlaySE("BossAttack");
+			SoundManager.Get.PlaySE("BossAttack");
 		}
 	}
 
@@ -100,14 +104,14 @@ public class BossAttackRange : MonoBehaviour {
 	{
 		float t = remainingTime / m_LimitTime;
 		t = t * t * (3 - 2 * t);
-		m_AttackRangeBoard.transform.localScale = new Vector3(m_Range.x, m_Range.y * t, 1.0f) ;
+		m_AttackRangeBoard.transform.localScale = new Vector3(m_Range.x, m_Range.y * t, 1.0f);
 	}
 
 	void RangeFlashing()
 	{
 		// TODO 現在適当に点滅
 		int cnt = (int)(m_AttackCount / 0.1f);
-		if(cnt % 3 == 0)
+		if (cnt % 3 == 0)
 		{
 			m_AttackRangeBoard.active = false;
 		}
@@ -123,9 +127,9 @@ public class BossAttackRange : MonoBehaviour {
 		if (m_AttackFlag)
 		{
 			RaycastHit[] hitInfo = Physics.BoxCastAll(m_AttackPos, new Vector3(m_Range.x / 2.0f, m_Range.y / 2.0f, 0.0f), Vector3.back, Quaternion.identity, 15.0f);
-			
+
 			// 当たったオブジェクトからプレイヤーを探してダメージ処理
-			for(int i = 0; i < hitInfo.Length; i++)
+			for (int i = 0; i < hitInfo.Length; i++)
 			{
 				if (hitInfo[i].collider.gameObject.tag == "Player")
 					hitInfo[i].collider.gameObject.GetComponent<Player>().HitBossAttack();
@@ -155,7 +159,7 @@ public class BossAttackRange : MonoBehaviour {
 				{
 					int idx = hitInfo[i].collider.gameObject.GetComponent<Player>().PlayerIndex;
 					float t = m_AttackCount / m_AttackTime;     // 徐々に振動を強くする
-					XPad.Get.SetVibration(idx, 0.0f, t, 0.2f * (1.0f -t));		// タイムの式は後半ほど振動を細切れにしている
+					XPad.Get.SetVibration(idx, 0.0f, t, 0.2f * (1.0f - t));     // タイムの式は後半ほど振動を細切れにしている
 				}
 			}
 		}
