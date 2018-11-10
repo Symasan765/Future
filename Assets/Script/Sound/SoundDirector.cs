@@ -26,34 +26,45 @@ public class SoundDirector : MonoBehaviour {
 	float m_BossHP = 0;
 	float m_BossInitHp = 0;
 
+	bool m_InitFlag = false;
+	void InitStart()
+	{
+		if(m_InitFlag == false)
+		{
+			m_BossManager = GameObject.Find("BossAttackManager").GetComponent<BossAttackManager>();
+			m_BossInitHp = m_BossManager.m_BossMaxDamage;
+			m_BossHP = m_BossInitHp;
+
+			Init(out m_FeverStartBGM, transform.Find("FeverStart"));
+			Init(out m_FeverMiddleBGM, transform.Find("FeverMiddle"));
+			Init(out m_FeverEndBGM, transform.Find("FeverEnd"));
+
+			Init(out m_BossStartBGM, transform.Find("BossStart"));
+			Init(out m_BossMiddleBGM, transform.Find("BossMiddle"));
+			Init(out m_BossEndBGM, transform.Find("BossEnd"));
+
+
+			if (m_FeverStartBGM.Length == 0)
+				Debug.LogError("BGMが登録されてない");
+			if (m_FeverMiddleBGM.Length == 0)
+				Debug.LogError("BGMが登録されてない");
+			if (m_FeverEndBGM.Length == 0)
+				Debug.LogError("BGMが登録されてない");
+
+			if (m_BossStartBGM.Length == 0)
+				Debug.LogError("BGMが登録されてない");
+			if (m_BossMiddleBGM.Length == 0)
+				Debug.LogError("BGMが登録されてない");
+			if (m_BossEndBGM.Length == 0)
+				Debug.LogError("BGMが登録されてない");
+
+			m_InitFlag = true;
+		}
+	}
+
 	// Use this for initialization
 	void Start () {
-		m_BossManager = GameObject.Find("BossAttackManager").GetComponent<BossAttackManager>();
-		m_BossInitHp = m_BossManager.m_BossMaxDamage;
-		m_BossHP = m_BossInitHp;
-
-		Init(out m_FeverStartBGM, transform.Find("FeverStart"));
-		Init(out m_FeverMiddleBGM, transform.Find("FeverMiddle"));
-		Init(out m_FeverEndBGM, transform.Find("FeverEnd"));
-
-		Init(out m_BossStartBGM, transform.Find("BossStart"));
-		Init(out m_BossMiddleBGM, transform.Find("BossMiddle"));
-		Init(out m_BossEndBGM, transform.Find("BossEnd"));
-
-
-		if (m_FeverStartBGM.Length == 0)
-			Debug.LogError("BGMが登録されてない");
-		if (m_FeverMiddleBGM.Length == 0)
-			Debug.LogError("BGMが登録されてない");
-		if (m_FeverEndBGM.Length == 0)
-			Debug.LogError("BGMが登録されてない");
-
-		if (m_BossStartBGM.Length == 0)
-			Debug.LogError("BGMが登録されてない");
-		if (m_BossMiddleBGM.Length == 0)
-			Debug.LogError("BGMが登録されてない");
-		if (m_BossEndBGM.Length == 0)
-			Debug.LogError("BGMが登録されてない");
+		InitStart();
 	}
 
 	private void Init(out GameObject[] objs,Transform child)
@@ -69,6 +80,7 @@ public class SoundDirector : MonoBehaviour {
 	
 	public AudioSource NextBGM()
 	{
+		InitStart();
 		AudioSource Ret = null;
 		if (EnemyAttack)
 		{
