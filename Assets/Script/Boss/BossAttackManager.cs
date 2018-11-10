@@ -101,6 +101,10 @@ public class BossAttackManager : MonoBehaviour
 				// プレイヤーが特定のエリアにいればそのエリアに攻撃を発生させる
 				if (AreaNo != -1)
 				{
+					// コルーチン対象が変わっていたら破棄
+					if (nowChangeNum != m_StageChangeNum)
+						yield break;
+
 					float waitSec = AttackID(AreaNo);
 					// 攻撃モーション開始まで待機してから…
 					yield return new WaitForSeconds(waitSec - m_SecondsBeforeAttack); // これで引数分の秒数の間、処理を待つ
