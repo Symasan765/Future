@@ -275,7 +275,7 @@ public class BossAttackManager : MonoBehaviour
 
 		int mask = LayerMask.GetMask("AreaJudge");
 		RaycastHit info;
-		Vector3 origin = m_PlayerObjs[targetNo].transform.position;
+		Vector3 origin = m_PlayerObjs[targetNo].transform.position + (Vector3.up * 0.3f);
 		if (Physics.Raycast(origin, Vector3.forward, out info, 10.0f, mask))
 		{
 			int newAreaNo = info.transform.GetComponent<AreaJudgment>().NextAttackNo();
