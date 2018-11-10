@@ -86,11 +86,19 @@ public class CharacterSelectManager : MonoBehaviour {
     // キャラクターの選択状態を更新
     void UpdateCharacterSelectStatus() {
         if (changeUnselectListFlg) {
-            // SelectCharacter/UnselectCharacterで編集願いフラグをオン/オフする
             // unselectリストからRemoveして、それが重複なく成功したらArrow側にそれを通知する
             // 重複したらIndexの小さい順にキャラを割り振り、Indexの大きい人は未選択ってことにする
+            if (selectDataList.Count != 0) {
+                for (int i = 0; i < selectDataList.Count; i++) {
 
+                }
+            }
 
+            if (unselectDataList.Count != 0) {
+                for (int i = 0; i < unselectDataList.Count; i++) {
+
+                }
+            }
             // unselectリストをいじり終わった後にフラグを戻す
             changeUnselectListFlg = false;
         }
