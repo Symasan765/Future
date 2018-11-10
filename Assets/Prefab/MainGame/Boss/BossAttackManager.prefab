@@ -56,3 +56,7 @@ MonoBehaviour:
   m_BossMaxDamage: 100
   m_BossDamage: 0
   m_AttackFlag: 0
+  m_SecondsBeforeAttack: 1.2
+  m_DownSwing: 0
+  m_SideSwing: 0
+  m_Beam: 0
