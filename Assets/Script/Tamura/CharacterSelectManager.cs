@@ -36,6 +36,10 @@ public class CharacterSelectManager : MonoBehaviour {
     [SerializeField]
     List<Camera> renderCamList = new List<Camera>();
 
+    // 変更するキャラ選択データの格納先
+    List<changeData> selectDataList = new List<changeData>();
+    List<changeData> unselectDataList = new List<changeData>();
+
     // 未選択キャラのリストをこのフレームでいじるかどうか
     bool changeUnselectListFlg;
 
