@@ -48,6 +48,7 @@ public class FeverManager : MonoBehaviour {
 		}
 	}
 
+	/*
 	//バズーカのショット可能かどうかを返す
 	public bool CanBazookaShot()
 	{
@@ -63,7 +64,7 @@ public class FeverManager : MonoBehaviour {
 			}
 		}
 		return true;
-	}
+	}*/
 
 	public void StartFever(float _feverSec)
 	{

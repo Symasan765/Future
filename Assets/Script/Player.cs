@@ -577,7 +577,7 @@ public class Player : MonoBehaviour
 				{
 					if (hit.collider.tag == "Player")
 					{
-						ReceiveItem(hit.collider.gameObject);
+						//ReceiveItem(hit.collider.gameObject);
 					} else
 					{
 						GetItem(hit.collider.gameObject);
@@ -595,7 +595,7 @@ public class Player : MonoBehaviour
 		{
 			if (item.IsHold())
 			{
-				ReceiveItem(_itemObj.transform.parent.gameObject);
+				//ReceiveItem(_itemObj.transform.parent.gameObject);
 
 			} else
 			{

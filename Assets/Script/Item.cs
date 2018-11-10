@@ -63,13 +63,14 @@ public class Item : MonoBehaviour {
 		transform.eulerAngles = new Vector3(0, 0, 0);
 		transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 		//持たれていない時モデルを回転
-		if (isHold)
+		if (isHold || isScaleDown)
 		{
 			ModelObj.transform.localEulerAngles = new Vector3(0, 0, 0);
 		} else
 		{
 			ModelObj.transform.localEulerAngles = new Vector3(0, ModelObj.transform.localEulerAngles.y + 2, 0);
 		}
+
 		//落下速度を固定
 		if (rb.velocity.y < -4)
 		{
@@ -103,8 +104,7 @@ public class Item : MonoBehaviour {
 			cntLifeTimeSec -= Time.deltaTime;
 			if (cntLifeTimeSec <= 0)
 			{
-				effectManager.PlayDelete(transform.position);
-				Destroy(gameObject);
+				Delete();
 			}
 			if (isHold)
 			{
@@ -115,7 +115,7 @@ public class Item : MonoBehaviour {
 		//指定された場所へ移動
 		if (flgMoveToGetPos)
 		{
-			if (transform.position != getPosition)
+			if (transform.localPosition != getPosition)
 			{
 				Vector3 vec = getPosition - transform.localPosition;
 				transform.localPosition += vec * MoveSpeed * Time.deltaTime;
@@ -144,15 +144,25 @@ public class Item : MonoBehaviour {
 			}
 		}
 
+		if (evidenceSpawnerObj == null)
+		{
+			Delete();
+		}
+
 		//フィーバタイムが終わったら、持たれていないフィーバ証拠を全て削除
 		if (isFeverEvidence)
 		{
 			if (!isHold && !isInBazooka && !feverManager.IsFever())
 			{
-				effectManager.PlayDelete(transform.position);
-				Destroy(gameObject);
+				Delete();
 			}
 		}
+	}
+
+	public void Delete()
+	{
+		effectManager.PlayDelete(transform.position);
+		Destroy(gameObject);
 	}
 
 	public bool IsHold()
@@ -182,7 +192,7 @@ public class Item : MonoBehaviour {
 	{
 		boxCollider.isTrigger = true;
 		bazookaRifle = _obj.gameObject.GetComponent<BazookaRifle>();
-		isHold = true;
+		//isHold = true;
 		SetItemLocalPosition(_obj.transform.position);
 		flgMoveToGetPos = true;
 		isScaleDown = true;

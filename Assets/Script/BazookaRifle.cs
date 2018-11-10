@@ -28,6 +28,7 @@ public class BazookaRifle : MonoBehaviour{
 	private EffectManager effectManager;
 	private BazookaBullet bazookaBullet;
 	private FeverManager feverManager;
+	private StageChangeManager stageChangeManager;
 
 	public float EvidenceDistance = 2.0f;            //証拠を認識する範囲。
     private int EvidenceNum = 0;                      //全体の証拠の数。
@@ -43,6 +44,7 @@ public class BazookaRifle : MonoBehaviour{
 	private bool isFirstFeverEvidenceHit = false;
 	private void Start()
 	{
+		stageChangeManager = GameObject.Find("StageChangeManager").GetComponent<StageChangeManager>();
 		BossObj = GameObject.FindGameObjectWithTag("BossHitPosition");
 		Debug.Log("ボスのヒット位置" + BossObj);
 		feverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
@@ -61,10 +63,9 @@ public class BazookaRifle : MonoBehaviour{
 			isFirstFeverEvidenceHit = false;
 		}
 		BazookaAreaUpdate();
-		//Lightning();
 		Explosion();
 
-		if (feverManager.CanBazookaShot() && NearEvidenceNum > 0)
+		if (stageChangeManager.CanBazookaShot() && NearEvidenceNum > 0)
 		{
 			//普通の証拠
 			nowSetEvidenceNum = NearEvidenceNum;
