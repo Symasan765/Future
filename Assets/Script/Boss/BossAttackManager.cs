@@ -186,6 +186,7 @@ public class BossAttackManager : MonoBehaviour
 	float AttackID(int ID)
 	{
 		float ret = 0.5f;
+		Debug.Log("攻撃ID" + ID + "起動！");
 		if (ID > m_MaxAttackID)
 		{
 			Debug.Log("err:スクリプト上にてボス攻撃IDにシーン配置されている攻撃ID以上の値が入力されました");
