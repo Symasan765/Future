@@ -24,8 +24,10 @@ public class AttackID : MonoBehaviour {
 		switch (m_AttackType)
 		{
 			case AttackType.DownSwing:
+				m_EffectPrefab = (GameObject)Resources.Load("Prefab/DownSwingEffect");
 				break;
 			case AttackType.SideSwing:
+				m_EffectPrefab = (GameObject)Resources.Load("Prefab/SideSwingAttack");
 				break;
 			case AttackType.Beam:
 				m_EffectPrefab = (GameObject)Resources.Load("Prefab/BeamSmoke");
