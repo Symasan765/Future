@@ -81,8 +81,6 @@ public class BossAttackManager : MonoBehaviour
 			AnmeFlagInit();
 			if (m_This.m_AttackFlag)
 			{
-				if (nowChangeNum != m_StageChangeNum)
-					yield return null;
 				// 攻撃対象のプレイヤーを確定させる
 				int targetNo = GetImportantPlayerNo();
 				// そのプレイヤーがステージのどこのエリアにいるかを特定する
@@ -93,8 +91,6 @@ public class BossAttackManager : MonoBehaviour
 					float waitSec = AttackID(AreaNo);
 					// 攻撃モーション開始まで待機してから…
 					yield return new WaitForSeconds(waitSec - m_SecondsBeforeAttack); // これで引数分の秒数の間、処理を待つ
-					if (nowChangeNum != m_StageChangeNum)
-						yield return null;
 					//攻撃モーションを起動させて残り秒数待つ
 					ChangeAnimFlag();
 					yield return new WaitForSeconds(m_SecondsBeforeAttack);
@@ -106,10 +102,9 @@ public class BossAttackManager : MonoBehaviour
 			}
 			else
 			{
-				if (nowChangeNum != m_StageChangeNum)
-					yield return null;
 				yield return new WaitForSeconds(2.0f);
 			}
+				yield return null;
 		}
 		yield return null;
 	}
@@ -248,6 +243,12 @@ public class BossAttackManager : MonoBehaviour
 
 	public void SearchAttackObj()
 	{
+		Debug.Log("SearchAttackObj呼び出し");
+		// 参照はずし
+		m_PlayerObjs = null;
+		m_AttackObjs = null;
+		m_AttackList = null;
+
 		GameObject[] obj = GameObject.FindGameObjectsWithTag("Player");
 		if (obj.Length != 4)
 			Debug.Log("キャラクターの人数が４人ではありません");
