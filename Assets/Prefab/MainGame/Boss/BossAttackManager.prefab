@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114055188700850096}
   m_Layer: 0
   m_Name: BossAttackManager
-  m_TagString: Untagged
+  m_TagString: BossManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,3 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RangePrefab: {fileID: 1506440863033174, guid: 11760b0a79f82284f95dd071485cff0a,
     type: 2}
+  m_BossMaxDamage: 100
+  m_BossDamage: 0
+  m_AttackFlag: 0
