@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ChangeCameraBG : MonoBehaviour {
     [SerializeField]
+    Color BGStartColor;
+
+    [SerializeField]
     Color BGColor;
 
     [SerializeField]
@@ -17,7 +20,7 @@ public class ChangeCameraBG : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         renderCamera = GetComponent<Camera>();
-        renderCamera.backgroundColor = Color.gray;
+        renderCamera.backgroundColor = BGStartColor;
 	}
 
     void Update() {
@@ -34,6 +37,6 @@ public class ChangeCameraBG : MonoBehaviour {
     }
 
     void ChangeToGrayColor() {
-        renderCamera.backgroundColor = Color.Lerp(renderCamera.backgroundColor, Color.gray, colorChangeSpeed);
+        renderCamera.backgroundColor = Color.Lerp(renderCamera.backgroundColor, BGStartColor, colorChangeSpeed);
     }
 }
