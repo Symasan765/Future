@@ -16,9 +16,7 @@ public class BazookaRifle : MonoBehaviour{
     private GameObject BazookaPrefab;               //ここにバズーカーのPrefabをUnityのInspectorで割当しておく。（またはResourece.Loadでロードするといい）
 	private GameObject[] Evidence_temp = new GameObject[3];
 	public GameObject EffectObj;
-	public GameObject m_AreaPrefab;
 	public GameObject BulletObj;
-	GameObject m_AreaEntity;
 	private GameObject BossObj;
 	public GameObject[] CurvePointObj = new GameObject[2];
 
@@ -51,9 +49,6 @@ public class BazookaRifle : MonoBehaviour{
 		effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
 		bossAttackManager = GameObject.FindGameObjectWithTag("BossManager").GetComponent<BossAttackManager>();
 		partyTimeManager = GameObject.Find("PartyTimeManager").GetComponent<PartyTimeManager>();
-		m_AreaEntity = Instantiate(m_AreaPrefab);
-		m_AreaEntity.transform.parent = transform;
-		BazookaAreaUpdate();
 	}
 
 	void Update()
@@ -62,7 +57,6 @@ public class BazookaRifle : MonoBehaviour{
 		{
 			isFirstFeverEvidenceHit = false;
 		}
-		BazookaAreaUpdate();
 		Explosion();
 
 		if (stageChangeManager.CanBazookaShot() && NearEvidenceNum > 0)
@@ -94,14 +88,6 @@ public class BazookaRifle : MonoBehaviour{
         }
 		NearEvidenceNum = NearEvidenceNum_Temp;
     }
-
-	void BazookaAreaUpdate()
-	{
-		m_AreaEntity.transform.localScale = new Vector3(EvidenceDistance, EvidenceDistance, 0.01f); // 0.01fは奥行方向に僅かに厚みを持たせるため
-		Vector3 pos = transform.position;
-		pos.z += 1.5f;		// バズーカモデルと重ねないために少し座標を奥にずらす
-		m_AreaEntity.transform.position = pos;
-	}
 
 	private void Explosion()
 	{
