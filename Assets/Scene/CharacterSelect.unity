@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45111656, g: 0.49970192, b: 0.5674754, a: 1}
+  m_IndirectSpecularColor: {r: 0.45111686, g: 0.49970192, b: 0.5674758, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -3380,6 +3380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ccea9dac3bfe946877227d0f767ee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BGStartColor: {r: 0.39215687, g: 0, b: 0, a: 1}
   BGColor: {r: 1, g: 0, b: 0, a: 1}
   colorChangeSpeed: 0.1
   cursorArrow: {fileID: 133215968}
@@ -4140,6 +4141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ccea9dac3bfe946877227d0f767ee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BGStartColor: {r: 0.041522514, g: 0.39215687, b: 0, a: 1}
   BGColor: {r: 0.105882354, g: 1, b: 0, a: 1}
   colorChangeSpeed: 0.1
   cursorArrow: {fileID: 861523571}
@@ -4294,6 +4296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ccea9dac3bfe946877227d0f767ee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BGStartColor: {r: 0, g: 0.10457507, b: 0.39215687, a: 1}
   BGColor: {r: 0, g: 0.26666668, b: 1, a: 1}
   colorChangeSpeed: 0.1
   cursorArrow: {fileID: 549227808}
@@ -4382,6 +4385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ccea9dac3bfe946877227d0f767ee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BGStartColor: {r: 0.39215687, g: 0.39061907, b: 0, a: 1}
   BGColor: {r: 1, g: 0.99607843, b: 0, a: 1}
   colorChangeSpeed: 0.1
   cursorArrow: {fileID: 1436009974}

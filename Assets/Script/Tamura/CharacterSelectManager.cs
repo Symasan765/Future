@@ -90,6 +90,7 @@ public class CharacterSelectManager : MonoBehaviour {
             // unselectリストからRemoveして、それが重複なく成功したらArrow側にそれを通知する
             // 重複したらIndexの小さい順にキャラを割り振り、Indexの大きい人は未選択ってことにする
 
+
             // unselectリストをいじり終わった後にフラグを戻す
             changeUnselectListFlg = false;
         }
