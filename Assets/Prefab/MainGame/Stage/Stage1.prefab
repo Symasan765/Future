@@ -26938,8 +26938,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 197bbac3313ccbe4eb328e674676dcfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AreaNo: 0
-  m_SelectAttackNo: 00000000000000000000000000000000
+  m_AreaNo: 4
+  m_SelectAttackNo: 0f000000100000001100000012000000
 --- !u!114 &114614567499083054
 MonoBehaviour:
   m_ObjectHideFlags: 1
