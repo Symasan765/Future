@@ -37,6 +37,8 @@ public class BossAttackManager : MonoBehaviour
 	public bool m_SideSwing = false;
 	public bool m_Beam = false;
 
+	int m_StageChangeNum = 0;
+
 	public enum BossCondition
 	{
 		Margin,     // ボス余裕
@@ -63,8 +65,6 @@ public class BossAttackManager : MonoBehaviour
 		m_PlayerObjs = new Player[obj.Length];
 		for (int i = 0; i < obj.Length; i++)
 			m_PlayerObjs[i] = obj[i].GetComponent<Player>();
-
-		StartCoroutine("BossAttack");
 	}
 
 	private void Update()
@@ -78,6 +78,8 @@ public class BossAttackManager : MonoBehaviour
 	/// <returns></returns>
 	IEnumerator BossAttack()
 	{
+		int nowChangeNum = m_StageChangeNum;
+
 		// TODO 将来的にはボスが生きている間、みたいな条件に変更すること
 		yield return new WaitForSeconds(3.0f);  // 開始後、すぐには攻撃しない
 		while (true)
@@ -86,6 +88,8 @@ public class BossAttackManager : MonoBehaviour
 			AnmeFlagInit();
 			if (m_This.m_AttackFlag)
 			{
+				if (nowChangeNum != m_StageChangeNum)
+					yield return null;
 				// 攻撃対象のプレイヤーを確定させる
 				int targetNo = GetImportantPlayerNo();
 				// そのプレイヤーがステージのどこのエリアにいるかを特定する
@@ -96,6 +100,8 @@ public class BossAttackManager : MonoBehaviour
 					float waitSec = AttackID(AreaNo);
 					// 攻撃モーション開始まで待機してから…
 					yield return new WaitForSeconds(waitSec - m_SecondsBeforeAttack); // これで引数分の秒数の間、処理を待つ
+					if (nowChangeNum != m_StageChangeNum)
+						yield return null;
 					//攻撃モーションを起動させて残り秒数待つ
 					ChangeAnimFlag();
 					yield return new WaitForSeconds(m_SecondsBeforeAttack);
@@ -245,8 +251,9 @@ public class BossAttackManager : MonoBehaviour
 		return randomArray[rand.Next(randomArray.Length)];
 	}
 
-	void SearchAttackObj()
+	public void SearchAttackObj()
 	{
+		m_StageChangeNum += 1;	// ステージ変更回数カウント
 		GameObject[] attackObjects;
 		// 攻撃用オブジェクトの探索を行う
 		attackObjects = GameObject.FindGameObjectsWithTag("BossAttackObj");
@@ -279,6 +286,8 @@ public class BossAttackManager : MonoBehaviour
 		}
 
 		m_AreaTime = new float[4] { 0.0f, 0.0f, 0.0f, 0.0f };
+
+		StartCoroutine("BossAttack");
 	}
 
 	int AreaIdentification(int targetNo)
