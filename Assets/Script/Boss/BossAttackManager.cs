@@ -81,6 +81,10 @@ public class BossAttackManager : MonoBehaviour
 			AnmeFlagInit();
 			if (m_This.m_AttackFlag)
 			{
+				// コルーチン対象が変わっていたら破棄
+				if (nowChangeNum != m_StageChangeNum)
+					yield break;
+
 				// 攻撃対象のプレイヤーを確定させる
 				int targetNo = GetImportantPlayerNo();
 				// そのプレイヤーがステージのどこのエリアにいるかを特定する
@@ -91,17 +95,27 @@ public class BossAttackManager : MonoBehaviour
 					float waitSec = AttackID(AreaNo);
 					// 攻撃モーション開始まで待機してから…
 					yield return new WaitForSeconds(waitSec - m_SecondsBeforeAttack); // これで引数分の秒数の間、処理を待つ
+
+					// コルーチン対象が変わっていたら破棄
+					if (nowChangeNum != m_StageChangeNum)
+						yield break;
 					//攻撃モーションを起動させて残り秒数待つ
 					ChangeAnimFlag();
 					yield return new WaitForSeconds(m_SecondsBeforeAttack);
 				}
 				else
 				{
+					// コルーチン対象が変わっていたら破棄
+					if (nowChangeNum != m_StageChangeNum)
+						yield break;
 					yield return new WaitForSeconds(0.5f);
 				}
 			}
 			else
 			{
+				// コルーチン対象が変わっていたら破棄
+				if (nowChangeNum != m_StageChangeNum)
+					yield break;
 				yield return new WaitForSeconds(2.0f);
 			}
 				yield return null;
