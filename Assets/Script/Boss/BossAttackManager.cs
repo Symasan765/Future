@@ -79,9 +79,11 @@ public class BossAttackManager : MonoBehaviour
 	IEnumerator BossAttack()
 	{
 		int nowChangeNum = m_StageChangeNum;
+		m_AttackFlag = false;
 
 		// TODO 将来的にはボスが生きている間、みたいな条件に変更すること
 		yield return new WaitForSeconds(3.0f);  // 開始後、すぐには攻撃しない
+		m_AttackFlag = true;
 		while (true)
 		{
 			// 攻撃モーションを初期化
