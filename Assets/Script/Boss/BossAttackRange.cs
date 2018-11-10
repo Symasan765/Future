@@ -19,7 +19,9 @@ public class BossAttackRange : MonoBehaviour {
 	public float m_LimitTime;   // ギリギリのタイミングで攻撃範囲を全体に映す際の残り時間
 
 	BossAttackManager m_BossAttackManager;
-	
+
+	AttackID m_AttackID;
+
 	// Update is called once per frame
 	void Update () {
 		// 攻撃中止！
@@ -38,7 +40,7 @@ public class BossAttackRange : MonoBehaviour {
 	/// <param name="atackPos">攻撃中心座標</param>
 	/// <param name="range">攻撃範囲</param>
 	/// <param name="atackTime">攻撃までの時間</param>
-	public void AttackCommand(BossAttackManager bm,Vector2 atackPos,Vector2 range,float atackTime)
+	public void AttackCommand(BossAttackManager bm,Vector2 atackPos,Vector2 range,float atackTime, AttackID ID)
 	{
 		// 攻撃できなければ登録せず破棄して終了
 		if (bm.m_AttackFlag == false)
@@ -62,6 +64,8 @@ public class BossAttackRange : MonoBehaviour {
 		m_AttackCount = 0.0f;
 		m_AttackRangeBoard.transform.position = m_AttackPos;
 		m_AttackRangeBoard.transform.localScale = new Vector3(range.x, range.y, 1.0f);
+
+		m_AttackID = ID;
 	}
 
 	void AttackUpdate()
@@ -129,6 +133,8 @@ public class BossAttackRange : MonoBehaviour {
 				Destroy(m_AttackRangeBoard);
 				Destroy(gameObject);
 			}
+
+			m_AttackID.m_AttackEffect();
 			m_AttackFlag = false;
 		}
 	}

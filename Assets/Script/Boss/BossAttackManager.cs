@@ -175,7 +175,7 @@ public class BossAttackManager : MonoBehaviour
 			ret = obj.m_TimeSec;
 			m_NextAttackType = obj.m_AttackType;
 			var boss = Instantiate(m_RangePrefab).GetComponent<BossAttackRange>();
-			boss.AttackCommand(this, obj.transform.position, obj.transform.localScale, obj.m_TimeSec);
+			boss.AttackCommand(this, obj.transform.position, obj.transform.localScale, obj.m_TimeSec,obj);
 		}
 
 		SoundManager.Get.PlaySE("BossAttackDangerous");
