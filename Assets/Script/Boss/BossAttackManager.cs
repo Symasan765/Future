@@ -75,6 +75,15 @@ public class BossAttackManager : MonoBehaviour
 		// TODO 将来的にはボスが生きている間、みたいな条件に変更すること
 		yield return new WaitForSeconds(3.0f);  // 開始後、すぐには攻撃しない
 		m_AttackFlag = true;
+
+		GameObject[] obj = GameObject.FindGameObjectsWithTag("Player");
+		if (obj.Length != 4)
+			Debug.Log("キャラクターの人数が４人ではありません");
+
+		m_PlayerObjs = new Player[obj.Length];
+		for (int i = 0; i < obj.Length; i++)
+			m_PlayerObjs[i] = obj[i].GetComponent<Player>();
+
 		while (true)
 		{
 			// 攻撃モーションを初期化
@@ -262,15 +271,6 @@ public class BossAttackManager : MonoBehaviour
 		m_PlayerObjs = null;
 		m_AttackObjs = null;
 		m_AttackList = null;
-
-		GameObject[] obj = GameObject.FindGameObjectsWithTag("Player");
-		if (obj.Length != 4)
-			Debug.Log("キャラクターの人数が４人ではありません");
-
-		m_PlayerObjs = new Player[obj.Length];
-		for (int i = 0; i < obj.Length; i++)
-			m_PlayerObjs[i] = obj[i].GetComponent<Player>();
-
 
 		m_StageChangeNum += 1;	// ステージ変更回数カウント
 		GameObject[] attackObjects;
