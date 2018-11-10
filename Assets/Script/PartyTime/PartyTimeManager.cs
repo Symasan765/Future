@@ -192,4 +192,11 @@ public class PartyTimeManager : MonoBehaviour {
 			SwitchState(PartyState.PlayerAttack);
 		}
 	}
+
+	public bool IsFever()
+	{
+		if (m_NowState == PartyState.PlayerAttack)
+			return true;
+		return false;
+	}
 }
