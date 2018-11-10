@@ -64,12 +64,10 @@ public class Player : MonoBehaviour
 
 	private GameObject getItemObj;
 	private GameObject holdDeskObj;
-	private GameObject bazookaObj;
 	private Animator animator;
 	private Rigidbody rb;
 	private ParticleSystem[] effectSweetSystem = new ParticleSystem[2];
 	private EffectManager effectManager;
-	private BazookaRifle bazookaRifle;
 	private FeverManager feverManager;
 
 	private float nowMoveSpeed;
@@ -99,8 +97,6 @@ public class Player : MonoBehaviour
 		effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
 		rb = GetComponent<Rigidbody>();
 		animator = GetComponent<Animator>();
-		bazookaObj = GameObject.Find("BazookaRifle");
-		bazookaRifle = bazookaObj.GetComponent<BazookaRifle>();
 		feverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
 	}
 	
@@ -141,7 +137,6 @@ public class Player : MonoBehaviour
 			{
 				if (CanIMove())
 				{
-					//InBazookaRange();
 					if (XPad.Get.GetRelease(XPad.KeyData.A, PlayerIndex))
 					{
 						if (isHoldItem)
@@ -677,18 +672,6 @@ public class Player : MonoBehaviour
 				getItemObj = null;
 				item.isHold = false;
 				isReleaceItem = false;
-			}
-		}
-	}
-
-	//バズーカの範囲に入った
-	private void InBazookaRange()
-	{
-		if (Vector3.Distance(transform.position, bazookaObj.transform.position) <= bazookaRifle.EvidenceDistance / 2 && IsOnGround())
-		{
-			if (isHoldItem)
-			{
-				ReleaseItem();
 			}
 		}
 	}
