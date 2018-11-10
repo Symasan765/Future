@@ -31,7 +31,6 @@ public class StageChangeManager : MonoBehaviour {
 			EvidenceSpawner[] eviSpawner = StageObjects[cntStageNum].GetComponentsInChildren<EvidenceSpawner>();
 			int eviNum = eviSpawner.Length;
 			int normalEviNum = 0;
-			Debug.Log("証拠スポナー数：" + eviNum);
 			//取得したコンポーネントを一つの配列に格納
 			for (int cntEviNum = 0; cntEviNum < eviNum; cntEviNum++)
 			{
@@ -44,7 +43,6 @@ public class StageChangeManager : MonoBehaviour {
 			NormalEvidenceSpawnerNum[cntStageNum] = normalEviNum;
 		}
 		AllEvidenceSpawners = new EvidenceSpawner[allNormalEvidenceNum];
-
 
 		CreateStage(nowStageIndex);	
 
@@ -117,23 +115,6 @@ public class StageChangeManager : MonoBehaviour {
 		for (int i = 0; i < nowStageIndex; i++)
 		{
 			nowEviIndex += NormalEvidenceSpawnerNum[i];
-		}
-
-		if (Input.GetKeyDown(KeyCode.Z))
-		{
-			Debug.Log("今の証拠数:" + GetNowNormalEvidenceNum());
-			Debug.Log("添え字開始位置:" + nowEviIndex);
-
-			for (int i = 0; i < NormalEvidenceSpawnerNum[nowStageIndex]; i++)
-			{
-				if (AllEvidenceSpawners[nowEviIndex + i].isSetBazooka)
-				{
-					Debug.Log(AllEvidenceSpawners[nowEviIndex + i] + "...IN");
-				} else
-				{
-					Debug.Log(AllEvidenceSpawners[nowEviIndex + i] + "...OUT");
-				}
-			}
 		}
 
 		for (int i = 0; i < NormalEvidenceSpawnerNum[nowStageIndex]; i++)
