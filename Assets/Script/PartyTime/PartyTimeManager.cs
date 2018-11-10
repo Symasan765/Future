@@ -68,7 +68,7 @@ public class PartyTimeManager : MonoBehaviour {
 		SkyMaterial.mainTextureScale = new Vector2(m_SkyDsc, 1.0f);
 
 		m_FeverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
-		m_BossAttackManager = GameObject.Find("BossAttackManager").GetComponent<BossAttackManager>();
+		m_BossAttackManager = GameObject.FindGameObjectWithTag("BossManager").GetComponent<BossAttackManager>();
 	}
 	
 	// Update is called once per frame

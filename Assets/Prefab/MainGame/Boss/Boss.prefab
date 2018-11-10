@@ -914,6 +914,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4388663836370216}
   - component: {fileID: 95347006218315252}
+  - component: {fileID: 114089397967409338}
   m_Layer: 0
   m_Name: Boss
   m_TagString: BOSS
@@ -4789,6 +4790,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114089397967409338
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1409397832540892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55b29fd2a8293040b21aa129543ec58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!137 &137035097392737350
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

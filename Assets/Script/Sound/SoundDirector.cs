@@ -31,7 +31,7 @@ public class SoundDirector : MonoBehaviour {
 	{
 		if(m_InitFlag == false)
 		{
-			m_BossManager = GameObject.Find("BossAttackManager").GetComponent<BossAttackManager>();
+			m_BossManager = GameObject.FindGameObjectWithTag("BossManager").GetComponent<BossAttackManager>();
 			m_BossInitHp = m_BossManager.m_BossMaxDamage;
 			m_BossHP = m_BossInitHp;
 

@@ -17,7 +17,7 @@ public class BossHPScript : MonoBehaviour {
 	RectTransform m_RectTransform;
 	// Use this for initialization
 	void Start () {
-		m_BossManager = GameObject.Find("BossAttackManager").GetComponent<BossAttackManager>();
+		m_BossManager = GameObject.FindGameObjectWithTag("BossManager").GetComponent<BossAttackManager>();
 		m_Image = GetComponent<Image>();
 
 		m_RectTransform = GetComponent<RectTransform>();

@@ -14,6 +14,13 @@ public class BossAnimeState : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		SetTag();
+	}
+
+	void SetTag()
+	{
+		m_Animator.SetBool("is_DownSwing", m_BossManager.m_DownSwing);
+		m_Animator.SetBool("is_SideSwing", m_BossManager.m_SideSwing);
+		m_Animator.SetBool("is_Beam", m_BossManager.m_Beam);
 	}
 }

@@ -47,7 +47,7 @@ public class BazookaRifle : MonoBehaviour{
 		Debug.Log("ボスのヒット位置" + BossObj);
 		feverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
 		effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
-		bossAttackManager = GameObject.Find("BossAttackManager").GetComponent<BossAttackManager>();
+		bossAttackManager = GameObject.FindGameObjectWithTag("BossManager").GetComponent<BossAttackManager>();
 		partyTimeManager = GameObject.Find("PartyTimeManager").GetComponent<PartyTimeManager>();
 		m_AreaEntity = Instantiate(m_AreaPrefab);
 		m_AreaEntity.transform.parent = transform;

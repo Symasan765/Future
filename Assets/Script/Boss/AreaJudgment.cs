@@ -30,7 +30,6 @@ public class AreaJudgment : MonoBehaviour {
 	public int NextAttackNo()
 	{
 		int no = m_SelectAttackNo[m_AttackNum % m_SelectAttackNo.Length];
-		Debug.Log("NextAttack呼ばれた");
 		m_AttackNum++;
 		return no;
 	}

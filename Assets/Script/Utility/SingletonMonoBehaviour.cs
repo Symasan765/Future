@@ -29,7 +29,6 @@ public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBe
 		// 他のゲームオブジェクトにアタッチされているか調べる
 		// アタッチされている場合は破棄する。
 		CheckInstance();
-		Debug.Log("ManagerSceneにて" + gameObject.name + "が立ち上がり");
 		DontDestroyOnLoad(gameObject);
 	}
 

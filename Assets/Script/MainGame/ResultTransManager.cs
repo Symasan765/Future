@@ -14,7 +14,7 @@ public class ResultTransManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		m_BossManager = GameObject.Find("BossAttackManager").GetComponent<BossAttackManager>();
+		m_BossManager = GameObject.FindGameObjectWithTag("BossManager").GetComponent<BossAttackManager>();
 	}
 	
 	// Update is called once per frame

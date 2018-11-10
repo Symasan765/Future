@@ -29,16 +29,23 @@ public class BossAttackManager : MonoBehaviour
 
 	public bool m_AttackFlag;   // ボスが攻撃してもいいかどうかのフラグ
 
+	public float m_SecondsBeforeAttack = 0.5f;
+
 	BossAttackManager m_This;
+
+	public bool m_DownSwing = false;
+	public bool m_SideSwing = false;
+	public bool m_Beam = false;
 
 	public enum BossCondition
 	{
 		Margin,     // ボス余裕
 		Spicy,      //ボス辛い
-		Dying		// しにかけ
+		Dying       // しにかけ
 	}
 
 	BossCondition m_Condition;
+	AttackID.AttackType m_NextAttackType;
 
 	// Use this for initialization
 	void Start()
@@ -72,9 +79,11 @@ public class BossAttackManager : MonoBehaviour
 	IEnumerator BossAttack()
 	{
 		// TODO 将来的にはボスが生きている間、みたいな条件に変更すること
-		yield return new WaitForSeconds(3.0f);	// 開始後、すぐには攻撃しない
+		yield return new WaitForSeconds(3.0f);  // 開始後、すぐには攻撃しない
 		while (true)
 		{
+			// 攻撃モーションを初期化
+			AnmeFlagInit();
 			if (m_This.m_AttackFlag)
 			{
 				// 攻撃対象のプレイヤーを確定させる
@@ -84,14 +93,19 @@ public class BossAttackManager : MonoBehaviour
 				// プレイヤーが特定のエリアにいればそのエリアに攻撃を発生させる
 				if (AreaNo != -1)
 				{
-					Debug.Log("攻撃エリア" + AreaNo);
 					float waitSec = AttackID(AreaNo);
-					yield return new WaitForSeconds(waitSec); // これで引数分の秒数の間、処理を待つ
-				} else
+					// 攻撃モーション開始まで待機してから…
+					yield return new WaitForSeconds(waitSec - m_SecondsBeforeAttack); // これで引数分の秒数の間、処理を待つ
+					//攻撃モーションを起動させて残り秒数待つ
+					ChangeAnimFlag();
+					yield return new WaitForSeconds(m_SecondsBeforeAttack);
+				}
+				else
 				{
 					yield return new WaitForSeconds(0.5f);
 				}
-			} else
+			}
+			else
 			{
 				yield return new WaitForSeconds(2.0f);
 			}
@@ -159,8 +173,9 @@ public class BossAttackManager : MonoBehaviour
 		{
 			var obj = m_AttackList[ID][i];
 			ret = obj.m_TimeSec;
+			m_NextAttackType = obj.m_AttackType;
 			var boss = Instantiate(m_RangePrefab).GetComponent<BossAttackRange>();
-			boss.AttackCommand(this,obj.transform.position, obj.transform.localScale, obj.m_TimeSec);
+			boss.AttackCommand(this, obj.transform.position, obj.transform.localScale, obj.m_TimeSec);
 		}
 
 		SoundManager.Get.PlaySE("BossAttackDangerous");
@@ -263,7 +278,7 @@ public class BossAttackManager : MonoBehaviour
 			m_AttackList.Add(list);
 		}
 
-		m_AreaTime = new float[4] { 0.0f ,0.0f,0.0f,0.0f};
+		m_AreaTime = new float[4] { 0.0f, 0.0f, 0.0f, 0.0f };
 	}
 
 	int AreaIdentification(int targetNo)
@@ -328,5 +343,28 @@ public class BossAttackManager : MonoBehaviour
 	public float GetBossHP()
 	{
 		return m_BossDamage;
+	}
+
+	void AnmeFlagInit()
+	{
+		m_DownSwing = false;
+		m_SideSwing = false;
+		m_Beam = false;
+	}
+
+	void ChangeAnimFlag()
+	{
+		switch (m_NextAttackType)
+		{
+			case global::AttackID.AttackType.DownSwing:
+				m_DownSwing = true;
+				break;
+			case global::AttackID.AttackType.SideSwing:
+				m_SideSwing = true;
+				break;
+			case global::AttackID.AttackType.Beam:
+				m_Beam = true;
+				break;
+		}
 	}
 }
