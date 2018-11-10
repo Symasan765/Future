@@ -278,7 +278,7 @@ public class BossAttackManager : MonoBehaviour
 		Vector3 origin = m_PlayerObjs[targetNo].transform.position + (Vector3.up * 0.3f);
 		if (Physics.Raycast(origin, Vector3.forward, out info, 10.0f, mask))
 		{
-			int newAreaNo = info.transform.GetComponent<AreaJudgment>().NextAttackNo();
+			int newAreaNo = info.transform.GetComponent<AreaJudgment>().m_AreaNo;
 			if (m_OldAreaNo == newAreaNo)
 			{
 				m_XORFlag = false;
