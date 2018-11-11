@@ -293,9 +293,9 @@ public class XPad : SingletonMonoBehaviour<XPad>
 	{
 		//新しい入力情報を反映していく
 		if (Data.Buttons.A == ButtonState.Pressed) NowInp[i] += (short)KeyData.A;
-		if (Data.Buttons.B == ButtonState.Pressed) NowInp[i] += (short)KeyData.A;		// 使わないのでAと同じキーを配置
+		if (Data.Buttons.B == ButtonState.Pressed) NowInp[i] += (short)KeyData.B;
 		if (Data.Buttons.X == ButtonState.Pressed) NowInp[i] += (short)KeyData.X;
-		if (Data.Buttons.Y == ButtonState.Pressed) NowInp[i] += (short)KeyData.X;		// 使わないのでXと同じキーを配置
+		if (Data.Buttons.Y == ButtonState.Pressed) NowInp[i] += (short)KeyData.Y;
 		if (Data.DPad.Up == ButtonState.Pressed) NowInp[i] += (short)KeyData.UP;
 		if (Data.DPad.Down == ButtonState.Pressed) NowInp[i] += (short)KeyData.DOWN;
 		if (Data.DPad.Left == ButtonState.Pressed) NowInp[i] += (short)KeyData.LEFT;
