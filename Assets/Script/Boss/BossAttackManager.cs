@@ -114,7 +114,8 @@ public class BossAttackManager : MonoBehaviour
 						yield break;
 					//攻撃モーションを起動させて残り秒数待つ
 					ChangeAnimFlag();
-					yield return new WaitForSeconds(m_SecondsBeforeAttack);
+					// 待ち時間に乱数を持たせる
+					yield return new WaitForSeconds(m_SecondsBeforeAttack + UnityEngine.Random.Range(0.1f,2.0f));
 				}
 				else
 				{
