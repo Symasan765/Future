@@ -52,9 +52,8 @@ public class Player : MonoBehaviour
 	private bool isAirjumpRotation = false;
 	private bool isReleaceItem = false;
 	private bool isStandUp;
-	[SerializeField]
-	private bool isOnGround = false;
-
+	private bool checkJumpTrigger = false;
+	
 	private int angleValue = 1;
 
 	public GameObject[] EffectSweatObj = new GameObject[2];
@@ -76,7 +75,7 @@ public class Player : MonoBehaviour
 	private float jumpSpeed;
 	private float cntGetItemBlankSec = 0;
 	private float cntDamageSec = 0;
-	private float cntJumpCheckSec = 0;
+	public float cntJumpCheckSec = 0;
 	private float cntJumpTriggerSec = 0;
 	private float cntInvincibleSec = 0;
 	private float cntAirJumpNum = 1;
@@ -105,8 +104,6 @@ public class Player : MonoBehaviour
 		animator.SetFloat("cntGetItemBlankTime", cntGetItemBlankSec);
 		animator.SetBool("isDamage", isDamage);
 		animator.SetBool("isOnGround", IsOnGround());
-
-		isOnGround = IsOnGround();
 
 		//操作不能時間のカウント
 		if (cntCantMoveSec > 0)
@@ -461,7 +458,6 @@ public class Player : MonoBehaviour
 	private void Jump()
 	{
 		Vector3 effectPos = new Vector3(transform.position.x, FootPositionObj[0].transform.position.y, FootPositionObj[0].transform.position.z);
-
 		animator.SetBool("isAirJumpRotation", isAirjumpRotation);
 
 		bool holdItemJump = false;
@@ -478,6 +474,8 @@ public class Player : MonoBehaviour
 				holdItemJump = true;
 			}
 		}
+		
+		
 
 		//空中ジャンプ
 		if (holdItemJump && !IsOnGround() && cntAirJumpNum > 0 && !isDamage && CanIMove())
@@ -494,8 +492,10 @@ public class Player : MonoBehaviour
 				animator.SetBool("isAirJumpRotationTrigger", true);
 			}
 		}
+
+
 		//地上ジャンプの処理
-		if (IsOnGround() && !isJump && !isDamage && CanIMove())
+		if (IsOnGround() && !isJump && !isDamage && CanIMove() && !checkJumpTrigger)
 		{
 			if (XPad.Get.GetPress(XPad.KeyData.X, PlayerIndex))
 			{
@@ -504,6 +504,8 @@ public class Player : MonoBehaviour
 
 			if (cntJumpCheckSec >= 0.1f)
 			{
+				cntJumpCheckSec = 0;
+				checkJumpTrigger = true;
 				cntAirJumpNum = AirJumpNum;
 				effectManager.PlayDUM(PlayerIndex, effectPos);
 				SoundManager.Get.PlaySE("AirJump");
@@ -511,22 +513,35 @@ public class Player : MonoBehaviour
 				isJump = true;
 			} else
 			{
-				if (XPad.Get.GetRelease(XPad.KeyData.X, PlayerIndex))
+				if (cntJumpCheckSec > 0)
 				{
-					cntAirJumpNum = AirJumpNum;
-					effectManager.PlayDUM(PlayerIndex, effectPos);
-					SoundManager.Get.PlaySE("AirJump");
-					jumpSpeed = GroundJumpPower - (GroundJumpPower / 3);
-					isJump = true;
+					if (XPad.Get.GetRelease(XPad.KeyData.X, PlayerIndex))
+					{
+						cntJumpCheckSec = 0;
+						checkJumpTrigger = false;
+						cntAirJumpNum = AirJumpNum;
+						effectManager.PlayDUM(PlayerIndex, effectPos);
+						SoundManager.Get.PlaySE("AirJump");
+						jumpSpeed = GroundJumpPower - (GroundJumpPower / 3);
+						isJump = true;
+					}
 				}
 			}
 		}
 
+		if (IsOnGround() && !XPad.Get.GetPress(XPad.KeyData.X, PlayerIndex) && !XPad.Get.GetTrigger(XPad.KeyData.X, PlayerIndex))
+		{
+			checkJumpTrigger = false;
+		}
+
+		if (checkJumpTrigger)
+		{
+			cntJumpCheckSec = 0;
+		}
 		animator.SetBool("isJump", isJump);
 		if (isJump)
 		{
 			this.transform.Translate(Vector3.up * jumpSpeed * Time.deltaTime);
-			//transform.position += Vector3.up * jumpSpeed * Time.deltaTime;
 			jumpSpeed -= Gravity * JumpSpeed;
 			if (jumpSpeed <= 0)
 			{
