@@ -65,6 +65,7 @@ public class Item : MonoBehaviour {
 		//持たれていない時モデルを回転
 		if (isHold || isScaleDown)
 		{
+			meshRenderer.enabled = true;
 			ModelObj.transform.localEulerAngles = new Vector3(0, 0, 0);
 		} else
 		{
