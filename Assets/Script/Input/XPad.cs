@@ -134,7 +134,18 @@ public class XPad : SingletonMonoBehaviour<XPad>
 	{
 		if (ConnectFlag[GamePadNo])
 		{
-			return StickJudge(NowState[GamePadNo].ThumbSticks.Left);
+			// 11/11 追加仕様。アナログスティックの入力が少なければデジタルキーも見て入力がゼロでなければそちらを使う
+			Vector2 ret = StickJudge(NowState[GamePadNo].ThumbSticks.Left);
+			if(ret.magnitude == 0)
+			{
+				ret = Vector2.zero;
+				if (GetPress(KeyData.UP, GamePadNo)) ret += Vector2.up;
+				if (GetPress(KeyData.DOWN, GamePadNo)) ret += Vector2.down;
+				if (GetPress(KeyData.RIGHT, GamePadNo)) ret += Vector2.right;
+				if (GetPress(KeyData.LEFT, GamePadNo)) ret += Vector2.left;
+			}
+
+			return ret.normalized;
 		}
 
 		// ゲームパッド非接続
@@ -282,9 +293,9 @@ public class XPad : SingletonMonoBehaviour<XPad>
 	{
 		//新しい入力情報を反映していく
 		if (Data.Buttons.A == ButtonState.Pressed) NowInp[i] += (short)KeyData.A;
-		if (Data.Buttons.B == ButtonState.Pressed) NowInp[i] += (short)KeyData.B;
+		if (Data.Buttons.B == ButtonState.Pressed) NowInp[i] += (short)KeyData.A;		// 使わないのでAと同じキーを配置
 		if (Data.Buttons.X == ButtonState.Pressed) NowInp[i] += (short)KeyData.X;
-		if (Data.Buttons.Y == ButtonState.Pressed) NowInp[i] += (short)KeyData.Y;
+		if (Data.Buttons.Y == ButtonState.Pressed) NowInp[i] += (short)KeyData.X;		// 使わないのでXと同じキーを配置
 		if (Data.DPad.Up == ButtonState.Pressed) NowInp[i] += (short)KeyData.UP;
 		if (Data.DPad.Down == ButtonState.Pressed) NowInp[i] += (short)KeyData.DOWN;
 		if (Data.DPad.Left == ButtonState.Pressed) NowInp[i] += (short)KeyData.LEFT;
