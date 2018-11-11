@@ -1021,7 +1021,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 0.5, y: 0.6, z: 1}
   m_StartTime: 0.2
   m_LostTime: 3
-  m_SEName: 
+  m_SEName: punch-high2
 --- !u!212 &269155749
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1896,7 +1896,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 0.5, y: 0.6, z: 1}
   m_StartTime: 0.2
   m_LostTime: 1.5
-  m_SEName: 
+  m_SEName: slap1
 --- !u!212 &411956995
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4206,6 +4206,11 @@ Prefab:
       propertyPath: m_StartTime
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 114561111206091996, guid: 9ea0deace3751bc41ad1f2fd5625684d,
+        type: 2}
+      propertyPath: m_SEName
+      value: launcher2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ea0deace3751bc41ad1f2fd5625684d, type: 2}
   m_IsPrefabParent: 0
@@ -4931,7 +4936,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 0.35, y: 0.3, z: 1}
   m_StartTime: 0.2
   m_LostTime: 3
-  m_SEName: 
+  m_SEName: punch-high2
 --- !u!212 &1121184887
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6067,6 +6072,115 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 489cff4a1928f47488d09b98b1e2d11c, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1376974217
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1376974219}
+  - component: {fileID: 1376974218}
+  m_Layer: 0
+  m_Name: ByAnyChance
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1376974218
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1376974217}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 2e84e048cf1602f4e8e4b7b3b13797fc, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.343
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!4 &1376974219
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1376974217}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1402845663
 GameObject:
   m_ObjectHideFlags: 0
@@ -7601,6 +7715,11 @@ Prefab:
       propertyPath: m_ShakeVolume.y
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 114561111206091996, guid: 9ea0deace3751bc41ad1f2fd5625684d,
+        type: 2}
+      propertyPath: m_SEName
+      value: GRRR!
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ea0deace3751bc41ad1f2fd5625684d, type: 2}
   m_IsPrefabParent: 0
@@ -8298,6 +8417,11 @@ Prefab:
       propertyPath: m_ShakeVolume.y
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 114561111206091996, guid: 9ea0deace3751bc41ad1f2fd5625684d,
+        type: 2}
+      propertyPath: m_SEName
+      value: hit1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ea0deace3751bc41ad1f2fd5625684d, type: 2}
   m_IsPrefabParent: 0
@@ -8569,7 +8693,7 @@ MonoBehaviour:
   m_ShakeTime: {x: 0.5, y: 0.6, z: 1}
   m_StartTime: 0.2
   m_LostTime: 1.1
-  m_SEName: 
+  m_SEName: slap1
 --- !u!212 &2060148635
 SpriteRenderer:
   m_ObjectHideFlags: 0

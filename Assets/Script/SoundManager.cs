@@ -10,7 +10,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 	private Dictionary<string, int> seIndexs = new Dictionary<string, int>();
 	private Dictionary<string, int> bgmIndexs = new Dictionary<string, int>();
 
-	const int NumChannel = 16;
+	const int NumChannel = 32;
 
 	private AudioSource bgmSource;
 	private AudioSource[] seSources = new AudioSource[NumChannel];
