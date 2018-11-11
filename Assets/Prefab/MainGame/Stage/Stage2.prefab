@@ -9833,7 +9833,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 36
   m_TimeSec: 3
-  m_AttackType: 0
+  m_AttackType: 2
 --- !u!114 &114022932879677720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9859,7 +9859,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 34
   m_TimeSec: 3
-  m_AttackType: 0
+  m_AttackType: 2
 --- !u!114 &114061816298780610
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10014,7 +10014,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 37
   m_TimeSec: 3
-  m_AttackType: 0
+  m_AttackType: 2
 --- !u!114 &114210818572902134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10028,7 +10028,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 36
   m_TimeSec: 3
-  m_AttackType: 0
+  m_AttackType: 2
 --- !u!114 &114222987419321692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10071,7 +10071,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 34
   m_TimeSec: 3
-  m_AttackType: 0
+  m_AttackType: 2
 --- !u!114 &114270066494206202
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10085,7 +10085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 31
   m_TimeSec: 3
-  m_AttackType: 0
+  m_AttackType: 2
 --- !u!114 &114311080662835760
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10126,7 +10126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 30
   m_TimeSec: 3
-  m_AttackType: 0
+  m_AttackType: 2
 --- !u!114 &114360946202727348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10140,7 +10140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 37
   m_TimeSec: 3
-  m_AttackType: 0
+  m_AttackType: 2
 --- !u!114 &114386434878263954
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10178,7 +10178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 40
   m_TimeSec: 3
-  m_AttackType: 0
+  m_AttackType: 2
 --- !u!114 &114394726813067338
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10270,7 +10270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 33
   m_TimeSec: 3
-  m_AttackType: 0
+  m_AttackType: 2
 --- !u!114 &114462082312250342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10284,7 +10284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 32
   m_TimeSec: 3
-  m_AttackType: 0
+  m_AttackType: 2
 --- !u!114 &114498741980047820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10335,7 +10335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 35
   m_TimeSec: 3
-  m_AttackType: 0
+  m_AttackType: 2
 --- !u!114 &114543727713170410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10390,7 +10390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 35
   m_TimeSec: 3
-  m_AttackType: 0
+  m_AttackType: 2
 --- !u!114 &114572760674049894
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10527,7 +10527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 32
   m_TimeSec: 3
-  m_AttackType: 0
+  m_AttackType: 2
 --- !u!114 &114730057136762530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10558,7 +10558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 40
   m_TimeSec: 3
-  m_AttackType: 0
+  m_AttackType: 2
 --- !u!114 &114778745485184194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10601,7 +10601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 30
   m_TimeSec: 3
-  m_AttackType: 0
+  m_AttackType: 2
 --- !u!114 &114826935447678984
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10615,7 +10615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 31
   m_TimeSec: 3
-  m_AttackType: 0
+  m_AttackType: 2
 --- !u!114 &114856379764982516
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10711,7 +10711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 33
   m_TimeSec: 3
-  m_AttackType: 0
+  m_AttackType: 2
 --- !u!114 &114950659222020576
 MonoBehaviour:
   m_ObjectHideFlags: 1

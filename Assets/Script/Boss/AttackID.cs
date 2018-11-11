@@ -11,9 +11,10 @@ public class AttackID : MonoBehaviour {
 
 	public enum AttackType
 	{
-		DownSwing,
-		SideSwing,
-		Beam
+		DownSwing,		// 振り下ろし
+		SideSwing,		// 薙ぎ払い
+		Beam,				// ビーム
+		Special			// ボス必殺
 	}
 
 	public AttackType m_AttackType = AttackType.DownSwing;
