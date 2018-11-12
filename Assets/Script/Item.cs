@@ -65,6 +65,7 @@ public class Item : MonoBehaviour {
 		//持たれていない時モデルを回転
 		if (isHold || isScaleDown)
 		{
+			meshRenderer.enabled = true;
 			ModelObj.transform.localEulerAngles = new Vector3(0, 0, 0);
 		} else
 		{
@@ -204,7 +205,12 @@ public class Item : MonoBehaviour {
 		{
 			if (other.tag == "Bazooka")
 			{
-				SetBazooka(other.gameObject);
+				BazookaRifle br = other.gameObject.GetComponent<BazookaRifle>();
+				if (!br.isSetEvidence)
+				{
+					br.isSetEvidence = true;
+					SetBazooka(other.gameObject);
+				}
 			}
 		}
 	}

@@ -41,6 +41,7 @@ public class EvidenceSpawner : MonoBehaviour {
 			//フィーバータイム時のスポナー処理
 			if (!feverManager.IsFever())
 			{
+				cntSpawnDeraySec = 0;
 				isSpawn = false;
 			} else
 			{
@@ -59,6 +60,7 @@ public class EvidenceSpawner : MonoBehaviour {
 			//通常時のスポナー処理
 			if (feverManager.IsFever())
 			{
+				cntSpawnDeraySec = 0;
 				isSpawn = false;
 			} else
 			{		
