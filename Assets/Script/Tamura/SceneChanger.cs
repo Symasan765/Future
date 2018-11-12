@@ -88,7 +88,7 @@ public class SceneChanger : SingletonMonoBehaviour<SceneChanger> {
             if (isCutsceneUIMoveEnd) {
                 // 次のシーン表示UIを画面上に出し終わったら
                 // RawImageを非表示に
-                //sceneImage.enabled = false;
+                sceneImage.enabled = false;
 
                 // ゲームの進行を再開
                 Time.timeScale = 1.0f;

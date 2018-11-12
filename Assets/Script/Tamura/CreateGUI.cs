@@ -24,6 +24,8 @@ public class CreateGUI : Graphic {
     Vector2 rbUV;
 
     [SerializeField]
+    float TexSize;
+    [SerializeField]
     float TexScale;
     [SerializeField]
     float UOffset;
@@ -49,14 +51,14 @@ public class CreateGUI : Graphic {
 
         // 左上と右上の頂点が横並びかどうか
         if (ltPos.y == rtPos.y) {
-            lbUV.y = 1 - (ltPos.y - lbPos.y) / 350 / TexScale;
-            rbUV.y = 1 - (rtPos.y - rbPos.y) / 350 / TexScale;
+            lbUV.y = 1 - (ltPos.y - lbPos.y) / TexSize / TexScale;
+            rbUV.y = 1 - (rtPos.y - rbPos.y) / TexSize / TexScale;
         }
 
         // 左下と右下の頂点が横並びかどうか
         if (lbPos.y == rbPos.y) {
-            ltUV.y = (ltPos.y - lbPos.y) / 350 / TexScale;
-            rtUV.y = (rtPos.y - rbPos.y) / 350 / TexScale;
+            ltUV.y = (ltPos.y - lbPos.y) / TexSize / TexScale;
+            rtUV.y = (rtPos.y - rbPos.y) / TexSize / TexScale;
         }
 
         // Vをオフセット分移動

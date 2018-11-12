@@ -48,24 +48,6 @@ public class FeverManager : MonoBehaviour {
 		}
 	}
 
-	/*
-	//バズーカのショット可能かどうかを返す
-	public bool CanBazookaShot()
-	{
-		for (int i = 0; i < NormalEvidenceSpawnerObjects.Length; i++)
-		{
-			if (NormalEvidenceSpawnerObjects != null)
-			{
-				EvidenceSpawner e = NormalEvidenceSpawnerObjects[i].GetComponent<EvidenceSpawner>();
-				if (!e.isSetBazooka)
-				{
-					return false;
-				}
-			}
-		}
-		return true;
-	}*/
-
 	public void StartFever(float _feverSec)
 	{
 		if (!isStart)

@@ -139,7 +139,7 @@ public class CharacterSelectManager : MonoBehaviour {
         for (int cursorIndex = 0; cursorIndex < 4; ) {
             if (arrowList[cursorIndex].GetStartGameFlg()) {
                 if (sceneChangeFlg == false) {
-                    sc.ChangeScene("Alpha");
+                    sc.ChangeScene("TimeLineTest");
                     sceneChangeFlg = true;
                 }
                 cursorIndex = 999;

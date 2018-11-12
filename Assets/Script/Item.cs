@@ -205,7 +205,12 @@ public class Item : MonoBehaviour {
 		{
 			if (other.tag == "Bazooka")
 			{
-				SetBazooka(other.gameObject);
+				BazookaRifle br = other.gameObject.GetComponent<BazookaRifle>();
+				if (!br.isSetEvidence)
+				{
+					br.isSetEvidence = true;
+					SetBazooka(other.gameObject);
+				}
 			}
 		}
 	}
