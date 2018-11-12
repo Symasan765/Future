@@ -1675,7 +1675,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1351949883936422
 GameObject:
   m_ObjectHideFlags: 1
@@ -2807,7 +2807,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1589321897589018
 GameObject:
   m_ObjectHideFlags: 1
@@ -3345,7 +3345,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1782795169282236
 GameObject:
   m_ObjectHideFlags: 1
@@ -3870,7 +3870,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1871804274882936
 GameObject:
   m_ObjectHideFlags: 1
@@ -10595,8 +10595,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletAttackPower: 10
-  BazookaPrefab: {fileID: 1298366636574104, guid: 567e6c65deb35664bb64e266a92ba19d,
-    type: 2}
   EffectObj: {fileID: 1247311384876784, guid: 4adffb0018aeda44e9263f901167af1f, type: 2}
   BulletObj: {fileID: 1883188493593020, guid: 281784580f20d5e4cb5d2ee972c332c6, type: 2}
   CurvePointObj:
@@ -10884,8 +10882,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletAttackPower: 10
-  BazookaPrefab: {fileID: 1298366636574104, guid: 567e6c65deb35664bb64e266a92ba19d,
-    type: 2}
   EffectObj: {fileID: 1247311384876784, guid: 4adffb0018aeda44e9263f901167af1f, type: 2}
   BulletObj: {fileID: 1883188493593020, guid: 281784580f20d5e4cb5d2ee972c332c6, type: 2}
   CurvePointObj:
@@ -11124,8 +11120,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletAttackPower: 10
-  BazookaPrefab: {fileID: 1298366636574104, guid: 567e6c65deb35664bb64e266a92ba19d,
-    type: 2}
   EffectObj: {fileID: 1247311384876784, guid: 4adffb0018aeda44e9263f901167af1f, type: 2}
   BulletObj: {fileID: 1883188493593020, guid: 281784580f20d5e4cb5d2ee972c332c6, type: 2}
   CurvePointObj:
@@ -11149,8 +11143,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletAttackPower: 10
-  BazookaPrefab: {fileID: 1298366636574104, guid: 567e6c65deb35664bb64e266a92ba19d,
-    type: 2}
   EffectObj: {fileID: 1247311384876784, guid: 4adffb0018aeda44e9263f901167af1f, type: 2}
   BulletObj: {fileID: 1883188493593020, guid: 281784580f20d5e4cb5d2ee972c332c6, type: 2}
   CurvePointObj:
