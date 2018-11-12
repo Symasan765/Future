@@ -388,7 +388,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 140490874}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 99, y: -187, z: 0}
+  m_LocalPosition: {x: 100, y: -187, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 481759927}
@@ -596,7 +596,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 197375507}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -335.9999, y: -85.00006, z: 0}
+  m_LocalPosition: {x: -335, y: -85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2125090261}
@@ -625,7 +625,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 205439345}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -335.99988, y: 256.99994, z: 0}
+  m_LocalPosition: {x: -335, y: 255, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1431039102}
@@ -1160,14 +1160,14 @@ MonoBehaviour:
   m_Material: {fileID: 2100000, guid: 4c0c7cb7710ae464cb1d6103c106d33c, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  ltPos: {x: -50, y: 50, z: 0}
-  lbPos: {x: -50, y: -360, z: 0}
-  rtPos: {x: 300, y: -200, z: 0}
-  rbPos: {x: 300, y: -360, z: 0}
-  TexScale: 0.85
-  UOffset: 0.05
+  ltPos: {x: -90, y: 130, z: 0}
+  lbPos: {x: -90, y: -320, z: 0}
+  rtPos: {x: 310, y: -110, z: 0}
+  rbPos: {x: 310, y: -320, z: 0}
+  TexSize: 400
+  TexScale: 0.7
+  UOffset: 0.2
   VOffset: 0
-  indexList: 
 --- !u!222 &481759929
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1603,14 +1603,14 @@ MonoBehaviour:
   m_Material: {fileID: 2100000, guid: 6027179b79c70ae40a466ed2c9a091fc, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  ltPos: {x: -50, y: 50, z: 0}
-  lbPos: {x: -50, y: -100, z: 0}
-  rtPos: {x: 300, y: 50, z: 0}
-  rbPos: {x: 300, y: -350, z: 0}
-  TexScale: 0.8
-  UOffset: 0.2
+  ltPos: {x: 0, y: 95, z: 0}
+  lbPos: {x: 0, y: -140, z: 0}
+  rtPos: {x: 310, y: 95, z: 0}
+  rbPos: {x: 310, y: -320, z: 0}
+  TexSize: 310
+  TexScale: 1
+  UOffset: 0
   VOffset: 0
-  indexList: 
 --- !u!222 &637284686
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3209,14 +3209,14 @@ MonoBehaviour:
   m_Material: {fileID: 2100000, guid: c5010baaf7f4e3844bc1ea4674f0a45e, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  ltPos: {x: -50, y: 50, z: 0}
-  lbPos: {x: -50, y: -250, z: 0}
-  rtPos: {x: 300, y: 50, z: 0}
-  rbPos: {x: 300, y: -150, z: 0}
-  TexScale: 0.8
-  UOffset: 0.15
-  VOffset: 0.05
-  indexList: 00000000010000000200000003000000
+  ltPos: {x: -80, y: 90, z: 0}
+  lbPos: {x: -80, y: -260, z: 0}
+  rtPos: {x: 320, y: 90, z: 0}
+  rbPos: {x: 320, y: -180, z: 0}
+  TexSize: 400
+  TexScale: 0.75
+  UOffset: 0.18
+  VOffset: 0
 --- !u!222 &1431039104
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3641,7 +3641,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1521272469}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 99.00011, y: 256.99994, z: 0}
+  m_LocalPosition: {x: 100, y: 255, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 637284684}
@@ -4590,14 +4590,14 @@ MonoBehaviour:
   m_Material: {fileID: 2100000, guid: a59452a067cde954d8b33f4406940c72, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  ltPos: {x: -50, y: 50, z: 0}
-  lbPos: {x: -50, y: -220, z: 0}
-  rtPos: {x: 300, y: 150, z: 0}
-  rbPos: {x: 300, y: -220, z: 0}
-  TexScale: 0.9
-  UOffset: 0.1
-  VOffset: 0.05
-  indexList: 
+  ltPos: {x: -80, y: 100, z: 0}
+  lbPos: {x: -80, y: -220, z: 0}
+  rtPos: {x: 320, y: 170, z: 0}
+  rbPos: {x: 320, y: -220, z: 0}
+  TexSize: 400
+  TexScale: 0.75
+  UOffset: 0.15
+  VOffset: 0.25
 --- !u!222 &2125090263
 CanvasRenderer:
   m_ObjectHideFlags: 0
