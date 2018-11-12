@@ -37,6 +37,7 @@ public class EviRainbow : MonoBehaviour
 			Material material = m_Materials[i];
 			material.SetColor("_Outline_Color", nowColor);
 			material.SetFloat("_Outline_Width", 70.0f);
+			material.SetFloat("_Farthest_Distance", 50.0f);
 		}
 	}
 }
