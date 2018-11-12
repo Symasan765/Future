@@ -23,11 +23,12 @@ public class Vibration : MonoBehaviour {
             pos.y += Random.Range(-m_MaxRange, m_MaxRange);
             pos.z += Random.Range(-m_MaxRange, m_MaxRange);
 
-            this.transform.position = pos;
         }
         else
         {
             pos = OldPos;
         }
+
+        this.transform.position = pos;
     }
 }
