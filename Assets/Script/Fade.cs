@@ -182,6 +182,16 @@ public class Fade : MonoBehaviour {
         {
             FadeSpeed.a = Speed;
         }
-        
+    }
+    public void ResetAllSetteing()
+    {
+         DoFadeIn = false;                                //フェードイン中
+         DoFadeOut = false;                               //フェードアウト中
+         FadeDone = false;                               //フェードが完了したかどうか
+         FadeAll = false;                                 //このオブジェクトが画面全体のフェードのものかどうか
+         NowFadeing = false;
+         Flash = false;
+        FadeSetted = false;
+         InitFadeSetting = false;
     }
 }

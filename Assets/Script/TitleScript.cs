@@ -46,15 +46,13 @@ public class TitleScript : MonoBehaviour {
                     AllFadeImage.GetComponent<Fade>().SetFade((int)Fade.FadeOption.FADEIN, 0.2f, true,false);
                     if (AllFadeImage.GetComponent<Fade>().IsFadeDone())
                     {
+                        AllFadeImage.GetComponent<Fade>().ResetAllSetteing();
                         SceneIndex++;
                         yield return new WaitForSeconds(1.0f);
                     }
                     break;
                 case 1:
-                    //if (TitleLogo.GetComponent<RectTransform>().localPosition.y<180.0f)
-                    //{
-                    //    TitleLogo.GetComponent<RectTransform>().localPosition += new Vector3(0.0f, 60.0f,0.0f);
-                    //}
+                    //StartCoroutine(RoopTitleScene());
                     TitleLogo.GetComponent<Fade>().SetFade((int)Fade.FadeOption.FADEIN, 0.2f, false, false);
                     if (TitleLogo.GetComponent<Fade>().IsFadeDone() == true) 
                     {
@@ -74,18 +72,31 @@ public class TitleScript : MonoBehaviour {
     IEnumerator GoNextScene()
     {
         yield return new WaitForSeconds(2.0f);
-        Debug.Log("GoNextScene");
+        SceneManager.LoadScene("CharacterSelect");
     }
     void AcceptInputFunc()
     {
         for (int i = 0; i < 4; i++)
         {
-            if (XPad.Get.GetTrigger(XPad.KeyData.A, i) || Input.GetKeyDown(KeyCode.A))
+            if (XPad.Get.AnyoneTrigger(XPad.KeyData.A) == true) 
             {
-                //SceneManager.LoadScene("CharacterSelect");
-                PushedStart = true;
+                StartCoroutine(GoNextScene());
             }
         }
        
+    }
+    IEnumerator RoopTitleScene()
+    {
+        yield return new WaitForSeconds(10.0f);
+        AllFadeImage.GetComponent<Fade>().SetFade((int)Fade.FadeOption.FADEOUT, 0.3f, true, true);
+        while (true)
+        {
+            if (AllFadeImage.GetComponent<Fade>().IsFadeDone())
+            {
+                Debug.Log("Im in");
+                SceneManager.LoadScene("Title");
+            }
+        }
+        
     }
 }
