@@ -32,7 +32,8 @@ public class PlayerRadarScript : MonoBehaviour
 				m_PlayerObjs[i] = obj[i].GetComponent<Player>();
 				m_RadarObjs[i] = Instantiate(m_LadarPrefab);
 			}
-			m_InitFlag = true;
+			if (m_PlayerObjs != null)
+				m_InitFlag = true;
 		}
 	}
 

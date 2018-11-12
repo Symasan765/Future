@@ -211,6 +211,11 @@ Prefab:
     - {fileID: 114561111206091996, guid: 9ea0deace3751bc41ad1f2fd5625684d, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9ea0deace3751bc41ad1f2fd5625684d, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &41225528 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1386425842841904, guid: 9ea0deace3751bc41ad1f2fd5625684d,
+    type: 2}
+  m_PrefabInternal: {fileID: 41225527}
 --- !u!1 &44678355 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1051093192942500, guid: 489cff4a1928f47488d09b98b1e2d11c,
@@ -8029,6 +8034,8 @@ PlayableDirector:
     value: {fileID: 1595013376}
   - key: {fileID: 114095557304657768, guid: 7454021dad7a12047a57d96a237ba22e, type: 2}
     value: {fileID: 1115738511}
+  - key: {fileID: 114885886715386872, guid: 7454021dad7a12047a57d96a237ba22e, type: 2}
+    value: {fileID: 41225528}
   m_ExposedReferences:
     m_References: []
 --- !u!1001 &1908997078
@@ -8604,7 +8611,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2048797484}
   - component: {fileID: 2048797483}
-  - component: {fileID: 2048797485}
   m_Layer: 0
   m_Name: TimelineManager
   m_TagString: Untagged
@@ -8623,6 +8629,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dc094a8c8e75b8409d8a1d2aae93dbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_BackLoadPrefab: {fileID: 1437499661955796, guid: 6017ced7da2b18d4a9291969542d495e,
+    type: 2}
 --- !u!4 &2048797484
 Transform:
   m_ObjectHideFlags: 0
@@ -8636,18 +8644,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2048797485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2048797482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 403d4fa9878878d49b2465e718360200, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_NextSceneName: Alpha
 --- !u!1 &2060148632
 GameObject:
   m_ObjectHideFlags: 0

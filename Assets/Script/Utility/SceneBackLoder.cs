@@ -17,7 +17,7 @@ public class SceneBackLoder : MonoBehaviour {
 		m_NowSceneName = SceneManager.GetActiveScene().name;
 
 		// シーンを読み込み始める
-		ScenePreLoad(m_NextSceneName);
+		StartCoroutine("ScenePreLoad");
 	}
 
 	// Update is called once per frame
@@ -33,17 +33,18 @@ public class SceneBackLoder : MonoBehaviour {
 		}
 	}
 
-	void ScenePreLoad(string changeScn)
+	IEnumerator ScenePreLoad()
 	{
-		async = SceneManager.LoadSceneAsync(changeScn, LoadSceneMode.Additive);
+		async = SceneManager.LoadSceneAsync(m_NextSceneName, LoadSceneMode.Single);
 		async.allowSceneActivation = false;
-		Debug.Log(changeScn + "シーンの読み込みを開始！");
+		Debug.Log(m_NextSceneName + "シーンの読み込みを開始！");
+		yield return null;
 	}
 
 	IEnumerator SceneLoad()
 	{
 		m_NowSceneName = SceneManager.GetActiveScene().name;
-		SceneManager.UnloadScene(m_NowSceneName);
+		SceneManager.UnloadSceneAsync(m_NowSceneName);
 		async.allowSceneActivation = true;
 		yield return null;
 	}

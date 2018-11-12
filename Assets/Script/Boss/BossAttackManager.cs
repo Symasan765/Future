@@ -61,6 +61,11 @@ public class BossAttackManager : MonoBehaviour
 	private void Update()
 	{
 		ConditionUpdate();
+
+		if (Input.GetKeyDown(KeyCode.P))
+		{
+			m_BossDamage = 0.0f;
+		}
 	}
 
 	/// <summary>

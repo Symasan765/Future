@@ -13,17 +13,19 @@ public class TimelineManager : MonoBehaviour
 	GameObject m_Parent1;
 	GameObject m_Parent2;
 
+	public GameObject m_BackLoadPrefab;
 	SceneBackLoder m_BackLoder;
 
 	bool IsEnd1;
+	bool LoadFlag = false;
+
+	float m_TimeCnt = 0.0f;
 	// Use this for initialization
 	void Start()
 	{
 		IsEnd1 = false;
 		m_Scene1 = GameObject.Find("Scene1").GetComponent<PlayableDirector>();
 		m_Scene2 = GameObject.Find("Scene2").GetComponent<PlayableDirector>();
-
-		m_BackLoder = GetComponent<SceneBackLoder>();
 
 		m_Parent1 = m_Scene1.gameObject.transform.root.gameObject;
 		m_Parent2 = m_Scene2.gameObject.transform.root.gameObject;
@@ -50,6 +52,16 @@ public class TimelineManager : MonoBehaviour
 			m_Parent2.SetActive(false);
 			ResultTransManager.m_InTheGame = true;
 			m_BackLoder.SceneChange();
+		}
+
+		m_TimeCnt += Time.deltaTime;
+		if(m_TimeCnt > 5.0f)
+		{
+			if(LoadFlag == false)
+			{
+				m_BackLoder = Instantiate(m_BackLoadPrefab).GetComponent<SceneBackLoder>();
+				LoadFlag = true;
+			}
 		}
 	}
 
