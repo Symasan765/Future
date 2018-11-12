@@ -8,7 +8,21 @@ public class EvidenceSpawner : MonoBehaviour {
 	private float SpawnDeraySec = 3;
 	[SerializeField]
 	private float FeverEvidenceLifeTime = 10.0f;
-	
+
+	[SerializeField]
+	private bool RandomDeraySec = false;
+	[SerializeField]
+	private float RandomDerayMaxSec = 10.0f;
+	[SerializeField]
+	private float RandomDerayMinSec = 0.0f;
+
+	[SerializeField]
+	private bool RandomLifeTime = false;
+	[SerializeField]
+	private float RandomLifeTimeMaxSec = 10.0f;
+	[SerializeField]
+	private float RandomLifeTimeMinSec = 5.0f;
+
 	private bool FeverSpawner = false;
 	public GameObject evidenceObj;
 	public GameObject EffectObj;
@@ -19,10 +33,30 @@ public class EvidenceSpawner : MonoBehaviour {
 	private bool isSpawn = false;
 	public bool isSetBazooka = false;
 
+	private float nowDeraySec;
 	private float cntSpawnDeraySec = 0;
+	private float nowLifeTime;
+
 	// Use this for initialization
 	void Start ()
 	{
+		//ランダムでディレイ時間決定
+		if (RandomDeraySec)
+		{
+			nowDeraySec = Random.Range(RandomDerayMinSec, RandomDerayMaxSec);
+		}else
+		{
+			nowDeraySec = SpawnDeraySec;
+		}
+		//ランダムで生存時間決定
+		if (RandomLifeTime)
+		{
+			nowLifeTime = Random.Range(RandomLifeTimeMinSec, RandomLifeTimeMaxSec);
+		} else
+		{
+			nowLifeTime = FeverEvidenceLifeTime;
+		}
+
 		if (this.tag == "NormalEvidenceSpawner")
 		{
 			FeverSpawner = false;
@@ -46,12 +80,21 @@ public class EvidenceSpawner : MonoBehaviour {
 			} else
 			{
 				cntSpawnDeraySec += Time.deltaTime;
-				if (cntSpawnDeraySec >= SpawnDeraySec)
+				if (cntSpawnDeraySec >= nowDeraySec)
 				{
 					if (!isSpawn)
 					{
 						Spawn(true);
 						isSpawn = true;
+					}
+				}
+
+				if (isSpawn)
+				{
+					if (eviObj == null)
+					{
+						cntSpawnDeraySec = 0;
+						isSpawn = false;
 					}
 				}
 			}
@@ -96,7 +139,7 @@ public class EvidenceSpawner : MonoBehaviour {
 			if (_isFever)
 			{
 				eviObj.name = "FeverEvidence";
-				item.SetFeverValue(FeverEvidenceLifeTime);
+				item.SetFeverValue(nowLifeTime);
 			} else
 			{
 				eviObj.name = "NormalEvidence";
