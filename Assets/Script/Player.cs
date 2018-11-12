@@ -82,6 +82,7 @@ public class Player : MonoBehaviour
 	private float cntInvincibleSec = 0;
 	private float cntAirJumpNum = 1;
 	private float cntCantMoveSec = 0;
+	private Vector3 startFootRPosition;
 
 	private Vector3 respawnPosition;
 	private float rotationValue = 0;
@@ -93,13 +94,14 @@ public class Player : MonoBehaviour
 		{
 			effectSweetSystem[i] = EffectSweatObj[i].GetComponent<ParticleSystem>();
 		}
-			//とりあえずリスポン位置をゲーム開始位置に
+		//とりあえずリスポン位置をゲーム開始位置に
 		respawnPosition = transform.position;
 		effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
 		rb = GetComponent<Rigidbody>();
 		animator = GetComponent<Animator>();
 		feverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
 		itemHoldCollision = ItemHoldCollisionObj.GetComponent<BoxCollider>();
+		startFootRPosition = FootPositionObj[0].transform.localPosition;
 	}
 	
 	void Update ()
@@ -557,7 +559,6 @@ public class Player : MonoBehaviour
 
 	}
 
-
 	//持てるアイテムを探す
 	private void SerchItem()
 	{
@@ -601,9 +602,11 @@ public class Player : MonoBehaviour
 	{
 		if (isHoldItem)
 		{
+			FootPositionObj[0].transform.localPosition = new Vector3(startFootRPosition.x, startFootRPosition.y, startFootRPosition.z * 2);
 			itemHoldCollision.enabled = true;
 		} else
 		{
+			FootPositionObj[0].transform.localPosition = startFootRPosition;
 			itemHoldCollision.enabled = false;
 		}
 	}
