@@ -870,10 +870,15 @@ public class Player : MonoBehaviour
 		{
 			if (other.gameObject.tag == "Bazooka")
 			{
-				GameObject io = getItemObj;
-				Item i = io.GetComponent<Item>();
-				ReleaseItem();
-				i.SetBazooka(other.gameObject);
+				BazookaRifle br = other.gameObject.GetComponent<BazookaRifle>();
+				if (!br.isSetEvidence)
+				{
+					br.isSetEvidence = true;
+					GameObject io = getItemObj;
+					Item i = io.GetComponent<Item>();
+					ReleaseItem();
+					i.SetBazooka(other.gameObject);
+				}
 			}
 		}
 	}

@@ -39,6 +39,8 @@ public class BazookaRifle : MonoBehaviour{
 
 	private int nowSetEvidenceNum = 0;
 
+	public bool isSetEvidence = false;
+
 	private bool isFirstFeverEvidenceHit = false;
 	private bool canShot = false;
 	private void Start()
@@ -139,6 +141,7 @@ public class BazookaRifle : MonoBehaviour{
 
 	private void ShotBazooka(bool _isFeverEvidence)
 	{
+		isSetEvidence = false;
 		for (int i = 0; i < 4; i++)
 		{
 			XPad.Get.SetVibration(i, 0.7f, 0.7f, 0.2f);
