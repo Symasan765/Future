@@ -800,6 +800,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: ecfdfed0b8a97aa478451246dd1aa038, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ecfdfed0b8a97aa478451246dd1aa038, type: 3}
   m_IsPrefabParent: 0
@@ -815,7 +819,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 262295703}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d2d75edce9139428b549cd831bccd5, type: 3}
+  m_Script: {fileID: 11500000, guid: 55caa3cc8d861774286104fc2ac56daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!95 &262295705 stripped
@@ -1167,7 +1171,7 @@ MonoBehaviour:
   TexSize: 400
   TexScale: 0.7
   UOffset: 0.2
-  VOffset: 0
+  VOffset: 0.1
 --- !u!222 &481759929
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1969,7 +1973,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 840319534}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d2d75edce9139428b549cd831bccd5, type: 3}
+  m_Script: {fileID: 11500000, guid: 55caa3cc8d861774286104fc2ac56daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!95 &840319536 stripped
@@ -2845,7 +2849,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1184781869}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d2d75edce9139428b549cd831bccd5, type: 3}
+  m_Script: {fileID: 11500000, guid: 55caa3cc8d861774286104fc2ac56daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!95 &1184781871 stripped
@@ -3611,7 +3615,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1518642279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d2d75edce9139428b549cd831bccd5, type: 3}
+  m_Script: {fileID: 11500000, guid: 55caa3cc8d861774286104fc2ac56daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!95 &1518642281 stripped
