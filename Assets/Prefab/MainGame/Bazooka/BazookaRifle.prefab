@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4566337051580420}
   - component: {fileID: 33187145552601996}
   - component: {fileID: 23463913170761768}
+  - component: {fileID: 114162673214241876}
   m_Layer: 0
   m_Name: polySurface1
   m_TagString: Untagged
@@ -801,6 +802,7 @@ GameObject:
   - component: {fileID: 4020180769143170}
   - component: {fileID: 33096090273357402}
   - component: {fileID: 23567999727975132}
+  - component: {fileID: 114882432530878382}
   m_Layer: 0
   m_Name: polySurface3
   m_TagString: Untagged
@@ -1823,6 +1825,18 @@ MonoBehaviour:
   isStart: 0
   ShotPosition: {x: 0, y: 0, z: 0}
   ShotVirticalRotation: {x: -30, y: 0, z: 0}
+--- !u!114 &114162673214241876
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1079920516580130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56693378303cfff4f86fa0afdb42571d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Threshold: 4
 --- !u!114 &114709563702915024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1867,6 +1881,18 @@ MonoBehaviour:
   nowEvidenceNormal: 0
   ExplosionSec: 2
   isSetEvidence: 0
+--- !u!114 &114882432530878382
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1979548473336698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56693378303cfff4f86fa0afdb42571d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Threshold: 4
 --- !u!135 &135094865058269660
 SphereCollider:
   m_ObjectHideFlags: 1

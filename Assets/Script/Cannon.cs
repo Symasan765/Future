@@ -55,10 +55,10 @@ public class Cannon : MonoBehaviour {
 			{
 				if (feverManager.IsFever())
 				{
-					cntDerayTime += Time.deltaTime;
+					cntDerayTime += Time.deltaTime * 4;
 				} else
 				{
-					cntDerayTime += Time.deltaTime;
+					cntDerayTime += Time.deltaTime * 2;
 				}
 				if (cntDerayTime >= MoveDerayTime)
 				{
@@ -91,15 +91,25 @@ public class Cannon : MonoBehaviour {
 		{
 			cntDerayTime = 0;
 			//元の位置に戻す
-			VirticalMove(false);
-			VirticalRotation(false);
-			HorizontalRotation(false);
+			if (VirtivalMove)
+			{
+				VirticalMove(false);
+			}
+			if (HorizontalRotate)
+			{
+				VirticalRotation(false);
+			}
+			if (VirticalRotate)
+			{
+				HorizontalRotation(false);
+			}	
 		}
-		
-		if ( bazookaRifle.isSetEvidence)
+
+		if (bazookaRifle.isSetEvidence)
 		{
 			if (!isStart)
 			{
+				cntDerayTime = 0;
 				cntAnimationSpeed = 0;
 			}
 			isStart = true;
@@ -107,6 +117,7 @@ public class Cannon : MonoBehaviour {
 		{
 			if (isStart)
 			{
+				cntDerayTime = 0;
 				cntAnimationSpeed = 0;
 			}
 			isStart = false;
@@ -129,7 +140,7 @@ public class Cannon : MonoBehaviour {
 		transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, 0, 0);
 		//位置を固定
 		//アニメーション時間をカウント
-		CountAnimationSpeed();
+		CountAnimationSpeed(_flg);
 	}
 
 	//横回転
@@ -153,7 +164,7 @@ public class Cannon : MonoBehaviour {
 		transform.localPosition = new Vector3(startPosition.x, transform.localPosition.y, startPosition.z);
 		
 		//アニメーション時間をカウント
-		CountAnimationSpeed();
+		CountAnimationSpeed(_flg);
 	}
 
 	//縦移動
@@ -167,25 +178,36 @@ public class Cannon : MonoBehaviour {
 			transform.localPosition = Vector3.Lerp(transform.localPosition, startPosition, cntAnimationSpeed);
 		}
 
-		CountAnimationSpeed();
+		CountAnimationSpeed(_flg);
 
 	}
 
 	//アニメーション時間のカウント
-	private void CountAnimationSpeed()
+	private void CountAnimationSpeed(bool _flg)
 	{
 		if (cntAnimationSpeed < 1.0f)
 		{
-			if (feverManager.IsFever())
+			if (_flg)
 			{
-				cntAnimationSpeed += AnimationSpeed * 2;
+				if (feverManager.IsFever())
+				{
+					cntAnimationSpeed += AnimationSpeed * 4;
+				} else
+				{
+					cntAnimationSpeed += AnimationSpeed * 2;
+				}
+				if (cntAnimationSpeed >= 1.0f)
+				{
+					cntAnimationSpeed = 1.0f;
+				}
 			} else
 			{
-				cntAnimationSpeed += AnimationSpeed;
-			}
-			if (cntAnimationSpeed >= 1.0f)
-			{
-				cntAnimationSpeed = 1.0f;
+				cntAnimationSpeed += AnimationSpeed * 0.5f;
+
+				if (cntAnimationSpeed >= 1.0f)
+				{
+					cntAnimationSpeed = 1.0f;
+				}
 			}
 		}
 	}

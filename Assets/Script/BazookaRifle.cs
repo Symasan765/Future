@@ -134,12 +134,11 @@ public class BazookaRifle : MonoBehaviour{
 		SoundManager.Get.PlaySE("BulletHit1",0.7f);
 		SoundManager.Get.PlaySE("BulletHit2",0.7f);
 		ShakeCamera.Impact(0.05f, 1.0f);
-	
+		isSetEvidence = false;
 	}
 
 	private void ShotBazooka(bool _isFeverEvidence)
 	{
-		isSetEvidence = false;
 		for (int i = 0; i < 4; i++)
 		{
 			XPad.Get.SetVibration(i, 0.7f, 0.7f, 0.2f);
