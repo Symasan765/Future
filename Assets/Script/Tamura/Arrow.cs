@@ -28,7 +28,6 @@ public class Arrow : MonoBehaviour {
     void Awake() {
         inputDelay = 0;
         cursorPos = 0;
-        //cursorPos = playerIndex;
         csManager = FindObjectOfType<CharacterSelectManager>();
 
         animAngle = 0.0f/* + playerIndex * 1.0f*/;

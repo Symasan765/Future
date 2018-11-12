@@ -40,8 +40,6 @@ public class SceneChanger : SingletonMonoBehaviour<SceneChanger> {
     bool isCutsceneUIMoveMiddle = true;
     bool isCutsceneUIMoveEnd = true;
 
-    AsyncOperation ao;
-
     void Awake() {
         var sceneChangers = FindObjectsOfType<SceneChanger>();
         if (sceneChangers.Length >= 2) {
@@ -65,8 +63,8 @@ public class SceneChanger : SingletonMonoBehaviour<SceneChanger> {
                     sceneImage.transform.localPosition = new Vector3(0.0f, -1080.0f, 0.0f);
 
                     // 次のシーンを読み込み
-                    //SceneManager.LoadSceneAsync(nextSceneName);
-                    ao.allowSceneActivation = true;
+                    SceneManager.LoadSceneAsync(nextSceneName);
+                    nowScene = SceneManager.GetSceneByName(nextSceneName);
                 }
             }
 
@@ -96,11 +94,6 @@ public class SceneChanger : SingletonMonoBehaviour<SceneChanger> {
                 Time.timeScale = 1.0f;
             }
         }
-    }
-
-    public void LoadAsync(string _sceneName) {
-        ao = SceneManager.LoadSceneAsync(_sceneName);
-        ao.allowSceneActivation = false;
     }
 
     public void ChangeScene(string _sceneName) {
