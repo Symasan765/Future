@@ -60,6 +60,7 @@ public class Player : MonoBehaviour
 	public GameObject ItemPosition;
 	public GameObject RotateObj;
 	public GameObject[] FootPositionObj = new GameObject[2];	//着地判定用にキャラの左右に配置
+	public GameObject ItemHoldCollisionObj;
 
 	private GameObject getItemObj;
 	private GameObject holdDeskObj;
@@ -68,6 +69,7 @@ public class Player : MonoBehaviour
 	private ParticleSystem[] effectSweetSystem = new ParticleSystem[2];
 	private EffectManager effectManager;
 	private FeverManager feverManager;
+	private BoxCollider itemHoldCollision;
 
 	private float nowMoveSpeed;
 	private float rightSpeed;
@@ -97,6 +99,7 @@ public class Player : MonoBehaviour
 		rb = GetComponent<Rigidbody>();
 		animator = GetComponent<Animator>();
 		feverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
+		itemHoldCollision = ItemHoldCollisionObj.GetComponent<BoxCollider>();
 	}
 	
 	void Update ()
@@ -163,6 +166,7 @@ public class Player : MonoBehaviour
 				Damage();
 			}
 		}
+		EvidenceHoldCollision();
 		Down();
 		Respawn();
 		//キャラのZ座標は常に0
@@ -424,7 +428,6 @@ public class Player : MonoBehaviour
 			for (int i = 0; i < 2; i++)
 			{
 				Vector3 checkPos = new Vector3(FootPositionObj[i].transform.position.x, FootPositionObj[i].transform.position.y, FootPositionObj[i].transform.position.z);
-
 				Physics.Raycast(checkPos, Vector3.down, out hit, 10, OnGroundLayer);
 				if (hit.collider)
 				{
@@ -435,21 +438,6 @@ public class Player : MonoBehaviour
 					}
 				}
 			}
-			/*
-			float scr = 0.4f;
-			RaycastHit hit;
-			Vector3 sphirePos = new Vector3(FootPositionObj.transform.position.x, FootPositionObj.transform.position.y + scr, FootPositionObj.transform.position.z);
-
-			int layerMask = LayerMask.GetMask(new string[] {"StageObject"});
-			Physics.SphereCast(sphirePos, scr, Vector3.down, out hit, 10, layerMask);
-			if (hit.collider)
-			{
-				if (hit.distance < 0.04f)
-				{
-					//rb.velocity = Vector3.zero;
-					return true;
-				}
-			}*/
 		}
 		return flgOnGround;
 	}
@@ -609,6 +597,17 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	private void EvidenceHoldCollision()
+	{
+		if (isHoldItem)
+		{
+			itemHoldCollision.enabled = true;
+		} else
+		{
+			itemHoldCollision.enabled = false;
+		}
+	}
+
 	//アイテムを持つ
 	private void GetItem(GameObject _itemObj)
 	{
@@ -630,10 +629,11 @@ public class Player : MonoBehaviour
 				isHoldItem = true;
 				_itemObj.transform.parent = transform;
 				Rigidbody itemRb = _itemObj.GetComponent<Rigidbody>();
-				BoxCollider col = _itemObj.GetComponent<BoxCollider>();
-				col.isTrigger = true;
+				//BoxCollider col = _itemObj.GetComponent<BoxCollider>();
+				//col.isTrigger = true;
 				itemRb.useGravity = false;
-				itemRb.isKinematic = true;
+				itemRb.velocity = Vector3.zero;
+				//itemRb.isKinematic = true;
 
 				item.SetItemLocalPosition(ItemPosition.transform.localPosition);
 				item.flgMoveToGetPos = true;
@@ -690,10 +690,10 @@ public class Player : MonoBehaviour
 				isHoldItem = false;
 				Rigidbody itemRb = getItemObj.GetComponent<Rigidbody>();
 				Item item = getItemObj.GetComponent<Item>();
-				BoxCollider col = getItemObj.GetComponent<BoxCollider>();
-				col.isTrigger = false;
+				//BoxCollider col = getItemObj.GetComponent<BoxCollider>();
+				//col.isTrigger = false;
 				itemRb.useGravity = true;
-				itemRb.isKinematic = false;
+				//itemRb.isKinematic = false;
 				itemRb.AddForce(transform.forward * 1, ForceMode.Impulse);
 				item.flgMoveToGetPos = false;
 				getItemObj = null;
