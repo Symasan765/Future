@@ -48,6 +48,8 @@ public class CharacterSelectManager : MonoBehaviour {
 
     void Start() {
         //SoundManager.Get.PlayBGM("はりきっちゃう時のテーマ", true);
+        sc = FindObjectOfType<SceneChanger>();
+        sc.LoadAsync("TimeLineTest");
     }
 
 	void Update () {
@@ -60,8 +62,6 @@ public class CharacterSelectManager : MonoBehaviour {
         }
         //履歴書を上に飛ばしていく
         //sheetList[0].transform.position = sheetList[0].transform.position + sheetList[0].transform.up;
-
-        sc = FindObjectOfType<SceneChanger>();
 	}
 
     // カーソルの位置を更新
@@ -90,13 +90,27 @@ public class CharacterSelectManager : MonoBehaviour {
             // 重複したらIndexの小さい順にキャラを割り振り、Indexの大きい人は未選択ってことにする
             if (selectDataList.Count != 0) {
                 for (int i = 0; i < selectDataList.Count; i++) {
+                    // 操作が同フレームで重複しなかった場合の処理
+                    /*CharacterManager.SetCharacter(_playerIndex, unselectCharaList[_cursorPos]);
+                    animatorList[unselectCharaList[_cursorPos]].SetBool("isSelected", true);
 
+                    unselectCharaList.RemoveAt(_cursorPos);
+
+                    // キャラ選択フラグをオンに
+                    arrowList[_playerIndex].SetIsCharacterSelected(true);*/
                 }
             }
 
             if (unselectDataList.Count != 0) {
                 for (int i = 0; i < unselectDataList.Count; i++) {
+                    /*unselectCharaList.Add(CharacterManager.SelectedCharacters[_playerIndex]);
+                    unselectCharaList.Sort();
 
+                    CharacterManager.ResetCharacter(_playerIndex);
+                    animatorList[unselectCharaList[_cursorPos]].SetBool("isSelected", false);
+
+                    // キャラ選択フラグをオフに
+                    arrowList[_playerIndex].SetIsCharacterSelected(false);*/
                 }
             }
             // unselectリストをいじり終わった後にフラグを戻す
@@ -156,6 +170,12 @@ public class CharacterSelectManager : MonoBehaviour {
     // playerIndexとcursorPosを持つ構造体にいじり情報を格納する？
     public void SelectCharater(int _playerIndex, int _cursorPos) {
         changeUnselectListFlg = true;
+
+        changeData cd;
+        cd._playerIndex = _playerIndex;
+        cd._cursorPos = _cursorPos;
+
+        selectDataList.Add(cd);
         //--------------------------------------------------------------------
 
         // 操作が同フレームで重複しなかった場合の処理
@@ -170,6 +190,12 @@ public class CharacterSelectManager : MonoBehaviour {
 
     public void UnselectCharacter(int _playerIndex, int _cursorPos) {
         changeUnselectListFlg = true;
+
+        changeData cd;
+        cd._playerIndex = _playerIndex;
+        cd._cursorPos = _cursorPos;
+
+        unselectDataList.Add(cd);
         //--------------------------------------------------------------------
 
         // 操作が同フレームで重複しても大丈夫なように未選択リストをいじるタイミングは統一すること
