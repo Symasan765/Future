@@ -618,6 +618,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1978039168148650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4442218321259382}
+  - component: {fileID: 65412974652348414}
+  m_Layer: 12
+  m_Name: ItemHoldCollision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1978878998687116
 GameObject:
   m_ObjectHideFlags: 1
@@ -665,6 +681,7 @@ Transform:
   - {fileID: 4840612450902636}
   - {fileID: 4816574997754798}
   - {fileID: 4219363331098140}
+  - {fileID: 4442218321259382}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -877,6 +894,19 @@ Transform:
   m_Father: {fileID: 4062441187737084}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4442218321259382
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1978039168148650}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.20000002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4080335310564636}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4472862445810512
 Transform:
   m_ObjectHideFlags: 1
@@ -910,7 +940,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1221897029035112}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0.5}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 4080335310564636}
@@ -1222,6 +1252,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.15, y: 0.93133986, z: 0.15}
   m_Center: {x: 0, y: 0.47314823, z: 0}
+--- !u!65 &65412974652348414
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1978039168148650}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15, y: 0.5313399, z: 0.4}
+  m_Center: {x: 0, y: 0.2731482, z: 0}
 --- !u!95 &95475969641692580
 Animator:
   serializedVersion: 3
@@ -1269,7 +1311,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8192
   isHoldItem: 0
-  isOnGround: 0
   EffectSweatObj:
   - {fileID: 1259145426381936}
   - {fileID: 1313688708623838}
@@ -1278,6 +1319,8 @@ MonoBehaviour:
   FootPositionObj:
   - {fileID: 1616491162938036}
   - {fileID: 1389389828572586}
+  ItemHoldCollisionObj: {fileID: 1978039168148650}
+  cntJumpCheckSec: 0
 --- !u!114 &114037348742382954
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -116,10 +116,16 @@ public class Item : MonoBehaviour {
 		//指定された場所へ移動
 		if (flgMoveToGetPos)
 		{
-			if (transform.localPosition != getPosition)
+			if (isHold)
 			{
-				Vector3 vec = getPosition - transform.localPosition;
-				transform.localPosition += vec * MoveSpeed * Time.deltaTime;
+				transform.localPosition = getPosition;
+			} else
+			{
+				if (transform.localPosition != getPosition)
+				{
+					Vector3 vec = getPosition - transform.localPosition;
+					transform.localPosition += vec * MoveSpeed * Time.deltaTime;
+				}
 			}
 		}
 
@@ -199,6 +205,23 @@ public class Item : MonoBehaviour {
 		isScaleDown = true;
 	}
 
+	void OnCollisionStay(Collision other)
+	{
+		if (!isHold)
+		{
+			if (other.gameObject.tag == "Bazooka")
+			{
+				BazookaRifle br = other.gameObject.GetComponent<BazookaRifle>();
+				if (!br.isSetEvidence)
+				{
+					br.isSetEvidence = true;
+					SetBazooka(other.gameObject);
+				}
+			}
+		}
+	}
+
+	/*
 	void OnTriggerStay(Collider other)
 	{
 		if (!isHold)
@@ -213,6 +236,6 @@ public class Item : MonoBehaviour {
 				}
 			}
 		}
-	}
+	}*/
 
 }
