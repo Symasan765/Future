@@ -23,6 +23,7 @@ public class Arrow : MonoBehaviour {
     float animAngle;
 
     public bool canSelect;
+    bool canInput;
 
     // 初期化
     void Awake() {
@@ -36,14 +37,20 @@ public class Arrow : MonoBehaviour {
     void Update() {
         // キャラ未選択状態なら
         if (!isCharacterSelected) {
-            MoveCursor();
+            //MoveCursor();
             SelectCharacter();
-            AnimateCursor();
         }
         // キャラ選択済みなら
         else {
             UnselectCharacter();
             StartGame();
+        }
+    }
+
+    void FixedUpdate() {
+        if (!isCharacterSelected) {
+            MoveCursor();
+            AnimateCursor();
         }
     }
 
@@ -73,7 +80,7 @@ public class Arrow : MonoBehaviour {
                     }
                 }
 
-                inputDelay = 20;
+                inputDelay = 10;
             }
         }
         else {
@@ -109,7 +116,7 @@ public class Arrow : MonoBehaviour {
     // カーソルのアニメーション(左右)
     void AnimateCursor() {
         float range = 0.5f;
-        float xSpeed = 0.135f; /*+ Random.Range(-0.1f, 0.1f);*/
+        float xSpeed = 0.25f; /*+ Random.Range(-0.1f, 0.1f);*/
 
         cursorAnimateTransform = new Vector3(Mathf.Sin(animAngle) * range, 0.0f, 0.0f);
 

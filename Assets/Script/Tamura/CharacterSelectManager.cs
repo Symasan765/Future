@@ -86,17 +86,50 @@ public class CharacterSelectManager : MonoBehaviour {
     // キャラクターの選択状態を更新
     void UpdateCharacterSelectStatus() {
         if (changeUnselectListFlg) {
-            // unselectリストからRemoveして、それが重複なく成功したらArrow側にそれを通知する
-            // 重複したらIndexの小さい順にキャラを割り振り、Indexの大きい人は未選択ってことにする
-            if (selectDataList.Count != 0) {
-                for (int i = 0; i < selectDataList.Count; i++) {
+            // いじるデータが一件だけの場合
+            if (unselectDataList.Count == 1) {
+                Debug.Log("select一件");
+            }
+            else {
+                // unselectリストからRemoveして、それが重複なく成功したらArrow側にそれを通知する
+                // 重複したらIndexの小さい順にキャラを割り振り、Indexの大きい人は未選択ってことにする
+                if (selectDataList.Count != 0) {
+                    for (int i = 0; i < selectDataList.Count; ) {
+                        //--------------------------------------------------------------------
+                        /*CharacterManager.SetCharacter(_playerIndex, unselectCharaList[_cursorPos]);
+                        animatorList[unselectCharaList[_cursorPos]].SetBool("isSelected", true);
 
+                        unselectCharaList.RemoveAt(_cursorPos);
+
+                        // キャラ選択フラグをオンに
+                        arrowList[_playerIndex].SetIsCharacterSelected(true);*/
+
+                        Debug.Log("select複数件");
+                        i++;
+                    }
                 }
             }
 
             if (unselectDataList.Count != 0) {
-                for (int i = 0; i < unselectDataList.Count; i++) {
+                // いじるデータが一件だけの場合
+                if (unselectDataList.Count == 1) {
+                    Debug.Log("unselect一件");
+                }
+                else {
+                    for (int i = 0; i < unselectDataList.Count;) {
+                        //--------------------------------------------------------------------
+                        /*unselectCharaList.Add(CharacterManager.SelectedCharacters[_playerIndex]);
+                        unselectCharaList.Sort();
 
+                        CharacterManager.ResetCharacter(_playerIndex);
+                        animatorList[unselectCharaList[_cursorPos]].SetBool("isSelected", false);
+
+                        // キャラ選択フラグをオフに
+                        arrowList[_playerIndex].SetIsCharacterSelected(false);*/
+
+                        Debug.Log("unselect複数件");
+                        i++;
+                    }
                 }
             }
             // unselectリストをいじり終わった後にフラグを戻す
@@ -156,6 +189,12 @@ public class CharacterSelectManager : MonoBehaviour {
     // playerIndexとcursorPosを持つ構造体にいじり情報を格納する？
     public void SelectCharater(int _playerIndex, int _cursorPos) {
         changeUnselectListFlg = true;
+
+        changeData cd;
+        cd._playerIndex = _playerIndex;
+        cd._cursorPos = _cursorPos;
+
+        selectDataList.Add(cd);
         //--------------------------------------------------------------------
 
         // 操作が同フレームで重複しなかった場合の処理
@@ -170,6 +209,12 @@ public class CharacterSelectManager : MonoBehaviour {
 
     public void UnselectCharacter(int _playerIndex, int _cursorPos) {
         changeUnselectListFlg = true;
+
+        changeData cd;
+        cd._playerIndex = _playerIndex;
+        cd._cursorPos = _cursorPos;
+
+        unselectDataList.Add(cd);
         //--------------------------------------------------------------------
 
         // 操作が同フレームで重複しても大丈夫なように未選択リストをいじるタイミングは統一すること
