@@ -12,8 +12,6 @@ public class BazookaRifle : MonoBehaviour{
 	[SerializeField]
 	private float BulletAttackPower = 10.0f;	//弾の攻撃力
 
-    [SerializeField]
-    private GameObject BazookaPrefab;               //ここにバズーカーのPrefabをUnityのInspectorで割当しておく。（またはResourece.Loadでロードするといい）
 	private GameObject[] Evidence_temp = new GameObject[3];
 	public GameObject EffectObj;
 	public GameObject BulletObj;
