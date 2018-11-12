@@ -474,14 +474,13 @@ public class Player : MonoBehaviour
 				holdItemJump = true;
 			}
 		}
-		
-		
 
 		//空中ジャンプ
 		if (holdItemJump && !IsOnGround() && cntAirJumpNum > 0 && !isDamage && CanIMove())
 		{
 			if (XPad.Get.GetTrigger(XPad.KeyData.X, PlayerIndex))
 			{
+				Debug.Log("空中J");
 				effectManager.PlayPYON(PlayerIndex, effectPos);
 				rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 				cntAirJumpNum--;
@@ -493,27 +492,27 @@ public class Player : MonoBehaviour
 			}
 		}
 
-
 		//地上ジャンプの処理
 		if (IsOnGround() && !isJump && !isDamage && CanIMove() && !checkJumpTrigger)
 		{
+			
 			if (XPad.Get.GetPress(XPad.KeyData.X, PlayerIndex))
 			{
 				cntJumpCheckSec += Time.deltaTime;
 			}
 
-			if (cntJumpCheckSec >= 0.1f)
+			if (holdItemJump)
 			{
-				cntJumpCheckSec = 0;
-				checkJumpTrigger = true;
-				cntAirJumpNum = AirJumpNum;
-				effectManager.PlayDUM(PlayerIndex, effectPos);
-				SoundManager.Get.PlaySE("AirJump");
-				jumpSpeed = GroundJumpPower;
-				isJump = true;
-			} else
-			{
-				if (cntJumpCheckSec > 0)
+				if (cntJumpCheckSec >= 0.07f)
+				{
+					cntJumpCheckSec = 0;
+					checkJumpTrigger = true;
+					cntAirJumpNum = AirJumpNum;
+					effectManager.PlayDUM(PlayerIndex, effectPos);
+					SoundManager.Get.PlaySE("AirJump");
+					jumpSpeed = GroundJumpPower;
+					isJump = true;
+				} else
 				{
 					if (XPad.Get.GetRelease(XPad.KeyData.X, PlayerIndex))
 					{
@@ -525,6 +524,19 @@ public class Player : MonoBehaviour
 						jumpSpeed = GroundJumpPower - (GroundJumpPower / 3);
 						isJump = true;
 					}
+
+				}
+			} else
+			{
+				if (XPad.Get.GetTrigger(XPad.KeyData.X, PlayerIndex))
+				{
+					cntJumpCheckSec = 0;
+					checkJumpTrigger = true;
+					cntAirJumpNum = AirJumpNum;
+					effectManager.PlayDUM(PlayerIndex, effectPos);
+					SoundManager.Get.PlaySE("AirJump");
+					jumpSpeed = GroundJumpPower * 1.15f;
+					isJump = true;
 				}
 			}
 		}
