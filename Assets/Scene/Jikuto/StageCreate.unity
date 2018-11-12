@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -4200,6 +4200,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnDeraySec: 3
   FeverEvidenceLifeTime: 10
+  RandomDeraySec: 0
+  RandomDerayMaxSec: 10
+  RandomDerayMinSec: 0
+  RandomLifeTime: 0
+  RandomLifeTimeMaxSec: 10
+  RandomLifeTimeMinSec: 5
   evidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
     type: 2}
   EffectObj: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 2}
@@ -4477,6 +4483,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnDeraySec: 3
   FeverEvidenceLifeTime: 10
+  RandomDeraySec: 0
+  RandomDerayMaxSec: 10
+  RandomDerayMinSec: 0
+  RandomLifeTime: 0
+  RandomLifeTimeMaxSec: 10
+  RandomLifeTimeMinSec: 5
   evidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
     type: 2}
   EffectObj: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 2}
@@ -4563,6 +4575,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnDeraySec: 3
   FeverEvidenceLifeTime: 10
+  RandomDeraySec: 0
+  RandomDerayMaxSec: 10
+  RandomDerayMinSec: 0
+  RandomLifeTime: 0
+  RandomLifeTimeMaxSec: 10
+  RandomLifeTimeMinSec: 5
   evidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
     type: 2}
   EffectObj: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 2}
@@ -8602,6 +8620,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnDeraySec: 3
   FeverEvidenceLifeTime: 10
+  RandomDeraySec: 0
+  RandomDerayMaxSec: 10
+  RandomDerayMinSec: 0
+  RandomLifeTime: 0
+  RandomLifeTimeMaxSec: 10
+  RandomLifeTimeMinSec: 5
   evidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
     type: 2}
   EffectObj: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 2}
@@ -13814,6 +13838,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnDeraySec: 3
   FeverEvidenceLifeTime: 10
+  RandomDeraySec: 0
+  RandomDerayMaxSec: 10
+  RandomDerayMinSec: 0
+  RandomLifeTime: 0
+  RandomLifeTimeMaxSec: 10
+  RandomLifeTimeMinSec: 5
   evidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
     type: 2}
   EffectObj: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 2}
@@ -21772,6 +21802,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnDeraySec: 3
   FeverEvidenceLifeTime: 10
+  RandomDeraySec: 0
+  RandomDerayMaxSec: 10
+  RandomDerayMinSec: 0
+  RandomLifeTime: 0
+  RandomLifeTimeMaxSec: 10
+  RandomLifeTimeMinSec: 5
   evidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
     type: 2}
   EffectObj: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 2}
@@ -25192,7 +25228,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4743893132764154, guid: 20147953ff61ca449a053d050f12a287, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 7.6499996
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4743893132764154, guid: 20147953ff61ca449a053d050f12a287, type: 2}
       propertyPath: m_LocalPosition.z
@@ -25566,6 +25602,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnDeraySec: 3
   FeverEvidenceLifeTime: 10
+  RandomDeraySec: 0
+  RandomDerayMaxSec: 10
+  RandomDerayMinSec: 0
+  RandomLifeTime: 0
+  RandomLifeTimeMaxSec: 10
+  RandomLifeTimeMinSec: 5
   evidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
     type: 2}
   EffectObj: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 2}
@@ -29359,52 +29401,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4679080112093546, guid: 229022c0e42d16247bc1df86d8a242ab,
     type: 2}
   m_PrefabInternal: {fileID: 38704607}
---- !u!1001 &1565601022
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4998585360278742, guid: 600912e04d80dca41a326e602e754180, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4998585360278742, guid: 600912e04d80dca41a326e602e754180, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4998585360278742, guid: 600912e04d80dca41a326e602e754180, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4998585360278742, guid: 600912e04d80dca41a326e602e754180, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4998585360278742, guid: 600912e04d80dca41a326e602e754180, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4998585360278742, guid: 600912e04d80dca41a326e602e754180, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4998585360278742, guid: 600912e04d80dca41a326e602e754180, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4998585360278742, guid: 600912e04d80dca41a326e602e754180, type: 2}
-      propertyPath: m_RootOrder
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 1954064531802366, guid: 600912e04d80dca41a326e602e754180, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 600912e04d80dca41a326e602e754180, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1569691307
 GameObject:
   m_ObjectHideFlags: 0
@@ -29451,6 +29447,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnDeraySec: 3
   FeverEvidenceLifeTime: 10
+  RandomDeraySec: 0
+  RandomDerayMaxSec: 10
+  RandomDerayMinSec: 0
+  RandomLifeTime: 0
+  RandomLifeTimeMaxSec: 10
+  RandomLifeTimeMinSec: 5
   evidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
     type: 2}
   EffectObj: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 2}
@@ -30390,6 +30392,52 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28a67b579f432804c9d442bf25ec8d88, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &1759364169
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4998585360278742, guid: 600912e04d80dca41a326e602e754180, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998585360278742, guid: 600912e04d80dca41a326e602e754180, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998585360278742, guid: 600912e04d80dca41a326e602e754180, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998585360278742, guid: 600912e04d80dca41a326e602e754180, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998585360278742, guid: 600912e04d80dca41a326e602e754180, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998585360278742, guid: 600912e04d80dca41a326e602e754180, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998585360278742, guid: 600912e04d80dca41a326e602e754180, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998585360278742, guid: 600912e04d80dca41a326e602e754180, type: 2}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1954064531802366, guid: 600912e04d80dca41a326e602e754180, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 600912e04d80dca41a326e602e754180, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1765180148
 Prefab:
