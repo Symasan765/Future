@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
 	private LayerMask OnGroundLayer;
 
 	private float GetItemBlankSec = 0.25f;	//アイテムを持つ&捨てる時の硬直フレーム
-	private float CanHoldItemDistance = 1.0f;	//机を運べるようになる範囲
+	private float CanHoldItemDistance = 1.7f;	//机を運べるようになる範囲
 	
 	private int mentalGauge = 0;
 	private bool isJump = false;
@@ -275,12 +275,6 @@ public class Player : MonoBehaviour
 		{
 			isMove = false;
 			animator.SetBool("isDash", false);
-		}
-
-		//すり抜け床の処理
-		if (XPad.Get.GetLeftStick(PlayerIndex).y < -0.2f)
-		{
-			GetComponent<ThroughFloorCheck>().IsFall(0.5f);
 		}
 
 		//アイテムを持った時移動速度を半減(仮)
@@ -575,7 +569,7 @@ public class Player : MonoBehaviour
 	//持てるアイテムを探す
 	private void SerchItem()
 	{
-		Vector3 itemPositon = new Vector3(transform.position.x, ItemPosition.transform.position.y, transform.position.z);
+		Vector3 itemPositon = new Vector3(transform.position.x - (0.5f * angleValue), ItemPosition.transform.position.y, transform.position.z);
 		if (cntGetItemBlankSec > 0)
 		{
 			animator.SetBool("isGetItem", true);
@@ -592,16 +586,11 @@ public class Player : MonoBehaviour
 		if (!isHoldItem && cntGetItemBlankSec == 0)
 		{
 			RaycastHit hit;
-			Physics.Raycast(itemPositon, transform.forward, out hit, CanHoldItemDistance);
+			Physics.Raycast(itemPositon, transform.forward, out hit, CanHoldItemDistance, LayerMask.GetMask("Evidence"));
+			Debug.DrawRay(itemPositon, transform.forward * CanHoldItemDistance, Color.blue);
 			if (hit.collider)
 			{
-				if (hit.collider.tag == "SYOUKO")
-				{
-					checkForwardEvidence = true;
-				} else
-				{
-					checkForwardEvidence = false;
-				}
+				checkForwardEvidence = true;
 				if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
 				{
 					GetItem(hit.collider.gameObject);		

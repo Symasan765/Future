@@ -114,7 +114,6 @@ GameObject:
   - component: {fileID: 114824534412255554}
   - component: {fileID: 54834224959521150}
   - component: {fileID: 95928765832404706}
-  - component: {fileID: 114912609895454970}
   - component: {fileID: 114709636213344546}
   - component: {fileID: 65630291246518354}
   m_Layer: 12
@@ -1490,17 +1489,6 @@ MonoBehaviour:
   - {fileID: 1139510922533572}
   ItemHoldCollisionObj: {fileID: 1928750000201304}
   cntJumpCheckSec: 0
---- !u!114 &114912609895454970
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1282707672321034}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bfaba21bbbd43e46971a10468a392f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114932610326873292
 MonoBehaviour:
   m_ObjectHideFlags: 1
