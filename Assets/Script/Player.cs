@@ -287,7 +287,7 @@ public class Player : MonoBehaviour
 			{
 				if (IsOnGround())
 				{
-					nowMoveSpeed = DashSpeed / 3 * XPad.Get.GetLeftStick(PlayerIndex).x;
+					nowMoveSpeed = DashSpeed / 2 * XPad.Get.GetLeftStick(PlayerIndex).x;
 				} else
 				{
 					nowMoveSpeed = DashSpeed * XPad.Get.GetLeftStick(PlayerIndex).x;
@@ -569,7 +569,7 @@ public class Player : MonoBehaviour
 	//持てるアイテムを探す
 	private void SerchItem()
 	{
-		Vector3 itemPositon = new Vector3(transform.position.x - (0.5f * angleValue), ItemPosition.transform.position.y, transform.position.z);
+		Vector3 itemPositon = new Vector3(transform.position.x - (0.7f * angleValue), ItemPosition.transform.position.y, transform.position.z);
 		if (cntGetItemBlankSec > 0)
 		{
 			animator.SetBool("isGetItem", true);

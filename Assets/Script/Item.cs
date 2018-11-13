@@ -127,7 +127,7 @@ public class Item : MonoBehaviour {
 		{
 			if (isHold)
 			{
-				transform.localPosition = getPosition;
+				transform.localPosition = Vector3.Lerp(transform.localPosition, getPosition, 0.5f);
 			} else
 			{
 				if (transform.localPosition != getPosition)
