@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
 	private bool isReleaceItem = false;
 	private bool isStandUp;
 	private bool checkJumpTrigger = false;
+	private bool checkForwardEvidence = false;
 	
 	private int angleValue = 1;
 
@@ -288,7 +289,19 @@ public class Player : MonoBehaviour
 			nowMoveSpeed = DashSpeed / 2 * XPad.Get.GetLeftStick(PlayerIndex).x;
 		} else
 		{
-			nowMoveSpeed = DashSpeed * XPad.Get.GetLeftStick(PlayerIndex).x;
+			if (checkForwardEvidence)
+			{
+				if (IsOnGround())
+				{
+					nowMoveSpeed = DashSpeed / 3 * XPad.Get.GetLeftStick(PlayerIndex).x;
+				} else
+				{
+					nowMoveSpeed = DashSpeed * XPad.Get.GetLeftStick(PlayerIndex).x;
+				}
+			} else
+			{
+				nowMoveSpeed = DashSpeed * XPad.Get.GetLeftStick(PlayerIndex).x;
+			}
 		}
 
 		if (feverManager.IsFever())
@@ -563,7 +576,6 @@ public class Player : MonoBehaviour
 	private void SerchItem()
 	{
 		Vector3 itemPositon = new Vector3(transform.position.x, ItemPosition.transform.position.y, transform.position.z);
-		//Debug.DrawRay(itemPositon, transform.forward * CanHoldItemDistance, Color.blue);
 		if (cntGetItemBlankSec > 0)
 		{
 			animator.SetBool("isGetItem", true);
@@ -583,17 +595,20 @@ public class Player : MonoBehaviour
 			Physics.Raycast(itemPositon, transform.forward, out hit, CanHoldItemDistance);
 			if (hit.collider)
 			{
-				//Debug.Log(hit.collider.gameObject.name + "取得可能");
+				if (hit.collider.tag == "SYOUKO")
+				{
+					checkForwardEvidence = true;
+				} else
+				{
+					checkForwardEvidence = false;
+				}
 				if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
 				{
-					if (hit.collider.tag == "Player")
-					{
-						//ReceiveItem(hit.collider.gameObject);
-					} else
-					{
-						GetItem(hit.collider.gameObject);
-					}
+					GetItem(hit.collider.gameObject);		
 				}
+			} else
+			{
+				checkForwardEvidence = false;
 			}
 		}
 	}
