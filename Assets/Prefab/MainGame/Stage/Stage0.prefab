@@ -815,6 +815,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1221070270741176
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4709662161841344}
+  - component: {fileID: 33345639937877760}
+  - component: {fileID: 65694579544487900}
+  - component: {fileID: 23771276804306886}
+  m_Layer: 13
+  m_Name: StageObj
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1222176732395746
 GameObject:
   m_ObjectHideFlags: 1
@@ -1459,7 +1477,7 @@ GameObject:
   - component: {fileID: 65204983610276158}
   - component: {fileID: 23022381988419258}
   m_Layer: 13
-  m_Name: StageObj
+  m_Name: StageObj (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5153,11 +5171,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1383645022686742}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 12, z: 0}
-  m_LocalScale: {x: 6, y: 1, z: 1}
+  m_LocalPosition: {x: -4.5, y: 12, z: 0}
+  m_LocalScale: {x: 3, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4990549408269008}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4165784074038606
 Transform:
@@ -7397,6 +7415,19 @@ Transform:
   m_Father: {fileID: 4537268479235066}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4709662161841344
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1221070270741176}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2, y: 12, z: 0}
+  m_LocalScale: {x: 3, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4990549408269008}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4720032703062376
 Transform:
   m_ObjectHideFlags: 1
@@ -8244,7 +8275,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1130078378864198}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5, y: 13.5, z: 0}
+  m_LocalPosition: {x: 2, y: 13.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4744090639540242}
@@ -8412,7 +8443,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1973971340817484}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.5, y: 9.5, z: 0}
+  m_LocalPosition: {x: -4.5, y: 13.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4419673037295288}
@@ -8524,6 +8555,7 @@ Transform:
   - {fileID: 4366362599253572}
   - {fileID: 4510839820560732}
   - {fileID: 4840773777732694}
+  - {fileID: 4709662161841344}
   - {fileID: 4165696830676130}
   m_Father: {fileID: 4371121381350810}
   m_RootOrder: 0
@@ -10313,6 +10345,40 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!23 &23771276804306886
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1221070270741176}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: f2b94a4a0255aa4419dd2f77a3850f1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!23 &23772898738743616
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -10817,6 +10883,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1856211528719352}
   m_Mesh: {fileID: 4300004, guid: 9005236d4507c494f8f41ac5fc8dba91, type: 3}
+--- !u!33 &33345639937877760
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1221070270741176}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &33347432331707856
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -11191,6 +11264,18 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1775194621359968}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65694579544487900
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1221070270741176}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -11640,6 +11725,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnDeraySec: 6
   FeverEvidenceLifeTime: 10
+  RandomDeraySec: 0
+  RandomDerayMaxSec: 10
+  RandomDerayMinSec: 0
+  RandomLifeTime: 0
+  RandomLifeTimeMaxSec: 10
+  RandomLifeTimeMinSec: 5
   evidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
     type: 2}
   EffectObj: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 2}
@@ -11716,6 +11807,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnDeraySec: 3
   FeverEvidenceLifeTime: 10
+  RandomDeraySec: 0
+  RandomDerayMaxSec: 10
+  RandomDerayMinSec: 0
+  RandomLifeTime: 0
+  RandomLifeTimeMaxSec: 10
+  RandomLifeTimeMinSec: 5
   evidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
     type: 2}
   EffectObj: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 2}
@@ -11774,6 +11871,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnDeraySec: 3
   FeverEvidenceLifeTime: 10
+  RandomDeraySec: 0
+  RandomDerayMaxSec: 10
+  RandomDerayMinSec: 0
+  RandomLifeTime: 0
+  RandomLifeTimeMaxSec: 10
+  RandomLifeTimeMinSec: 5
   evidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
     type: 2}
   EffectObj: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 2}
@@ -11805,6 +11908,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnDeraySec: 7
   FeverEvidenceLifeTime: 10
+  RandomDeraySec: 0
+  RandomDerayMaxSec: 10
+  RandomDerayMinSec: 0
+  RandomLifeTime: 0
+  RandomLifeTimeMaxSec: 10
+  RandomLifeTimeMinSec: 5
   evidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
     type: 2}
   EffectObj: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 2}
@@ -11857,6 +11966,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnDeraySec: 0
   FeverEvidenceLifeTime: 10
+  RandomDeraySec: 0
+  RandomDerayMaxSec: 10
+  RandomDerayMinSec: 0
+  RandomLifeTime: 0
+  RandomLifeTimeMaxSec: 10
+  RandomLifeTimeMinSec: 5
   evidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
     type: 2}
   EffectObj: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 2}
@@ -11986,6 +12101,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnDeraySec: 1
   FeverEvidenceLifeTime: 10
+  RandomDeraySec: 0
+  RandomDerayMaxSec: 10
+  RandomDerayMinSec: 0
+  RandomLifeTime: 0
+  RandomLifeTimeMaxSec: 10
+  RandomLifeTimeMinSec: 5
   evidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
     type: 2}
   EffectObj: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 2}
@@ -12067,6 +12188,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnDeraySec: 3
   FeverEvidenceLifeTime: 10
+  RandomDeraySec: 0
+  RandomDerayMaxSec: 10
+  RandomDerayMinSec: 0
+  RandomLifeTime: 0
+  RandomLifeTimeMaxSec: 10
+  RandomLifeTimeMinSec: 5
   evidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
     type: 2}
   EffectObj: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 2}
@@ -12107,6 +12234,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnDeraySec: 3
   FeverEvidenceLifeTime: 10
+  RandomDeraySec: 0
+  RandomDerayMaxSec: 10
+  RandomDerayMinSec: 0
+  RandomLifeTime: 0
+  RandomLifeTimeMaxSec: 10
+  RandomLifeTimeMinSec: 5
   evidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
     type: 2}
   EffectObj: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 2}
@@ -12299,6 +12432,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnDeraySec: 0
   FeverEvidenceLifeTime: 10
+  RandomDeraySec: 0
+  RandomDerayMaxSec: 10
+  RandomDerayMinSec: 0
+  RandomLifeTime: 0
+  RandomLifeTimeMaxSec: 10
+  RandomLifeTimeMinSec: 5
   evidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
     type: 2}
   EffectObj: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 2}
@@ -12342,6 +12481,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnDeraySec: 2
   FeverEvidenceLifeTime: 10
+  RandomDeraySec: 0
+  RandomDerayMaxSec: 10
+  RandomDerayMinSec: 0
+  RandomLifeTime: 0
+  RandomLifeTimeMaxSec: 10
+  RandomLifeTimeMinSec: 5
   evidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
     type: 2}
   EffectObj: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 2}
@@ -12554,6 +12699,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnDeraySec: 4
   FeverEvidenceLifeTime: 10
+  RandomDeraySec: 0
+  RandomDerayMaxSec: 10
+  RandomDerayMinSec: 0
+  RandomLifeTime: 0
+  RandomLifeTimeMaxSec: 10
+  RandomLifeTimeMinSec: 5
   evidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
     type: 2}
   EffectObj: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 2}
