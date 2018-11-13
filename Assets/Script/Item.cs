@@ -74,6 +74,13 @@ public class Item : MonoBehaviour {
 			ModelObj.transform.localEulerAngles = new Vector3(0, ModelObj.transform.localEulerAngles.y + 2, 0);
 		}
 
+		//左右移動速度を固定
+		rb.velocity = new Vector3(0, rb.velocity.y, 0);
+		//上昇速度を固定
+		if (rb.velocity.y > 0)
+		{
+			rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+		}
 		//落下速度を固定
 		if (rb.velocity.y < -4)
 		{

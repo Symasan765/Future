@@ -646,6 +646,7 @@ public class Player : MonoBehaviour
 				cntGetItemBlankSec = GetItemBlankSec;
 				isHoldItem = true;
 				_itemObj.transform.parent = transform;
+				_itemObj.layer = LayerMask.NameToLayer("Player");
 				Rigidbody itemRb = _itemObj.GetComponent<Rigidbody>();
 				//BoxCollider col = _itemObj.GetComponent<BoxCollider>();
 				//col.isTrigger = true;
@@ -682,7 +683,6 @@ public class Player : MonoBehaviour
 			player.ChangeItemParent(this.gameObject);
 			cntGetItemBlankSec = GetItemBlankSec;
 			rightSpeed = leftSpeed = 0.0f;
-
 			if (player.transform.position.x > transform.position.x)
 			{
 				player.SetAngleValue(-1);
@@ -708,6 +708,7 @@ public class Player : MonoBehaviour
 				isHoldItem = false;
 				Rigidbody itemRb = getItemObj.GetComponent<Rigidbody>();
 				Item item = getItemObj.GetComponent<Item>();
+				getItemObj.layer = LayerMask.NameToLayer("Evidence");
 				//BoxCollider col = getItemObj.GetComponent<BoxCollider>();
 				//col.isTrigger = false;
 				itemRb.useGravity = true;
