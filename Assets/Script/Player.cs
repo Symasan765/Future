@@ -652,7 +652,7 @@ public class Player : MonoBehaviour
 				itemRb.useGravity = false;
 				itemRb.velocity = Vector3.zero;
 				//itemRb.isKinematic = true;
-
+				item.holdPlayerIndex = PlayerIndex;
 				item.SetItemLocalPosition(ItemPosition.transform.localPosition);
 				item.flgMoveToGetPos = true;
 				item.isHold = true;

@@ -45,6 +45,7 @@ public class BazookaRifle : MonoBehaviour{
 	private Vector3 startPosition;
 	private bool isShake = false;
 	private float cntShakePower = 0;
+	private int cutinPlayerIndex = 0;
 
 	private void Start()
 	{
@@ -68,6 +69,7 @@ public class BazookaRifle : MonoBehaviour{
 		if (stageChangeManager.CanBazookaShot() && NearEvidenceNum > 0)
 		{
 			//普通の証拠
+			feverManager.PlayCutIn(cutinPlayerIndex);
 			nowSetEvidenceNum = NearEvidenceNum;
 			ShotBazooka(false);
 			NearEvidenceNum = 0;
@@ -135,11 +137,11 @@ public class BazookaRifle : MonoBehaviour{
 	{
 		if (_isFever)
 		{
-			bossAttackManager.BossDamage(BulletAttackPower);
+			bossAttackManager.BossDamage(BulletAttackPower * 0.5f);
 			effectManager.PlaySMASH(-1, _hitPos, -1);
 		} else
 		{
-			bossAttackManager.BossDamage(BulletAttackPower * nowSetEvidenceNum);
+			feverManager.BossDamage(BulletAttackPower * 0.5f);
 			isFirstFeverEvidenceHit = true;
 			partyTimeManager.LetsParty();
 		}
@@ -185,5 +187,9 @@ public class BazookaRifle : MonoBehaviour{
 		{
 			NearEvidenceNum++;
 		}
+	}
+	public void SetPlayerIndex(int _index)
+	{
+		cutinPlayerIndex = _index;
 	}
 }

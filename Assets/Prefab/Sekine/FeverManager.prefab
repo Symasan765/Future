@@ -51,11 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a994d81ab89fe4880d9cfde6626551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CutInObj: {fileID: 1238088410941198, guid: 6472ab94d957ab247ab4a10a1c2d53af, type: 2}
   cameraObj: {fileID: 0}
   FeverSec: 10
-  CreateEviDeraySec: 1
-  HorizontalRange: 22
-  VirticalRange: 16
-  VirtivalOriginPosition: 7
-  EvidenceObj: {fileID: 1743127188897746, guid: da43d2cd1c1979d4e9c972ed6c027a71,
-    type: 2}
+  catInPlayerIndex: 0

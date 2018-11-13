@@ -29,6 +29,8 @@ public class Item : MonoBehaviour {
 	private bool isInBazooka = false;
 	private bool isTriggerStay = false;
 
+	public int holdPlayerIndex = 0;
+
 	private float cntScaleDownTime = 0;
 	private float cntLifeTimeSec = 0;
 	private float LifeTime = 0;
@@ -146,6 +148,7 @@ public class Item : MonoBehaviour {
 					evidenceSpawner.isSetBazooka = true;
 					evidenceSpawner.DeleteEvidenceObj();
 				}
+				bazookaRifle.SetPlayerIndex(holdPlayerIndex);
 				bazookaRifle.SetEvidence(isFeverEvidence);
 				Destroy(gameObject);
 			}

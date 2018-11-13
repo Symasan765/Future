@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class FeverManager : MonoBehaviour {
 
+	public GameObject CutInObj;
 	public GameObject cameraObj;
+	private GameObject nowCutInObj = null;
 
 	[SerializeField]
 	private float FeverSec = 10;
@@ -19,8 +21,11 @@ public class FeverManager : MonoBehaviour {
 	private EvidenceSpawner[] evidenceSpawners;
 	private GameObject BossHitPositionObj;
 	private Animator animator;
+	private BossAttackManager bossAttackManager;
+
 	void Start ()
 	{
+		bossAttackManager = GameObject.FindGameObjectWithTag("BossManager").GetComponent<BossAttackManager>();
 		BossHitPositionObj = GameObject.FindGameObjectWithTag("BossHitPosition");
 		animator = BossHitPositionObj.transform.parent.GetComponent<Animator>();
 		//ステージ上にある通常証拠スポナーを全部取得
@@ -75,6 +80,11 @@ public class FeverManager : MonoBehaviour {
 		}
 	}
 
+	public void BossDamage(float _bossDamage)
+	{
+		bossAttackManager.BossDamage(_bossDamage);
+	}
+
 	public bool IsFever()
 	{
 		if (cntFeverSec > 0)
@@ -82,6 +92,14 @@ public class FeverManager : MonoBehaviour {
 			return true;
 		}
 		return false;
+	}
+
+	public void PlayCutIn(int _playerIndex)
+	{
+		//カットイン用キャラ番号格納
+		CutinScript.m_CharaNo = CharacterManager.SelectedCharacters[_playerIndex];
+		CutinScript.m_PlayerNo = _playerIndex;
+		Instantiate(CutInObj);
 	}
 
 }
