@@ -41,8 +41,14 @@ public class BazookaRifle : MonoBehaviour{
 
 	private bool isFirstFeverEvidenceHit = false;
 	private bool canShot = false;
+
+	private Vector3 startPosition;
+	private bool isShake = false;
+	private float cntShakePower = 0;
+
 	private void Start()
 	{
+		startPosition = transform.position;
 		stageChangeManager = GameObject.Find("StageChangeManager").GetComponent<StageChangeManager>();
 		BossObj = GameObject.FindGameObjectWithTag("BossHitPosition");
 		feverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
@@ -66,28 +72,40 @@ public class BazookaRifle : MonoBehaviour{
 			ShotBazooka(false);
 			NearEvidenceNum = 0;
 		}
-
+		ShakeBazooka(2, 1);
     }
 
-    //証拠を探す関数。
-    void DetectEvidence()
-    {
-        //とりあえずSYOUKOタグがついているオブジェクトを全部獲得。
-        GameObject[] Syouko = GameObject.FindGameObjectsWithTag("SYOUKO");
-		EvidenceNum = Syouko.Length;
-        int NearEvidenceNum_Temp = 0;
+	private void ShakeBazooka(int _speed, float _brakePower)
+	{
+		if (isShake)
+		{
+			if (Time.frameCount % _speed == 0)
+			{
+				transform.position = new Vector3(startPosition.x, startPosition.y + cntShakePower, startPosition.z);
+			} else
+			{
+				transform.position = new Vector3(startPosition.x, startPosition.y + (cntShakePower * -1), startPosition.z);
+			}
+			cntShakePower -= Time.deltaTime * _brakePower;
+			if (cntShakePower <= 0)
+			{
+				cntShakePower = 0;
+				isShake = false;
+			}
+		} else
+		{
+			transform.position = startPosition;
+		}
+	}
 
-        //証拠とバズーカーの距離がパラメータより近いと近づいた証拠だと判断する。
-        for (int i = 0; i < EvidenceNum; i++)
-        {
-            if (Vector3.Distance(Syouko[i].gameObject.transform.position, this.gameObject.transform.position) <= EvidenceDistance)
-            {
-				Evidence_temp[NearEvidenceNum_Temp] = Syouko[i];        //あとで削除するために変数でオブジェクトを持っておく。
-				NearEvidenceNum_Temp++;            
-            }
-        }
-		NearEvidenceNum = NearEvidenceNum_Temp;
-    }
+	public void StartShakeBazooka(float _shakePower)
+	{
+		if (!isShake)
+		{
+			cntShakePower = _shakePower;
+			isShake = true;
+		}
+	}
 
 	private void Explosion()
 	{
@@ -155,6 +173,7 @@ public class BazookaRifle : MonoBehaviour{
 		bullet.SetCurvePointObj(CurvePointObj[0], CurvePointObj[1]);
 		bullet.SetBazooka(BossObj.transform.position);
 		bullet.SetFeverEvidenceFlg(_isFeverEvidence);
+		StartShakeBazooka(0.4f);
 	}
 
 	public void SetEvidence(bool _feverEvidence)
