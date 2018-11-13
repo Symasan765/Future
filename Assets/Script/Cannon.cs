@@ -97,11 +97,11 @@ public class Cannon : MonoBehaviour {
 			}
 			if (HorizontalRotate)
 			{
-				VirticalRotation(false);
+				HorizontalRotation(false);
 			}
 			if (VirticalRotate)
 			{
-				HorizontalRotation(false);
+				VirticalRotation(false);
 			}	
 		}
 
@@ -187,6 +187,8 @@ public class Cannon : MonoBehaviour {
 	{
 		if (cntAnimationSpeed < 1.0f)
 		{
+
+			/*
 			if (_flg)
 			{
 				if (feverManager.IsFever())
@@ -196,18 +198,15 @@ public class Cannon : MonoBehaviour {
 				{
 					cntAnimationSpeed += AnimationSpeed * 2;
 				}
-				if (cntAnimationSpeed >= 1.0f)
-				{
-					cntAnimationSpeed = 1.0f;
-				}
 			} else
 			{
 				cntAnimationSpeed += AnimationSpeed * 0.5f;
+			}*/
 
-				if (cntAnimationSpeed >= 1.0f)
-				{
-					cntAnimationSpeed = 1.0f;
-				}
+			cntAnimationSpeed += AnimationSpeed;
+			if (cntAnimationSpeed >= 1.0f)
+			{
+				cntAnimationSpeed = 1.0f;
 			}
 		}
 	}
