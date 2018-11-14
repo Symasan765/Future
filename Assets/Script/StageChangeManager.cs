@@ -5,7 +5,7 @@ using UnityEngine;
 public class StageChangeManager : MonoBehaviour {
 
 	[SerializeField]
-	const int StageNum = 3;											//ステージ数
+	const int StageNum = 4;											//ステージ数
 	public GameObject[] StageObjects = new GameObject[StageNum];	//ステージプレハブを格納
 	public GameObject PlayerManagerObj;
 	[SerializeField]
