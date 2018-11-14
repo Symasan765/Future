@@ -25,6 +25,7 @@ public class BazookaRifle : MonoBehaviour{
 	private BazookaBullet bazookaBullet;
 	private FeverManager feverManager;
 	private StageChangeManager stageChangeManager;
+	private EviRainbow[] eviRainbows; 
 
 	public float EvidenceDistance = 2.0f;            //証拠を認識する範囲。
     private int EvidenceNum = 0;                      //全体の証拠の数。
@@ -49,6 +50,7 @@ public class BazookaRifle : MonoBehaviour{
 
 	private void Start()
 	{
+		eviRainbows = GetComponentsInChildren<EviRainbow>();
 		startPosition = transform.position;
 		stageChangeManager = GameObject.Find("StageChangeManager").GetComponent<StageChangeManager>();
 		BossObj = GameObject.FindGameObjectWithTag("BossHitPosition");
@@ -56,6 +58,7 @@ public class BazookaRifle : MonoBehaviour{
 		effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
 		bossAttackManager = GameObject.FindGameObjectWithTag("BossManager").GetComponent<BossAttackManager>();
 		partyTimeManager = GameObject.Find("PartyTimeManager").GetComponent<PartyTimeManager>();
+
 	}
 
 	void Update()
@@ -154,7 +157,7 @@ public class BazookaRifle : MonoBehaviour{
 		SoundManager.Get.PlaySE("BulletHit1",0.7f);
 		SoundManager.Get.PlaySE("BulletHit2",0.7f);
 		ShakeCamera.Impact(0.05f, 1.0f);
-		isSetEvidence = false;
+
 	}
 
 	private void ShotBazooka(bool _isFeverEvidence)
@@ -176,10 +179,21 @@ public class BazookaRifle : MonoBehaviour{
 		bullet.SetBazooka(BossObj.transform.position);
 		bullet.SetFeverEvidenceFlg(_isFeverEvidence);
 		StartShakeBazooka(0.4f);
+		isSetEvidence = false;
+		SetEviRainbow(true);
+	}
+
+	private void SetEviRainbow(bool _flg)
+	{
+		for (int i = 0; i < eviRainbows.Length; i++)
+		{
+			eviRainbows[i].IsRainbow(_flg);
+		}
 	}
 
 	public void SetEvidence(bool _feverEvidence)
 	{
+		SetEviRainbow(false);
 		if (_feverEvidence)
 		{
 			ShotBazooka(true);
