@@ -62,6 +62,7 @@ public class Player : MonoBehaviour
 	public GameObject RotateObj;
 	public GameObject[] FootPositionObj = new GameObject[2];	//着地判定用にキャラの左右に配置
 	public GameObject ItemHoldCollisionObj;
+	//public GameObject MentalGaugeObj;
 
 	private GameObject getItemObj;
 	private GameObject holdDeskObj;
@@ -71,6 +72,7 @@ public class Player : MonoBehaviour
 	private EffectManager effectManager;
 	private FeverManager feverManager;
 	private BoxCollider itemHoldCollision;
+	private HPGauge hpGauge;
 
 	private float nowMoveSpeed;
 	private float rightSpeed;
@@ -103,6 +105,8 @@ public class Player : MonoBehaviour
 		feverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
 		itemHoldCollision = ItemHoldCollisionObj.GetComponent<BoxCollider>();
 		startFootRPosition = FootPositionObj[0].transform.localPosition;
+	//	hpGauge = MentalGaugeObj.GetComponent<HPGauge>();
+	//	hpGauge.SetPlayerMental(mentalGauge, MentalGaugeMax);
 	}
 	
 	void Update ()
@@ -110,7 +114,7 @@ public class Player : MonoBehaviour
 		animator.SetFloat("cntGetItemBlankTime", cntGetItemBlankSec);
 		animator.SetBool("isDamage", isDamage);
 		animator.SetBool("isOnGround", IsOnGround());
-
+	//	hpGauge.SetPlayerAngleValue(angleValue);
 		//操作不能時間のカウント
 		if (cntCantMoveSec > 0)
 		{
@@ -369,10 +373,13 @@ public class Player : MonoBehaviour
 			cntDamageSec = DamageSec;
 			cntCantMoveSec = DamageSec;
 			isDamage = true;
-			mentalGauge += Random.Range(5, 15);
+			mentalGauge += Random.Range(8, 15);
 			if (mentalGauge > MentalGaugeMax)
 			{
 				mentalGauge = MentalGaugeMax;
+			} else
+			{
+				//hpGauge.PlayAnimation(mentalGauge);
 			}
 			cntInvincibleSec = InvincibleSec;
 		}
@@ -473,7 +480,7 @@ public class Player : MonoBehaviour
 		}
 
 		//空中ジャンプ
-		if (holdItemJump && !IsOnGround() && cntAirJumpNum > 0 && !isDamage && CanIMove())
+		if (!IsOnGround() && cntAirJumpNum > 0 && !isDamage && CanIMove())
 		{
 			if (XPad.Get.GetTrigger(XPad.KeyData.X, PlayerIndex))
 			{
@@ -482,7 +489,13 @@ public class Player : MonoBehaviour
 				rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 				cntAirJumpNum--;
 				SoundManager.Get.PlaySE("jump");
-				jumpSpeed = AirJumpPower;
+				if (isHoldItem)
+				{
+					jumpSpeed = AirJumpPower * 0.9f;
+				} else
+				{
+					jumpSpeed = AirJumpPower;
+				}
 				isJump = true;
 				isAirjumpRotation = true;
 				animator.SetBool("isAirJumpRotationTrigger", true);
@@ -498,44 +511,36 @@ public class Player : MonoBehaviour
 				cntJumpCheckSec += Time.deltaTime;
 			}
 
-			if (holdItemJump)
+			float nowJumpPower = GroundJumpPower;
+			if (isHoldItem)
 			{
-				if (cntJumpCheckSec >= 0.07f)
-				{
-					cntJumpCheckSec = 0;
-					checkJumpTrigger = true;
-					cntAirJumpNum = AirJumpNum;
-					effectManager.PlayDUM(PlayerIndex, effectPos);
-					SoundManager.Get.PlaySE("AirJump");
-					jumpSpeed = GroundJumpPower;
-					isJump = true;
-				} else
-				{
-					if (XPad.Get.GetRelease(XPad.KeyData.X, PlayerIndex))
-					{
-						cntJumpCheckSec = 0;
-						checkJumpTrigger = false;
-						cntAirJumpNum = AirJumpNum;
-						effectManager.PlayDUM(PlayerIndex, effectPos);
-						SoundManager.Get.PlaySE("AirJump");
-						jumpSpeed = GroundJumpPower - (GroundJumpPower / 3);
-						isJump = true;
-					}
+				nowJumpPower = GroundJumpPower * 0.9f;
+			}
 
-				}
+			if (cntJumpCheckSec >= 0.07f)
+			{
+				cntJumpCheckSec = 0;
+				checkJumpTrigger = true;
+				cntAirJumpNum = AirJumpNum;
+				effectManager.PlayDUM(PlayerIndex, effectPos);
+				SoundManager.Get.PlaySE("AirJump");
+				jumpSpeed = nowJumpPower;
+				isJump = true;
 			} else
 			{
-				if (XPad.Get.GetTrigger(XPad.KeyData.X, PlayerIndex))
+				if (XPad.Get.GetRelease(XPad.KeyData.X, PlayerIndex))
 				{
 					cntJumpCheckSec = 0;
-					checkJumpTrigger = true;
+					checkJumpTrigger = false;
 					cntAirJumpNum = AirJumpNum;
 					effectManager.PlayDUM(PlayerIndex, effectPos);
 					SoundManager.Get.PlaySE("AirJump");
-					jumpSpeed = GroundJumpPower * 1.15f;
+					jumpSpeed = nowJumpPower - (nowJumpPower / 3);
 					isJump = true;
 				}
+
 			}
+
 		}
 
 		if (IsOnGround() && !XPad.Get.GetPress(XPad.KeyData.X, PlayerIndex) && !XPad.Get.GetTrigger(XPad.KeyData.X, PlayerIndex))
@@ -837,6 +842,7 @@ public class Player : MonoBehaviour
 				cntCantMoveSec = 3;
 				isStandUp = true;
 				animator.SetBool("isStandUp", true);
+			//	hpGauge.SetPlayerMental(mentalGauge, MentalGaugeMax);
 			}
 		}
 	}
