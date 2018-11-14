@@ -9,7 +9,7 @@ public class CutinImage : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		GetComponent<Image>().sprite = m_Image[CutinScript.m_PlayerNo];
+		GetComponent<Image>().sprite = m_Image[CutinScript.m_CharaNo];
 	}
 	
 	// Update is called once per frame
