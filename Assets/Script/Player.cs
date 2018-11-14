@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
 	private EffectManager effectManager;
 	private FeverManager feverManager;
 	private BoxCollider itemHoldCollision;
-	private HPGauge hpGauge;
+	//private HPGauge hpGauge;
 
 	private float nowMoveSpeed;
 	private float rightSpeed;
