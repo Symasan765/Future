@@ -15,6 +15,7 @@ TagManager:
   - Bazooka
   - BossHitPosition
   - BossManager
+  - AttackStart
   layers:
   - Default
   - TransparentFX
