@@ -110,6 +110,70 @@ public class XPad : SingletonMonoBehaviour<XPad>
 	}
 
 	/// <summary>
+	/// ジャンプを取得するボタンが押されているか判定を行う
+	/// </summary>
+	/// <param name="GamePadNo"></param>
+	/// <returns></returns>
+	public bool JumpPress(int GamePadNo)
+	{
+		// ジャンプ処理を行うボタンをどんどん追加していく
+		if (GetPress(KeyData.A, GamePadNo))
+			return true;
+
+		if (GetPress(KeyData.B, GamePadNo))
+			return true;
+
+		if (GetPress(KeyData.Y, GamePadNo))
+			return true;
+
+		if (GetPress(KeyData.X, GamePadNo))
+			return true;
+
+		return false;
+	}
+
+	public bool JumpTrigger(int GamePadNo)
+	{
+		// ジャンプ処理を行うボタンをどんどん追加していく
+		if (GetTrigger(KeyData.A, GamePadNo))
+			return true;
+
+		if (GetTrigger(KeyData.B, GamePadNo))
+			return true;
+
+		if (GetTrigger(KeyData.Y, GamePadNo))
+			return true;
+
+		if (GetTrigger(KeyData.X, GamePadNo))
+			return true;
+
+		return false;
+	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="GamePadNo"></param>
+	/// <returns></returns>
+	public bool HoldPress(int GamePadNo)
+	{
+		// ジャンプ処理を行うボタンをどんどん追加していく
+		if (GetPress(KeyData.RB, GamePadNo))
+			return true;
+
+		return false;
+	}
+
+	public bool HoldTrigger(int GamePadNo)
+	{
+		// ジャンプ処理を行うボタンをどんどん追加していく
+		if (GetTrigger(KeyData.RB, GamePadNo))
+			return true;
+
+		return false;
+	}
+
+	/// <summary>
 	/// 右スティックの入力ベクトルを取得する
 	/// </summary>
 	/// <param name="GamePadNo"></param>
