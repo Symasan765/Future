@@ -78,8 +78,9 @@ public class BossAttackManager : MonoBehaviour
 		m_AttackFlag = false;
 
 		// TODO 将来的にはボスが生きている間、みたいな条件に変更すること
-		yield return new WaitForSeconds(3.0f);  // 開始後、すぐには攻撃しない
+		yield return new WaitForSeconds(2.9f);  // 開始後、すぐには攻撃しない
 		m_AttackFlag = true;
+		yield return new WaitForSeconds(0.1f);	// スタート位置オブジェがある場合、↑でtrueにしたものが反映してしまう場合があるので一度待つ
 
 		GameObject[] obj = GameObject.FindGameObjectsWithTag("Player");
 		if (obj.Length != 4)
@@ -93,7 +94,7 @@ public class BossAttackManager : MonoBehaviour
 		{
 			// 攻撃モーションを初期化
 			AnmeFlagInit();
-			if (m_This.m_AttackFlag)
+			if (m_AttackFlag)
 			{
 				// コルーチン対象が変わっていたら破棄
 				if (nowChangeNum != m_StageChangeNum)

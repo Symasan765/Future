@@ -7,7 +7,7 @@ public class CutinColor : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Color[] m_Color = { Color.red, Color.blue, Color.yellow, Color.green, Color.gray };
+		Color[] m_Color = { Color.blue, Color.red, Color.green, Color.yellow, Color.gray };
 
 		var obj = GetComponent<Image>().color = m_Color[CutinScript.m_PlayerNo];
 
