@@ -258,8 +258,8 @@ public class XPad : SingletonMonoBehaviour<XPad>
 		DebugFlag = Debug.isDebugBuild;     // デバッグ状態を取得
     }
 
-    // Update is called once per frame
-    void Update () {
+	// Update is called once per frame
+	private void FixedUpdate(){ 
 		AllConfirmConnection();
 		DebugKeyFlagSwitching();
 
