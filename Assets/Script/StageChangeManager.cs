@@ -64,7 +64,17 @@ public class StageChangeManager : MonoBehaviour {
 			}
 		}
 
-		ChangeStage(nowStageIndex);
+		ChangeNowStage(nowStageIndex);
+	}
+
+	public void ChangeStage()
+	{
+		isChangeStage = true;
+		nowStageIndex++;
+		if (nowStageIndex >= StageNum)
+		{
+			nowStageIndex = 0;
+		}
 	}
 
 	public int GetNowNormalEvidenceNum()
@@ -72,7 +82,7 @@ public class StageChangeManager : MonoBehaviour {
 		return NormalEvidenceSpawnerNum[nowStageIndex];
 	}
 
-	void ChangeStage(int _nextStageIndex)
+	private void ChangeNowStage(int _nextStageIndex)
 	{
 		if (isChangeStage)
 		{
