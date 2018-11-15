@@ -142,23 +142,6 @@ public class Player : MonoBehaviour
 		{
 			if (!isDamage)
 			{
-				if (CanIMove())
-				{
-					if (XPad.Get.GetRelease(XPad.KeyData.A, PlayerIndex))
-					{
-						if (isHoldItem)
-						{
-							isReleaceItem = true;
-						}
-					}
-
-					if (isReleaceItem)
-					{
-						ReleaseItem();
-					}
-
-					SerchItem();
-				}
 				//無敵フレームのカウント
 				if (cntInvincibleSec > 0)
 				{
@@ -188,6 +171,23 @@ public class Player : MonoBehaviour
 
 		if (!IsDown())
 		{
+			if (!isDamage && CanIMove())
+			{
+				if (XPad.Get.GetRelease(XPad.KeyData.A, PlayerIndex))
+				{
+					if (isHoldItem)
+					{
+						isReleaceItem = true;
+					}
+				}
+
+				if (isReleaceItem)
+				{
+					ReleaseItem();
+				}
+
+				SerchItem();
+			}
 			if (!isDamage && cntGetItemBlankSec == 0 && CanIMove())
 			{
 				Move();
