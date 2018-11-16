@@ -59,3 +59,5 @@ MonoBehaviour:
     type: 2}
   m_ParticlePrefab: {fileID: 1622285358806166, guid: 1071053792ee0574c9881556084ab565,
     type: 2}
+  m_StartTimeline: {fileID: 1461558674801296, guid: 748a2f6e0cbefab4390770812b35ff69,
+    type: 2}

@@ -13,6 +13,8 @@ public class PartyTimeManager : MonoBehaviour {
 	public GameObject m_PlayerAudioPrefab;
 	public GameObject m_ParticlePrefab;
 
+	public GameObject m_StartTimeline;
+
 	AudioSource m_NowBGM;
 	AudioSource m_NextBGM;
 
@@ -69,6 +71,9 @@ public class PartyTimeManager : MonoBehaviour {
 
 		m_FeverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
 		m_BossAttackManager = GameObject.FindGameObjectWithTag("BossManager").GetComponent<BossAttackManager>();
+
+		// スタート演出を生成してある程度後に消滅させる
+		Destroy(Instantiate(m_StartTimeline), 10.0f);
 	}
 	
 	// Update is called once per frame
