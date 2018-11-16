@@ -34,6 +34,9 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
+*blinn1.mat
+*SimpleSky.mat
+
 !Assets/Meshes/Coin/coin.obj
 
 Assets/StoreAssets/Cinemachine/Timeline/LegacyTimelineAPI.unitypackage.meta
