@@ -34,8 +34,8 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
-*blinn1.mat
-*SimpleSky.mat
+*blinn1*
+*SimpleSky*
 
 !Assets/Meshes/Coin/coin.obj
 
