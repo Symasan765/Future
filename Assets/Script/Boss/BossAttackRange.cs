@@ -109,16 +109,27 @@ public class BossAttackRange : MonoBehaviour
 
 	void RangeFlashing()
 	{
-		// TODO 現在適当に点滅
-		int cnt = (int)(m_AttackCount / 0.1f);
-		if (cnt % 3 == 0)
-		{
-			m_AttackRangeBoard.active = false;
-		}
-		else
+		float t = m_AttackCount / m_AttackTime;     // 徐々に振動を強くする
+		t *= t;
+
+		if(((int)((1.0f - t) / 0.05f) % 2 == 0))
 		{
 			m_AttackRangeBoard.active = true;
 		}
+		else
+		{
+			m_AttackRangeBoard.active = false;
+		}
+
+		//int cnt = (int)(m_AttackCount / 0.1f);
+		//if (cnt % 3 == 0)
+		//{
+		//	m_AttackRangeBoard.active = false;
+		//}
+		//else
+		//{
+		//	m_AttackRangeBoard.active = true;
+		//}
 	}
 
 	// プレイヤーに攻撃を仕掛ける関数

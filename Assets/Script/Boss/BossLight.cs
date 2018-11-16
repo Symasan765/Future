@@ -9,29 +9,43 @@ public class BossLight : MonoBehaviour {
 	Color m_InitColor;
 	Color m_InitMainColor;
 
+	float TimeCnt = 0;
+	bool LightOn = false;
+	float changeSec = 0.2f;
+
 	// Use this for initialization
 	void Start () {
-		m_InitColor = m_LightMaterial.GetColor("_Emissive_Color");
-		m_InitMainColor = m_LightMaterial.GetColor("_BaseColor");
-	}
-	
-	public void LightChage(bool on)
-	{
-		Color nowColor;
-		Color mainColor;
+		m_InitColor = Color.red;
+		m_InitMainColor = Color.red;
 
-		if (on)
+		ColorUpdate();
+	}
+
+	private void Update()
+	{
+		ColorUpdate();
+	}
+
+	void ColorUpdate()
+	{
+		if (LightOn)
 		{
-			nowColor = m_InitColor;
-			mainColor = m_InitMainColor;
+			TimeCnt += Time.deltaTime;
+			if (TimeCnt > changeSec) TimeCnt = changeSec;
 		}
 		else
 		{
-			nowColor = Color.black;
-			mainColor = Color.black;
+			TimeCnt -= Time.deltaTime;
+			if (TimeCnt < 0.0f) TimeCnt = 0.0f;
 		}
 
-		m_LightMaterial.SetColor("_Emissive_Color", nowColor);
-		m_LightMaterial.SetColor("_BaseColor", mainColor);
+		float t = TimeCnt / changeSec;
+		m_LightMaterial.SetColor("_Emissive_Color", Color.Lerp(Color.black,m_InitColor,t));
+		m_LightMaterial.SetColor("_BaseColor", Color.Lerp(Color.gray, m_InitMainColor, t));
+	}
+
+	public void LightChage(bool on)
+	{
+		LightOn = on;
 	}
 }
