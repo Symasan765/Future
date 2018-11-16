@@ -33,6 +33,8 @@ public class BossAttackManager : MonoBehaviour
 
 	BossAttackManager m_This;
 
+	BossLight m_Light;
+
 	public bool m_DownSwing = false;
 	public bool m_SideSwing = false;
 	public bool m_Beam = false;
@@ -56,6 +58,9 @@ public class BossAttackManager : MonoBehaviour
 		m_AttackFlag = true;
 		m_BossDamage = m_BossMaxDamage;
 		m_Condition = BossCondition.Margin;
+
+		m_Light = GetComponent<BossLight>();
+		m_Light.LightChage(false);
 	}
 
 	private void Update()
@@ -119,9 +124,11 @@ public class BossAttackManager : MonoBehaviour
 					if (nowChangeNum != m_StageChangeNum)
 						yield break;
 					//攻撃モーションを起動させて残り秒数待つ
+					m_Light.LightChage(true);
 					ChangeAnimFlag();
 					// 待ち時間に乱数を持たせる
 					yield return new WaitForSeconds(m_SecondsBeforeAttack + UnityEngine.Random.Range(0.1f,2.0f));
+					m_Light.LightChage(false);
 				}
 				else
 				{
@@ -406,5 +413,11 @@ public class BossAttackManager : MonoBehaviour
 				m_Beam = true;
 				break;
 		}
+	}
+
+	public void EndBoss()
+	{
+		// 次の周のためにライトをON
+		m_Light.LightChage(true);
 	}
 }
