@@ -69,7 +69,6 @@ public class SceneChanger : SingletonMonoBehaviour<SceneChanger> {
             }
 
             if (nowScene.isLoaded) {
-                Debug.Log("ロード完了");
                 if (!isCutsceneUIMoveEnd) {
                     if (!isCutsceneUIMoveMiddle) {
                         MoveUI_Cutscene1();
