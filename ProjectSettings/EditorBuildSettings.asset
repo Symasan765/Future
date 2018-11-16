@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scene/Matsumoto/TestTitle.unity
+    path: Assets/Scene/Title.unity
     guid: b753a251c0db1ff4fae7d2bddeaa060c
   - enabled: 1
     path: Assets/Scene/ManagerScene.unity
