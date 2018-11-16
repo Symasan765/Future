@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StageChangeManager : MonoBehaviour {
 
-	[SerializeField]
+	const int PlayerNum = 4;
 	const int StageNum = 4;											//ステージ数
 	public GameObject[] StageObjects = new GameObject[StageNum];	//ステージプレハブを格納
 	public GameObject PlayerManagerObj;
@@ -14,16 +14,27 @@ public class StageChangeManager : MonoBehaviour {
 	private BossAttackManager bossAttackManager;
 	private EvidenceSpawner[] AllEvidenceSpawners;					//全ステージのノーマル証拠を格納
 	private int[] NormalEvidenceSpawnerNum = new int[StageNum];
+	private GameObject[] playerObjects;
+	private GameObject[] SpawnPositoins;
 
 	public bool isChangeStage=false;
 
 	private GameObject nowStageObject = null;
+	private FeverManager feverManager;
+
+	private float cntChangeStage = 0;
 
 	void Start ()
 	{
+		//スポーンポジションの数を計算
+		int allSpawnPositionNum = PlayerNum * StageNum;
+		SpawnPositoins = new GameObject[allSpawnPositionNum];
+
+		feverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
 		bossAttackManager = GameObject.FindGameObjectWithTag("BossManager").GetComponent<BossAttackManager>();
 
 		int allNormalEvidenceNum = 0;
+
 		for (int cntStageNum = 0; cntStageNum < StageNum; cntStageNum++)
 		{
 			//EvidenceSpawnerコンポーネントの取得
@@ -41,13 +52,44 @@ public class StageChangeManager : MonoBehaviour {
 				}
 			}
 			NormalEvidenceSpawnerNum[cntStageNum] = normalEviNum;
+			
+			//スポーンポジションの取得
+			for (int cntChildNum = 0; cntChildNum < StageObjects[cntStageNum].transform.childCount; cntChildNum++)
+			{
+				if (StageObjects[cntStageNum].transform.GetChild(cntChildNum).name == "SpawnPosition")
+				{
+					for (int i = 0; i < StageObjects[cntStageNum].transform.GetChild(cntChildNum).transform.childCount; i++)
+					{
+						if (StageObjects[cntStageNum].transform.GetChild(cntChildNum).transform.GetChild(i).name == "SpawnPlayer1")
+						{
+							SpawnPositoins[(cntStageNum * PlayerNum)] = StageObjects[cntStageNum].transform.GetChild(cntChildNum).transform.GetChild(i).gameObject;
+						}
+						if (StageObjects[cntStageNum].transform.GetChild(cntChildNum).transform.GetChild(i).name == "SpawnPlayer2")
+						{
+							SpawnPositoins[(cntStageNum * PlayerNum) + 1] = StageObjects[cntStageNum].transform.GetChild(cntChildNum).transform.GetChild(i).gameObject;
+						}
+						if (StageObjects[cntStageNum].transform.GetChild(cntChildNum).transform.GetChild(i).name == "SpawnPlayer3")
+						{
+							SpawnPositoins[(cntStageNum * PlayerNum) + 2] = StageObjects[cntStageNum].transform.GetChild(cntChildNum).transform.GetChild(i).gameObject;
+						}
+						if (StageObjects[cntStageNum].transform.GetChild(cntChildNum).transform.GetChild(i).name == "SpawnPlayer4")
+						{
+							SpawnPositoins[(cntStageNum * PlayerNum) + 3] = StageObjects[cntStageNum].transform.GetChild(cntChildNum).transform.GetChild(i).gameObject;
+						}
+					}
+					break;
+				}
+			}
 		}
+
 		AllEvidenceSpawners = new EvidenceSpawner[allNormalEvidenceNum];
 
 		CreateStage(nowStageIndex);	
 
 		//最初のステージ作成後にPlayerManagerを生成
 		Instantiate(PlayerManagerObj, transform.position, transform.rotation).name = "PlayerManager";
+
+		playerObjects = GameObject.FindGameObjectsWithTag("Player");
 	}
 	
 	void Update ()
@@ -56,12 +98,7 @@ public class StageChangeManager : MonoBehaviour {
 		//デバッグ用Eキー押下時ステージを順に変更
 		if (Input.GetKeyDown(KeyCode.E))
 		{
-			isChangeStage = true;
-			nowStageIndex++;
-			if (nowStageIndex >= StageNum)
-			{
-				nowStageIndex = 0;
-			}
+			ChangeStage();
 		}
 
 		ChangeNowStage(nowStageIndex);
@@ -89,6 +126,7 @@ public class StageChangeManager : MonoBehaviour {
 			Destroy(nowStageObject);		//ステージの削除
 			CreateStage(_nextStageIndex);	//ステージ生成
 			isChangeStage = false;
+			RespawnPlayers(_nextStageIndex);
 		}
 	}
 
@@ -137,4 +175,34 @@ public class StageChangeManager : MonoBehaviour {
 		return true;
 	}
 
+	private void RespawnPlayers(int _stageIndex)
+	{
+		for (int i = 0; i < PlayerNum; i++)
+		{
+			if (playerObjects[i].name == "Player1")
+			{
+				playerObjects[i].transform.position = SpawnPositoins[(_stageIndex * PlayerNum)].transform.position;
+				Player pl = playerObjects[i].GetComponent<Player>();
+				pl.SetRespawnPosition(SpawnPositoins[(_stageIndex * PlayerNum)].transform.position);
+			}
+			if (playerObjects[i].name == "Player2")
+			{
+				playerObjects[i].transform.position = SpawnPositoins[(_stageIndex * PlayerNum) + 1].transform.position;
+				Player pl = playerObjects[i].GetComponent<Player>();
+				pl.SetRespawnPosition(SpawnPositoins[(_stageIndex * PlayerNum) + 1].transform.position);
+			}
+			if (playerObjects[i].name == "Player3")
+			{
+				playerObjects[i].transform.position = SpawnPositoins[(_stageIndex * PlayerNum) + 2].transform.position;
+				Player pl = playerObjects[i].GetComponent<Player>();
+				pl.SetRespawnPosition(SpawnPositoins[(_stageIndex * PlayerNum) + 2].transform.position);
+			}
+			if (playerObjects[i].name == "Player4")
+			{
+				playerObjects[i].transform.position = SpawnPositoins[(_stageIndex * PlayerNum) + 3].transform.position;
+				Player pl = playerObjects[i].GetComponent<Player>();
+				pl.SetRespawnPosition(SpawnPositoins[(_stageIndex * PlayerNum) + 3].transform.position);
+			}
+		}
+	}
 }
