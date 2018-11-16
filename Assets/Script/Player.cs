@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
 	public GameObject RotateObj;
 	public GameObject[] FootPositionObj = new GameObject[2];	//着地判定用にキャラの左右に配置
 	public GameObject ItemHoldCollisionObj;
-	//public GameObject MentalGaugeObj;
+	public GameObject MentalGaugeObj;
 
 	private GameObject getItemObj;
 	private GameObject holdDeskObj;
@@ -72,7 +72,6 @@ public class Player : MonoBehaviour
 	private EffectManager effectManager;
 	private FeverManager feverManager;
 	private BoxCollider itemHoldCollision;
-	//private HPGauge hpGauge;
 
 	private float nowMoveSpeed;
 	private float rightSpeed;
@@ -105,8 +104,6 @@ public class Player : MonoBehaviour
 		feverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
 		itemHoldCollision = ItemHoldCollisionObj.GetComponent<BoxCollider>();
 		startFootRPosition = FootPositionObj[0].transform.localPosition;
-	//	hpGauge = MentalGaugeObj.GetComponent<HPGauge>();
-	//	hpGauge.SetPlayerMental(mentalGauge, MentalGaugeMax);
 	}
 	
 	void Update ()
@@ -114,7 +111,6 @@ public class Player : MonoBehaviour
 		animator.SetFloat("cntGetItemBlankTime", cntGetItemBlankSec);
 		animator.SetBool("isDamage", isDamage);
 		animator.SetBool("isOnGround", IsOnGround());
-	//	hpGauge.SetPlayerAngleValue(angleValue);
 		//操作不能時間のカウント
 		if (cntCantMoveSec > 0)
 		{
@@ -377,9 +373,6 @@ public class Player : MonoBehaviour
 			if (mentalGauge > MentalGaugeMax)
 			{
 				mentalGauge = MentalGaugeMax;
-			} else
-			{
-				//hpGauge.PlayAnimation(mentalGauge);
 			}
 			cntInvincibleSec = InvincibleSec;
 		}
@@ -463,21 +456,6 @@ public class Player : MonoBehaviour
 	{
 		Vector3 effectPos = new Vector3(transform.position.x, FootPositionObj[0].transform.position.y, FootPositionObj[0].transform.position.z);
 		animator.SetBool("isAirJumpRotation", isAirjumpRotation);
-
-		bool holdItemJump = false;
-		if (feverManager.IsFever())
-		{
-			holdItemJump = true;
-		} else
-		{
-			if (isHoldItem)
-			{
-				holdItemJump = false;
-			} else
-			{
-				holdItemJump = true;
-			}
-		}
 
 		//空中ジャンプ
 		if (!IsOnGround() && cntAirJumpNum > 0 && !isDamage && CanIMove())
@@ -854,7 +832,6 @@ public class Player : MonoBehaviour
 				cntCantMoveSec = 3;
 				isStandUp = true;
 				animator.SetBool("isStandUp", true);
-			//	hpGauge.SetPlayerMental(mentalGauge, MentalGaugeMax);
 			}
 		}
 	}
