@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4228283887987942}
   - component: {fileID: 114055188700850096}
+  - component: {fileID: 114035651947612276}
   m_Layer: 0
   m_Name: BossAttackManager
   m_TagString: BossManager
@@ -40,6 +41,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114035651947612276
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1628656583086660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772754e3738253945aaa45e52ad8d3cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightMaterial: {fileID: 2100000, guid: a489832c9a984864ab842590b7907f00, type: 2}
 --- !u!114 &114055188700850096
 MonoBehaviour:
   m_ObjectHideFlags: 1
