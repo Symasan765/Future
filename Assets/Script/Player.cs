@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
 	private LayerMask OnGroundLayer;
 
 	private float GetItemBlankSec = 0.25f;	//アイテムを持つ&捨てる時の硬直フレーム
-	private float CanHoldItemDistance = 1.7f;	//机を運べるようになる範囲
+	private float CanHoldItemDistance = 2;	//机を運べるようになる範囲
 	
 	private int mentalGauge = 0;
 	private bool isJump = false;
@@ -173,7 +173,7 @@ public class Player : MonoBehaviour
 		{
 			if (!isDamage && CanIMove())
 			{
-				if (XPad.Get.GetRelease(XPad.KeyData.A, PlayerIndex))
+				if (XPad.Get.HoldTrigger(PlayerIndex))
 				{
 					if (isHoldItem)
 					{
@@ -482,7 +482,7 @@ public class Player : MonoBehaviour
 		//空中ジャンプ
 		if (!IsOnGround() && cntAirJumpNum > 0 && !isDamage && CanIMove())
 		{
-			if (XPad.Get.GetTrigger(XPad.KeyData.X, PlayerIndex))
+			if (XPad.Get.JumpTrigger(PlayerIndex))
 			{
 				Debug.Log("空中J");
 				effectManager.PlayPYON(PlayerIndex, effectPos);
@@ -517,6 +517,18 @@ public class Player : MonoBehaviour
 				nowJumpPower = GroundJumpPower * 0.9f;
 			}
 
+			if (XPad.Get.JumpTrigger(PlayerIndex))
+			{
+				cntJumpCheckSec = 0;
+				checkJumpTrigger = false;
+				cntAirJumpNum = AirJumpNum;
+				effectManager.PlayDUM(PlayerIndex, effectPos);
+				SoundManager.Get.PlaySE("AirJump");
+				jumpSpeed = nowJumpPower;
+				isJump = true;
+			}
+
+			/*
 			if (cntJumpCheckSec >= 0.07f)
 			{
 				cntJumpCheckSec = 0;
@@ -539,7 +551,7 @@ public class Player : MonoBehaviour
 					isJump = true;
 				}
 
-			}
+			}*/
 
 		}
 
@@ -574,7 +586,7 @@ public class Player : MonoBehaviour
 	//持てるアイテムを探す
 	private void SerchItem()
 	{
-		Vector3 itemPositon = new Vector3(transform.position.x - (0.7f * angleValue), ItemPosition.transform.position.y, transform.position.z);
+		Vector3 itemPositon = new Vector3(transform.position.x - (1.0f * angleValue), ItemPosition.transform.position.y, transform.position.z);
 		if (cntGetItemBlankSec > 0)
 		{
 			animator.SetBool("isGetItem", true);
@@ -596,7 +608,7 @@ public class Player : MonoBehaviour
 			if (hit.collider)
 			{
 				checkForwardEvidence = true;
-				if (XPad.Get.GetTrigger(XPad.KeyData.A, PlayerIndex))
+				if (XPad.Get.HoldTrigger(PlayerIndex))
 				{
 					GetItem(hit.collider.gameObject);		
 				}
