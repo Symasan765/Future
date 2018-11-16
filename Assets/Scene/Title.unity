@@ -1226,9 +1226,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d707743035a634e43bc8fe86bef4f507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxRange: 17.42
-  VibrationTrigger: 0
+  m_MaxRange: 0.36
   OldPos: {x: 0, y: 0, z: 0}
+  Pos: {x: 0, y: 0, z: 0}
 --- !u!1001 &226216695
 Prefab:
   m_ObjectHideFlags: 0
