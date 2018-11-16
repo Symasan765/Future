@@ -175,6 +175,28 @@ public class StageChangeManager : MonoBehaviour {
 		return true;
 	}
 
+	public int GetNowSetEvidenceNum()
+	{
+		int nowEviIndex = 0;
+
+		//配列の開始位置を計算
+		for (int i = 0; i < nowStageIndex; i++)
+		{
+			nowEviIndex += NormalEvidenceSpawnerNum[i];
+		}
+
+		int setEviNum = 0;
+
+		for (int i = 0; i < NormalEvidenceSpawnerNum[nowStageIndex]; i++)
+		{
+			if (AllEvidenceSpawners[nowEviIndex + i].isSetBazooka)
+			{
+				setEviNum++;
+			}
+		}
+		return GetNowNormalEvidenceNum() - setEviNum;
+	}
+
 	private void RespawnPlayers(int _stageIndex)
 	{
 		for (int i = 0; i < PlayerNum; i++)

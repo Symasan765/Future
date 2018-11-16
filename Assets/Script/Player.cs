@@ -928,6 +928,11 @@ public class Player : MonoBehaviour
         return PlayerIndex;
     }
 
+	public void SetRespawnPosition(Vector3 _pos)
+	{
+		respawnPosition = _pos;
+	}
+
 	private void Step()
 	{
 		Vector3 effectPos = new Vector3(transform.position.x, FootPositionObj[0].transform.position.y, FootPositionObj[0].transform.position.z);
