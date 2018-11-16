@@ -123,6 +123,11 @@ public class Player : MonoBehaviour
 			}
 		}
 
+		if (getItemObj == null)
+		{
+			isHoldItem = false;
+		}
+
 		if (IsOnGround())
 		{
 			isOnCollisionStay = false;
@@ -784,6 +789,11 @@ public class Player : MonoBehaviour
 				isDown = true;
 			}
 		}
+	}
+
+	public void StartRespawn()
+	{
+		isRespawn = true;
 	}
 
 	//リスポーン処理

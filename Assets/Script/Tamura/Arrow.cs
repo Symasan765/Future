@@ -8,7 +8,7 @@ public class Arrow : MonoBehaviour {
 
     int inputDelay;             // 入力待ちフレーム量
     bool isCharacterSelected;   // キャラ選択中かどうか
-    int cursorPos;              // カーソルの現在位置
+    public int cursorPos;       // カーソルの現在位置
 
     bool isSelectAnimating;     // 選択後のアニメーション中か
     float zAngle;               // アニメーション用のZ軸回転角
@@ -28,7 +28,7 @@ public class Arrow : MonoBehaviour {
     // 初期化
     void Awake() {
         inputDelay = 0;
-        cursorPos = 0;
+        cursorPos = playerIndex;
         csManager = FindObjectOfType<CharacterSelectManager>();
 
         animAngle = 0.0f/* + playerIndex * 1.0f*/;
@@ -37,7 +37,6 @@ public class Arrow : MonoBehaviour {
     void Update() {
         // キャラ未選択状態なら
         if (!isCharacterSelected) {
-            //MoveCursor();
             SelectCharacter();
         }
         // キャラ選択済みなら
@@ -134,6 +133,10 @@ public class Arrow : MonoBehaviour {
 
     public int GetCursorPos() {
         return cursorPos;
+    }
+
+    public void SetCursorPos(int _curPos) {
+        cursorPos = _curPos;
     }
 
     public bool GetStartGameFlg() {

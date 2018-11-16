@@ -11,7 +11,6 @@ public class TitleScript : MonoBehaviour {
     public GameObject AllFadeImage; //画面全体のフェード用画像    
     public GameObject TitleLogo;    //ロゴ画像
     public GameObject StartButton;  //スタートボタン画像
-
     bool PushedStart = false;
 
     //start : -271 title : 180
@@ -52,16 +51,15 @@ public class TitleScript : MonoBehaviour {
                     }
                     break;
                 case 1:
-                    //StartCoroutine(RoopTitleScene());
-                    TitleLogo.GetComponent<Fade>().SetFade((int)Fade.FadeOption.FADEIN, 0.2f, false, false);
-                    if (TitleLogo.GetComponent<Fade>().IsFadeDone() == true) 
+                    StartCoroutine(RoopTitleScene());
+                    TitleLogo.transform.position += new Vector3(0.0f, 0.0f, 1.0f);
+                    if (TitleLogo.transform.position.z >= 2.0f) 
                     {
                         SceneIndex++;
-                        TitleLogo.GetComponent<Vibration>().VibrationTrigger = true;
                         yield return new WaitForSeconds(0.30f);
                     }
                     break;
-                case 2:   
+                case 2:
                     StartButton.SetActive(true);
                     break;
             }
@@ -93,9 +91,9 @@ public class TitleScript : MonoBehaviour {
         {
             if (AllFadeImage.GetComponent<Fade>().IsFadeDone())
             {
-                Debug.Log("Im in");
                 SceneManager.LoadScene("Title");
             }
+            yield return null;
         }
         
     }
