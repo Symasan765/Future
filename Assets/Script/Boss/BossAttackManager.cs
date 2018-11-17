@@ -152,49 +152,6 @@ public class BossAttackManager : MonoBehaviour
 		yield return null;
 	}
 
-	IEnumerator JikutoAttack()
-	{
-		m_OldAreaNo = -1;
-		// TODO 将来的にはボスが生きている間、みたいな条件に変更すること
-		while (true)
-		{
-			if (m_This.m_AttackFlag)
-			{
-				for (int i = 0; i < 4; i++)
-				{
-					m_AreaTime[i] -= Time.deltaTime;
-				}
-
-				// 攻撃対象のプレイヤーを確定させる
-				int targetNo = GetImportantPlayerNo();
-				// そのプレイヤーがステージのどこのエリアにいるかを特定する
-				int AreaNo = AreaIdentification(targetNo);
-				// プレイヤーが特定のエリアにいればそのエリアに攻撃を発生させる
-				if (AreaNo != -1)
-				{
-					if (m_XORFlag)
-					{
-						AttackID(AreaNo);
-						Debug.Log("攻撃エリア" + AreaNo);
-						m_AreaTime[m_OldAreaNo] = 2.0f;
-						yield return new WaitForSeconds(0.5f); // これで引数分の秒数の間、処理を待つ
-					}
-					else
-						yield return new WaitForSeconds(0.5f); // これで引数分の秒数の間、処理を待つ
-				}
-				else
-				{
-					yield return new WaitForSeconds(0.5f);
-				}
-			}
-			else
-			{
-				yield return new WaitForSeconds(2.0f);
-			}
-		}
-		yield return null;
-	}
-
 	/// <summary>
 	/// 
 	/// </summary>
