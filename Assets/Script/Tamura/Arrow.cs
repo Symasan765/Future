@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Arrow : MonoBehaviour {
     [SerializeField]
     int playerIndex;
@@ -9,6 +10,7 @@ public class Arrow : MonoBehaviour {
     int inputDelay;             // 入力待ちフレーム量
     bool isCharacterSelected;   // キャラ選択中かどうか
     public int cursorPos;       // カーソルの現在位置
+    public int charaNum;
 
     bool isSelectAnimating;     // 選択後のアニメーション中か
     float zAngle;               // アニメーション用のZ軸回転角
@@ -90,6 +92,7 @@ public class Arrow : MonoBehaviour {
     // キャラ選択
     void SelectCharacter() {
         if (XPad.Get.GetTrigger(XPad.KeyData.A, playerIndex) && canSelect) {
+            charaNum = cursorPos;
             csManager.SelectCharater(playerIndex, cursorPos);
         }
     }
@@ -97,6 +100,7 @@ public class Arrow : MonoBehaviour {
     // キャラ選択を解除
     void UnselectCharacter() {
         if (XPad.Get.GetTrigger(XPad.KeyData.B, playerIndex)) {
+            Debug.Log("pIndex:" + playerIndex + " cPos:" + cursorPos);
             csManager.UnselectCharacter(playerIndex, cursorPos);
         }
     }
@@ -115,9 +119,9 @@ public class Arrow : MonoBehaviour {
     // カーソルのアニメーション(左右)
     void AnimateCursor() {
         float range = 0.5f;
-        float xSpeed = 0.25f; /*+ Random.Range(-0.1f, 0.1f);*/
+        float xSpeed = 0.25f;
 
-        cursorAnimateTransform = new Vector3(Mathf.Sin(animAngle) * range, 0.0f, 0.0f);
+        cursorAnimateTransform = new Vector3(Mathf.Sin(animAngle) * range, Mathf.Sin(animAngle) * -0.25f, 0.0f);
 
         animAngle += xSpeed;
         this.transform.position = cursorTransform + cursorAnimateTransform;
@@ -137,6 +141,10 @@ public class Arrow : MonoBehaviour {
 
     public void SetCursorPos(int _curPos) {
         cursorPos = _curPos;
+    }
+
+    public int GetPlayerIndex() {
+        return playerIndex;
     }
 
     public bool GetStartGameFlg() {

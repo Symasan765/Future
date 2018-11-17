@@ -36,6 +36,9 @@ public class CharacterSelectManager : MonoBehaviour {
     [SerializeField]
     List<Camera> renderCamList = new List<Camera>();
 
+    [SerializeField]
+    List<CameraAnimation> camAnimList = new List<CameraAnimation>();
+
     // 変更するキャラ選択データの格納先
     List<changeData> selectDataList = new List<changeData>();
     List<changeData> unselectDataList = new List<changeData>();
@@ -70,11 +73,12 @@ public class CharacterSelectManager : MonoBehaviour {
             Arrow aElement = arrowList[cursorIndex];
 
             if (!aElement.GetIsCharacterSelected()) {
+                float posX = -60.0f + 10.0f * unselectCharaList[aElement.GetCursorPos()];
+
                 // n番のカーソルの位置を履歴書の顔写真の横に移動
                 aElement.cursorTransform = Vector3.Lerp(aElement.cursorTransform, portraitList[unselectCharaList[aElement.GetCursorPos()]].arrowPosList[cursorIndex].transform.position, 0.5f);
-                // カーソル移動しなくていい場合でも移動してしまう
-                // unselectCharacterListじゃなくcursorPosを変更したほうがいい
-                renderCamList[cursorIndex].transform.position = new Vector3(-60.0f + 10.0f * unselectCharaList[aElement.GetCursorPos()], 0.0f, -1.0f);
+                renderCamList[cursorIndex].transform.position = new Vector3(posX, 0.0f, -1.0f);
+                camAnimList[aElement.GetPlayerIndex()].SetPosition(posX);
                 if (aElement.cursorTransform == portraitList[unselectCharaList[aElement.GetCursorPos()]].arrowPosList[cursorIndex].transform.position) {
                     aElement.canSelect = true;
                 }
@@ -109,8 +113,12 @@ public class CharacterSelectManager : MonoBehaviour {
                 int pIndex = selectDataList[0]._playerIndex;
                 int cPos = selectDataList[0]._cursorPos;
                 Debug.Log("カーソル位置" + cPos);
+
+                arrowList[pIndex].charaNum = unselectCharaList[cPos];
+
                 CharacterManager.SetCharacter(pIndex, unselectCharaList[cPos]);
                 animatorList[unselectCharaList[cPos]].SetBool("isSelected", true);
+                camAnimList[pIndex].StartCameraAnimation();
 
                 unselectCharaList.RemoveAt(cPos);
 
@@ -126,7 +134,7 @@ public class CharacterSelectManager : MonoBehaviour {
                 }
 
                 for (int i = 0; i < selectDataList.Count; i++) {
-                    selectDataList[i]._cursorPos = selectDataList[i]._cursorPos - 1 % selectDataList.Count;
+                    selectDataList[i]._cursorPos = (selectDataList[i]._cursorPos - 1) % selectDataList.Count;
                 }
 
                 Debug.Log("select処理");
@@ -135,15 +143,19 @@ public class CharacterSelectManager : MonoBehaviour {
             if (unselectDataList.Count != 0) {
                 // 残りゼロ件になるまでやる
                 for (; unselectDataList.Count > 0; ) {
-                    unselectCharaList.Add(CharacterManager.SelectedCharacters[unselectDataList[0]._playerIndex]);
+                    int pIndex = unselectDataList[0]._playerIndex;
+                    int cNum = arrowList[pIndex].charaNum;
 
-                    CharacterManager.ResetCharacter(unselectDataList[0]._playerIndex);
-                    animatorList[unselectCharaList[unselectDataList[0]._cursorPos]].SetBool("isSelected", false);
+                    unselectCharaList.Add(CharacterManager.SelectedCharacters[pIndex]);
+
+                    CharacterManager.ResetCharacter(pIndex);
+                    animatorList[cNum].SetBool("isSelected", false);
 
                     // キャラ選択フラグをオフに
-                    arrowList[unselectDataList[0]._playerIndex].SetIsCharacterSelected(false);
+                    Debug.Log("キャラ番号" + cNum + "unselect処理");
+                    arrowList[pIndex].SetIsCharacterSelected(false);
+                    camAnimList[pIndex].StartCameraAnimation();
 
-                    Debug.Log("unselect処理");
                     unselectDataList.RemoveAt(0);
                 }
                 unselectCharaList.Sort();
@@ -215,6 +227,7 @@ public class CharacterSelectManager : MonoBehaviour {
         changeData cd = new changeData();
         cd._playerIndex = _playerIndex;
         cd._cursorPos = _cursorPos;
+        //Debug.Log("pIndex:"+_playerIndex+" cPos:"+_cursorPos);
 
         unselectDataList.Add(cd);
     }
