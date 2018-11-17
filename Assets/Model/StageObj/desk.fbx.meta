@@ -59,7 +59,37 @@ ModelImporter:
     4300014: pCube41
     4300016: pCube42
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: desuku1
+    second: {fileID: 2100000, guid: 7d206a991a9ff5044b8e963b02ae7820, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: desuku2
+    second: {fileID: 2100000, guid: 55b870f7eb1dee7439a90637c21fb1ca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: desuku3
+    second: {fileID: 2100000, guid: d599a5c7e9a0942469dbb730a0a05cdd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: desuku4
+    second: {fileID: 2100000, guid: a4d465c9fb340bd42a7d53c0c552d2eb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: desuku5
+    second: {fileID: 2100000, guid: 08a9dfb06dc362c4f96a41f4c8670332, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 320f16ca6ee31dc4495b673aa1298ddb, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

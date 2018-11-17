@@ -21,7 +21,22 @@ ModelImporter:
     4300000: pCube11
     4300002: pCylinder35
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: isu1
+    second: {fileID: 2100000, guid: 20c1d51124782884c81a12ff48829052, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: isu2
+    second: {fileID: 2100000, guid: 6bcbb274dffac9e458d1d4a4e3a64bbb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: isu3
+    second: {fileID: 2100000, guid: 0c75a0070df31264ab04f707f5a860c3, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
