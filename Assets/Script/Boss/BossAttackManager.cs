@@ -37,6 +37,8 @@ public class BossAttackManager : MonoBehaviour
 
 	BossLight m_Light;
 
+	EvidenceLoading m_EviLoading;
+
 	public bool m_DownSwing = false;
 	public bool m_SideSwing = false;
 	public bool m_Beam = false;
@@ -63,6 +65,8 @@ public class BossAttackManager : MonoBehaviour
 
 		m_Light = GetComponent<BossLight>();
 		m_Light.LightChage(false);
+
+		m_EviLoading = GameObject.Find("EvidenceLoading").GetComponent<EvidenceLoading>();
 	}
 
 	private void Update()
@@ -296,6 +300,9 @@ public class BossAttackManager : MonoBehaviour
 		m_AreaTime = new float[4] { 0.0f, 0.0f, 0.0f, 0.0f };
 
 		StartCoroutine("BossAttack");
+
+		// 労基オブジェクトを新しく見つける
+		m_EviLoading.InitLoader();
 	}
 
 	int AreaIdentification(int targetNo)

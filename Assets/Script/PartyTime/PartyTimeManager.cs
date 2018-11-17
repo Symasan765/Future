@@ -21,6 +21,9 @@ public class PartyTimeManager : MonoBehaviour {
 
 	SoundDirector soundDirector;
 
+	// 証拠が入ったかどうかの判定とかをする
+	EvidenceLoading m_EviLoading;
+
 	float m_BossSky = 1.98f;
 	float m_PartySky = 2.55f;
 
@@ -76,6 +79,8 @@ public class PartyTimeManager : MonoBehaviour {
 		// スタート演出を生成してある程度後に消滅させる
 		Destroy(Instantiate(m_StartTimeline), 10.0f);
 		Destroy(Instantiate(m_RadarTimeline), 15.0f);
+
+		m_EviLoading = GameObject.Find("EvidenceLoading").GetComponent<EvidenceLoading>();
 	}
 	
 	// Update is called once per frame
@@ -119,6 +124,7 @@ public class PartyTimeManager : MonoBehaviour {
 		switch (newState)
 		{
 			case PartyState.BossAttack:
+				m_EviLoading.InitLoader();
 				m_BossAttackManager.BossBehaviorSwitching(true);
 				SkySwitch();
 				break;
