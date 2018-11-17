@@ -36,7 +36,7 @@ public class Arrow : MonoBehaviour {
         animAngle = 0.0f/* + playerIndex * 1.0f*/;
     }
 
-    void Update() {
+    /*void Update() {
         // キャラ未選択状態なら
         if (!isCharacterSelected) {
             SelectCharacter();
@@ -46,12 +46,18 @@ public class Arrow : MonoBehaviour {
             UnselectCharacter();
             StartGame();
         }
-    }
+    }*/
 
     void FixedUpdate() {
         if (!isCharacterSelected) {
             MoveCursor();
             AnimateCursor();
+
+            SelectCharacter();
+        }
+        else {
+            UnselectCharacter();
+            StartGame();
         }
     }
 
