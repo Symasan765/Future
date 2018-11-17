@@ -14,6 +14,7 @@ public class PartyTimeManager : MonoBehaviour {
 	public GameObject m_ParticlePrefab;
 
 	public GameObject m_StartTimeline;
+	public GameObject m_RadarTimeline;
 
 	AudioSource m_NowBGM;
 	AudioSource m_NextBGM;
@@ -74,6 +75,7 @@ public class PartyTimeManager : MonoBehaviour {
 
 		// スタート演出を生成してある程度後に消滅させる
 		Destroy(Instantiate(m_StartTimeline), 10.0f);
+		Destroy(Instantiate(m_RadarTimeline), 15.0f);
 	}
 	
 	// Update is called once per frame

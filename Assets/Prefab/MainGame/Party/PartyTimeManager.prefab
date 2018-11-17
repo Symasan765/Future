@@ -61,3 +61,5 @@ MonoBehaviour:
     type: 2}
   m_StartTimeline: {fileID: 1461558674801296, guid: 748a2f6e0cbefab4390770812b35ff69,
     type: 2}
+  m_RadarTimeline: {fileID: 1361932966472714, guid: 3fa4a529f4df2af458afc82178873e5a,
+    type: 2}
