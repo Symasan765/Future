@@ -40,6 +40,11 @@ public class AttackID : MonoBehaviour {
 				m_BossLaunchPos = GameObject.Find("BossLaunchPos").gameObject;
 				m_BeamObj = (GameObject)Resources.Load("Prefab/BeamObj");
 				break;
+			case AttackType.Special:
+				m_EffectPrefab = (GameObject)Resources.Load("Prefab/BeamSmoke");
+				m_BossLaunchPos = GameObject.Find("BossLaunchPos").gameObject;
+				m_BeamObj = (GameObject)Resources.Load("Prefab/BeamObj");
+				break;
 		}
 	}
 

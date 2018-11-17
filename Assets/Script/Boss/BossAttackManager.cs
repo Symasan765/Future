@@ -13,6 +13,8 @@ public class BossAttackManager : MonoBehaviour
 
 	GameObject[] m_AttackObjects;
 
+	public GameObject m_CutinPrefab;
+
 	int m_MaxAttackID = -1;
 
 	// 攻撃範囲用に配置したオブジェクトを取得する
@@ -207,13 +209,24 @@ public class BossAttackManager : MonoBehaviour
 			return ret;
 		}
 
+		bool specialAttackFlag = false;
+
 		for (int i = 0; i < m_AttackList[ID].Count; i++)
 		{
 			var obj = m_AttackList[ID][i];
 			ret = obj.m_TimeSec;
 			m_NextAttackType = obj.m_AttackType;
+			if (m_NextAttackType == global::AttackID.AttackType.Special) specialAttackFlag = true;
 			var boss = Instantiate(m_RangePrefab).GetComponent<BossAttackRange>();
 			boss.AttackCommand(this, obj.transform.position, obj.transform.localScale, obj.m_TimeSec,obj);
+		}
+
+		// Special攻撃が来た場合、ボスのカットインを表示させる
+		if (specialAttackFlag)
+		{
+			CutinScript.m_CharaNo = 4;
+			CutinScript.m_PlayerNo = 4;
+			Instantiate(m_CutinPrefab);
 		}
 
 		SoundManager.Get.PlaySE("BossAttackDangerous");

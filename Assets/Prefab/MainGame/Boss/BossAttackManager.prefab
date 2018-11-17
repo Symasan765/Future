@@ -66,6 +66,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RangePrefab: {fileID: 1506440863033174, guid: 11760b0a79f82284f95dd071485cff0a,
     type: 2}
+  m_CutinPrefab: {fileID: 1238088410941198, guid: 6472ab94d957ab247ab4a10a1c2d53af,
+    type: 2}
   m_BossMaxDamage: 100
   m_BossDamage: 0
   m_AttackFlag: 0
