@@ -112,6 +112,8 @@ public class StageChangeManager : MonoBehaviour {
 		{
 			nowStageIndex = 0;
 		}
+
+		ChangeNowStage(nowStageIndex);
 	}
 
 	public int GetNowNormalEvidenceNum()
