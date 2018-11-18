@@ -62,7 +62,7 @@ public class BossAttackRange : MonoBehaviour
 		m_Material = m_AttackRangeBoard.GetComponent<Renderer>().material;
 
 		// 攻撃情報保持
-		m_AttackPos = new Vector3(atackPos.x, atackPos.y, 5.5f);
+		m_AttackPos = new Vector3(atackPos.x, atackPos.y, 1.0f);
 		m_Range = range;
 		m_AttackTime = atackTime;
 		m_AttackCount = 0.0f;

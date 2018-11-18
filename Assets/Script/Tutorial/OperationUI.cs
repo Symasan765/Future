@@ -13,6 +13,7 @@ public class OperationUI : MonoBehaviour
 
 	GameObject m_Image0;
 	GameObject m_Image1;
+	Vector3 scale;
 
 	// Use this for initialization
 	void Start()
@@ -23,6 +24,10 @@ public class OperationUI : MonoBehaviour
 
 		// シーン上で見やすいようにしてるメッシュを切る
 		GetComponent<MeshRenderer>().enabled = false;
+
+		scale = transform.localScale;
+		transform.localScale = Vector3.one;
+		GetComponent<BoxCollider>().size = scale;
 	}
 
 	// Update is called once per frame
@@ -35,7 +40,7 @@ public class OperationUI : MonoBehaviour
 	void HitCheck()
 	{
 		m_HitFlag = false;  // 当たっていない前提
-		RaycastHit[] hitInfo = Physics.BoxCastAll(transform.position, transform.localScale, Vector3.back, Quaternion.identity, 15.0f);
+		RaycastHit[] hitInfo = Physics.BoxCastAll(transform.position, scale, Vector3.back, Quaternion.identity, 15.0f);
 
 		// 当たったオブジェクトからプレイヤーを探してダメージ処理
 		for (int i = 0; i < hitInfo.Length; i++)
