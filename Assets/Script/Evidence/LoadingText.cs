@@ -38,7 +38,7 @@ public class LoadingText : MonoBehaviour {
 		}
 
 		// バズーカに証拠が入った
-		if (m_Bazooka.isSetEvidence)
+		if (m_Bazooka.isSetNormalEvidence)
 		{
 			m_StartFlag = true;
 		}
@@ -52,7 +52,7 @@ public class LoadingText : MonoBehaviour {
 			float t = m_TimeCnt / m_ScaleTimeSec;
 			transform.localScale = Vector3.one * t;
 
-			if (!m_Bazooka.isSetEvidence)
+			if (!m_Bazooka.isSetNormalEvidence)
 				m_EndFlag = true;
 		}
 	}
