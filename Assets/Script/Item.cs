@@ -213,6 +213,10 @@ public class Item : MonoBehaviour {
 		SetItemLocalPosition(_obj.transform.position);
 		flgMoveToGetPos = true;
 		isScaleDown = true;
+		if (!isFeverEvidence)
+		{
+			bazookaRifle.isSetNormalEvidence = true;
+		}
 	}
 
 	void OnCollisionStay(Collision other)
