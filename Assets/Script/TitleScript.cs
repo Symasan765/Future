@@ -28,7 +28,7 @@ public class TitleScript : MonoBehaviour {
     {
         StartCoroutine(TitleScene());
     }
-    void Update ()
+    void FixedUpdate()
     {
         
         AcceptInputFunc();

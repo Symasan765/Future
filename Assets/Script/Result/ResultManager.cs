@@ -39,7 +39,7 @@ public class ResultManager : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void Update()
+	void FixedUpdate()
 	{
 		AttackTextUpdate();
 		DamageTextUpdate();

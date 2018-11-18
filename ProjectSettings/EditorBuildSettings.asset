@@ -12,14 +12,14 @@ EditorBuildSettings:
     path: Assets/Scene/ManagerScene.unity
     guid: 04e86cd28eeaa2b4996b2a54ec2761ec
   - enabled: 1
-    path: Assets/Scene/Result.unity
-    guid: cef800716690f3f4a966e53a67252630
-  - enabled: 1
     path: Assets/Scene/CharacterSelect.unity
     guid: 06cf9f9cbaf08cd48aacdf819870d568
+  - enabled: 1
+    path: Assets/Scene/TimeLineTest.unity
+    guid: 7e4f1def8c0131e49badbe08c66733d5
   - enabled: 1
     path: Assets/Scene/Alpha.unity
     guid: 7add785d9ecf3ba4eb8b5bd0b1078cfe
   - enabled: 1
-    path: Assets/Scene/TimeLineTest.unity
-    guid: 7e4f1def8c0131e49badbe08c66733d5
+    path: Assets/Scene/Result.unity
+    guid: cef800716690f3f4a966e53a67252630

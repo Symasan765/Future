@@ -53,7 +53,7 @@ public class CharacterSelectManager : MonoBehaviour {
         //SoundManager.Get.PlayBGM("はりきっちゃう時のテーマ", true);
     }
 
-	void Update () {
+	void FixedUpdate () {
         UpdateCursor();
         UpdateCharacterSelectStatus();
         CheckCharacterSelected();
