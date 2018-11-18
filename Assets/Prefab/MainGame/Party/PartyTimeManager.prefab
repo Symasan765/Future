@@ -63,3 +63,5 @@ MonoBehaviour:
     type: 2}
   m_RadarTimeline: {fileID: 1361932966472714, guid: 3fa4a529f4df2af458afc82178873e5a,
     type: 2}
+  m_StageChangeText: {fileID: 1970758277710060, guid: a135c863d74eb89469bf765d003c88ce,
+    type: 2}

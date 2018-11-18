@@ -54,6 +54,7 @@ public class BossAttackManager : MonoBehaviour
 
 	BossCondition m_Condition;
 	AttackID.AttackType m_NextAttackType;
+	public bool m_StageSwitch = false;
 
 	// Use this for initialization
 	void Start()
@@ -71,7 +72,11 @@ public class BossAttackManager : MonoBehaviour
 
 	private void Update()
 	{
+		// ボスのコンディションが変わったらステージスイッチフラグをONにする
+		var nowCond = m_Condition;
 		ConditionUpdate();
+		if (nowCond != m_Condition)
+			m_StageSwitch = true;
 
 		if (Input.GetKeyDown(KeyCode.P))
 		{

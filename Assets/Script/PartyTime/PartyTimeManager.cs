@@ -24,13 +24,20 @@ public class PartyTimeManager : MonoBehaviour {
 	// 証拠が入ったかどうかの判定とかをする
 	EvidenceLoading m_EviLoading;
 
+	public GameObject m_StageChangeText;
+	StageChangeManager m_ChangeManager;
+
 	float m_BossSky = 1.98f;
 	float m_PartySky = 2.55f;
 
 	// スカイドームのカラー変更用
 	float m_SkyTimeSec;
 	float m_SkySrc;		// 変更元
-	float m_SkyDsc;		// 変更先
+	float m_SkyDsc;     // 変更先
+
+	// ステージ切り替えパラメータ
+	float m_ChangeStageSec = 1.0f;  // パーティタイム終了後にどれくらいの感覚で終了させるか？
+	float m_ChangeTimeCnt = 0.0f;
 
 	enum PartyState
 	{
@@ -81,6 +88,8 @@ public class PartyTimeManager : MonoBehaviour {
 		Destroy(Instantiate(m_RadarTimeline), 15.0f);
 
 		m_EviLoading = GameObject.Find("EvidenceLoading").GetComponent<EvidenceLoading>();
+
+		m_ChangeManager = GameObject.Find("StageChangeManager").GetComponent<StageChangeManager>();
 	}
 	
 	// Update is called once per frame
@@ -103,7 +112,17 @@ public class PartyTimeManager : MonoBehaviour {
 
 	void BossAttackTurn()
 	{
-		
+		// ステージ切り替え命令が出ている
+		if(m_ChangeTimeCnt != 0.0f)
+		{
+			m_ChangeTimeCnt -= Time.deltaTime;
+			if(m_ChangeTimeCnt < 0.0f)
+			{
+				m_ChangeTimeCnt = 0.0f;
+				m_ChangeManager.ChangeStage();
+				Instantiate(m_StageChangeText);
+			}
+		}
 	}
 
 	void PlayerAttackTurn()
@@ -124,6 +143,11 @@ public class PartyTimeManager : MonoBehaviour {
 		switch (newState)
 		{
 			case PartyState.BossAttack:
+				if (m_BossAttackManager.m_StageSwitch)
+				{
+					m_ChangeTimeCnt = m_ChangeStageSec;
+					m_BossAttackManager.m_StageSwitch = false;
+				}
 				m_EviLoading.InitLoader();
 				m_BossAttackManager.BossBehaviorSwitching(true);
 				SkySwitch();
