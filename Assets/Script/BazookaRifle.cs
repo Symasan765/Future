@@ -39,6 +39,7 @@ public class BazookaRifle : MonoBehaviour{
 	private int nowSetEvidenceNum = 0;
 
 	public bool isSetEvidence = false;
+	public bool isSetNormalEvidence = false;
 
 	private bool isFirstFeverEvidenceHit = false;
 	private bool canShot = false;
@@ -65,6 +66,7 @@ public class BazookaRifle : MonoBehaviour{
     {
 		if (!feverManager.IsFever())
 		{
+			isSetNormalEvidence = false;
 			isFirstFeverEvidenceHit = false;
 		}
 		Explosion();
@@ -199,6 +201,7 @@ public class BazookaRifle : MonoBehaviour{
 			ShotBazooka(true);
 		} else
 		{
+			isSetNormalEvidence = true;
 			NearEvidenceNum++;
 		}
 	}
