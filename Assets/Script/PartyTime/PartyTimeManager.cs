@@ -121,6 +121,7 @@ public class PartyTimeManager : MonoBehaviour {
 				m_ChangeTimeCnt = 0.0f;
 				m_ChangeManager.ChangeStage();
 				Instantiate(m_StageChangeText);
+				m_EviLoading.InitLoader();
 			}
 		}
 	}
