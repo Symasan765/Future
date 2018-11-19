@@ -108,6 +108,7 @@ public class Player : MonoBehaviour
 	
 	void Update ()
 	{
+		animator.SetBool("isHoldItem", isHoldItem);
 		animator.SetFloat("cntGetItemBlankTime", cntGetItemBlankSec);
 		animator.SetBool("isDamage", isDamage);
 		animator.SetBool("isOnGround", IsOnGround());

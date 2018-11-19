@@ -1379,7 +1379,7 @@ MonoBehaviour:
   EffectSweatObj:
   - {fileID: 1181545730777294}
   - {fileID: 1180589747255228}
-  ItemPosition: {fileID: 1053198867627620}
+  ItemPosition: {fileID: 1596092469022498}
   RotateObj: {fileID: 1431413087891794}
   FootPositionObj:
   - {fileID: 1679386103963478}
