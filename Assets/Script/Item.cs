@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Item : MonoBehaviour {
 
+	public GameObject EviEffectObj;
+
 	private GameObject bazookaObj = null;
 	private BazookaRifle bazookaRifle = null;
 	private Vector3 getPosition;
@@ -14,6 +16,8 @@ public class Item : MonoBehaviour {
 	private BoxCollider boxCollider = null;
 	private Rigidbody rb = null;
 	private FeverManager feverManager;
+
+	private ParticleSystem eviParticle;
 
 	[HideInInspector]
 	public bool flgMoveToGetPos;
@@ -40,6 +44,7 @@ public class Item : MonoBehaviour {
 
 	void Start ()
 	{
+		eviParticle = EviEffectObj.GetComponent<ParticleSystem>();
 		startSize = transform.localScale;
 		if (meshRenderer == null)
 		{
@@ -71,6 +76,7 @@ public class Item : MonoBehaviour {
 		//持たれていない時モデルを回転
 		if (isHold || isScaleDown)
 		{
+			eviParticle.Stop();
 			transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 			if (isScaleDown)
 			{
@@ -81,6 +87,10 @@ public class Item : MonoBehaviour {
 			transform.localScale = Vector3.Lerp(transform.localScale, startSize * 0.5f, MoveSpeed);
 		} else
 		{
+			if (!eviParticle.isPlaying)
+			{
+				eviParticle.Play();
+			}
 			transform.eulerAngles = new Vector3(0, 0, 0);
 			transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(startSize.x * fieldSize, startSize.y * fieldSize, startSize.z * fieldSize), MoveSpeed);
 			ModelObj.transform.localEulerAngles = new Vector3(0, ModelObj.transform.localEulerAngles.y + 2, 0);
