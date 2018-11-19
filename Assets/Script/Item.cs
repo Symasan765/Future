@@ -70,14 +70,13 @@ public class Item : MonoBehaviour {
 
 	void Update ()
 	{
-		
 		//角度とZ座標を固定
 		transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 		//持たれていない時モデルを回転
 		if (isHold || isScaleDown)
 		{
 			eviParticle.Stop();
-			transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+			transform.eulerAngles = new Vector3(0, 0, 0);
 			if (isScaleDown)
 			{
 				transform.eulerAngles = new Vector3(0, 0, 0);
