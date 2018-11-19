@@ -67,7 +67,6 @@ GameObject:
   - component: {fileID: 114005056543997684}
   - component: {fileID: 54133030888642252}
   - component: {fileID: 95475969641692580}
-  - component: {fileID: 114037348742382954}
   - component: {fileID: 65083026338811018}
   m_Layer: 12
   m_Name: Woman2
@@ -1321,18 +1320,6 @@ MonoBehaviour:
   ItemHoldCollisionObj: {fileID: 1978039168148650}
   MentalGaugeObj: {fileID: 0}
   cntJumpCheckSec: 0
---- !u!114 &114037348742382954
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1106051528358694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65ef9917e4eeab64080e26a7fc015d7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectObj: {fileID: 1454401753073556, guid: 910dab777bea2f9439bdeb78c2496040, type: 2}
 --- !u!114 &114116826718789164
 MonoBehaviour:
   m_ObjectHideFlags: 1

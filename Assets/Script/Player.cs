@@ -346,11 +346,10 @@ public class Player : MonoBehaviour
 	{
 		if (!IsInvincible())
 		{
-			ShakeCamera.Impact(0.005f, 0.3f);
+			effectManager.PlayPlayerDamage(transform.position);
+			ShakeCamera.Impact(0.009f, 0.6f);
 			animator.SetBool("isDamageTrigger", true);
 			SoundManager.Get.PlaySE("hit1");
-			PlayerDamage pd = GetComponent<PlayerDamage>();
-			pd.StartEffect();
 			//アイテムを落とす
 			if (isHoldItem)
 			{

@@ -270,7 +270,6 @@ GameObject:
   - component: {fileID: 114774967995697136}
   - component: {fileID: 54257537111487590}
   - component: {fileID: 95444729249226000}
-  - component: {fileID: 114782820943902396}
   - component: {fileID: 65740259402274814}
   m_Layer: 12
   m_Name: Man1
@@ -1388,18 +1387,6 @@ MonoBehaviour:
   ItemHoldCollisionObj: {fileID: 1463772854906826}
   MentalGaugeObj: {fileID: 0}
   cntJumpCheckSec: 0
---- !u!114 &114782820943902396
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1356394232252974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65ef9917e4eeab64080e26a7fc015d7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectObj: {fileID: 1454401753073556, guid: 910dab777bea2f9439bdeb78c2496040, type: 2}
 --- !u!137 &137182819891424252
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

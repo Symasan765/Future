@@ -16,6 +16,7 @@ public class EffectManager : MonoBehaviour {
 	public GameObject EffectLightning;
 	public GameObject EffectDown;
 	public GameObject EffectRespawnHeart;
+	public GameObject EffectPlayerDamage;
 
 	private ParticleSystem psDelete;
 	private ParticleSystem psCreateEvidence;
@@ -23,6 +24,13 @@ public class EffectManager : MonoBehaviour {
 	private ParticleSystem psLightning;
 	private ParticleSystem psDown;
 	private ParticleSystem psRespawnHeart;
+	private ParticleSystem psPlayerDamage;
+
+	public void PlayPlayerDamage(Vector3 _pos)
+	{
+		psPlayerDamage = Instantiate(EffectPlayerDamage, _pos, transform.rotation).GetComponent<ParticleSystem>();
+		psPlayerDamage.Play();
+	}
 
 	public void PlayRespawnHeart(Vector3 _pos)
 	{

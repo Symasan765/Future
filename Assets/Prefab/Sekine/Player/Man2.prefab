@@ -276,7 +276,6 @@ GameObject:
   - component: {fileID: 114771468955765048}
   - component: {fileID: 54253813368414248}
   - component: {fileID: 95155043803887646}
-  - component: {fileID: 114342329200000528}
   - component: {fileID: 65575086921633624}
   m_Layer: 12
   m_Name: Man2
@@ -1388,18 +1387,6 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
---- !u!114 &114342329200000528
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1366503086411458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65ef9917e4eeab64080e26a7fc015d7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectObj: {fileID: 1454401753073556, guid: 910dab777bea2f9439bdeb78c2496040, type: 2}
 --- !u!114 &114466856254331912
 MonoBehaviour:
   m_ObjectHideFlags: 1
