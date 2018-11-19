@@ -24,15 +24,19 @@ public class AttackStartPos : MonoBehaviour
 
 	private void OnTriggerEnter(Collider collider)
 	{
-		// プレイヤーと接触したら攻撃フラグをオンにして自殺する
-		m_Manager.m_AttackFlag = true;
-		Destroy(gameObject);
-
-		// 一度触れたらすべての攻撃オブジェクトを消滅させる
-		var objs = GameObject.FindGameObjectsWithTag("AttackStart");
-		for (int i = 0; i < objs.Length; i++)
+		// 証拠タグがついていれば消す
+		if (collider.gameObject.tag == "SYOUKO")
 		{
-			Destroy(objs[i]);
+			// プレイヤーと接触したら攻撃フラグをオンにして自殺する
+			m_Manager.m_AttackFlag = true;
+			Destroy(gameObject);
+
+			// 一度触れたらすべての攻撃オブジェクトを消滅させる
+			var objs = GameObject.FindGameObjectsWithTag("AttackStart");
+			for (int i = 0; i < objs.Length; i++)
+			{
+				Destroy(objs[i]);
+			}
 		}
 	}
 }
