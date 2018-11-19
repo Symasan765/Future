@@ -42,6 +42,8 @@ public class BossLight : MonoBehaviour {
 		float t = TimeCnt / changeSec;
 		m_LightMaterial.SetColor("_Emissive_Color", Color.Lerp(Color.black,m_InitColor,t));
 		m_LightMaterial.SetColor("_BaseColor", Color.Lerp(Color.gray, m_InitMainColor, t));
+		m_LightMaterial.SetColor("_1st_ShadeColor", Color.Lerp(Color.black, m_InitMainColor, t));
+		m_LightMaterial.SetColor("_2nd_ShadeColor", Color.Lerp(Color.black, m_InitMainColor, t));
 	}
 
 	public void LightChage(bool on)
