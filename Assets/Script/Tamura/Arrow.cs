@@ -124,10 +124,10 @@ public class Arrow : MonoBehaviour {
 
     // カーソルのアニメーション(左右)
     void AnimateCursor() {
-        float range = 0.5f;
+        float range = 0.1f;
         float xSpeed = 0.25f;
 
-        cursorAnimateTransform = new Vector3(Mathf.Sin(animAngle) * range, Mathf.Sin(animAngle) * -0.25f, 0.0f);
+        cursorAnimateTransform = new Vector3(Mathf.Sin(animAngle) * range, Mathf.Sin(animAngle) * -0.05f, 0.0f);
 
         animAngle += xSpeed;
         this.transform.position = cursorTransform + cursorAnimateTransform;
