@@ -78,6 +78,18 @@ public class XPad : SingletonMonoBehaviour<XPad>
 		return false;
 	}
 
+	public bool AnyonePress(KeyData key)
+	{
+		for (int i = 0; i < MaxControllerNum; i++)
+		{
+			if (GetPress(key, i))
+				return true;
+		}
+
+		// ここまで来たってことは誰もボタン押してない
+		return false;
+	}
+
 	/// <summary>
 	/// キーのリリース判定を行う
 	/// </summary>

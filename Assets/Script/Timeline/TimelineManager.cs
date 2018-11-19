@@ -54,8 +54,16 @@ public class TimelineManager : MonoBehaviour
 			m_BackLoder.SceneChange();
 		}
 
+		// スタートキーとバックキーを同時に押されたらスキップさせる
+		if(XPad.Get.AnyonePress(XPad.KeyData.START) && XPad.Get.AnyonePress(XPad.KeyData.BACK))
+		{
+			m_Parent2.SetActive(false);
+			ResultTransManager.m_InTheGame = true;
+			m_BackLoder.SceneChange();
+		}
+
 		m_TimeCnt += Time.deltaTime;
-		if(m_TimeCnt > 5.0f)
+		if(m_TimeCnt > 3.0f)
 		{
 			if(LoadFlag == false)
 			{
