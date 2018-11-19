@@ -569,7 +569,7 @@ public class Player : MonoBehaviour
 	//持てるアイテムを探す
 	private void SerchItem()
 	{
-		Vector3 itemPositon = new Vector3(transform.position.x - (1.0f * angleValue), ItemPosition.transform.position.y, transform.position.z);
+		Vector3 itemPositon = new Vector3(transform.position.x - (1.0f * angleValue), transform.position.y + 0.5f, transform.position.z);
 		if (cntGetItemBlankSec > 0)
 		{
 			animator.SetBool("isGetItem", true);
@@ -634,7 +634,7 @@ public class Player : MonoBehaviour
 				getItemObj = _itemObj.gameObject;
 				cntGetItemBlankSec = GetItemBlankSec;
 				isHoldItem = true;
-				_itemObj.transform.parent = transform;
+				_itemObj.transform.parent = ItemPosition.transform;
 				_itemObj.layer = LayerMask.NameToLayer("Player");
 				Rigidbody itemRb = _itemObj.GetComponent<Rigidbody>();
 				//BoxCollider col = _itemObj.GetComponent<BoxCollider>();

@@ -940,7 +940,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1326459268181816}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0.1}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 4631297892528700}
@@ -1482,12 +1482,13 @@ MonoBehaviour:
   EffectSweatObj:
   - {fileID: 1876039770738480}
   - {fileID: 1788482152308402}
-  ItemPosition: {fileID: 1326459268181816}
+  ItemPosition: {fileID: 1428271491426112}
   RotateObj: {fileID: 1958454660141482}
   FootPositionObj:
   - {fileID: 1474838652328144}
   - {fileID: 1139510922533572}
   ItemHoldCollisionObj: {fileID: 1928750000201304}
+  MentalGaugeObj: {fileID: 0}
   cntJumpCheckSec: 0
 --- !u!114 &114932610326873292
 MonoBehaviour:

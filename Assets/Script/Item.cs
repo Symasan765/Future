@@ -35,8 +35,12 @@ public class Item : MonoBehaviour {
 	private float cntLifeTimeSec = 0;
 	private float LifeTime = 0;
 
+	private Vector3 startSize;
+	private float fieldSize = 1.3f;
+
 	void Start ()
 	{
+		startSize = transform.localScale;
 		if (meshRenderer == null)
 		{
 			meshRenderer = ModelObj.GetComponent<MeshRenderer>();
@@ -61,16 +65,24 @@ public class Item : MonoBehaviour {
 
 	void Update ()
 	{
+		
 		//角度とZ座標を固定
-		transform.eulerAngles = new Vector3(0, 0, 0);
 		transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 		//持たれていない時モデルを回転
 		if (isHold || isScaleDown)
 		{
+			transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+			if (isScaleDown)
+			{
+				transform.eulerAngles = new Vector3(0, 0, 0);
+			}
 			meshRenderer.enabled = true;
 			ModelObj.transform.localEulerAngles = new Vector3(0, 0, 0);
+			transform.localScale = Vector3.Lerp(transform.localScale, startSize * 0.5f, MoveSpeed);
 		} else
 		{
+			transform.eulerAngles = new Vector3(0, 0, 0);
+			transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(startSize.x * fieldSize, startSize.y * fieldSize, startSize.z * fieldSize), MoveSpeed);
 			ModelObj.transform.localEulerAngles = new Vector3(0, ModelObj.transform.localEulerAngles.y + 2, 0);
 		}
 
