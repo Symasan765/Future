@@ -163,6 +163,10 @@ public class Item : MonoBehaviour {
 		//バズーカに入った時の縮小と削除処理
 		if (isScaleDown)
 		{
+			if(bazookaObj == null)
+			{
+				Delete();
+			}
 			isInBazooka = true;
 			cntScaleDownTime += Time.deltaTime;
 			if (cntScaleDownTime >= 1.0f)
@@ -229,6 +233,7 @@ public class Item : MonoBehaviour {
 
 	public void SetBazooka(GameObject _obj)
 	{
+		bazookaObj = _obj;
 		boxCollider.isTrigger = true;
 		bazookaRifle = _obj.gameObject.GetComponent<BazookaRifle>();
 		//isHold = true;

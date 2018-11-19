@@ -22,7 +22,7 @@ public class BazookaBullet : MonoBehaviour {
 	private Vector3 EndScale = new Vector3(0.5f, 0.5f, 0.5f);
 	private float speed = 0.8f;
 
-	private GameObject[] curvePoint = new GameObject[2];
+	private Vector3[] curvePoint = new Vector3[2];
 	private BazookaRifle bazookaRifle;
 
     //Updateでがターゲッティング関数をずっと呼び出す。
@@ -38,34 +38,19 @@ public class BazookaBullet : MonoBehaviour {
     void Targetting()
     {
 
+
 		float value = 1 - (Vector3.Distance(transform.position, TargetPos) / Vector3.Distance(startPosition, TargetPos));
 
 		transform.localScale = Vector3.Lerp(transform.localScale, EndScale, value);
-		//transform.position = Vector3.Lerp(transform.position, TargetPos, cntShotSec);
-		transform.position = GetPoint(startPosition, curvePoint[0].transform.position, curvePoint[1].transform.position, TargetPos, cntShotSec);
-		cntShotSec += Time.deltaTime * speed;
 
+		transform.position = GetPoint(startPosition, curvePoint[0], curvePoint[1], TargetPos, cntShotSec);
+		cntShotSec += Time.deltaTime * speed;
 		if (value >= 1)
 		{
 			bazookaRifle.HitBullet(isFever, transform.position);
 			Destroy(gameObject);
 		}
 
-		/*
-        //自分から敵へのベクトルを求める。
-        TargetVector = TargetPos - transform.position;
-        Vector3.Normalize(TargetVector);
-        //TargetVector = TargetVector * 1 / 100;
-
-        //敵に近づく。
-        if (Vector3.Distance(TargetPos, this.transform.position) > 0.5f)
-        {
-			this.transform.position += TargetVector * Time.deltaTime * 2;
-        }
-        if (Vector3.Distance(TargetPos, this.transform.position) <= 0.1f)
-        {
-            Destroy(this.gameObject);
-        }*/
 
     }
 
@@ -77,8 +62,8 @@ public class BazookaBullet : MonoBehaviour {
     //敵の座標をセット
 	public void SetCurvePointObj(GameObject _obj1, GameObject _obj2)
 	{
-		curvePoint[0] = _obj1;
-		curvePoint[1] = _obj2;
+		curvePoint[0] = _obj1.transform.position;
+		curvePoint[1] = _obj2.transform.position;
 	}
     public void SetBazooka(Vector3 in_TargetPos)
     {
