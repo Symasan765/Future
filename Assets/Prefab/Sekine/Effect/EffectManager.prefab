@@ -68,3 +68,4 @@ MonoBehaviour:
   EffectDown: {fileID: 1107877012052426, guid: f07dc32b6d6330b4ab84b0836dc43ac1, type: 2}
   EffectRespawnHeart: {fileID: 1273942130558040, guid: ab678d816ad1cbd47a1a7b5ab175888d,
     type: 2}
+  EffectPlayerDamage: {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 2}
