@@ -6,6 +6,9 @@ public class AttackID : MonoBehaviour {
 
 	public int m_AttackID = 0;
 	public float m_TimeSec = 5.0f;
+	public float m_NextAttackDelaySec = 5.0f;
+	public bool m_EmotionFlag = true;
+	public int m_NextAttackID = -1;
 
 	GameObject m_BossLaunchPos;		// ビーム時のビーム発射位置
 

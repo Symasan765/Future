@@ -45,6 +45,8 @@ public class BossAttackManager : MonoBehaviour
 
 	int m_StageChangeNum = 0;
 
+	float m_NextDelaySec = 0.0f;
+
 	public enum BossCondition
 	{
 		Margin,     // ボス余裕
@@ -137,8 +139,8 @@ public class BossAttackManager : MonoBehaviour
 					//攻撃モーションを起動させて残り秒数待つ
 					m_Light.LightChage(true);
 					ChangeAnimFlag();
-					// 待ち時間に乱数を持たせる
-					yield return new WaitForSeconds(m_SecondsBeforeAttack + UnityEngine.Random.Range(0.1f,2.0f));
+
+					yield return new WaitForSeconds(m_NextDelaySec);
 					m_Light.LightChage(false);
 				}
 				else
@@ -182,6 +184,7 @@ public class BossAttackManager : MonoBehaviour
 			var obj = m_AttackList[ID][i];
 			ret = obj.m_TimeSec;
 			m_NextAttackType = obj.m_AttackType;
+			m_NextDelaySec = obj.m_NextAttackDelaySec;
 			if (m_NextAttackType == global::AttackID.AttackType.Special) specialAttackFlag = true;
 			var boss = Instantiate(m_RangePrefab).GetComponent<BossAttackRange>();
 			boss.AttackCommand(this, obj.transform.position, obj.transform.localScale, obj.m_TimeSec,obj);
