@@ -90,6 +90,9 @@ public class Player : MonoBehaviour
 	private float rotationValue = 0;
 	private float dashBrakeSpeed = 1.0f;
 
+	private Vector3 damageImpactPower;
+	private float cntDamageImpactSec = 0;
+
 	void Start ()
 	{
 		for (int i = 0; i < 2; i++)
@@ -158,6 +161,7 @@ public class Player : MonoBehaviour
 				Damage();
 			}
 		}
+		//DamageImpact();
 		EvidenceHoldCollision();
 		Down();
 		Respawn();
@@ -193,9 +197,8 @@ public class Player : MonoBehaviour
 			if (!isDamage && cntGetItemBlankSec == 0 && CanIMove())
 			{
 				Move();
-				Fall();
 			}
-
+			Fall();
 			Jump();
 		}
 		rb.position = new Vector3(rb.position.x, rb.position.y, 0);
@@ -208,14 +211,13 @@ public class Player : MonoBehaviour
 		{
 			rb.velocity = new Vector3(rb.velocity.x, FallSpeedMax * -1, rb.velocity.z);
 		}
-		if (!isDamage)
-		{
+
 			if (!isJump && !IsOnGround() && XPad.Get.GetLeftStick(PlayerIndex).y < -0.8f)
 			{
 				rb.velocity = new Vector3(rb.velocity.x, (FallSpeedMax * 2) * -1, rb.velocity.z);
 			}
 			rb.AddForce(Vector3.down * (Gravity * FallSpeed));
-		}
+		
 	}
 
 	//キャラの向きを変える
@@ -373,6 +375,8 @@ public class Player : MonoBehaviour
 			XPad.Get.SetVibration(PlayerIndex, 1.0f, 1.0f, 0.5f);
 			cntDamageSec = DamageSec;
 			cntCantMoveSec = DamageSec;
+			damageImpactPower = new Vector3(5, 7, 0);
+			cntDamageImpactSec =1;
 			isDamage = true;
 			mentalGauge += Random.Range(8, 15);
 			if (mentalGauge > MentalGaugeMax)
@@ -421,6 +425,29 @@ public class Player : MonoBehaviour
 			if (cntDamageSec <= 0)
 			{
 				isDamage = false;
+			}
+		}
+	}
+
+	private void DamageImpact()
+	{
+		if (damageImpactPower.x > 0)
+		{
+			this.transform.Translate((Vector3.forward * -1) * damageImpactPower.x * Time.deltaTime);
+			damageImpactPower.x -= Time.deltaTime * 15;
+			if (damageImpactPower.x <= 0)
+			{
+				damageImpactPower.x = 0;
+			}
+		}
+		if (damageImpactPower.y > 0)
+		{
+			rb.velocity = Vector3.zero;
+			this.transform.Translate(Vector3.up * damageImpactPower.y * Time.deltaTime);
+			damageImpactPower.y -= Time.deltaTime * 15;
+			if (damageImpactPower.y <= 0)
+			{
+				damageImpactPower.y = 0;
 			}
 		}
 	}
