@@ -17,8 +17,7 @@ public class MessageEvidenceNum : MonoBehaviour {
 
 	void Start ()
 	{
-		startPosition[0] = NormalTextObj.transform.localPosition;
-		startPosition[1] = FeverTextObj.transform.localPosition;
+		startPosition[0] = startPosition[1] = new Vector3(0, 0, 0);
 		feverManager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
 	}
 	
