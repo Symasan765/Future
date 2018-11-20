@@ -47,6 +47,8 @@ public class BossAttackManager : MonoBehaviour
 
 	float m_NextDelaySec = 0.0f;
 
+	int m_ContinuousAttackID = -1;	// こいつが-1以外のときはその攻撃を連続発生させる
+
 	public enum BossCondition
 	{
 		Margin,     // ボス余裕
@@ -118,10 +120,15 @@ public class BossAttackManager : MonoBehaviour
 				if (nowChangeNum != m_StageChangeNum)
 					yield break;
 
-				// 攻撃対象のプレイヤーを確定させる
-				int targetNo = GetImportantPlayerNo();
-				// そのプレイヤーがステージのどこのエリアにいるかを特定する
-				int AreaNo = AreaIdentification(targetNo);
+				int AreaNo = m_ContinuousAttackID;
+
+				// 連続攻撃しない場合はプレイヤーの位置から探知させる
+				if (m_ContinuousAttackID == -1)
+				{
+					// 狙うプレイヤーを確定し、攻撃エリアを特定させる
+					AreaNo = TargetAreaNo();
+				}
+
 				// プレイヤーが特定のエリアにいればそのエリアに攻撃を発生させる
 				if (AreaNo != -1)
 				{
@@ -143,6 +150,7 @@ public class BossAttackManager : MonoBehaviour
 					yield return new WaitForSeconds(m_NextDelaySec);
 					m_Light.LightChage(false);
 				}
+				// プレイヤーがいるエリアを特定出来なかった場合…
 				else
 				{
 					// コルーチン対象が変わっていたら破棄
@@ -151,6 +159,7 @@ public class BossAttackManager : MonoBehaviour
 					yield return new WaitForSeconds(0.5f);
 				}
 			}
+			// 攻撃可能フラグが立っていない
 			else
 			{
 				// コルーチン対象が変わっていたら破棄
@@ -161,6 +170,16 @@ public class BossAttackManager : MonoBehaviour
 				yield return null;
 		}
 		yield return null;
+	}
+
+	int TargetAreaNo()
+	{
+		// 攻撃対象のプレイヤーを確定させる
+		int targetNo = GetImportantPlayerNo();
+		// そのプレイヤーがステージのどこのエリアにいるかを特定する
+		int AreaNo = AreaIdentification(targetNo);
+
+		return AreaNo;
 	}
 
 	/// <summary>
@@ -183,6 +202,7 @@ public class BossAttackManager : MonoBehaviour
 		{
 			var obj = m_AttackList[ID][i];
 			ret = obj.m_TimeSec;
+			m_ContinuousAttackID = obj.m_NextAttackID;
 			m_NextAttackType = obj.m_AttackType;
 			m_NextDelaySec = obj.m_NextAttackDelaySec;
 			if (m_NextAttackType == global::AttackID.AttackType.Special) specialAttackFlag = true;
