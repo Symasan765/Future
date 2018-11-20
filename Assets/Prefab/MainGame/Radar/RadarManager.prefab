@@ -53,6 +53,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LadarPrefab: {fileID: 1622059966829596, guid: 67977d8d1406d044cb14f562417ba9ba,
     type: 2}
+  m_FramePrefab:
+  - {fileID: 1148745382618428, guid: c6a19428bc824e24ea26d77bb6d0545e, type: 2}
+  - {fileID: 1463214803497712, guid: 7ba83ae584d1cd0468463f68c894c1ce, type: 2}
+  - {fileID: 1730483557853226, guid: dd8e8b754d517c34e8493e90cb6cfbf3, type: 2}
+  - {fileID: 1742251134234912, guid: 475cd8c70b3c98f4d86548cc53e2cfb7, type: 2}
   m_MaxRadius: 9
   m_MinRadius: 5
   m_Offset: {x: 0, y: 0.4, z: 0}
+  m_FrameSize: 0.3
