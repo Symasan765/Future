@@ -367,6 +367,7 @@ public class BossAttackManager : MonoBehaviour
 	public void BossDamage(float damage)
 	{
 		m_BossDamage -= damage;
+		if (m_BossDamage < 0.0f) m_BossDamage = 0.0f;
 		// TODO 今度、ボスの攻撃を徐々に減らす、ボスにダメージエフェクトを出すなどする場合はここをいじる
 	}
 
