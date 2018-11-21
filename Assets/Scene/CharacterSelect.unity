@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45111686, g: 0.49970192, b: 0.5674758, a: 1}
+  m_IndirectSpecularColor: {r: 0.45111656, g: 0.49970192, b: 0.5674754, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2152,7 +2152,7 @@ Prefab:
     - target: {fileID: 9500000, guid: f6e89b03dbb3eff4fb8bd6170f0d4d56, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: a0bbac5e780c6f345a4ab7913ce3413c, type: 2}
+      objectReference: {fileID: 9100000, guid: 8b51df8d3f05c7c45afc5e6190af1670, type: 2}
     - target: {fileID: 400068, guid: f6e89b03dbb3eff4fb8bd6170f0d4d56, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
@@ -3681,8 +3681,8 @@ MonoBehaviour:
   rtPos: {x: 320, y: 90, z: 0}
   rbPos: {x: 320, y: -180, z: 0}
   TexSize: 400
-  TexScale: 0.75
-  UOffset: 0.18
+  TexScale: 1
+  UOffset: 0
   VOffset: 0
 --- !u!222 &1431039104
 CanvasRenderer:
@@ -3914,7 +3914,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 69
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -3959,9 +3959,10 @@ MonoBehaviour:
   renderCamera: {fileID: 1475957733}
   arrow: {fileID: 133215968}
   beforeCamPos: {x: 0, y: 0, z: -1}
-  afterCamPos: {x: 0, y: 0, z: 0}
-  afterAngle: {x: 15, y: 15, z: 15}
-  offset: {x: -0.15, y: 0.35, z: -0.6}
+  afterCamPos: {x: -30.13, y: 0, z: -0.6}
+  afterAngle: {x: -13.25, y: 18.83, z: 11}
+  offset: {x: -0.14, y: -0.1, z: -0.67}
+  AnimationSpeed: 0.3
 --- !u!1 &1484357217
 GameObject:
   m_ObjectHideFlags: 0
@@ -4110,7 +4111,7 @@ Prefab:
     - target: {fileID: 9500000, guid: 2cf89ca830c36df41b4da232dee182f9, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: a0bbac5e780c6f345a4ab7913ce3413c, type: 2}
+      objectReference: {fileID: 9100000, guid: 8b51df8d3f05c7c45afc5e6190af1670, type: 2}
     - target: {fileID: 400066, guid: 2cf89ca830c36df41b4da232dee182f9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
@@ -4795,6 +4796,7 @@ MonoBehaviour:
   afterCamPos: {x: 0, y: 0, z: -1}
   afterAngle: {x: -30, y: -30, z: 0}
   offset: {x: 0.35, y: -0.2, z: -0.6}
+  AnimationSpeed: 0.5
 --- !u!1 &1921561307
 GameObject:
   m_ObjectHideFlags: 0
@@ -4968,6 +4970,7 @@ MonoBehaviour:
   afterCamPos: {x: 0, y: 0, z: -1}
   afterAngle: {x: -15, y: 25, z: 0}
   offset: {x: -0.3, y: 0.1, z: -0.6}
+  AnimationSpeed: 0.5
 --- !u!1 &1984605572
 GameObject:
   m_ObjectHideFlags: 0
@@ -5075,6 +5078,7 @@ MonoBehaviour:
   afterCamPos: {x: 0, y: 0, z: -1}
   afterAngle: {x: 45, y: -45, z: 0}
   offset: {x: 0.3, y: 0.75, z: -0.5}
+  AnimationSpeed: 0.5
 --- !u!1 &2017282520
 GameObject:
   m_ObjectHideFlags: 0

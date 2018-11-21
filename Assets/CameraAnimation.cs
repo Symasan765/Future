@@ -25,6 +25,9 @@ public class CameraAnimation : MonoBehaviour {
     bool isAnimating;
     bool isReverse;
 
+	[SerializeField]
+	private float AnimationSpeed = 0.5f;
+
     void Start() {
         nextPos = beforeCamPos;
         nextRot = Quaternion.identity;
@@ -52,8 +55,8 @@ public class CameraAnimation : MonoBehaviour {
 
     void UpdateCamPos() {
         if (isAnimating) {
-            renderCamera.transform.position = Vector3.Lerp(renderCamera.transform.position, nextPos, 0.5f);
-            renderCamera.transform.rotation = Quaternion.Lerp(renderCamera.transform.rotation, nextRot, 0.5f);
+			renderCamera.transform.position = Vector3.Lerp(renderCamera.transform.position, nextPos, AnimationSpeed);
+			renderCamera.transform.rotation = Quaternion.Lerp(renderCamera.transform.rotation, nextRot, AnimationSpeed);
             if (renderCamera.transform.position == nextPos && renderCamera.transform.rotation == nextRot) {
                 isAnimating = false;
             }
