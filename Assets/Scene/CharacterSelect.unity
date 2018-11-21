@@ -1334,9 +1334,9 @@ MonoBehaviour:
   rtPos: {x: 310, y: -110, z: 0}
   rbPos: {x: 310, y: -320, z: 0}
   TexSize: 400
-  TexScale: 0.7
-  UOffset: 0.2
-  VOffset: 0.1
+  TexScale: 1.31
+  UOffset: -0.12
+  VOffset: -0.33
 --- !u!222 &481759929
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4792,11 +4792,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderCamera: {fileID: 1916617917}
   arrow: {fileID: 861523571}
-  beforeCamPos: {x: 0, y: 0, z: -1}
+  beforeCamPos: {x: 0, y: 0, z: -1.8}
   afterCamPos: {x: 0, y: 0, z: -1}
   afterAngle: {x: -30, y: -30, z: 0}
-  offset: {x: 0.35, y: -0.2, z: -0.6}
-  AnimationSpeed: 0.5
+  offset: {x: 0.5, y: -0.6, z: -0.78}
+  AnimationSpeed: 0.3
 --- !u!1 &1921561307
 GameObject:
   m_ObjectHideFlags: 0
