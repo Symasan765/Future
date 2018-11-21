@@ -901,7 +901,7 @@ Prefab:
     - target: {fileID: 9500000, guid: ecfdfed0b8a97aa478451246dd1aa038, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 66ccad6d47773454c80c5adac605e148, type: 2}
+      objectReference: {fileID: 9100000, guid: 98661c74cb3e75e4f8ebdf5cb70779eb, type: 2}
     - target: {fileID: 400000, guid: ecfdfed0b8a97aa478451246dd1aa038, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
@@ -2152,7 +2152,7 @@ Prefab:
     - target: {fileID: 9500000, guid: f6e89b03dbb3eff4fb8bd6170f0d4d56, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 8b51df8d3f05c7c45afc5e6190af1670, type: 2}
+      objectReference: {fileID: 9100000, guid: f3eee1790da251647be61cdbf572bcfb, type: 2}
     - target: {fileID: 400068, guid: f6e89b03dbb3eff4fb8bd6170f0d4d56, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
@@ -4794,8 +4794,8 @@ MonoBehaviour:
   arrow: {fileID: 861523571}
   beforeCamPos: {x: 0, y: 0, z: -1.8}
   afterCamPos: {x: 0, y: 0, z: -1}
-  afterAngle: {x: -30, y: -30, z: 0}
-  offset: {x: 0.5, y: -0.6, z: -0.78}
+  afterAngle: {x: -10.76, y: -26.15, z: -10.86}
+  offset: {x: 0.5, y: -0.2, z: -0.98}
   AnimationSpeed: 0.3
 --- !u!1 &1921561307
 GameObject:
