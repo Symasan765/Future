@@ -1,0 +1,495 @@
+fileFormatVersion: 2
+guid: d4597edf3a52df8458672e905ae15ec7
+timeCreated: 1542766840
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Boss:pCube10
+    100002: Boss:pCube13
+    100004: Boss:pCube18
+    100006: Boss:pCube22
+    100008: Boss:pCube23
+    100010: Boss:pCube23 1
+    100012: Boss:pCube24
+    100014: Boss:pCylinder29
+    100016: Boss:pCylinder52
+    100018: Boss:pCylinder52 1
+    100020: Boss:pCylinder53
+    100022: Boss:pCylinder54
+    100024: Boss:pCylinder57
+    100026: Boss:pCylinder61
+    100028: Boss:pCylinder61 1
+    100030: Boss:pCylinder62
+    100032: Boss:pCylinder74
+    100034: Boss:pCylinder75
+    100036: Boss:pCylinder76
+    100038: Boss:pCylinder77
+    100040: Boss:pCylinder78
+    100042: Boss:pCylinder80
+    100044: Boss:pCylinder81
+    100046: Boss:pCylinder82
+    100048: Boss:pCylinder85
+    100050: Boss:pCylinder86
+    100052: Boss:polySurface11
+    100054: Boss:polySurface11 1
+    100056: Boss:polySurface19
+    100058: Boss:polySurface2
+    100060: Boss:polySurface26
+    100062: Boss:pPipe4
+    100064: Boss:pPipe5
+    100066: Boss:pPipe7
+    100068: Boss:pPipe8
+    100070: Boss:pSphere27
+    100072: Boss:pSphere31
+    100074: Boss:pSphere33
+    100076: Boss:transform40
+    100078: Boss:transform41
+    100080: Boss:transform42
+    100082: Boss:transform43
+    100084: Boss:transform44
+    100086: Boss:transform45
+    100088: Boss:transform46
+    100090: Boss:transform47
+    100092: Boss:transform49
+    100094: //RootNode
+    100096: Character2_Head
+    100098: Character2_Hips
+    100100: Character2_LeftArm
+    100102: Character2_LeftFoot
+    100104: Character2_LeftFootMiddle1
+    100106: Character2_LeftFootMiddle2
+    100108: Character2_LeftForeArm
+    100110: Character2_LeftHand
+    100112: Character2_LeftHandIndex1
+    100114: Character2_LeftHandIndex2
+    100116: Character2_LeftHandIndex3
+    100118: Character2_LeftHandMiddle1
+    100120: Character2_LeftHandMiddle2
+    100122: Character2_LeftHandMiddle3
+    100124: Character2_LeftHandRing1
+    100126: Character2_LeftHandRing2
+    100128: Character2_LeftHandRing3
+    100130: Character2_LeftLeg
+    100132: Character2_LeftToeBase
+    100134: Character2_LeftUpLeg
+    100136: Character2_Neck
+    100138: Character2_Reference
+    100140: Character2_RightArm
+    100142: Character2_RightFoot
+    100144: Character2_RightFootMiddle1
+    100146: Character2_RightFootMiddle2
+    100148: Character2_RightForeArm
+    100150: Character2_RightHand
+    100152: Character2_RightHandIndex1
+    100154: Character2_RightHandIndex2
+    100156: Character2_RightHandIndex3
+    100158: Character2_RightHandMiddle1
+    100160: Character2_RightHandMiddle2
+    100162: Character2_RightHandMiddle3
+    100164: Character2_RightHandRing1
+    100166: Character2_RightHandRing2
+    100168: Character2_RightHandRing3
+    100170: Character2_RightLeg
+    100172: Character2_RightToeBase
+    100174: Character2_RightUpLeg
+    100176: Character2_Spine
+    100178: Character2_Spine1
+    100180: Character2_Spine2
+    100182: group3
+    100184: ikHandle7
+    100186: ikHandle8
+    100188: joint1
+    100190: joint2
+    100192: joint2 1
+    100194: joint3
+    100196: joint4
+    100198: joint5
+    100200: pCube18
+    100202: pCube22
+    100204: pCube23
+    100206: pCube24
+    100208: pCube44
+    100210: pCylinder121
+    100212: pCylinder52
+    100214: pCylinder53
+    100216: pCylinder61
+    100218: pCylinder62
+    100220: pCylinder74
+    100222: pCylinder77
+    100224: pCylinder80
+    100226: pCylinder86
+    100228: polySurface10
+    100230: polySurface10 1
+    100232: polySurface11
+    100234: polySurface11 1
+    100236: polySurface12
+    100238: polySurface13
+    100240: polySurface13 1
+    100242: polySurface14
+    100244: polySurface15
+    100246: polySurface16
+    100248: polySurface16 1
+    100250: polySurface17
+    100252: polySurface17 1
+    100254: polySurface18
+    100256: polySurface19
+    100258: polySurface19 1
+    100260: polySurface19 2
+    100262: polySurface20
+    100264: polySurface9
+    100266: pSphere33
+    100268: transform40
+    100270: transform41
+    100272: transform42
+    100274: transform43
+    100276: transform44
+    100278: transform45
+    100280: transform46
+    100282: transform47
+    100284: transform68
+    100286: transform68 1
+    100288: transform69
+    100290: transform69 1
+    100292: transform70
+    100294: transform70 1
+    100296: transform71
+    100298: transform71 1
+    100300: transform72
+    100302: transform72 1
+    100304: transform73
+    100306: transform73 1
+    100308: transform74
+    100310: transform74 1
+    100312: transform75
+    100314: transform75 1
+    100316: transform76
+    100318: transform76 1
+    100320: transform77
+    100322: transform77 1
+    400000: Boss:pCube10
+    400002: Boss:pCube13
+    400004: Boss:pCube18
+    400006: Boss:pCube22
+    400008: Boss:pCube23
+    400010: Boss:pCube23 1
+    400012: Boss:pCube24
+    400014: Boss:pCylinder29
+    400016: Boss:pCylinder52
+    400018: Boss:pCylinder52 1
+    400020: Boss:pCylinder53
+    400022: Boss:pCylinder54
+    400024: Boss:pCylinder57
+    400026: Boss:pCylinder61
+    400028: Boss:pCylinder61 1
+    400030: Boss:pCylinder62
+    400032: Boss:pCylinder74
+    400034: Boss:pCylinder75
+    400036: Boss:pCylinder76
+    400038: Boss:pCylinder77
+    400040: Boss:pCylinder78
+    400042: Boss:pCylinder80
+    400044: Boss:pCylinder81
+    400046: Boss:pCylinder82
+    400048: Boss:pCylinder85
+    400050: Boss:pCylinder86
+    400052: Boss:polySurface11
+    400054: Boss:polySurface11 1
+    400056: Boss:polySurface19
+    400058: Boss:polySurface2
+    400060: Boss:polySurface26
+    400062: Boss:pPipe4
+    400064: Boss:pPipe5
+    400066: Boss:pPipe7
+    400068: Boss:pPipe8
+    400070: Boss:pSphere27
+    400072: Boss:pSphere31
+    400074: Boss:pSphere33
+    400076: Boss:transform40
+    400078: Boss:transform41
+    400080: Boss:transform42
+    400082: Boss:transform43
+    400084: Boss:transform44
+    400086: Boss:transform45
+    400088: Boss:transform46
+    400090: Boss:transform47
+    400092: Boss:transform49
+    400094: //RootNode
+    400096: Character2_Head
+    400098: Character2_Hips
+    400100: Character2_LeftArm
+    400102: Character2_LeftFoot
+    400104: Character2_LeftFootMiddle1
+    400106: Character2_LeftFootMiddle2
+    400108: Character2_LeftForeArm
+    400110: Character2_LeftHand
+    400112: Character2_LeftHandIndex1
+    400114: Character2_LeftHandIndex2
+    400116: Character2_LeftHandIndex3
+    400118: Character2_LeftHandMiddle1
+    400120: Character2_LeftHandMiddle2
+    400122: Character2_LeftHandMiddle3
+    400124: Character2_LeftHandRing1
+    400126: Character2_LeftHandRing2
+    400128: Character2_LeftHandRing3
+    400130: Character2_LeftLeg
+    400132: Character2_LeftToeBase
+    400134: Character2_LeftUpLeg
+    400136: Character2_Neck
+    400138: Character2_Reference
+    400140: Character2_RightArm
+    400142: Character2_RightFoot
+    400144: Character2_RightFootMiddle1
+    400146: Character2_RightFootMiddle2
+    400148: Character2_RightForeArm
+    400150: Character2_RightHand
+    400152: Character2_RightHandIndex1
+    400154: Character2_RightHandIndex2
+    400156: Character2_RightHandIndex3
+    400158: Character2_RightHandMiddle1
+    400160: Character2_RightHandMiddle2
+    400162: Character2_RightHandMiddle3
+    400164: Character2_RightHandRing1
+    400166: Character2_RightHandRing2
+    400168: Character2_RightHandRing3
+    400170: Character2_RightLeg
+    400172: Character2_RightToeBase
+    400174: Character2_RightUpLeg
+    400176: Character2_Spine
+    400178: Character2_Spine1
+    400180: Character2_Spine2
+    400182: group3
+    400184: ikHandle7
+    400186: ikHandle8
+    400188: joint1
+    400190: joint2
+    400192: joint2 1
+    400194: joint3
+    400196: joint4
+    400198: joint5
+    400200: pCube18
+    400202: pCube22
+    400204: pCube23
+    400206: pCube24
+    400208: pCube44
+    400210: pCylinder121
+    400212: pCylinder52
+    400214: pCylinder53
+    400216: pCylinder61
+    400218: pCylinder62
+    400220: pCylinder74
+    400222: pCylinder77
+    400224: pCylinder80
+    400226: pCylinder86
+    400228: polySurface10
+    400230: polySurface10 1
+    400232: polySurface11
+    400234: polySurface11 1
+    400236: polySurface12
+    400238: polySurface13
+    400240: polySurface13 1
+    400242: polySurface14
+    400244: polySurface15
+    400246: polySurface16
+    400248: polySurface16 1
+    400250: polySurface17
+    400252: polySurface17 1
+    400254: polySurface18
+    400256: polySurface19
+    400258: polySurface19 1
+    400260: polySurface19 2
+    400262: polySurface20
+    400264: polySurface9
+    400266: pSphere33
+    400268: transform40
+    400270: transform41
+    400272: transform42
+    400274: transform43
+    400276: transform44
+    400278: transform45
+    400280: transform46
+    400282: transform47
+    400284: transform68
+    400286: transform68 1
+    400288: transform69
+    400290: transform69 1
+    400292: transform70
+    400294: transform70 1
+    400296: transform71
+    400298: transform71 1
+    400300: transform72
+    400302: transform72 1
+    400304: transform73
+    400306: transform73 1
+    400308: transform74
+    400310: transform74 1
+    400312: transform75
+    400314: transform75 1
+    400316: transform76
+    400318: transform76 1
+    400320: transform77
+    400322: transform77 1
+    2100000: Boss_lambert4
+    2100002: Boss_lambert2
+    2100004: Boss_lambert3
+    2100006: kuti
+    2100008: mayu
+    2100010: ha
+    2100012: Boss_blinn1
+    2100014: Boss_lambert5
+    2100016: huku_onnna2_2
+    2100018: skin
+    2100020: l
+    2100022: syatyou_huku
+    2100024: eye2
+    2100026: syatyou_hair
+    4300000: Boss:pCylinder29
+    4300002: Boss:pCube10
+    4300004: Boss:pCube13
+    4300006: Boss:pPipe4
+    4300008: Boss:pCylinder54
+    4300010: Boss:pPipe5
+    4300012: Boss:pCylinder57
+    4300014: Boss:pSphere27
+    4300016: polySurface20
+    4300018: Boss:pCylinder75
+    4300020: polySurface15
+    4300022: Boss:pCylinder76
+    4300024: polySurface18
+    4300026: Boss:pCylinder78
+    4300028: polySurface12
+    4300030: Boss:pCylinder81
+    4300032: polySurface9
+    4300034: Boss:pCylinder82
+    4300036: Boss:pCylinder85
+    4300038: polySurface14
+    4300040: Boss:pSphere31
+    4300042: Boss:polySurface2
+    4300044: Boss:pSphere33
+    4300046: Boss:polySurface26
+    4300048: Boss:polySurface19
+    4300050: Boss:pPipe7
+    4300052: Boss:pPipe8
+    4300054: Boss:pCylinder52
+    4300056: Boss:pCylinder61
+    4300058: Boss:pCube23
+    4300060: polySurface19
+    4300062: pCylinder121
+    4300064: pCube44
+    4300066: Boss:polySurface11
+    7400000: roar3
+    9500000: //RootNode
+    13700000: Boss:pCube10
+    13700002: Boss:pCube13
+    13700004: Boss:pCube23
+    13700006: Boss:pCylinder29
+    13700008: Boss:pCylinder52
+    13700010: Boss:pCylinder54
+    13700012: Boss:pCylinder57
+    13700014: Boss:pCylinder61
+    13700016: Boss:pCylinder75
+    13700018: Boss:pCylinder76
+    13700020: Boss:pCylinder78
+    13700022: Boss:pCylinder81
+    13700024: Boss:pCylinder82
+    13700026: Boss:pCylinder85
+    13700028: Boss:polySurface11
+    13700030: Boss:polySurface19
+    13700032: Boss:polySurface2
+    13700034: Boss:polySurface26
+    13700036: Boss:pPipe4
+    13700038: Boss:pPipe5
+    13700040: Boss:pPipe7
+    13700042: Boss:pPipe8
+    13700044: Boss:pSphere27
+    13700046: Boss:pSphere31
+    13700048: Boss:pSphere33
+    13700050: pCube44
+    13700052: pCylinder121
+    13700054: polySurface12
+    13700056: polySurface14
+    13700058: polySurface15
+    13700060: polySurface18
+    13700062: polySurface19
+    13700064: polySurface20
+    13700066: polySurface9
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
