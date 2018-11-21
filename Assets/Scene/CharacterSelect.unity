@@ -901,7 +901,7 @@ Prefab:
     - target: {fileID: 9500000, guid: ecfdfed0b8a97aa478451246dd1aa038, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: a0bbac5e780c6f345a4ab7913ce3413c, type: 2}
+      objectReference: {fileID: 9100000, guid: 66ccad6d47773454c80c5adac605e148, type: 2}
     - target: {fileID: 400000, guid: ecfdfed0b8a97aa478451246dd1aa038, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
@@ -3233,7 +3233,7 @@ Prefab:
     - target: {fileID: 9500000, guid: 2d51814ec77a62c4db1050d15bcfa357, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: a0bbac5e780c6f345a4ab7913ce3413c, type: 2}
+      objectReference: {fileID: 9100000, guid: 66ccad6d47773454c80c5adac605e148, type: 2}
     - target: {fileID: 400000, guid: 2d51814ec77a62c4db1050d15bcfa357, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
@@ -3961,7 +3961,7 @@ MonoBehaviour:
   beforeCamPos: {x: 0, y: 0, z: -1}
   afterCamPos: {x: -30.13, y: 0, z: -0.6}
   afterAngle: {x: -13.25, y: 18.83, z: 11}
-  offset: {x: -0.14, y: -0.1, z: -0.67}
+  offset: {x: -0.14, y: -0.1, z: -0.62}
   AnimationSpeed: 0.3
 --- !u!1 &1484357217
 GameObject:
@@ -4966,11 +4966,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderCamera: {fileID: 1952179571}
   arrow: {fileID: 549227808}
-  beforeCamPos: {x: 0, y: 0, z: -1}
+  beforeCamPos: {x: 0, y: 0, z: -1.5}
   afterCamPos: {x: 0, y: 0, z: -1}
-  afterAngle: {x: -15, y: 25, z: 0}
-  offset: {x: -0.3, y: 0.1, z: -0.6}
-  AnimationSpeed: 0.5
+  afterAngle: {x: -10.6, y: -31.7, z: 11.82}
+  offset: {x: 0.4, y: -0.1, z: -0.67}
+  AnimationSpeed: 0.3
 --- !u!1 &1984605572
 GameObject:
   m_ObjectHideFlags: 0
@@ -5421,9 +5421,9 @@ MonoBehaviour:
   rtPos: {x: 320, y: 170, z: 0}
   rbPos: {x: 320, y: -220, z: 0}
   TexSize: 400
-  TexScale: 0.75
-  UOffset: 0.15
-  VOffset: 0.25
+  TexScale: 1.04
+  UOffset: -0.03
+  VOffset: -0.12
 --- !u!222 &2125090263
 CanvasRenderer:
   m_ObjectHideFlags: 0
