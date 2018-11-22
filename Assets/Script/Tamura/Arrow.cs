@@ -34,6 +34,8 @@ public class Arrow : MonoBehaviour {
         csManager = FindObjectOfType<CharacterSelectManager>();
 
         animAngle = 0.0f/* + playerIndex * 1.0f*/;
+
+        canInput = true;
     }
 
     /*void Update() {
@@ -49,15 +51,17 @@ public class Arrow : MonoBehaviour {
     }*/
 
     void FixedUpdate() {
-        if (!isCharacterSelected) {
-            MoveCursor();
-            AnimateCursor();
+        if (canInput) {
+            if (!isCharacterSelected) {
+                MoveCursor();
+                AnimateCursor();
 
-            SelectCharacter();
-        }
-        else {
-            UnselectCharacter();
-            StartGame();
+                SelectCharacter();
+            }
+            else {
+                UnselectCharacter();
+                StartGame();
+            }
         }
     }
 
