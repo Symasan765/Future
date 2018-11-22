@@ -8,17 +8,19 @@ public class BossAppearanceObj : MonoBehaviour
 
 	GameObject m_BossObj;
 	public PlayableDirector m_Timeline;
-	Vector3 m_InitPos;
 	float m_TimeCnt = 0.0f;
 	BossLight m_Light;
+	SkinnedMeshRenderer[] skin;
+
+	bool m_DrawFlag = false;
 
 	// Use this for initialization
 	void Start()
 	{
 		m_BossObj = GameObject.Find("Boss");
-		m_InitPos = m_BossObj.transform.position;
-		m_BossObj.transform.position = new Vector3(m_InitPos.x, m_InitPos.y, -100.0f);     // ボスを見つけたらカメラから見えない遥か上空へ
 		m_Light = GameObject.FindGameObjectWithTag("BossManager").GetComponent<BossLight>();
+
+		skin = m_BossObj.GetComponentsInChildren<SkinnedMeshRenderer>();
 	}
 
 	// Update is called once per frame
@@ -30,8 +32,15 @@ public class BossAppearanceObj : MonoBehaviour
 			m_Light.LightChage(true);
 
 			// 初期位置に戻す(若干時間を上げないと一瞬ボスが見えてしまいそう…)
-			if (m_TimeCnt > 0.5f)
-				m_BossObj.transform.position = m_InitPos;
+			if(m_TimeCnt > 1.5f && m_DrawFlag == false)
+			{
+				for (int i = 0; i < skin.Length; i++)
+				{
+					skin[i].enabled = true;
+				}
+				m_DrawFlag = true;
+			}
+			//m_BossObj.transform.position = m_InitPos;
 
 			// タイムラインが終了した
 			if (m_Timeline.duration < m_TimeCnt)
@@ -44,10 +53,22 @@ public class BossAppearanceObj : MonoBehaviour
 			}
 			m_TimeCnt += Time.deltaTime;
 		}
+		else
+		{
+			for (int i = 0; i < skin.Length; i++)
+			{
+				skin[i].enabled = false;
+			}
+		}
 	}
 
 	public void StartTimeline()
 	{
 		m_Timeline.gameObject.SetActive(true);
+		for (int i = 0; i < skin.Length; i++)
+		{
+			skin[i].enabled = true;
+		}
+		
 	}
 }

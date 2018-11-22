@@ -3635,7 +3635,7 @@ Transform:
   - {fileID: 4254340411047380}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4393554948489460
 Transform:
   m_ObjectHideFlags: 1
@@ -4935,7 +4935,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 118b0b2502e774649b7cc4a0bb0e5828, type: 3}
   m_Controller: {fileID: 9100000, guid: 0f7d3e158d86a0544956b4c5064e3aab, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
