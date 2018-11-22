@@ -12,7 +12,7 @@ public class BossAppearanceObj : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		m_BossObj = GameObject.FindGameObjectWithTag("BOSS");
+		m_BossObj = GameObject.Find("Boss");
 		m_InitPos = m_BossObj.transform.position;
 		m_BossObj.transform.position = Vector3.up * 100.0f;		// ボスを見つけたらカメラから見えない遥か上空へ
 	}
