@@ -17,7 +17,7 @@ public class BossAppearanceObj : MonoBehaviour
 	{
 		m_BossObj = GameObject.Find("Boss");
 		m_InitPos = m_BossObj.transform.position;
-		m_BossObj.transform.position = Vector3.up * 100.0f;     // ボスを見つけたらカメラから見えない遥か上空へ
+		m_BossObj.transform.position = new Vector3(m_InitPos.x, m_InitPos.y, -100.0f);     // ボスを見つけたらカメラから見えない遥か上空へ
 		m_Light = GameObject.FindGameObjectWithTag("BossManager").GetComponent<BossLight>();
 	}
 
@@ -30,7 +30,8 @@ public class BossAppearanceObj : MonoBehaviour
 			m_Light.LightChage(true);
 
 			// 初期位置に戻す(若干時間を上げないと一瞬ボスが見えてしまいそう…)
-			m_BossObj.transform.position = m_InitPos;
+			if (m_TimeCnt > 0.5f)
+				m_BossObj.transform.position = m_InitPos;
 
 			// タイムラインが終了した
 			if (m_Timeline.duration < m_TimeCnt)
