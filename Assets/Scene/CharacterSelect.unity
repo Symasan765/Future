@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45111656, g: 0.49970192, b: 0.5674754, a: 1}
+  m_IndirectSpecularColor: {r: 0.45111686, g: 0.49970192, b: 0.5674758, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -6305,7 +6305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderCamera: {fileID: 1916617917}
   arrow: {fileID: 861523571}
-  beforeCamPos: {x: 0, y: 0, z: -1.8}
+  beforeCamPos: {x: 0, y: 30, z: -1.8}
   afterCamPos: {x: 0, y: 0, z: -1}
   afterAngle: {x: -10.76, y: -26.15, z: -10.86}
   offset: {x: 0.5, y: 29.8, z: -0.98}
@@ -6710,7 +6710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderCamera: {fileID: 1984605576}
   arrow: {fileID: 1436009974}
-  beforeCamPos: {x: 0, y: 0, z: -1.3}
+  beforeCamPos: {x: 0, y: 20, z: -1.3}
   afterCamPos: {x: 0, y: 0, z: -1}
   afterAngle: {x: -15.54, y: -2.958, z: 34.78}
   offset: {x: 0.2, y: 19.84, z: -0.82}
