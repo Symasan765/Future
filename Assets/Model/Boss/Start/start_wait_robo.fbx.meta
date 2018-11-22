@@ -1,0 +1,358 @@
+fileFormatVersion: 2
+guid: 149b04407aff2d746ab39d9e9b1157d2
+timeCreated: 1542892041
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: group3
+    100002: pCube10
+    100004: pCube13
+    100006: pCube46
+    100008: pCube48
+    100010: pCube50
+    100012: pCube51
+    100014: pCylinder126
+    100016: pCylinder127
+    100018: pCylinder128
+    100020: pCylinder129
+    100022: pCylinder130
+    100024: pCylinder131
+    100026: pCylinder29
+    100028: pCylinder52
+    100030: pCylinder54
+    100032: pCylinder57
+    100034: pCylinder75
+    100036: pCylinder76
+    100038: pCylinder78
+    100040: pCylinder81
+    100042: pCylinder82
+    100044: pCylinder85
+    100046: polySurface11
+    100048: polySurface12
+    100050: polySurface14
+    100052: polySurface15
+    100054: polySurface18
+    100056: polySurface19
+    100058: polySurface2
+    100060: polySurface20
+    100062: polySurface26
+    100064: polySurface27
+    100066: polySurface9
+    100068: pPipe4
+    100070: pPipe5
+    100072: pPipe7
+    100074: pPipe8
+    100076: pSphere27
+    100078: pSphere31
+    100080: pSphere34
+    100082: //RootNode
+    400000: group3
+    400002: pCube10
+    400004: pCube13
+    400006: pCube46
+    400008: pCube48
+    400010: pCube50
+    400012: pCube51
+    400014: pCylinder126
+    400016: pCylinder127
+    400018: pCylinder128
+    400020: pCylinder129
+    400022: pCylinder130
+    400024: pCylinder131
+    400026: pCylinder29
+    400028: pCylinder52
+    400030: pCylinder54
+    400032: pCylinder57
+    400034: pCylinder75
+    400036: pCylinder76
+    400038: pCylinder78
+    400040: pCylinder81
+    400042: pCylinder82
+    400044: pCylinder85
+    400046: polySurface11
+    400048: polySurface12
+    400050: polySurface14
+    400052: polySurface15
+    400054: polySurface18
+    400056: polySurface19
+    400058: polySurface2
+    400060: polySurface20
+    400062: polySurface26
+    400064: polySurface27
+    400066: polySurface9
+    400068: pPipe4
+    400070: pPipe5
+    400072: pPipe7
+    400074: pPipe8
+    400076: pSphere27
+    400078: pSphere31
+    400080: pSphere34
+    400082: //RootNode
+    2100000: Boss_lambert4
+    2100002: Boss_lambert2
+    2100004: Boss_lambert3
+    2100006: kuti
+    2100008: mayu
+    2100010: ha
+    2100012: Boss_blinn1
+    2100014: Boss_lambert5
+    2100016: huku_onnna2_2
+    2100018: skin
+    2100020: l
+    2100022: syatyou_huku
+    2100024: eye2
+    2100026: syatyou_hair
+    2300000: pCube10
+    2300002: pCube13
+    2300004: pCube50
+    2300006: pCube51
+    2300008: pCylinder130
+    2300010: pCylinder131
+    2300012: pCylinder29
+    2300014: pCylinder52
+    2300016: pCylinder54
+    2300018: pCylinder57
+    2300020: pCylinder75
+    2300022: pCylinder76
+    2300024: pCylinder78
+    2300026: pCylinder81
+    2300028: pCylinder82
+    2300030: pCylinder85
+    2300032: polySurface11
+    2300034: polySurface12
+    2300036: polySurface14
+    2300038: polySurface15
+    2300040: polySurface18
+    2300042: polySurface19
+    2300044: polySurface2
+    2300046: polySurface20
+    2300048: polySurface26
+    2300050: polySurface27
+    2300052: polySurface9
+    2300054: pPipe4
+    2300056: pPipe5
+    2300058: pPipe7
+    2300060: pPipe8
+    2300062: pSphere27
+    2300064: pSphere31
+    2300066: pSphere34
+    3300000: pCube10
+    3300002: pCube13
+    3300004: pCube50
+    3300006: pCube51
+    3300008: pCylinder130
+    3300010: pCylinder131
+    3300012: pCylinder29
+    3300014: pCylinder52
+    3300016: pCylinder54
+    3300018: pCylinder57
+    3300020: pCylinder75
+    3300022: pCylinder76
+    3300024: pCylinder78
+    3300026: pCylinder81
+    3300028: pCylinder82
+    3300030: pCylinder85
+    3300032: polySurface11
+    3300034: polySurface12
+    3300036: polySurface14
+    3300038: polySurface15
+    3300040: polySurface18
+    3300042: polySurface19
+    3300044: polySurface2
+    3300046: polySurface20
+    3300048: polySurface26
+    3300050: polySurface27
+    3300052: polySurface9
+    3300054: pPipe4
+    3300056: pPipe5
+    3300058: pPipe7
+    3300060: pPipe8
+    3300062: pSphere27
+    3300064: pSphere31
+    3300066: pSphere34
+    4300000: pCube10
+    4300002: pCylinder29
+    4300004: pCube13
+    4300006: pPipe4
+    4300008: pCylinder54
+    4300010: pPipe5
+    4300012: pCylinder57
+    4300014: pSphere27
+    4300016: polySurface20
+    4300018: pCylinder75
+    4300020: polySurface15
+    4300022: pCylinder76
+    4300024: polySurface18
+    4300026: pCylinder78
+    4300028: polySurface12
+    4300030: pCylinder81
+    4300032: polySurface9
+    4300034: pCylinder82
+    4300036: pCylinder85
+    4300038: polySurface14
+    4300040: pSphere31
+    4300042: polySurface2
+    4300044: pSphere34
+    4300046: polySurface26
+    4300048: polySurface19
+    4300050: pPipe7
+    4300052: pPipe8
+    4300054: pCylinder52
+    4300056: pCylinder130
+    4300058: pCube50
+    4300060: polySurface27
+    4300062: pCylinder131
+    4300064: pCube51
+    4300066: polySurface11
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boss_blinn1
+    second: {fileID: 2100000, guid: b78405385eb147146bff4c5f4a85aa33, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boss_lambert2
+    second: {fileID: 2100000, guid: f1de9586bf6305740898658a9346640e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boss_lambert3
+    second: {fileID: 2100000, guid: 16822488c4256f3469f42d3a318ea6b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boss_lambert4
+    second: {fileID: 2100000, guid: 9faf6f98cb4e5794b9f08b0462ad3035, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boss_lambert5
+    second: {fileID: 2100000, guid: 813a2fb3ed73b484ba1e75631c51b2ad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eye2
+    second: {fileID: 2100000, guid: 15d41b41928a7cf46a85f0555518f810, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ha
+    second: {fileID: 2100000, guid: 2fd13e5fdc85f6042995d8ad134703cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: huku_onnna2_2
+    second: {fileID: 2100000, guid: 7d720d42a9ef80e47bf33b045e7892c9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kuti
+    second: {fileID: 2100000, guid: a90084d413f906a42b46e4a71b170d71, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: l
+    second: {fileID: 2100000, guid: 67d0c9182b7643a44b384c3fda610524, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mayu
+    second: {fileID: 2100000, guid: c68ffe615943edb4b8102114e43d55d5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: skin
+    second: {fileID: 2100000, guid: 8eca999eeb92863428deb19a4ed1f8fc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: syatyou_hair
+    second: {fileID: 2100000, guid: d98a2bfde366ce142808c1b6651ea5fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: syatyou_huku
+    second: {fileID: 2100000, guid: 5c2db8cbbe8af294183f815a304c96a6, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

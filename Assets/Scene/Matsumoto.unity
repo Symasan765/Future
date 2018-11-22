@@ -339,6 +339,14 @@ Prefab:
       propertyPath: m_SceneBindings.Array.data[9].value
       value: 
       objectReference: {fileID: 334275167}
+    - target: {fileID: 1954900156029228, guid: 3e9a440dddd8ec440a456d8bdc6b94cc, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378369484526090, guid: 3e9a440dddd8ec440a456d8bdc6b94cc, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e9a440dddd8ec440a456d8bdc6b94cc, type: 2}
   m_IsPrefabParent: 0
