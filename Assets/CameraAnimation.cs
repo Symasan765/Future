@@ -33,6 +33,7 @@ public class CameraAnimation : MonoBehaviour {
         nextRot = Quaternion.identity;
 
         afterCamRot = Quaternion.Euler(afterAngle);
+        renderCamera.transform.position = beforeCamPos;
     }
 	
 	void Update () {

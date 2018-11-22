@@ -74,10 +74,11 @@ public class CharacterSelectManager : MonoBehaviour {
 
             if (!aElement.GetIsCharacterSelected()) {
                 float posX = -60.0f + 10.0f * unselectCharaList[aElement.GetCursorPos()];
+                float posY = 10.0f * aElement.GetPlayerIndex();
 
                 // n番のカーソルの位置を履歴書の顔写真の横に移動
                 aElement.cursorTransform = Vector3.Lerp(aElement.cursorTransform, portraitList[unselectCharaList[aElement.GetCursorPos()]].arrowPosList[cursorIndex].transform.position, 0.5f);
-                renderCamList[cursorIndex].transform.position = new Vector3(posX, 0.0f, -1.0f);
+                renderCamList[cursorIndex].transform.position = new Vector3(posX, posY, -1.0f);
                 camAnimList[aElement.GetPlayerIndex()].SetPosition(posX);
                 if (aElement.cursorTransform == portraitList[unselectCharaList[aElement.GetCursorPos()]].arrowPosList[cursorIndex].transform.position) {
                     aElement.canSelect = true;
