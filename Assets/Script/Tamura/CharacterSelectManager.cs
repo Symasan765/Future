@@ -78,7 +78,7 @@ public class CharacterSelectManager : MonoBehaviour {
 
                 // n番のカーソルの位置を履歴書の顔写真の横に移動
                 aElement.cursorTransform = Vector3.Lerp(aElement.cursorTransform, portraitList[unselectCharaList[aElement.GetCursorPos()]].arrowPosList[cursorIndex].transform.position, 0.5f);
-                renderCamList[cursorIndex].transform.position = new Vector3(posX, posY, -1.0f);
+                renderCamList[cursorIndex].transform.position = new Vector3(posX, posY, camAnimList[aElement.GetPlayerIndex()].beforeCamPos.z);
                 camAnimList[aElement.GetPlayerIndex()].SetPosition(posX);
                 if (aElement.cursorTransform == portraitList[unselectCharaList[aElement.GetCursorPos()]].arrowPosList[cursorIndex].transform.position) {
                     aElement.canSelect = true;

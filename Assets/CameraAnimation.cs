@@ -9,7 +9,7 @@ public class CameraAnimation : MonoBehaviour {
     Arrow arrow;
 
     [SerializeField]
-    Vector3 beforeCamPos;
+    public Vector3 beforeCamPos;
     [SerializeField]
     Vector3 afterCamPos;
 
