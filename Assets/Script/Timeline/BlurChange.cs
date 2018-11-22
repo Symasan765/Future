@@ -11,7 +11,7 @@ public class BlurChange : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		m_MainCameraObj = GameObject.FindGameObjectWithTag("Main Camera");
+		m_MainCameraObj = GameObject.FindGameObjectWithTag("MainCamera");
 		m_MainCameraObj.GetComponent<PostProcessingBehaviour>().profile = m_Profile;
 	}
 	
@@ -20,7 +20,7 @@ public class BlurChange : MonoBehaviour {
 		// TODO ここで振動処理を行う
 		if (m_VibrationFlag)
 		{
-
+			ShakeCamera.Impact(0.05f, 1.0f);
 		}
 	}
 }

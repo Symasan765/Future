@@ -17,6 +17,7 @@ TagManager:
   - BossManager
   - AttackStart
   - Description
+  - BossAppearanceObj
   layers:
   - Default
   - TransparentFX

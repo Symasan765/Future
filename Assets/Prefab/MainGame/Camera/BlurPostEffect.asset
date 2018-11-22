@@ -77,10 +77,10 @@ MonoBehaviour:
       useCameraFov: 0
       kernelSize: 1
   motionBlur:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
-      shutterAngle: 160
-      sampleCount: 12
+      shutterAngle: 360
+      sampleCount: 32
       frameBlending: 0
   eyeAdaptation:
     m_Enabled: 0
@@ -109,10 +109,10 @@ MonoBehaviour:
         texture: {fileID: 0}
         intensity: 3
   colorGrading:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       tonemapping:
-        tonemapper: 1
+        tonemapper: 2
         neutralBlackIn: 0.02
         neutralWhiteIn: 10
         neutralBlackOut: 0
@@ -281,10 +281,10 @@ MonoBehaviour:
       lut: {fileID: 0}
       contribution: 1
   chromaticAberration:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       spectralTexture: {fileID: 0}
-      intensity: 0
+      intensity: 1
   grain:
     m_Enabled: 0
     m_Settings:
@@ -298,7 +298,7 @@ MonoBehaviour:
       mode: 0
       color: {r: 0, g: 0, b: 0, a: 1}
       center: {x: 0.5, y: 0.5}
-      intensity: 0.21
+      intensity: 0.159
       smoothness: 0.422
       roundness: 1
       mask: {fileID: 0}

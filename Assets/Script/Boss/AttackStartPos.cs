@@ -7,12 +7,16 @@ public class AttackStartPos : MonoBehaviour
 
 	BossAttackManager m_Manager;
 
+	GameObject BossTimeline;	// ボス登場演出をする場合はこのオブジェクトがシーン上に存在する
+
 	// Use this for initialization
 	void Start()
 	{
 		m_Manager = GameObject.FindGameObjectWithTag("BossManager").GetComponent<BossAttackManager>();
 
 		GetComponent<MeshRenderer>().enabled = false;
+
+		BossTimeline = GameObject.FindGameObjectWithTag("BossAppearanceObj");
 	}
 
 	// Update is called once per frame
@@ -37,6 +41,9 @@ public class AttackStartPos : MonoBehaviour
 			{
 				Destroy(objs[i]);
 			}
+
+			if (BossTimeline != null)
+				BossTimeline.GetComponent<BossAppearanceObj>().StartTimeline();
 		}
 	}
 }
