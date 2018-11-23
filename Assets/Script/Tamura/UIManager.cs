@@ -5,8 +5,10 @@ using System;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
-    [SerializeField]
-    Player[] playerArray;
+	[SerializeField]
+	private GameObject[] UIPlayerMentalNumObjs = new GameObject[4];
+	[SerializeField]
+	Player[] playerArray = new Player[4];
     [SerializeField]
     Image[] GaugeArray;
     [SerializeField]
@@ -52,4 +54,15 @@ public class UIManager : MonoBehaviour {
             index++;
         }
     }
+
+	public void SetPlayerArray(int _index,Player _player)
+	{
+		playerArray[_index] = _player;
+	}
+
+	public void SetPlayerUI(int _index, GameObject _playerObj)
+	{
+		UIPlayerMentalNum un = UIPlayerMentalNumObjs[_index].GetComponent<UIPlayerMentalNum>();
+		un.SetPlayerObject(_playerObj);
+	}
 }
