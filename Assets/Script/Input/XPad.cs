@@ -39,7 +39,8 @@ public class XPad : SingletonMonoBehaviour<XPad>
 		RB = 256,       //いわゆるR1キー
 		LB = 512,       //L1キー
 		START = 1024,
-		BACK = 2048
+		BACK = 2048,
+		RT = 4096
 	}
 
 	/// <summary>
@@ -173,6 +174,9 @@ public class XPad : SingletonMonoBehaviour<XPad>
 		if (GetPress(KeyData.RB, GamePadNo))
 			return true;
 
+		if (GetPress(KeyData.RT, GamePadNo))
+			return true;
+
 		return false;
 	}
 
@@ -180,6 +184,9 @@ public class XPad : SingletonMonoBehaviour<XPad>
 	{
 		// ジャンプ処理を行うボタンをどんどん追加していく
 		if (GetTrigger(KeyData.RB, GamePadNo))
+			return true;
+
+		if (GetTrigger(KeyData.RT, GamePadNo))
 			return true;
 
 		return false;
@@ -380,6 +387,7 @@ public class XPad : SingletonMonoBehaviour<XPad>
 		if (Data.Buttons.LeftShoulder == ButtonState.Pressed) NowInp[i] += (short)KeyData.LB;
 		if (Data.Buttons.Start == ButtonState.Pressed) NowInp[i] += (short)KeyData.START;
 		if (Data.Buttons.Back == ButtonState.Pressed) NowInp[i] += (short)KeyData.BACK;
+		if(Data.Triggers.Right > 0.1f) NowInp[i] += (short)KeyData.RT;
 	}
 
 	/// <summary>
@@ -400,6 +408,7 @@ public class XPad : SingletonMonoBehaviour<XPad>
 		if (Input.GetKey(KeyCode.E)) NowInp[i] += (short)KeyData.LB;
 		if (Input.GetKey(KeyCode.Space)) NowInp[i] += (short)KeyData.START;
 		if (Input.GetKey(KeyCode.Escape)) NowInp[i] += (short)KeyData.BACK;
+		if (Input.GetKey(KeyCode.O)) NowInp[i] += (short)KeyData.RT;
 
 		float x = 0, y = 0;
 		// 左スティックの入力
