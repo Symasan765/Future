@@ -17,9 +17,9 @@ public class CameraVibration : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector3 pos = m_Parent.transform.position;
-		pos.x += Random.Range(-(float)cRandom.Next(-10000,10000) / 100000.0f, (float)cRandom.Next(-10000, 10000) / 100000.0f);
-		pos.y += Random.Range(-(float)cRandom.Next(-10000, 10000) / 1000000.0f, (float)cRandom.Next(-10000, 10000) / 100000.0f);
-		pos.z += Random.Range(-(float)cRandom.Next(-10000, 10000) / 100000.0f, (float)cRandom.Next(-10000, 10000) / 100000.0f);
+		pos.x += (float)cRandom.Next(-10000,10000) / 100000.0f;
+		pos.y += (float)cRandom.Next(-10000, 10000) / 100000.0f;
+		pos.z += (float)cRandom.Next(-10000, 10000) / 100000.0f;
 
 		m_Parent.transform.position = pos;
 	}

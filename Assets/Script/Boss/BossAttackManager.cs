@@ -47,7 +47,9 @@ public class BossAttackManager : MonoBehaviour
 
 	float m_NextDelaySec = 0.0f;
 
-	int m_ContinuousAttackID = -1;	// こいつが-1以外のときはその攻撃を連続発生させる
+	int m_ContinuousAttackID = -1;  // こいつが-1以外のときはその攻撃を連続発生させる
+
+	BossUIScript m_BossHPUI;
 
 	public enum BossCondition
 	{
@@ -72,6 +74,8 @@ public class BossAttackManager : MonoBehaviour
 		m_Light.LightChage(false);
 
 		m_EviLoading = GameObject.Find("EvidenceLoading").GetComponent<EvidenceLoading>();
+
+		m_BossHPUI = GameObject.Find("BossUIParent").GetComponent<BossUIScript>();
 	}
 
 	private void Update()
@@ -367,6 +371,7 @@ public class BossAttackManager : MonoBehaviour
 	public void BossDamage(float damage)
 	{
 		m_BossDamage -= damage;
+		m_BossHPUI.IsDamage();
 		if (m_BossDamage < 0.0f) m_BossDamage = 0.0f;
 		// TODO 今度、ボスの攻撃を徐々に減らす、ボスにダメージエフェクトを出すなどする場合はここをいじる
 	}
