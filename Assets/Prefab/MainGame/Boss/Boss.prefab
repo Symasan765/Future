@@ -5139,6 +5139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f55b29fd2a8293040b21aa129543ec58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_EmotionPrefab: {fileID: 1627695742393374, guid: 02f13e365aa8c054f958696477939666,
+    type: 2}
 --- !u!114 &114986940948287614
 MonoBehaviour:
   m_ObjectHideFlags: 1

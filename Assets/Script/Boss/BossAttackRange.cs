@@ -143,7 +143,10 @@ public class BossAttackRange : MonoBehaviour
 			for (int i = 0; i < hitInfo.Length; i++)
 			{
 				if (hitInfo[i].collider.gameObject.tag == "Player")
+				{
 					hitInfo[i].collider.gameObject.GetComponent<Player>().HitBossAttack();
+					m_BossAttackManager.SetEmotion();
+				}
 				// TODO ボスの攻撃モーションを呼ぶならここ
 				Destroy(m_AttackRangeBoard);
 				Destroy(gameObject);

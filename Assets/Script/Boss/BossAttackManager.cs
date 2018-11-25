@@ -42,6 +42,8 @@ public class BossAttackManager : MonoBehaviour
 	public bool m_DownSwing = false;
 	public bool m_SideSwing = false;
 	public bool m_Beam = false;
+	public bool m_Emotion = false;
+	bool m_IsEmotion = false;
 
 	int m_StageChangeNum = 0;
 
@@ -120,6 +122,7 @@ public class BossAttackManager : MonoBehaviour
 			AnmeFlagInit();
 			if (m_AttackFlag)
 			{
+				m_Emotion = false;
 				// コルーチン対象が変わっていたら破棄
 				if (nowChangeNum != m_StageChangeNum)
 					yield break;
@@ -151,8 +154,14 @@ public class BossAttackManager : MonoBehaviour
 					m_Light.LightChage(true);
 					ChangeAnimFlag();
 
-					yield return new WaitForSeconds(m_NextDelaySec);
+					yield return new WaitForSeconds(m_SecondsBeforeAttack);
 					m_Light.LightChage(false);
+
+					// 攻撃が当たっていたらボスの喜ぶモーションを行う
+					while (m_Emotion)
+						yield return null;
+
+					yield return new WaitForSeconds(m_NextDelaySec);
 				}
 				// プレイヤーがいるエリアを特定出来なかった場合…
 				else
@@ -206,6 +215,7 @@ public class BossAttackManager : MonoBehaviour
 		{
 			var obj = m_AttackList[ID][i];
 			ret = obj.m_TimeSec;
+			m_IsEmotion = obj.m_EmotionFlag;
 			m_ContinuousAttackID = obj.m_NextAttackID;
 			m_NextAttackType = obj.m_AttackType;
 			m_NextDelaySec = obj.m_NextAttackDelaySec;
@@ -430,5 +440,15 @@ public class BossAttackManager : MonoBehaviour
 	{
 		// 次の周のためにライトをON
 		m_Light.LightChage(true);
+	}
+
+	public void SetEmotion()
+	{
+		// 喜んでもいい時
+		if (m_IsEmotion)
+		{
+			Debug.Log("ボス笑え！");
+			m_Emotion = true;
+		}
 	}
 }

@@ -1,110 +1,110 @@
 fileFormatVersion: 2
-guid: ab4277e2b83e81d47a9297c29b456cfb
-timeCreated: 1541773981
+guid: 715061ddbda2afc4da54ff930aa6f781
+timeCreated: 1543113675
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Boss:pCube10
-    100004: Boss:pCube13
-    100006: Boss:pCube18
-    100008: Boss:pCube22
-    100010: Boss:pCube23
-    100012: Boss:pCube23 1
-    100014: Boss:pCube24
-    100016: Boss:pCylinder29
-    100018: Boss:pCylinder52
-    100020: Boss:pCylinder52 1
-    100022: Boss:pCylinder53
-    100024: Boss:pCylinder54
-    100026: Boss:pCylinder57
-    100028: Boss:pCylinder61
-    100030: Boss:pCylinder61 1
-    100032: Boss:pCylinder62
-    100034: Boss:pCylinder74
-    100036: Boss:pCylinder75
-    100038: Boss:pCylinder76
-    100040: Boss:pCylinder77
-    100042: Boss:pCylinder78
-    100044: Boss:pCylinder80
-    100046: Boss:pCylinder81
-    100048: Boss:pCylinder82
-    100050: Boss:pCylinder85
-    100052: Boss:pCylinder86
-    100054: Boss:polySurface11
-    100056: Boss:polySurface11 1
-    100058: Boss:polySurface19
-    100060: Boss:polySurface2
-    100062: Boss:polySurface26
-    100064: Boss:pPipe4
-    100066: Boss:pPipe5
-    100068: Boss:pPipe7
-    100070: Boss:pPipe8
-    100072: Boss:pSphere27
-    100074: Boss:pSphere31
-    100076: Boss:pSphere33
-    100078: Boss:transform40
-    100080: Boss:transform41
-    100082: Boss:transform42
-    100084: Boss:transform43
-    100086: Boss:transform44
-    100088: Boss:transform45
-    100090: Boss:transform46
-    100092: Boss:transform47
-    100094: Boss:transform49
-    100096: Character2_Head
-    100098: Character2_Hips
-    100100: Character2_LeftArm
-    100102: Character2_LeftFoot
-    100104: Character2_LeftFootMiddle1
-    100106: Character2_LeftFootMiddle2
-    100108: Character2_LeftForeArm
-    100110: Character2_LeftHand
-    100112: Character2_LeftHandIndex1
-    100114: Character2_LeftHandIndex2
-    100116: Character2_LeftHandIndex3
-    100118: Character2_LeftHandMiddle1
-    100120: Character2_LeftHandMiddle2
-    100122: Character2_LeftHandMiddle3
-    100124: Character2_LeftHandRing1
-    100126: Character2_LeftHandRing2
-    100128: Character2_LeftHandRing3
-    100130: Character2_LeftLeg
-    100132: Character2_LeftToeBase
-    100134: Character2_LeftUpLeg
-    100136: Character2_Neck
-    100138: Character2_Reference
-    100140: Character2_RightArm
-    100142: Character2_RightFoot
-    100144: Character2_RightFootMiddle1
-    100146: Character2_RightFootMiddle2
-    100148: Character2_RightForeArm
-    100150: Character2_RightHand
-    100152: Character2_RightHandIndex1
-    100154: Character2_RightHandIndex2
-    100156: Character2_RightHandIndex3
-    100158: Character2_RightHandMiddle1
-    100160: Character2_RightHandMiddle2
-    100162: Character2_RightHandMiddle3
-    100164: Character2_RightHandRing1
-    100166: Character2_RightHandRing2
-    100168: Character2_RightHandRing3
-    100170: Character2_RightLeg
-    100172: Character2_RightToeBase
-    100174: Character2_RightUpLeg
-    100176: Character2_Spine
-    100178: Character2_Spine1
-    100180: Character2_Spine2
-    100182: group3
-    100184: ikHandle7
-    100186: ikHandle8
-    100188: joint1
-    100190: joint2
-    100192: joint2 1
-    100194: joint3
-    100196: joint4
-    100198: joint5
+    100000: Boss:pCube10
+    100002: Boss:pCube13
+    100004: Boss:pCube18
+    100006: Boss:pCube22
+    100008: Boss:pCube23
+    100010: Boss:pCube23 1
+    100012: Boss:pCube24
+    100014: Boss:pCylinder29
+    100016: Boss:pCylinder52
+    100018: Boss:pCylinder52 1
+    100020: Boss:pCylinder53
+    100022: Boss:pCylinder54
+    100024: Boss:pCylinder57
+    100026: Boss:pCylinder61
+    100028: Boss:pCylinder61 1
+    100030: Boss:pCylinder62
+    100032: Boss:pCylinder74
+    100034: Boss:pCylinder75
+    100036: Boss:pCylinder76
+    100038: Boss:pCylinder77
+    100040: Boss:pCylinder78
+    100042: Boss:pCylinder80
+    100044: Boss:pCylinder81
+    100046: Boss:pCylinder82
+    100048: Boss:pCylinder85
+    100050: Boss:pCylinder86
+    100052: Boss:polySurface11
+    100054: Boss:polySurface11 1
+    100056: Boss:polySurface19
+    100058: Boss:polySurface2
+    100060: Boss:polySurface26
+    100062: Boss:pPipe4
+    100064: Boss:pPipe5
+    100066: Boss:pPipe7
+    100068: Boss:pPipe8
+    100070: Boss:pSphere27
+    100072: Boss:pSphere31
+    100074: Boss:pSphere33
+    100076: Boss:transform40
+    100078: Boss:transform41
+    100080: Boss:transform42
+    100082: Boss:transform43
+    100084: Boss:transform44
+    100086: Boss:transform45
+    100088: Boss:transform46
+    100090: Boss:transform47
+    100092: Boss:transform49
+    100094: Character2_Head
+    100096: Character2_Hips
+    100098: Character2_LeftArm
+    100100: Character2_LeftFoot
+    100102: Character2_LeftFootMiddle1
+    100104: Character2_LeftFootMiddle2
+    100106: Character2_LeftForeArm
+    100108: Character2_LeftHand
+    100110: Character2_LeftHandIndex1
+    100112: Character2_LeftHandIndex2
+    100114: Character2_LeftHandIndex3
+    100116: Character2_LeftHandMiddle1
+    100118: Character2_LeftHandMiddle2
+    100120: Character2_LeftHandMiddle3
+    100122: Character2_LeftHandRing1
+    100124: Character2_LeftHandRing2
+    100126: Character2_LeftHandRing3
+    100128: Character2_LeftLeg
+    100130: Character2_LeftToeBase
+    100132: Character2_LeftUpLeg
+    100134: Character2_Neck
+    100136: Character2_Reference
+    100138: Character2_RightArm
+    100140: Character2_RightFoot
+    100142: Character2_RightFootMiddle1
+    100144: Character2_RightFootMiddle2
+    100146: Character2_RightForeArm
+    100148: Character2_RightHand
+    100150: Character2_RightHandIndex1
+    100152: Character2_RightHandIndex2
+    100154: Character2_RightHandIndex3
+    100156: Character2_RightHandMiddle1
+    100158: Character2_RightHandMiddle2
+    100160: Character2_RightHandMiddle3
+    100162: Character2_RightHandRing1
+    100164: Character2_RightHandRing2
+    100166: Character2_RightHandRing3
+    100168: Character2_RightLeg
+    100170: Character2_RightToeBase
+    100172: Character2_RightUpLeg
+    100174: Character2_Spine
+    100176: Character2_Spine1
+    100178: Character2_Spine2
+    100180: group3
+    100182: ikHandle7
+    100184: ikHandle8
+    100186: joint1
+    100188: joint2
+    100190: joint2 1
+    100192: joint3
+    100194: joint4
+    100196: joint5
+    100198: //RootNode
     100200: pCube18
     100202: pCube22
     100204: pCube23
@@ -167,106 +167,106 @@ ModelImporter:
     100318: transform76 1
     100320: transform77
     100322: transform77 1
-    400000: //RootNode
-    400002: Boss:pCube10
-    400004: Boss:pCube13
-    400006: Boss:pCube18
-    400008: Boss:pCube22
-    400010: Boss:pCube23
-    400012: Boss:pCube23 1
-    400014: Boss:pCube24
-    400016: Boss:pCylinder29
-    400018: Boss:pCylinder52
-    400020: Boss:pCylinder52 1
-    400022: Boss:pCylinder53
-    400024: Boss:pCylinder54
-    400026: Boss:pCylinder57
-    400028: Boss:pCylinder61
-    400030: Boss:pCylinder61 1
-    400032: Boss:pCylinder62
-    400034: Boss:pCylinder74
-    400036: Boss:pCylinder75
-    400038: Boss:pCylinder76
-    400040: Boss:pCylinder77
-    400042: Boss:pCylinder78
-    400044: Boss:pCylinder80
-    400046: Boss:pCylinder81
-    400048: Boss:pCylinder82
-    400050: Boss:pCylinder85
-    400052: Boss:pCylinder86
-    400054: Boss:polySurface11
-    400056: Boss:polySurface11 1
-    400058: Boss:polySurface19
-    400060: Boss:polySurface2
-    400062: Boss:polySurface26
-    400064: Boss:pPipe4
-    400066: Boss:pPipe5
-    400068: Boss:pPipe7
-    400070: Boss:pPipe8
-    400072: Boss:pSphere27
-    400074: Boss:pSphere31
-    400076: Boss:pSphere33
-    400078: Boss:transform40
-    400080: Boss:transform41
-    400082: Boss:transform42
-    400084: Boss:transform43
-    400086: Boss:transform44
-    400088: Boss:transform45
-    400090: Boss:transform46
-    400092: Boss:transform47
-    400094: Boss:transform49
-    400096: Character2_Head
-    400098: Character2_Hips
-    400100: Character2_LeftArm
-    400102: Character2_LeftFoot
-    400104: Character2_LeftFootMiddle1
-    400106: Character2_LeftFootMiddle2
-    400108: Character2_LeftForeArm
-    400110: Character2_LeftHand
-    400112: Character2_LeftHandIndex1
-    400114: Character2_LeftHandIndex2
-    400116: Character2_LeftHandIndex3
-    400118: Character2_LeftHandMiddle1
-    400120: Character2_LeftHandMiddle2
-    400122: Character2_LeftHandMiddle3
-    400124: Character2_LeftHandRing1
-    400126: Character2_LeftHandRing2
-    400128: Character2_LeftHandRing3
-    400130: Character2_LeftLeg
-    400132: Character2_LeftToeBase
-    400134: Character2_LeftUpLeg
-    400136: Character2_Neck
-    400138: Character2_Reference
-    400140: Character2_RightArm
-    400142: Character2_RightFoot
-    400144: Character2_RightFootMiddle1
-    400146: Character2_RightFootMiddle2
-    400148: Character2_RightForeArm
-    400150: Character2_RightHand
-    400152: Character2_RightHandIndex1
-    400154: Character2_RightHandIndex2
-    400156: Character2_RightHandIndex3
-    400158: Character2_RightHandMiddle1
-    400160: Character2_RightHandMiddle2
-    400162: Character2_RightHandMiddle3
-    400164: Character2_RightHandRing1
-    400166: Character2_RightHandRing2
-    400168: Character2_RightHandRing3
-    400170: Character2_RightLeg
-    400172: Character2_RightToeBase
-    400174: Character2_RightUpLeg
-    400176: Character2_Spine
-    400178: Character2_Spine1
-    400180: Character2_Spine2
-    400182: group3
-    400184: ikHandle7
-    400186: ikHandle8
-    400188: joint1
-    400190: joint2
-    400192: joint2 1
-    400194: joint3
-    400196: joint4
-    400198: joint5
+    400000: Boss:pCube10
+    400002: Boss:pCube13
+    400004: Boss:pCube18
+    400006: Boss:pCube22
+    400008: Boss:pCube23
+    400010: Boss:pCube23 1
+    400012: Boss:pCube24
+    400014: Boss:pCylinder29
+    400016: Boss:pCylinder52
+    400018: Boss:pCylinder52 1
+    400020: Boss:pCylinder53
+    400022: Boss:pCylinder54
+    400024: Boss:pCylinder57
+    400026: Boss:pCylinder61
+    400028: Boss:pCylinder61 1
+    400030: Boss:pCylinder62
+    400032: Boss:pCylinder74
+    400034: Boss:pCylinder75
+    400036: Boss:pCylinder76
+    400038: Boss:pCylinder77
+    400040: Boss:pCylinder78
+    400042: Boss:pCylinder80
+    400044: Boss:pCylinder81
+    400046: Boss:pCylinder82
+    400048: Boss:pCylinder85
+    400050: Boss:pCylinder86
+    400052: Boss:polySurface11
+    400054: Boss:polySurface11 1
+    400056: Boss:polySurface19
+    400058: Boss:polySurface2
+    400060: Boss:polySurface26
+    400062: Boss:pPipe4
+    400064: Boss:pPipe5
+    400066: Boss:pPipe7
+    400068: Boss:pPipe8
+    400070: Boss:pSphere27
+    400072: Boss:pSphere31
+    400074: Boss:pSphere33
+    400076: Boss:transform40
+    400078: Boss:transform41
+    400080: Boss:transform42
+    400082: Boss:transform43
+    400084: Boss:transform44
+    400086: Boss:transform45
+    400088: Boss:transform46
+    400090: Boss:transform47
+    400092: Boss:transform49
+    400094: Character2_Head
+    400096: Character2_Hips
+    400098: Character2_LeftArm
+    400100: Character2_LeftFoot
+    400102: Character2_LeftFootMiddle1
+    400104: Character2_LeftFootMiddle2
+    400106: Character2_LeftForeArm
+    400108: Character2_LeftHand
+    400110: Character2_LeftHandIndex1
+    400112: Character2_LeftHandIndex2
+    400114: Character2_LeftHandIndex3
+    400116: Character2_LeftHandMiddle1
+    400118: Character2_LeftHandMiddle2
+    400120: Character2_LeftHandMiddle3
+    400122: Character2_LeftHandRing1
+    400124: Character2_LeftHandRing2
+    400126: Character2_LeftHandRing3
+    400128: Character2_LeftLeg
+    400130: Character2_LeftToeBase
+    400132: Character2_LeftUpLeg
+    400134: Character2_Neck
+    400136: Character2_Reference
+    400138: Character2_RightArm
+    400140: Character2_RightFoot
+    400142: Character2_RightFootMiddle1
+    400144: Character2_RightFootMiddle2
+    400146: Character2_RightForeArm
+    400148: Character2_RightHand
+    400150: Character2_RightHandIndex1
+    400152: Character2_RightHandIndex2
+    400154: Character2_RightHandIndex3
+    400156: Character2_RightHandMiddle1
+    400158: Character2_RightHandMiddle2
+    400160: Character2_RightHandMiddle3
+    400162: Character2_RightHandRing1
+    400164: Character2_RightHandRing2
+    400166: Character2_RightHandRing3
+    400168: Character2_RightLeg
+    400170: Character2_RightToeBase
+    400172: Character2_RightUpLeg
+    400174: Character2_Spine
+    400176: Character2_Spine1
+    400178: Character2_Spine2
+    400180: group3
+    400182: ikHandle7
+    400184: ikHandle8
+    400186: joint1
+    400188: joint2
+    400190: joint2 1
+    400192: joint3
+    400194: joint4
+    400196: joint5
+    400198: //RootNode
     400200: pCube18
     400202: pCube22
     400204: pCube23
@@ -377,7 +377,7 @@ ModelImporter:
     4300062: pCylinder121
     4300064: pCube44
     4300066: Boss:polySurface11
-    7400000: beam_attack
+    7400000: www
     9500000: //RootNode
     13700000: Boss:pCube10
     13700002: Boss:pCube13
@@ -441,10 +441,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: beam_attack
-      takeName: beam_attack
+      name: www
+      takeName: www
       firstFrame: 1
-      lastFrame: 120
+      lastFrame: 80
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -464,8 +464,15 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.25093633
+        functionName: StartEmotion
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 1
-        functionName: UnInit
+        functionName: EndEvent
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

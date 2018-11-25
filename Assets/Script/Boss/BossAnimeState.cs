@@ -7,6 +7,8 @@ public class BossAnimeState : MonoBehaviour {
 	BossAttackManager m_BossManager;
 	PartyTimeManager m_PartyManager;
 
+	public GameObject m_EmotionPrefab;
+
 	// Use this for initialization
 	void Start () {
 		m_Animator = GetComponent<Animator>();
@@ -27,7 +29,26 @@ public class BossAnimeState : MonoBehaviour {
 		m_Animator.SetBool("is_DownSwing", m_BossManager.m_DownSwing);
 		m_Animator.SetBool("is_SideSwing", m_BossManager.m_SideSwing);
 		m_Animator.SetBool("is_Beam", m_BossManager.m_Beam);
-		if(m_PartyManager != null)
+		m_Animator.SetBool("is_Laugh", m_BossManager.m_Emotion);
+		if (m_PartyManager != null)
 			m_Animator.SetBool("isFever", m_PartyManager.IsFever());
+	}
+
+	void EndEvent()
+	{
+		Debug.Log("ボス笑い終了");
+		m_BossManager.m_Emotion = false;
+	}
+
+	void UnInit()
+	{
+		m_BossManager.m_DownSwing = false;
+		m_BossManager.m_SideSwing = false;
+		m_BossManager.m_Beam = false;
+	}
+
+	void StartEmotion()
+	{
+		Instantiate(m_EmotionPrefab);
 	}
 }

@@ -464,15 +464,8 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.25738397
-        functionName: PlayEffect
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.6751055
-        functionName: StopEffect
+      - time: 1
+        functionName: UnInit
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
