@@ -26,8 +26,8 @@ public class AttentionText : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		m_Up.size = new Vector2(m_Up.size.x, m_Up.size.y + Time.deltaTime * 1.0f);
-		m_Down.size = new Vector2(m_Down.size.x, m_Down.size.y - Time.deltaTime * 1.0f);
+		m_Up.size = new Vector2(m_Up.size.x, m_Up.size.y + Time.deltaTime * 2.0f);
+		m_Down.size = new Vector2(m_Down.size.x, m_Down.size.y - Time.deltaTime * 2.0f);
 
 		var objs = GameObject.FindGameObjectsWithTag("AttackRange");
 		if (objs.Length > 0)
