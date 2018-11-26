@@ -27,11 +27,14 @@ public class Arrow : MonoBehaviour {
     public bool canSelect;
     bool canInput;
 
+    AudioSource seCymbal;
+
     // 初期化
     void Awake() {
         inputDelay = 0;
         cursorPos = playerIndex;
         csManager = FindObjectOfType<CharacterSelectManager>();
+        seCymbal = GetComponent<AudioSource>();
 
         animAngle = 0.0f/* + playerIndex * 1.0f*/;
 
