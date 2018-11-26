@@ -5210,7 +5210,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1954214961002662
 GameObject:
   m_ObjectHideFlags: 1
@@ -14751,7 +14751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AttackID: 22
-  m_TimeSec: 1.5
+  m_TimeSec: 3
   m_NextAttackDelaySec: 1
   m_EmotionFlag: 0
   m_NextAttackID: 23
