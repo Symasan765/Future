@@ -814,6 +814,7 @@ public class Player : MonoBehaviour
 			//Debug.Log(gameObject.name + "がリスポーンした");
 			if (cntInvincibleSec <= 0)
 			{
+				GameScore.m_PlayerDownNum++;
 				effectManager.PlayDown(new Vector3(transform.position.x, transform.position.y, -2));
 				if (isHoldItem)
 				{
