@@ -10,6 +10,10 @@ public class UIPlayerMentalNum : MonoBehaviour {
 	private GameObject playerObject;
 	private Player player;
 	private Text[] text = new Text[2];
+	private Color[] damageColor = new Color[4];
+	private float nowMental = 0;
+	private bool isShake = false;
+	private float shakePower = 0;
 	void Start ()
 	{
 		text[0] = GetComponent<Text>();
@@ -19,28 +23,68 @@ public class UIPlayerMentalNum : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+		if (nowMental > player.GetMentalGauge())
+		{
+			nowMental = 0;
+		}
+		if (nowMental < player.GetMentalGauge())
+		{
+			nowMental += Time.deltaTime * 20;
+			if (nowMental > player.GetMentalGauge())
+			{
+				nowMental = player.GetMentalGauge();
+			}
+
+		}
+		/*
+		if (nowMental != player.GetMentalGauge())
+		{
+			if (!isShake)
+			{
+				shakePower = 10;
+				isShake = true;
+			}
+		}
+		if (isShake)
+		{
+			if (nowMental == player.GetMentalGauge())
+			{
+				isShake = false;
+			}
+
+		}
+		if (shakePower > 0)
+		{
+
+		}*/
+
 
 		for (int i = 0; i < 2; i++)
 		{
-			text[i].text = player.GetMentalGauge().ToString();
+			text[i].text = ((int)nowMental).ToString();
+			//text[i].text = player.GetMentalGauge().ToString();
 		}
 
 		if (player.GetMentalGauge() < 100 / 4)
 		{
-			text[0].color = new Color(1, 0.1f ,0.1f, 1.0f);
+			//Debug.Log(player.GetMentalGauge() / (100 / 4));
+			text[0].color = Color.Lerp(damageColor[0], damageColor[1], (float)player.GetMentalGauge() / (100 / 4));
+			//text[0].color = damageColor[0];
 		} else
 		{
 			if (player.GetMentalGauge() < (100 / 2))
 			{
-				text[0].color = new Color(0.8f, 0.1f, 0.1f, 1.0f);
+				text[0].color = Color.Lerp(damageColor[1], damageColor[2], (float)player.GetMentalGauge() / (100 / 2));
+				//text[0].color = damageColor[1];
 			} else
 			{
 				if (player.GetMentalGauge() < (100 / 4) * 3)
 				{
-					text[0].color = new Color(0.6f, 0.1f, 0.1f, 1.0f);
+					text[0].color = Color.Lerp(damageColor[2], damageColor[3], (float)player.GetMentalGauge() / ((100 / 4)*3));
+					//text[0].color = damageColor[2];
 				} else
 				{
-					text[0].color = new Color(0.4f, 0.1f, 0.1f, 1.0f);
+					text[0].color = damageColor[3];
 				}
 			}
 		}
@@ -51,5 +95,13 @@ public class UIPlayerMentalNum : MonoBehaviour {
 	{
 		playerObject = _playerObject;
 		player = playerObject.GetComponent<Player>();
+	}
+
+	public void SetColor(Color _c1,Color _c2,Color _c3,Color _c4)
+	{
+		damageColor[0] = _c1;
+		damageColor[1] = _c2;
+		damageColor[2] = _c3;
+		damageColor[3] = _c4;
 	}
 }

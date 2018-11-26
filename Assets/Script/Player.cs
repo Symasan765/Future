@@ -379,11 +379,12 @@ public class Player : MonoBehaviour
 			cntDamageImpactSec =1;
 			isDamage = true;
 			mentalGauge += Random.Range(8, 15);
-			if (mentalGauge > MentalGaugeMax)
+			cntInvincibleSec = InvincibleSec;
+			if (mentalGauge >= MentalGaugeMax)
 			{
 				mentalGauge = MentalGaugeMax;
 			}
-			cntInvincibleSec = InvincibleSec;
+
 		}
 	}
 

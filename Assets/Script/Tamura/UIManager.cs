@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour {
 	[SerializeField]
 	private GameObject[] UIPlayerMentalNumObjs = new GameObject[4];
 	[SerializeField]
+	private Color[] damageColor = new Color[4];
+	[SerializeField]
 	Player[] playerArray = new Player[4];
     [SerializeField]
     Image[] GaugeArray;
@@ -21,7 +23,14 @@ public class UIManager : MonoBehaviour {
     float shakeTime;
 
 	void Start () {
-        playerArray = FindObjectsOfType<Player>();
+
+		for (int i = 0; i < 4; i++)
+		{
+			UIPlayerMentalNum ui = UIPlayerMentalNumObjs[i].GetComponent<UIPlayerMentalNum>();
+			ui.SetColor(damageColor[0], damageColor[1], damageColor[2], damageColor[3]);
+		}
+
+			playerArray = FindObjectsOfType<Player>();
         Array.Sort(playerArray, (a, b) => a.PlayerIndex - b.PlayerIndex);
 	}
 	
