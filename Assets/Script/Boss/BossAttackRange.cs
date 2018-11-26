@@ -114,11 +114,11 @@ public class BossAttackRange : MonoBehaviour
 
 		if(((int)((1.0f - t) / 0.05f) % 2 == 0))
 		{
-			m_AttackRangeBoard.active = true;
+			m_AttackRangeBoard.GetComponent<MeshRenderer>().enabled = true;
 		}
 		else
 		{
-			m_AttackRangeBoard.active = false;
+			m_AttackRangeBoard.GetComponent<MeshRenderer>().enabled = false;
 		}
 
 		//int cnt = (int)(m_AttackCount / 0.1f);
@@ -146,6 +146,7 @@ public class BossAttackRange : MonoBehaviour
 				{
 					hitInfo[i].collider.gameObject.GetComponent<Player>().HitBossAttack();
 					m_BossAttackManager.SetEmotion();
+					GameScore.m_AttackNum++;
 				}
 				// TODO ボスの攻撃モーションを呼ぶならここ
 				Destroy(m_AttackRangeBoard);

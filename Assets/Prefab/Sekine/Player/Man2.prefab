@@ -1552,7 +1552,8 @@ MonoBehaviour:
   - {fileID: 1758077839635686}
   - {fileID: 1748252652876186}
   ItemHoldCollisionObj: {fileID: 1627978787208758}
-  MentalGaugeObj: {fileID: 0}
+  RespawnCountObj: {fileID: 1766417064631356, guid: 18bcb2b8d688192428a06228d0414ed1,
+    type: 2}
   cntJumpCheckSec: 0
 --- !u!114 &114777614747906134
 MonoBehaviour:

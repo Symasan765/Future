@@ -35,7 +35,8 @@ public class ResultManager : MonoBehaviour
 	void Start()
 	{
 		// TODO ここでダメージと攻撃回数をメインシーンから取得して変数に入れる
-		
+		m_AttackNum = GameScore.m_PlayerDownNum;
+		m_DamageNum = GameScore.m_AttackNum;
 	}
 
 	// Update is called once per frame

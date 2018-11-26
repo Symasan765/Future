@@ -25,7 +25,11 @@ public class UIPlayerMentalNum : MonoBehaviour {
 	{
 		if (nowMental > player.GetMentalGauge())
 		{
-			nowMental = 0;
+			nowMental -= Time.deltaTime * 40;
+			if (nowMental <= 0)
+			{
+				nowMental = 0;
+			}
 		}
 		if (nowMental < player.GetMentalGauge())
 		{
