@@ -361,6 +361,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1424128272610020, guid: 3f823d394f132c8499c41aed970dcf16,
         type: 2}
+    - target: {fileID: 114951600887371488, guid: d2edacc8bb83c9a4db882bfe642ff809,
+        type: 2}
+      propertyPath: PlayerRespawnSec
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d2edacc8bb83c9a4db882bfe642ff809, type: 2}
   m_IsPrefabParent: 0
@@ -576,7 +581,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4743893132764154, guid: 20147953ff61ca449a053d050f12a287, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 7.6499996
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4743893132764154, guid: 20147953ff61ca449a053d050f12a287, type: 2}
       propertyPath: m_LocalPosition.z

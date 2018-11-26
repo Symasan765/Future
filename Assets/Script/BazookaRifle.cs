@@ -9,8 +9,7 @@ using UnityEngine;
 /// </summary>
 public class BazookaRifle : MonoBehaviour{
 
-	[SerializeField]
-	private float BulletAttackPower = 10.0f;	//弾の攻撃力
+	private float BulletAttackPower = 5;	//弾の攻撃力
 
 	private GameObject[] Evidence_temp = new GameObject[3];
 	public GameObject EffectObj;
@@ -145,7 +144,7 @@ public class BazookaRifle : MonoBehaviour{
 			effectManager.PlaySMASH(-1, _hitPos, -1);
 		} else
 		{
-			feverManager.BossDamage(BulletAttackPower * 0.5f);
+			feverManager.BossDamage((BulletAttackPower * 0.5f) / 8);
 			isFirstFeverEvidenceHit = true;
 			partyTimeManager.LetsParty();
 		}
