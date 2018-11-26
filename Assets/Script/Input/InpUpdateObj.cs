@@ -8,9 +8,13 @@ public class InpUpdateObj : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+#if UNITY_EDITOR
+
+#else
 		XPad.Get.m_UpdateFlag = m_UpdateFlag;
+#endif
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		
