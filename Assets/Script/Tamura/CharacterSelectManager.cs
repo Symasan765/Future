@@ -9,6 +9,11 @@ public class CharacterSelectManager : MonoBehaviour {
         public int _cursorPos;
     }
 
+    [System.SerializableAttribute]
+    class animatorList {
+        public List<Animator> animList = new List<Animator>();
+    }
+
     [SerializeField]
     // カーソルの位置用リスト
     List<ArrowPosList> portraitList = new List<ArrowPosList>();
@@ -31,7 +36,7 @@ public class CharacterSelectManager : MonoBehaviour {
     bool isWaiting = false;
 
     [SerializeField]
-    List<Animator> animatorList = new List<Animator>();
+    List<animatorList> allAnimatorList = new List<animatorList>();
 
     [SerializeField]
     List<Camera> renderCamList = new List<Camera>();
@@ -51,6 +56,7 @@ public class CharacterSelectManager : MonoBehaviour {
 
     void Start() {
         //SoundManager.Get.PlayBGM("はりきっちゃう時のテーマ", true);
+        sc = FindObjectOfType<SceneChanger>();
     }
 
 	void FixedUpdate () {
@@ -63,8 +69,7 @@ public class CharacterSelectManager : MonoBehaviour {
         }
         //履歴書を上に飛ばしていく
         //sheetList[0].transform.position = sheetList[0].transform.position + sheetList[0].transform.up;
-
-        sc = FindObjectOfType<SceneChanger>();
+        CheckCanInput();
 	}
 
     // カーソルの位置を更新
@@ -113,12 +118,12 @@ public class CharacterSelectManager : MonoBehaviour {
 
                 int pIndex = selectDataList[0]._playerIndex;
                 int cPos = selectDataList[0]._cursorPos;
-                Debug.Log("カーソル位置" + cPos);
+                Debug.Log("プレイヤー番号:" + (pIndex+1) + " カーソル位置:" + (cPos+1) + " キャラ番号:" + (unselectCharaList[cPos]+1));
 
                 arrowList[pIndex].charaNum = unselectCharaList[cPos];
 
                 CharacterManager.SetCharacter(pIndex, unselectCharaList[cPos]);
-                animatorList[unselectCharaList[cPos]].SetBool("isSelected", true);
+                allAnimatorList[pIndex].animList[unselectCharaList[cPos]].SetBool("isSelected", true);
                 camAnimList[pIndex].StartCameraAnimation();
 
                 unselectCharaList.RemoveAt(cPos);
@@ -130,12 +135,26 @@ public class CharacterSelectManager : MonoBehaviour {
 
                 for (int i = 0; i < 4; i++) {
                     if (i != pIndex && unselectCharaList.Count != 0) {
-                        arrowList[i].cursorPos = (arrowList[i].cursorPos) % unselectCharaList.Count;
+                        if (arrowList[i].cursorPos > arrowList[pIndex].cursorPos) {
+                            arrowList[i].cursorPos = arrowList[i].cursorPos % unselectCharaList.Count - 1;
+                        }
+                        else {
+                            arrowList[i].cursorPos = arrowList[i].cursorPos % unselectCharaList.Count;
+                        }
+                        
+                        if (arrowList[i].cursorPos < 0) {
+                            arrowList[i].cursorPos = unselectCharaList.Count - 1;
+                        }
                     }
                 }
 
                 for (int i = 0; i < selectDataList.Count; i++) {
-                    selectDataList[i]._cursorPos = (selectDataList[i]._cursorPos - 1) % selectDataList.Count;
+                    if (selectDataList[i]._cursorPos != 0) {
+                        selectDataList[i]._cursorPos = (selectDataList[i]._cursorPos - 1) % selectDataList.Count;
+                    }
+                    else {
+                        selectDataList[i]._cursorPos = selectDataList.Count - 1;
+                    }
                 }
 
                 Debug.Log("select処理");
@@ -150,12 +169,20 @@ public class CharacterSelectManager : MonoBehaviour {
                     unselectCharaList.Add(CharacterManager.SelectedCharacters[pIndex]);
 
                     CharacterManager.ResetCharacter(pIndex);
-                    animatorList[cNum].SetBool("isSelected", false);
+                    allAnimatorList[pIndex].animList[cNum].SetBool("isSelected", false);
 
                     // キャラ選択フラグをオフに
                     Debug.Log("キャラ番号" + cNum + "unselect処理");
                     arrowList[pIndex].SetIsCharacterSelected(false);
                     camAnimList[pIndex].StartCameraAnimation();
+
+                    for (int i = 0; i < 4; i++) {
+                        if (i != pIndex) {
+                            if (arrowList[i].cursorPos >= arrowList[pIndex].cursorPos) {
+                                arrowList[i].cursorPos = arrowList[i].cursorPos % unselectCharaList.Count + 1;
+                            }
+                        }
+                    }
 
                     unselectDataList.RemoveAt(0);
                 }
@@ -231,5 +258,17 @@ public class CharacterSelectManager : MonoBehaviour {
         //Debug.Log("pIndex:"+_playerIndex+" cPos:"+_cursorPos);
 
         unselectDataList.Add(cd);
+    }
+
+    void CheckCanInput() {
+        for (int cursorIndex = 0; cursorIndex < 4; cursorIndex++) {
+            Arrow aElement = arrowList[cursorIndex];
+
+            if (aElement.GetCanInput()) {
+                for(int charaNum = 0; charaNum < 4; charaNum++){
+                    allAnimatorList[aElement.GetPlayerIndex()].animList[charaNum].SetBool("canInput", true);
+                }
+            }
+        }
     }
 }

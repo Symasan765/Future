@@ -35,20 +35,9 @@ public class Arrow : MonoBehaviour {
 
         animAngle = 0.0f/* + playerIndex * 1.0f*/;
 
-        canInput = true;
+        //canInput = true;
+        this.transform.position = new Vector3(-1500.0f, 1000.0f, 0.0f);
     }
-
-    /*void Update() {
-        // キャラ未選択状態なら
-        if (!isCharacterSelected) {
-            SelectCharacter();
-        }
-        // キャラ選択済みなら
-        else {
-            UnselectCharacter();
-            StartGame();
-        }
-    }*/
 
     void FixedUpdate() {
         if (canInput) {
@@ -62,6 +51,9 @@ public class Arrow : MonoBehaviour {
                 UnselectCharacter();
                 StartGame();
             }
+        }
+        else {
+            WaitingJoin();
         }
     }
 
@@ -126,6 +118,12 @@ public class Arrow : MonoBehaviour {
         }
     }
 
+    void WaitingJoin() {
+        if (XPad.Get.GetTrigger(XPad.KeyData.START, playerIndex)) {
+            canInput = true;
+        }
+    }
+
     // カーソルのアニメーション(左右)
     void AnimateCursor() {
         float range = 0.1f;
@@ -135,6 +133,10 @@ public class Arrow : MonoBehaviour {
 
         animAngle += xSpeed;
         this.transform.position = cursorTransform + cursorAnimateTransform;
+    }
+
+    public bool GetCanInput() {
+        return canInput;
     }
 
     public bool GetIsCharacterSelected() {
