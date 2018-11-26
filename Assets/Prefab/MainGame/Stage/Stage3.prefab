@@ -13097,11 +13097,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 13
+  m_AttackID: 43
   m_TimeSec: 3.25
   m_NextAttackDelaySec: 0
   m_EmotionFlag: 0
-  m_NextAttackID: 14
+  m_NextAttackID: 44
   m_AttackType: 1
 --- !u!114 &114036037537886812
 MonoBehaviour:
@@ -13138,11 +13138,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 14
+  m_AttackID: 44
   m_TimeSec: 3.25
   m_NextAttackDelaySec: 0.5
   m_EmotionFlag: 0
-  m_NextAttackID: 30
+  m_NextAttackID: 45
   m_AttackType: 0
 --- !u!114 &114057319567746584
 MonoBehaviour:
@@ -13178,7 +13178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 1
+  m_AttackID: 31
   m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
   m_EmotionFlag: 1
@@ -13195,7 +13195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 4
+  m_AttackID: 34
   m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
   m_EmotionFlag: 1
@@ -13223,11 +13223,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 31
+  m_AttackID: 48
   m_TimeSec: 3
   m_NextAttackDelaySec: 1
   m_EmotionFlag: 0
-  m_NextAttackID: 32
+  m_NextAttackID: 49
   m_AttackType: 2
 --- !u!114 &114141335298952670
 MonoBehaviour:
@@ -13334,7 +13334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 9
+  m_AttackID: 39
   m_TimeSec: 5
   m_NextAttackDelaySec: 2.75
   m_EmotionFlag: 1
@@ -13431,7 +13431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 0
-  m_SelectAttackNo: 00000000010000000200000003000000040000000a000000
+  m_SelectAttackNo: 1e0000001f00000020000000210000002200000028000000
 --- !u!114 &114327914362994288
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13684,11 +13684,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 30
+  m_AttackID: 46
   m_TimeSec: 4
   m_NextAttackDelaySec: 1
   m_EmotionFlag: 0
-  m_NextAttackID: 31
+  m_NextAttackID: 47
   m_AttackType: 2
 --- !u!114 &114469889230365308
 MonoBehaviour:
@@ -13712,7 +13712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 0
+  m_AttackID: 30
   m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
   m_EmotionFlag: 1
@@ -13729,7 +13729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 6
+  m_AttackID: 36
   m_TimeSec: 3
   m_NextAttackDelaySec: 2.75
   m_EmotionFlag: 1
@@ -13746,7 +13746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 7
+  m_AttackID: 37
   m_TimeSec: 3
   m_NextAttackDelaySec: 2.75
   m_EmotionFlag: 1
@@ -13763,11 +13763,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 30
+  m_AttackID: 45
   m_TimeSec: 4
   m_NextAttackDelaySec: 1
   m_EmotionFlag: 0
-  m_NextAttackID: 31
+  m_NextAttackID: 46
   m_AttackType: 2
 --- !u!114 &114517697655834616
 MonoBehaviour:
@@ -13780,7 +13780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 2
+  m_AttackID: 32
   m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
   m_EmotionFlag: 1
@@ -13818,7 +13818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 7
+  m_AttackID: 37
   m_TimeSec: 3
   m_NextAttackDelaySec: 2.75
   m_EmotionFlag: 1
@@ -13835,11 +13835,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 31
+  m_AttackID: 47
   m_TimeSec: 3
   m_NextAttackDelaySec: 1
   m_EmotionFlag: 0
-  m_NextAttackID: 32
+  m_NextAttackID: 48
   m_AttackType: 2
 --- !u!114 &114564295873251640
 MonoBehaviour:
@@ -13932,11 +13932,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 11
+  m_AttackID: 41
   m_TimeSec: 3
   m_NextAttackDelaySec: 0.5
   m_EmotionFlag: 0
-  m_NextAttackID: 12
+  m_NextAttackID: 42
   m_AttackType: 2
 --- !u!114 &114634996053370404
 MonoBehaviour:
@@ -13949,7 +13949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 6
+  m_AttackID: 36
   m_TimeSec: 3
   m_NextAttackDelaySec: 2.75
   m_EmotionFlag: 1
@@ -13966,11 +13966,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 12
+  m_AttackID: 42
   m_TimeSec: 3
   m_NextAttackDelaySec: 1
   m_EmotionFlag: 0
-  m_NextAttackID: 13
+  m_NextAttackID: 43
   m_AttackType: 0
 --- !u!114 &114658039113845464
 MonoBehaviour:
@@ -14019,11 +14019,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 10
+  m_AttackID: 40
   m_TimeSec: 3
   m_NextAttackDelaySec: 0.5
   m_EmotionFlag: 0
-  m_NextAttackID: 11
+  m_NextAttackID: 41
   m_AttackType: 3
 --- !u!114 &114688986093730148
 MonoBehaviour:
@@ -14150,7 +14150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 8
+  m_AttackID: 38
   m_TimeSec: 3
   m_NextAttackDelaySec: 2.75
   m_EmotionFlag: 1
@@ -14167,7 +14167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 1
+  m_AttackID: 31
   m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
   m_EmotionFlag: 1
@@ -14184,7 +14184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 3
+  m_AttackID: 33
   m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
   m_EmotionFlag: 1
@@ -14293,7 +14293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 32
+  m_AttackID: 49
   m_TimeSec: 4.5
   m_NextAttackDelaySec: 2
   m_EmotionFlag: 1
@@ -14311,7 +14311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 1
-  m_SelectAttackNo: 05000000060000000700000008000000090000000a000000
+  m_SelectAttackNo: 230000002400000025000000260000002700000028000000
 --- !u!114 &114881562343454036
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14369,7 +14369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 3
+  m_AttackID: 33
   m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
   m_EmotionFlag: 1
@@ -14386,7 +14386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 5
+  m_AttackID: 35
   m_TimeSec: 3
   m_NextAttackDelaySec: 2.75
   m_EmotionFlag: 1
@@ -14403,7 +14403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6f7212a2fde54eb3f02ef13cc87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AttackID: 0
+  m_AttackID: 30
   m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
   m_EmotionFlag: 1
