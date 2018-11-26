@@ -9,6 +9,9 @@ using UnityEngine;
 /// </summary>
 public class BazookaRifle : MonoBehaviour{
 
+	[SerializeField]
+	private int MaxEvidenceNum = 1;
+
 	private float BulletAttackPower = 5;	//弾の攻撃力
 
 	private GameObject[] Evidence_temp = new GameObject[3];
@@ -28,7 +31,7 @@ public class BazookaRifle : MonoBehaviour{
 
 	public float EvidenceDistance = 2.0f;            //証拠を認識する範囲。
     private int EvidenceNum = 0;                      //全体の証拠の数。
-    public int NearEvidenceNum = 0;                  //近づいた証拠の数。
+    public int setNormalEvidenceNum = 0;                  //近づいた証拠の数。
 
 	public bool nowEvidenceNormal = false;
 	[SerializeField]
@@ -48,8 +51,16 @@ public class BazookaRifle : MonoBehaviour{
 	private float cntShakePower = 0;
 	private int cutinPlayerIndex = 0;
 
+	private float cntScaleUpTime = 0;
+	private float cntScaleDownTime = 0;
+	private Vector3 startLocalScale;
+
+	private bool rotateAngle = false;
+	private float rotatePower = 0;
+
 	private void Start()
 	{
+		startLocalScale = transform.localScale;
 		eviRainbows = GetComponentsInChildren<EviRainbow>();
 		startPosition = transform.position;
 		stageChangeManager = GameObject.Find("StageChangeManager").GetComponent<StageChangeManager>();
@@ -58,24 +69,50 @@ public class BazookaRifle : MonoBehaviour{
 		effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
 		bossAttackManager = GameObject.FindGameObjectWithTag("BossManager").GetComponent<BossAttackManager>();
 		partyTimeManager = GameObject.Find("PartyTimeManager").GetComponent<PartyTimeManager>();
-
 	}
 
 	void Update()
     {
+		if(cntScaleUpTime > 0)
+		{
+			float maxScale = 2.0f;
+			if (cntScaleUpTime > 1)
+			{
+				transform.localScale = Vector3.Lerp(startLocalScale, new Vector3(startLocalScale.x * maxScale, startLocalScale.y * maxScale * 1.5f, startLocalScale.z * maxScale), 2 - cntScaleUpTime);
+			}
+			if(cntScaleUpTime <= 1)
+			{
+				transform.localScale = Vector3.Lerp(new Vector3(startLocalScale.x * maxScale, startLocalScale.y * maxScale * 1.5f, startLocalScale.z * maxScale), startLocalScale, 1 - cntScaleUpTime);
+			}
+			cntScaleUpTime -= Time.deltaTime * 8;
+			if (cntScaleUpTime <= 0)
+			{
+				cntScaleUpTime = 0;
+			}
+		} else
+		{
+			transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(0, 0, 0), 0.2f);
+			transform.localScale = startLocalScale;
+		}
+
+		if (setNormalEvidenceNum == MaxEvidenceNum)
+		{
+			isSetEvidence = true;
+		}
+
 		if (!feverManager.IsFever())
 		{
 			isFirstFeverEvidenceHit = false;
 		}
 		Explosion();
 
-		if (stageChangeManager.CanBazookaShot() && NearEvidenceNum > 0)
+		if (stageChangeManager.CanBazookaShot() && setNormalEvidenceNum > 0)
 		{
 			//普通の証拠
 			feverManager.PlayCutIn(cutinPlayerIndex);
-			nowSetEvidenceNum = NearEvidenceNum;
+			nowSetEvidenceNum = setNormalEvidenceNum;
 			ShotBazooka(false);
-			NearEvidenceNum = 0;
+			setNormalEvidenceNum = 0;
 		}
 		ShakeBazooka(2, 1);
     }
@@ -181,6 +218,7 @@ public class BazookaRifle : MonoBehaviour{
 		StartShakeBazooka(0.4f);
 		isSetEvidence = false;
 		isSetNormalEvidence = false;
+		setNormalEvidenceNum = 0;
 		SetEviRainbow(true);
 	}
 
@@ -200,11 +238,16 @@ public class BazookaRifle : MonoBehaviour{
 			ShotBazooka(true);
 		} else
 		{
-			NearEvidenceNum++;
+			setNormalEvidenceNum++;
 		}
 	}
 	public void SetPlayerIndex(int _index)
 	{
 		cutinPlayerIndex = _index;
+	}
+
+	public void StartScaleUp()
+	{
+		cntScaleUpTime = 2;
 	}
 }

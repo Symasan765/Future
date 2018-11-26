@@ -193,14 +193,13 @@ public class Player : MonoBehaviour
 				{
 					ReleaseItem();
 				}
-
+				Fall();
 				SerchItem();
 			}
 			if (!isDamage && cntGetItemBlankSec == 0 && CanIMove())
 			{
 				Move();
 			}
-			Fall();
 			Jump();
 		}
 		rb.position = new Vector3(rb.position.x, rb.position.y, 0);
@@ -214,12 +213,12 @@ public class Player : MonoBehaviour
 			rb.velocity = new Vector3(rb.velocity.x, FallSpeedMax * -1, rb.velocity.z);
 		}
 
-			if (!isJump && !IsOnGround() && XPad.Get.GetLeftStick(PlayerIndex).y < -0.8f)
-			{
-				rb.velocity = new Vector3(rb.velocity.x, (FallSpeedMax * 2) * -1, rb.velocity.z);
-			}
-			rb.AddForce(Vector3.down * (Gravity * FallSpeed));
-		
+		if (!isJump && !IsOnGround() && XPad.Get.GetLeftStick(PlayerIndex).y < -0.8f)
+		{
+			rb.velocity = new Vector3(rb.velocity.x, (FallSpeedMax * 2) * -1, rb.velocity.z);
+		}
+		rb.AddForce(Vector3.down * (Gravity * FallSpeed));
+
 	}
 
 	//キャラの向きを変える
@@ -654,11 +653,10 @@ public class Player : MonoBehaviour
 		{
 			if (item.IsHold())
 			{
-				//ReceiveItem(_itemObj.transform.parent.gameObject);
+				ReceiveItem(_itemObj.transform.parent.gameObject);
 
 			} else
 			{
-
 				SoundManager.Get.PlaySE("get");
 				rightSpeed = leftSpeed = 0.0f;
 				XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
@@ -917,6 +915,7 @@ public class Player : MonoBehaviour
 				if (!br.isSetEvidence)
 				{
 					br.isSetEvidence = true;
+					br.StartScaleUp();
 					GameObject io = getItemObj;
 					Item i = io.GetComponent<Item>();
 					ReleaseItem();

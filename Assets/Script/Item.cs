@@ -42,10 +42,14 @@ public class Item : MonoBehaviour {
 	private Vector3 startSize;
 	private float fieldSize = 1.3f;
 
+	private float cntScaleUpTime = 0;
+	private Vector3 modelStartScale;
+
 	void Start ()
 	{
 		eviParticle = EviEffectObj.GetComponent<ParticleSystem>();
 		startSize = transform.localScale;
+		modelStartScale = ModelObj.transform.localScale;
 		if (meshRenderer == null)
 		{
 			meshRenderer = ModelObj.GetComponent<MeshRenderer>();
@@ -66,6 +70,8 @@ public class Item : MonoBehaviour {
 		{
 			effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
 		}
+
+		cntScaleUpTime = 2;
 	}
 
 	void Update ()
@@ -83,6 +89,7 @@ public class Item : MonoBehaviour {
 			}
 			meshRenderer.enabled = true;
 			ModelObj.transform.localEulerAngles = new Vector3(0, 0, 0);
+			ModelObj.transform.localScale = modelStartScale;
 			transform.localScale = Vector3.Lerp(transform.localScale, startSize * 0.5f, MoveSpeed);
 		} else
 		{
@@ -91,8 +98,26 @@ public class Item : MonoBehaviour {
 				eviParticle.Play();
 			}
 			transform.eulerAngles = new Vector3(0, 0, 0);
-			transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(startSize.x * fieldSize, startSize.y * fieldSize, startSize.z * fieldSize), MoveSpeed);
-			ModelObj.transform.localEulerAngles = new Vector3(0, ModelObj.transform.localEulerAngles.y + 2, 0);
+			//transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(startSize.x * fieldSize, startSize.y * fieldSize, startSize.z * fieldSize), MoveSpeed);
+			//ModelObj.transform.localEulerAngles = new Vector3(0, ModelObj.transform.localEulerAngles.y + 2, 0);
+
+			if (cntScaleUpTime > 0)
+			{
+				float maxScale = 1.3f;
+				if (cntScaleUpTime > 1)
+				{
+					ModelObj.transform.localScale = Vector3.Slerp(modelStartScale, new Vector3(modelStartScale.x * maxScale, modelStartScale.y * maxScale, modelStartScale.z * maxScale), 2 - cntScaleUpTime);
+				}
+				if (cntScaleUpTime <= 1)
+				{
+					ModelObj.transform.localScale = Vector3.Slerp(new Vector3(modelStartScale.x * maxScale, modelStartScale.y * maxScale, modelStartScale.z * maxScale), modelStartScale, 1 - cntScaleUpTime);
+				}
+				cntScaleUpTime -= Time.deltaTime;
+				if (cntScaleUpTime <= 0)
+				{
+					cntScaleUpTime = 2;
+				}
+			}
 		}
 
 		//左右移動速度を固定
