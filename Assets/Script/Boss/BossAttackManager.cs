@@ -52,6 +52,7 @@ public class BossAttackManager : MonoBehaviour
 	int m_ContinuousAttackID = -1;  // こいつが-1以外のときはその攻撃を連続発生させる
 
 	BossUIScript m_BossHPUI;
+	Coroutine m_NowCoroutine = null;
 
 	public enum BossCondition
 	{
@@ -301,6 +302,12 @@ public class BossAttackManager : MonoBehaviour
 
 	public void SearchAttackObj()
 	{
+		if (m_NowCoroutine != null)
+		{
+			StopCoroutine(m_NowCoroutine);
+			m_NowCoroutine = null;
+		}
+
 		Debug.Log("SearchAttackObj呼び出し");
 		// 参照はずし
 		m_PlayerObjs = null;
@@ -341,7 +348,7 @@ public class BossAttackManager : MonoBehaviour
 
 		m_AreaTime = new float[4] { 0.0f, 0.0f, 0.0f, 0.0f };
 
-		StartCoroutine("BossAttack");
+		m_NowCoroutine = StartCoroutine("BossAttack");
 
 		// 労基オブジェクトを新しく見つける
 		m_EviLoading.InitLoader();
