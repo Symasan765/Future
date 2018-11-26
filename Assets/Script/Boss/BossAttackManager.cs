@@ -308,6 +308,8 @@ public class BossAttackManager : MonoBehaviour
 			m_NowCoroutine = null;
 		}
 
+		m_ContinuousAttackID = -1;
+
 		Debug.Log("SearchAttackObj呼び出し");
 		// 参照はずし
 		m_PlayerObjs = null;
