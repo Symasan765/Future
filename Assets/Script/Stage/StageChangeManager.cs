@@ -17,6 +17,8 @@ public class StageChangeManager : MonoBehaviour {
 	private EvidenceSpawner[] AllEvidenceSpawners;					//全ステージのノーマル証拠を格納
 	private int[] NormalEvidenceSpawnerNum = new int[StageNum];
 	private GameObject[] playerObjects;
+	private GameObject playerManagerObj;
+	private PlayerManager playerManager = null;
 	private GameObject[] SpawnPositoins;
 
 	private bool isChangeStage=false;
@@ -26,6 +28,7 @@ public class StageChangeManager : MonoBehaviour {
 
 	private float cntChangeStage = 0;
 
+	private float cntStageChangeSec = 0;
 	void Start ()
 	{
 		//スポーンポジションの数を計算
@@ -89,13 +92,26 @@ public class StageChangeManager : MonoBehaviour {
 		CreateStage(nowStageIndex);	
 
 		//最初のステージ作成後にPlayerManagerを生成
-		Instantiate(PlayerManagerObj, transform.position, transform.rotation).name = "PlayerManager";
+		playerManagerObj = Instantiate(PlayerManagerObj, transform.position, transform.rotation);
+		playerManagerObj.name = "PlayerManager";
+		playerManager = playerManagerObj.GetComponent<PlayerManager>();
 
 		playerObjects = GameObject.FindGameObjectsWithTag("Player");
 	}
 	
 	void Update ()
 	{
+		if (cntStageChangeSec > 0)
+		{
+			cntStageChangeSec -= Time.deltaTime;
+			if (cntStageChangeSec <= 0)
+			{
+				cntStageChangeSec = 0;
+				ReloadPlayerArrowBazookaObj();
+				Debug.Log("バズーカオブジェクトリロード");
+			}
+		}
+
 		CanBazookaShot();
 		//デバッグ用Eキー押下時ステージを順に変更
 		if (Input.GetKeyDown(KeyCode.E))
@@ -134,8 +150,14 @@ public class StageChangeManager : MonoBehaviour {
 		}
 	}
 
+	private void ReloadPlayerArrowBazookaObj()
+	{
+		playerManager.ReloadBazookaObj();
+	}
+
 	void CreateStage(int _stageIndex)
 	{
+		cntStageChangeSec = 0.2f;
 		nowStageObject = Instantiate(StageObjects[_stageIndex], transform.position, transform.rotation);
 		nowStageObject.name = "Stage" + nowStageIndex;
 		bossAttackManager.SearchAttackObj();//AttackObjリロード

@@ -63,6 +63,7 @@ public class Player : MonoBehaviour
 	public GameObject[] FootPositionObj = new GameObject[2];	//着地判定用にキャラの左右に配置
 	public GameObject ItemHoldCollisionObj;
 	public GameObject RespawnCountObj;
+	public GameObject ArrowObj;
 
 	private GameObject getItemObj;
 	private GameObject holdDeskObj;
@@ -941,7 +942,14 @@ public class Player : MonoBehaviour
 		isOnCollisionStay = false;
 	}
 
-    public int GetPlayerIndex() {
+	public void ReloadBazookaObj()
+	{
+		PlayerArrow playerArrow = ArrowObj.GetComponent<PlayerArrow>();
+		playerArrow.ReloadBazookaObj();
+	}
+
+    public int GetPlayerIndex()
+	{
         return PlayerIndex;
     }
 
