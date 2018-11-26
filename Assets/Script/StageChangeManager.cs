@@ -8,7 +8,9 @@ public class StageChangeManager : MonoBehaviour {
 	const int StageNum = 3;											//ステージ数
 	public GameObject[] StageObjects = new GameObject[StageNum];	//ステージプレハブを格納
 	public GameObject PlayerManagerObj;
-	[SerializeField]
+
+	public float PlayerRespawnSec = 1;
+
 	private int nowStageIndex = 0;									//今のステージ番号
 
 	private BossAttackManager bossAttackManager;
@@ -17,7 +19,7 @@ public class StageChangeManager : MonoBehaviour {
 	private GameObject[] playerObjects;
 	private GameObject[] SpawnPositoins;
 
-	public bool isChangeStage=false;
+	private bool isChangeStage=false;
 
 	private GameObject nowStageObject = null;
 	private FeverManager feverManager;

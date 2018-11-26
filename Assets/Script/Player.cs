@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
 	public GameObject RotateObj;
 	public GameObject[] FootPositionObj = new GameObject[2];	//着地判定用にキャラの左右に配置
 	public GameObject ItemHoldCollisionObj;
-	public GameObject MentalGaugeObj;
+	public GameObject RespawnCountObj;
 
 	private GameObject getItemObj;
 	private GameObject holdDeskObj;
@@ -84,6 +84,8 @@ public class Player : MonoBehaviour
 	private float cntInvincibleSec = 0;
 	private float cntAirJumpNum = 1;
 	private float cntCantMoveSec = 0;
+	private float RespawnSec = 0;
+	private float cntRespawnSec = 0;
 	private Vector3 startFootRPosition;
 
 	private Vector3 respawnPosition;
@@ -349,6 +351,7 @@ public class Player : MonoBehaviour
 	{
 		if (!IsInvincible())
 		{
+			animator.SetBool("isDash", false);
 			effectManager.PlayPlayerDamage(transform.position);
 			ShakeCamera.Impact(0.009f, 0.6f);
 			animator.SetBool("isDamageTrigger", true);
@@ -739,38 +742,6 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	//他プレイヤーを助ける
-	/*
-	private void RescuePlayer()
-	{
-		animator.SetBool("isRescue", isRescue);
-		Vector3 itemPositon = new Vector3(transform.position.x, ItemPosition.transform.position.y, transform.position.z);
-		if (XPad.Get.GetRelease(XPad.KeyData.A, PlayerIndex))
-		{
-			isRescue = false;
-		}
-		if (!isHoldItem && cntGetItemBlankTime == 0)
-		{
-			RaycastHit hit;
-			Physics.Raycast(itemPositon, transform.forward, out hit, CanHoldItemDistance);
-			if (hit.collider)
-			{
-				if (hit.collider.tag == "Player")
-				{
-					Player player = hit.collider.gameObject.GetComponent<Player>();
-					if (player.IsDown())
-					{
-						if (XPad.Get.GetPress(XPad.KeyData.A, PlayerIndex))
-						{
-							isRescue = true;
-							player.RecoveryMentalGauge(2);
-						}
-					}
-				}
-			}
-		}
-	}*/
-
 	//汗のエフェクト
 	private void PlayEffect()
 	{
@@ -850,8 +821,7 @@ public class Player : MonoBehaviour
 				}
 				mentalGauge = 0;
 				rightSpeed = leftSpeed = 0.0f;
-				transform.position = respawnPosition;
-				effectManager.PlayRespawnHeart(new Vector3(transform.position.x, transform.position.y, -2));
+				//transform.position = respawnPosition;		
 				cntDamageSec = 0;
 				cntGetItemBlankSec = 0;
 				cntJumpCheckSec = 0;
@@ -864,14 +834,33 @@ public class Player : MonoBehaviour
 				isReleaceItem = false;
 				isDown = false;
 				isAirjumpRotation = false;
-
+				cntRespawnSec = RespawnSec;
+				cntCantMoveSec = RespawnSec;
+				cntInvincibleSec = RespawnSec;
 				isRespawn = false;
+				UICountRespawnSec uiCount = Instantiate(RespawnCountObj, transform.position,new Quaternion(0,0,0,0)).GetComponent<UICountRespawnSec>();
+				uiCount.SetPlayerIndex(PlayerIndex);
+				uiCount.SetRespawnSec(RespawnSec);
+			}
+		}
+
+		if (cntRespawnSec > 0)
+		{
+
+			RotateObj.transform.localPosition = new Vector3(1000, 1000, 1000);
+			cntRespawnSec -= Time.deltaTime;
+			if (cntRespawnSec <= 0)
+			{
+				RotateObj.transform.localPosition = new Vector3(0, 0, 0);
 				cntInvincibleSec = 3;
 				cntCantMoveSec = 3;
 				isStandUp = true;
 				animator.SetBool("isStandUp", true);
+				transform.position = respawnPosition;
+				effectManager.PlayRespawnHeart(new Vector3(transform.position.x, transform.position.y, -2));
 			}
 		}
+
 	}
 
 	//今移動可能かどうかを返す
@@ -955,6 +944,11 @@ public class Player : MonoBehaviour
     public int GetPlayerIndex() {
         return PlayerIndex;
     }
+
+	public void SetRespawnSec(float _sec)
+	{
+		RespawnSec = _sec;
+	}
 
 	public void SetRespawnPosition(Vector3 _pos)
 	{

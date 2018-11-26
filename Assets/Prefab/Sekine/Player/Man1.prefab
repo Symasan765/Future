@@ -1385,7 +1385,8 @@ MonoBehaviour:
   - {fileID: 1679386103963478}
   - {fileID: 1859521185737578}
   ItemHoldCollisionObj: {fileID: 1463772854906826}
-  MentalGaugeObj: {fileID: 0}
+  RespawnCountObj: {fileID: 1766417064631356, guid: 18bcb2b8d688192428a06228d0414ed1,
+    type: 2}
   cntJumpCheckSec: 0
 --- !u!137 &137182819891424252
 SkinnedMeshRenderer:

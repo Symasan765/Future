@@ -10,10 +10,13 @@ public class PlayerManager : MonoBehaviour {
 	const int PlayerNum = 4;
 	GameObject[] plyObjs = new GameObject[4];
 	UIManager uiManager;
+	StageChangeManager stageChangeManager;
+	private float respawnSec = 1;
 	void Awake ()
 	{
 		uiManager = GameObject.FindGameObjectWithTag("UIManagerObject").GetComponent<UIManager>();
-
+		stageChangeManager = GameObject.Find("StageChangeManager").GetComponent<StageChangeManager>();
+		respawnSec = stageChangeManager.PlayerRespawnSec;
 		//プレイヤーの生成
 		for (int i = 0; i < PlayerNum; i++)
 		{
@@ -23,6 +26,7 @@ public class PlayerManager : MonoBehaviour {
 
 			plyObjs[i] = Instantiate(PlayerObjects[CharacterManager.SelectedCharacters[i]], SpawnPosition[i].transform.position, transform.rotation);
 			Player player = plyObjs[i].GetComponent<Player>();
+			player.SetRespawnSec(respawnSec);
 			player.PlayerIndex = i;
 			//uiManager.SetPlayerArray(i, plyObjs[i].GetComponent<Player>());
 			plyObjs[i].name = "Player" + (i + 1);
