@@ -42,7 +42,7 @@ public class BossAttackManager : MonoBehaviour
 	public bool m_DownSwing = false;
 	public bool m_SideSwing = false;
 	public bool m_Beam = false;
-	public bool m_Emotion = false;
+	private bool m_Emotion = false;
 	bool m_IsEmotion = false;
 
 	int m_StageChangeNum = 0;
@@ -117,13 +117,14 @@ public class BossAttackManager : MonoBehaviour
 		for (int i = 0; i < obj.Length; i++)
 			m_PlayerObjs[i] = obj[i].GetComponent<Player>();
 
+		m_Emotion = false;
+
 		while (true)
 		{
 			// 攻撃モーションを初期化
 			AnmeFlagInit();
 			if (m_AttackFlag)
 			{
-				m_Emotion = false;
 				// コルーチン対象が変わっていたら破棄
 				if (nowChangeNum != m_StageChangeNum)
 					yield break;
@@ -158,11 +159,14 @@ public class BossAttackManager : MonoBehaviour
 					yield return new WaitForSeconds(m_SecondsBeforeAttack);
 					m_Light.LightChage(false);
 
+					yield return new WaitForSeconds(m_NextDelaySec * 0.5f);
+
 					// 攻撃が当たっていたらボスの喜ぶモーションを行う
 					while (m_Emotion)
+					{
 						yield return null;
-
-					yield return new WaitForSeconds(m_NextDelaySec);
+					}
+					yield return new WaitForSeconds(m_NextDelaySec * 0.5f);
 				}
 				// プレイヤーがいるエリアを特定出来なかった場合…
 				else
@@ -456,8 +460,17 @@ public class BossAttackManager : MonoBehaviour
 		// 喜んでもいい時
 		if (m_IsEmotion)
 		{
-			Debug.Log("ボス笑え！");
 			m_Emotion = true;
 		}
+	}
+
+	public bool GetEmotion()
+	{
+		return m_Emotion;
+	}
+
+	public void EndEmotion()
+	{
+		m_Emotion = false;
 	}
 }

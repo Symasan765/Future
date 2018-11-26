@@ -29,15 +29,14 @@ public class BossAnimeState : MonoBehaviour {
 		m_Animator.SetBool("is_DownSwing", m_BossManager.m_DownSwing);
 		m_Animator.SetBool("is_SideSwing", m_BossManager.m_SideSwing);
 		m_Animator.SetBool("is_Beam", m_BossManager.m_Beam);
-		m_Animator.SetBool("is_Laugh", m_BossManager.m_Emotion);
+		m_Animator.SetBool("is_Laugh", m_BossManager.GetEmotion());
 		if (m_PartyManager != null)
 			m_Animator.SetBool("isFever", m_PartyManager.IsFever());
 	}
 
 	void EndEvent()
 	{
-		Debug.Log("ボス笑い終了");
-		m_BossManager.m_Emotion = false;
+		m_BossManager.EndEmotion();
 	}
 
 	void UnInit()
