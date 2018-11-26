@@ -13181,7 +13181,7 @@ MonoBehaviour:
   m_AttackID: 31
   m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
-  m_EmotionFlag: 1
+  m_EmotionFlag: 0
   m_NextAttackID: -1
   m_AttackType: 0
 --- !u!114 &114100346832833668
@@ -13198,7 +13198,7 @@ MonoBehaviour:
   m_AttackID: 34
   m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
-  m_EmotionFlag: 1
+  m_EmotionFlag: 0
   m_NextAttackID: -1
   m_AttackType: 0
 --- !u!114 &114132444575907226
@@ -13337,7 +13337,7 @@ MonoBehaviour:
   m_AttackID: 39
   m_TimeSec: 5
   m_NextAttackDelaySec: 2.75
-  m_EmotionFlag: 1
+  m_EmotionFlag: 0
   m_NextAttackID: -1
   m_AttackType: 0
 --- !u!114 &114228254385353810
@@ -13715,7 +13715,7 @@ MonoBehaviour:
   m_AttackID: 30
   m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
-  m_EmotionFlag: 1
+  m_EmotionFlag: 0
   m_NextAttackID: -1
   m_AttackType: 0
 --- !u!114 &114485905336093660
@@ -13732,7 +13732,7 @@ MonoBehaviour:
   m_AttackID: 36
   m_TimeSec: 3
   m_NextAttackDelaySec: 2.75
-  m_EmotionFlag: 1
+  m_EmotionFlag: 0
   m_NextAttackID: -1
   m_AttackType: 0
 --- !u!114 &114498006507982614
@@ -13749,7 +13749,7 @@ MonoBehaviour:
   m_AttackID: 37
   m_TimeSec: 3
   m_NextAttackDelaySec: 2.75
-  m_EmotionFlag: 1
+  m_EmotionFlag: 0
   m_NextAttackID: -1
   m_AttackType: 0
 --- !u!114 &114517179937751942
@@ -13783,7 +13783,7 @@ MonoBehaviour:
   m_AttackID: 32
   m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
-  m_EmotionFlag: 1
+  m_EmotionFlag: 0
   m_NextAttackID: -1
   m_AttackType: 0
 --- !u!114 &114522908789875210
@@ -13821,7 +13821,7 @@ MonoBehaviour:
   m_AttackID: 37
   m_TimeSec: 3
   m_NextAttackDelaySec: 2.75
-  m_EmotionFlag: 1
+  m_EmotionFlag: 0
   m_NextAttackID: -1
   m_AttackType: 0
 --- !u!114 &114543408734513590
@@ -13952,7 +13952,7 @@ MonoBehaviour:
   m_AttackID: 36
   m_TimeSec: 3
   m_NextAttackDelaySec: 2.75
-  m_EmotionFlag: 1
+  m_EmotionFlag: 0
   m_NextAttackID: -1
   m_AttackType: 0
 --- !u!114 &114642313500329586
@@ -14153,7 +14153,7 @@ MonoBehaviour:
   m_AttackID: 38
   m_TimeSec: 3
   m_NextAttackDelaySec: 2.75
-  m_EmotionFlag: 1
+  m_EmotionFlag: 0
   m_NextAttackID: -1
   m_AttackType: 0
 --- !u!114 &114747347570015774
@@ -14170,7 +14170,7 @@ MonoBehaviour:
   m_AttackID: 31
   m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
-  m_EmotionFlag: 1
+  m_EmotionFlag: 0
   m_NextAttackID: -1
   m_AttackType: 0
 --- !u!114 &114764945899919234
@@ -14187,7 +14187,7 @@ MonoBehaviour:
   m_AttackID: 33
   m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
-  m_EmotionFlag: 1
+  m_EmotionFlag: 0
   m_NextAttackID: -1
   m_AttackType: 0
 --- !u!114 &114812869294953538
@@ -14372,7 +14372,7 @@ MonoBehaviour:
   m_AttackID: 33
   m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
-  m_EmotionFlag: 1
+  m_EmotionFlag: 0
   m_NextAttackID: -1
   m_AttackType: 0
 --- !u!114 &114936820485784144
@@ -14389,7 +14389,7 @@ MonoBehaviour:
   m_AttackID: 35
   m_TimeSec: 3
   m_NextAttackDelaySec: 2.75
-  m_EmotionFlag: 1
+  m_EmotionFlag: 0
   m_NextAttackID: -1
   m_AttackType: 0
 --- !u!114 &114953220007084364
@@ -14406,7 +14406,7 @@ MonoBehaviour:
   m_AttackID: 30
   m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
-  m_EmotionFlag: 1
+  m_EmotionFlag: 0
   m_NextAttackID: -1
   m_AttackType: 0
 --- !u!114 &114970049853631318
