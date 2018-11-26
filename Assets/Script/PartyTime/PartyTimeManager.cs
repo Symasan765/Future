@@ -50,6 +50,8 @@ public class PartyTimeManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		GameScore.Init();
+
 		m_NowState = PartyState.BossAttack;
 
 		m_SkyTimeSec = SkyChangeTime;
