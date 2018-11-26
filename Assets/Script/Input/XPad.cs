@@ -5,29 +5,32 @@ using XInputDotNetPure;
 
 public class XPad : SingletonMonoBehaviour<XPad>
 {
-    const int MaxControllerNum = 4;
-    PlayerIndex[] playerIndex = new PlayerIndex[MaxControllerNum];            //現在つないでいるプレイヤーの番号
-    GamePadState[] NowState = new GamePadState[MaxControllerNum];              //現在のフレームの入力情報
-    
-    //下記の二つはビットフラグを使用するので注意
-    short[] NowInp = new short[MaxControllerNum];
-    short[] OldInp = new short[MaxControllerNum];
+	const int MaxControllerNum = 4;
+	PlayerIndex[] playerIndex = new PlayerIndex[MaxControllerNum];            //現在つないでいるプレイヤーの番号
+	GamePadState[] NowState = new GamePadState[MaxControllerNum];              //現在のフレームの入力情報
+
+	//下記の二つはビットフラグを使用するので注意
+	short[] NowInp = new short[MaxControllerNum];
+	short[] OldInp = new short[MaxControllerNum];
 	Vector2[] m_KeyboardLeftStickVal = new Vector2[MaxControllerNum];
 	Vector2[] m_KeyboardRightStickVal = new Vector2[MaxControllerNum];
 	bool[] ConnectFlag = new bool[MaxControllerNum];
 
-    // デバッグではコントローラーだけではなくキーボード入力も利用するため
-    bool DebugFlag = false;
+	// デバッグではコントローラーだけではなくキーボード入力も利用するため
+	bool DebugFlag = false;
 	public bool[] KeyDebugFlag = new bool[MaxControllerNum];    // キーボードでの複数人接続を行う
 
 	const float m_DeadZone = 0.3f;
 
-	Vector3[] m_VibeData = new Vector3[MaxControllerNum];		// x = 左振動情報、y = 右振動情報,z = 残りタイム
+	Vector3[] m_VibeData = new Vector3[MaxControllerNum];       // x = 左振動情報、y = 右振動情報,z = 残りタイム
+
+	public bool m_UpdateFlag = true;
 
 	/// <summary>
 	/// 入力するキー番号。ビット演算を使用するため各数値は累乗
 	/// </summary>
-	public enum KeyData {
+	public enum KeyData
+	{
 		A = 1,
 		B = 2,
 		X = 4,
@@ -49,7 +52,7 @@ public class XPad : SingletonMonoBehaviour<XPad>
 	/// <param name="key">独自キーコード。KeyData.…で取得できる</param>
 	/// <param name="GamePadNo">取得するコントローラー番号</param>
 	/// <returns></returns>
-	public bool GetTrigger(KeyData key,int GamePadNo)
+	public bool GetTrigger(KeyData key, int GamePadNo)
 	{
 		bool Now = false;
 		bool Old = false;
@@ -69,7 +72,7 @@ public class XPad : SingletonMonoBehaviour<XPad>
 	/// <returns></returns>
 	public bool AnyoneTrigger(KeyData key)
 	{
-		for(int i = 0; i < MaxControllerNum; i++)
+		for (int i = 0; i < MaxControllerNum; i++)
 		{
 			if (GetTrigger(key, i))
 				return true;
@@ -129,6 +132,10 @@ public class XPad : SingletonMonoBehaviour<XPad>
 	/// <returns></returns>
 	public bool JumpPress(int GamePadNo)
 	{
+		// 更新不可ならなにも返さない
+		if (m_UpdateFlag == false)
+			return false;
+
 		// ジャンプ処理を行うボタンをどんどん追加していく
 		if (GetPress(KeyData.A, GamePadNo))
 			return true;
@@ -147,6 +154,10 @@ public class XPad : SingletonMonoBehaviour<XPad>
 
 	public bool JumpTrigger(int GamePadNo)
 	{
+		// 更新不可ならなにも返さない
+		if (m_UpdateFlag == false)
+			return false;
+
 		// ジャンプ処理を行うボタンをどんどん追加していく
 		if (GetTrigger(KeyData.A, GamePadNo))
 			return true;
@@ -170,6 +181,10 @@ public class XPad : SingletonMonoBehaviour<XPad>
 	/// <returns></returns>
 	public bool HoldPress(int GamePadNo)
 	{
+		// 更新不可ならなにも返さない
+		if (m_UpdateFlag == false)
+			return false;
+
 		// ジャンプ処理を行うボタンをどんどん追加していく
 		if (GetPress(KeyData.RB, GamePadNo))
 			return true;
@@ -182,6 +197,10 @@ public class XPad : SingletonMonoBehaviour<XPad>
 
 	public bool HoldTrigger(int GamePadNo)
 	{
+		// 更新不可ならなにも返さない
+		if (m_UpdateFlag == false)
+			return false;
+
 		// ジャンプ処理を行うボタンをどんどん追加していく
 		if (GetTrigger(KeyData.RB, GamePadNo))
 			return true;
@@ -215,11 +234,15 @@ public class XPad : SingletonMonoBehaviour<XPad>
 	/// <returns>長さ1.0f以内のX,Y成分ベクトル</returns>
 	public Vector2 GetLeftStick(int GamePadNo)
 	{
+		// 更新不可処理が出ていればなにも返さない
+		if (m_UpdateFlag == false)
+			return Vector2.zero;
+
 		if (ConnectFlag[GamePadNo])
 		{
 			// 11/11 追加仕様。アナログスティックの入力が少なければデジタルキーも見て入力がゼロでなければそちらを使う
 			Vector2 ret = StickJudge(NowState[GamePadNo].ThumbSticks.Left);
-			if(ret.magnitude == 0)
+			if (ret.magnitude == 0)
 			{
 				ret = Vector2.zero;
 				if (GetPress(KeyData.UP, GamePadNo)) ret += Vector2.up;
@@ -239,7 +262,7 @@ public class XPad : SingletonMonoBehaviour<XPad>
 	{
 		Vector2 val = new Vector2(stick.X, stick.Y);
 		// デッドゾーンより入力が少なければ入力を感知しない
-		if(val.magnitude < m_DeadZone)
+		if (val.magnitude < m_DeadZone)
 		{
 			return Vector2.zero;
 		}
@@ -254,31 +277,32 @@ public class XPad : SingletonMonoBehaviour<XPad>
 	/// <param name="LeftMagnitude">0.0~1.0 粗の大きいショック性の振動</param>
 	/// <param name="RightMagnitude">0.0-1.0 きめの細かい連続性の振動</param>
 	/// <param name="vibeSec"></param>
-	public void SetVibration(int GamePadNo, float LeftMagnitude, float RightMagnitude,float vibeSec)
+	public void SetVibration(int GamePadNo, float LeftMagnitude, float RightMagnitude, float vibeSec)
 	{
 		if (ConnectFlag[GamePadNo])
 			m_VibeData[GamePadNo] = new Vector3(LeftMagnitude, RightMagnitude, vibeSec);
 	}
 
 	void Start()
-    {
+	{
 
 		Debug.Log("Update");
 		//	パラメータ初期化
 		for (int i = 0; i < MaxControllerNum; i++)
-        {
-            NowInp[i] = 0;
-            OldInp[i] = 0;
-            ConnectFlag[i] = false;
+		{
+			NowInp[i] = 0;
+			OldInp[i] = 0;
+			ConnectFlag[i] = false;
 			KeyDebugFlag[i] = false;
 
 		}
-		KeyDebugFlag[0] = true;		// 第一コントローラーは初期段階で入力できるようにしている
+		KeyDebugFlag[0] = true;     // 第一コントローラーは初期段階で入力できるようにしている
 		DebugFlag = Debug.isDebugBuild;     // デバッグ状態を取得
-    }
+	}
 
 	// Update is called once per frame
-	private void FixedUpdate(){ 
+	private void FixedUpdate()
+	{
 		AllConfirmConnection();
 		DebugKeyFlagSwitching();
 
@@ -307,38 +331,38 @@ public class XPad : SingletonMonoBehaviour<XPad>
 	/// コントローラーとの接続を試みる
 	/// </summary>
 	void AllConfirmConnection()
-    {
-        for (int i = 0; i < MaxControllerNum; i++)
-        {
-            ConfirmConnection(i);
-        }       // end for (int i = 0; i < MaxControllerNum; i++)
-    }
+	{
+		for (int i = 0; i < MaxControllerNum; i++)
+		{
+			ConfirmConnection(i);
+		}       // end for (int i = 0; i < MaxControllerNum; i++)
+	}
 
-    void ConfirmConnection(int i)
-    {
-        // まだ接続されていなければ接続処理
-        if (!ConnectFlag[i] || !NowState[i].IsConnected)
-        {
-            PlayerIndex testPlayerIndex = (PlayerIndex)i;
-            GamePadState testState = GamePad.GetState(testPlayerIndex);
-            //1度でも接続されればコネクトフラグを立てて、以降このブロックに入らないようにする
-            if (testState.IsConnected)
-            {
-                playerIndex[i] = testPlayerIndex;
-                ConnectFlag[i] = true;
-            }
-        }       // end if (!playerIndexSet || !prevState.IsConnected)
-    }
+	void ConfirmConnection(int i)
+	{
+		// まだ接続されていなければ接続処理
+		if (!ConnectFlag[i] || !NowState[i].IsConnected)
+		{
+			PlayerIndex testPlayerIndex = (PlayerIndex)i;
+			GamePadState testState = GamePad.GetState(testPlayerIndex);
+			//1度でも接続されればコネクトフラグを立てて、以降このブロックに入らないようにする
+			if (testState.IsConnected)
+			{
+				playerIndex[i] = testPlayerIndex;
+				ConnectFlag[i] = true;
+			}
+		}       // end if (!playerIndexSet || !prevState.IsConnected)
+	}
 
 	/// <summary>
 	/// 入力情報更新
 	/// </summary>
 	void AllInputUpdate()
 	{
-		for(int i = 0; i < MaxControllerNum; i++)
+		for (int i = 0; i < MaxControllerNum; i++)
 		{
 			NowState[i] = GamePad.GetState(playerIndex[i]);   //新しい情報を取得
-			GamePadUpdate(NowState[i],i);    //更新
+			GamePadUpdate(NowState[i], i);    //更新
 		}
 	}
 
@@ -347,7 +371,7 @@ public class XPad : SingletonMonoBehaviour<XPad>
 	/// </summary>
 	/// <param name="state"></param>
 	/// <returns></returns>
-	void GamePadUpdate(GamePadState Data,int i)
+	void GamePadUpdate(GamePadState Data, int i)
 	{
 		OldInp[i] = NowInp[i];        //前のフレームの情報を保持する
 		NowInp[i] = 0;             //一度入力情報をクリアする
@@ -355,7 +379,7 @@ public class XPad : SingletonMonoBehaviour<XPad>
 		//ゲームパッドが接続されていたらそちらからデータを取得する
 		if (ConnectFlag[i])
 		{
-			PadButtonUpdate(Data,i);
+			PadButtonUpdate(Data, i);
 		}
 		else
 		{
@@ -372,7 +396,7 @@ public class XPad : SingletonMonoBehaviour<XPad>
 	/// </summary>
 	/// <param name="Data"></param>
 	/// <param name="i"></param>
-	void PadButtonUpdate(GamePadState Data,int i)
+	void PadButtonUpdate(GamePadState Data, int i)
 	{
 		//新しい入力情報を反映していく
 		if (Data.Buttons.A == ButtonState.Pressed) NowInp[i] += (short)KeyData.A;
@@ -387,7 +411,7 @@ public class XPad : SingletonMonoBehaviour<XPad>
 		if (Data.Buttons.LeftShoulder == ButtonState.Pressed) NowInp[i] += (short)KeyData.LB;
 		if (Data.Buttons.Start == ButtonState.Pressed) NowInp[i] += (short)KeyData.START;
 		if (Data.Buttons.Back == ButtonState.Pressed) NowInp[i] += (short)KeyData.BACK;
-		if(Data.Triggers.Right > 0.1f) NowInp[i] += (short)KeyData.RT;
+		if (Data.Triggers.Right > 0.1f) NowInp[i] += (short)KeyData.RT;
 	}
 
 	/// <summary>
@@ -433,19 +457,23 @@ public class XPad : SingletonMonoBehaviour<XPad>
 	/// </summary>
 	void DebugKeyFlagSwitching()
 	{
-		if (Input.GetKeyDown(KeyCode.Alpha1)) {
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+		{
 			KeyDebugFlag[0] = !KeyDebugFlag[0];
 			Debug.Log("コントローラーNo" + 1 + "接続状態 : " + KeyDebugFlag[0]);
 		}
-		if (Input.GetKeyDown(KeyCode.Alpha2)) {
+		if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
 			KeyDebugFlag[1] = !KeyDebugFlag[1];
 			Debug.Log("コントローラーNo" + 2 + "接続状態 : " + KeyDebugFlag[1]);
 		}
-		if (Input.GetKeyDown(KeyCode.Alpha3)) {
+		if (Input.GetKeyDown(KeyCode.Alpha3))
+		{
 			KeyDebugFlag[2] = !KeyDebugFlag[2];
 			Debug.Log("コントローラーNo" + 3 + "接続状態 : " + KeyDebugFlag[2]);
 		}
-		if (Input.GetKeyDown(KeyCode.Alpha4)) {
+		if (Input.GetKeyDown(KeyCode.Alpha4))
+		{
 			KeyDebugFlag[3] = !KeyDebugFlag[3];
 			Debug.Log("コントローラーNo" + 4 + "接続状態 : " + KeyDebugFlag[3]);
 		}
