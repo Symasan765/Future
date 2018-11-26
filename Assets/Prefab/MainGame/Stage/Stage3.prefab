@@ -13179,7 +13179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AttackID: 1
-  m_TimeSec: 3
+  m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
   m_EmotionFlag: 1
   m_NextAttackID: -1
@@ -13196,7 +13196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AttackID: 4
-  m_TimeSec: 5
+  m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
   m_EmotionFlag: 1
   m_NextAttackID: -1
@@ -13431,7 +13431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AreaNo: 0
-  m_SelectAttackNo: 0000000001000000020000000300000004000000
+  m_SelectAttackNo: 00000000010000000200000003000000040000000a000000
 --- !u!114 &114327914362994288
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13713,7 +13713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AttackID: 0
-  m_TimeSec: 3
+  m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
   m_EmotionFlag: 1
   m_NextAttackID: -1
@@ -13781,7 +13781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AttackID: 2
-  m_TimeSec: 3
+  m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
   m_EmotionFlag: 1
   m_NextAttackID: -1
@@ -14168,7 +14168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AttackID: 1
-  m_TimeSec: 3
+  m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
   m_EmotionFlag: 1
   m_NextAttackID: -1
@@ -14185,7 +14185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AttackID: 3
-  m_TimeSec: 3
+  m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
   m_EmotionFlag: 1
   m_NextAttackID: -1
@@ -14294,8 +14294,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AttackID: 32
-  m_TimeSec: 5
-  m_NextAttackDelaySec: 1
+  m_TimeSec: 4.5
+  m_NextAttackDelaySec: 2
   m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
@@ -14370,7 +14370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AttackID: 3
-  m_TimeSec: 3
+  m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
   m_EmotionFlag: 1
   m_NextAttackID: -1
@@ -14404,7 +14404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AttackID: 0
-  m_TimeSec: 3
+  m_TimeSec: 2.75
   m_NextAttackDelaySec: 2
   m_EmotionFlag: 1
   m_NextAttackID: -1
