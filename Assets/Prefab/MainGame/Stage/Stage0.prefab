@@ -22327,8 +22327,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 13
   m_TimeSec: 2
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114032841384253296
@@ -22436,8 +22436,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 12
   m_TimeSec: 2
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114109475961483280
@@ -22464,8 +22464,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 3
   m_TimeSec: 2
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 0
 --- !u!114 &114124540048318838
@@ -22502,8 +22502,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 8
   m_TimeSec: 1.75
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114134913407681940
@@ -22532,7 +22532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 4
   m_TimeSec: 1.75
-  m_NextAttackDelaySec: 0.5
+  m_NextAttackDelaySec: 1.5
   m_EmotionFlag: 0
   m_NextAttackID: -1
   m_AttackType: 2
@@ -22549,8 +22549,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 2
   m_TimeSec: 2
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 0
 --- !u!114 &114148684581703964
@@ -22646,8 +22646,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 11
   m_TimeSec: 2
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114212458370597570
@@ -22698,8 +22698,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 4
   m_TimeSec: 1.75
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114241571273423438
@@ -22715,7 +22715,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 7
   m_TimeSec: 2
-  m_NextAttackDelaySec: 0.5
+  m_NextAttackDelaySec: 1.5
   m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 1
@@ -22732,8 +22732,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 6
   m_TimeSec: 1.5
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114260448497004414
@@ -22797,9 +22797,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AttackID: 11
-  m_TimeSec: 3
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_TimeSec: 2
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114343605206231586
@@ -22988,8 +22988,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 1
   m_TimeSec: 2
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114470690121811424
@@ -23005,8 +23005,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 1
   m_TimeSec: 2
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114480658161985924
@@ -23033,8 +23033,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 4
   m_TimeSec: 1.75
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114510657638847736
@@ -23098,8 +23098,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 4
   m_TimeSec: 1.75
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114544472896411008
@@ -23151,8 +23151,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 11
   m_TimeSec: 2
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114560681277937884
@@ -23333,8 +23333,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 13
   m_TimeSec: 2
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114707221014584512
@@ -23375,7 +23375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 14
   m_TimeSec: 3
-  m_NextAttackDelaySec: 0.5
+  m_NextAttackDelaySec: 1.5
   m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 1
@@ -23392,8 +23392,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 0
   m_TimeSec: 2
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114728291676654466
@@ -23409,8 +23409,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 11
   m_TimeSec: 2
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114737286718008302
@@ -23485,9 +23485,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AttackID: 0
-  m_TimeSec: 3
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_TimeSec: 2
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114794630750039466
@@ -23581,8 +23581,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 6
   m_TimeSec: 1.5
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114844336121041002
@@ -23679,8 +23679,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 12
   m_TimeSec: 2
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114870644393364010
@@ -23696,8 +23696,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 6
   m_TimeSec: 1.5
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114881527963234304
@@ -23713,8 +23713,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 5
   m_TimeSec: 3
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 1
 --- !u!114 &114899235514647712
@@ -23730,8 +23730,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 12
   m_TimeSec: 2
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114900058171074496
@@ -23816,8 +23816,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackID: 6
   m_TimeSec: 1.5
-  m_NextAttackDelaySec: 0.5
-  m_EmotionFlag: 0
+  m_NextAttackDelaySec: 1.5
+  m_EmotionFlag: 1
   m_NextAttackID: -1
   m_AttackType: 2
 --- !u!114 &114918895008617534
