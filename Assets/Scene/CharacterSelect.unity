@@ -693,7 +693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.41176468, b: 0.41176468, a: 1}
+  m_Color: {r: 0.4117647, g: 0.6, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2076,7 +2076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.41176468, g: 0.60117644, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.4117647, b: 0.4117647, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -4872,8 +4872,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ccea9dac3bfe946877227d0f767ee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BGStartColor: {r: 0.39215687, g: 0, b: 0, a: 1}
-  BGColor: {r: 1, g: 0, b: 0, a: 1}
+  BGStartColor: {r: 0, g: 0.105882354, b: 0.39215687, a: 1}
+  BGColor: {r: 0, g: 0.26666668, b: 1, a: 1}
   colorChangeSpeed: 0.1
   cursorArrow: {fileID: 133215968}
 --- !u!124 &1475957732
@@ -6540,8 +6540,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ccea9dac3bfe946877227d0f767ee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BGStartColor: {r: 0, g: 0.10457507, b: 0.39215687, a: 1}
-  BGColor: {r: 0, g: 0.26666668, b: 1, a: 1}
+  BGStartColor: {r: 0.39215687, g: 0, b: 0, a: 1}
+  BGColor: {r: 1, g: 0, b: 0, a: 1}
   colorChangeSpeed: 0.1
   cursorArrow: {fileID: 549227808}
 --- !u!124 &1952179570
