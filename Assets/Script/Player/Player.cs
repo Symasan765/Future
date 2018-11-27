@@ -214,12 +214,14 @@ public class Player : MonoBehaviour
 			rb.velocity = new Vector3(rb.velocity.x, FallSpeedMax * -1, rb.velocity.z);
 		}
 
-		if (!isJump && !IsOnGround() && XPad.Get.GetLeftStick(PlayerIndex).y < -0.8f)
+		if (cntGetItemBlankSec == 0)
 		{
-			rb.velocity = new Vector3(rb.velocity.x, (FallSpeedMax * 2) * -1, rb.velocity.z);
+			if (!isJump && !IsOnGround() && XPad.Get.GetLeftStick(PlayerIndex).y < -0.8f)
+			{
+				rb.velocity = new Vector3(rb.velocity.x, (FallSpeedMax * 2) * -1, rb.velocity.z);
+			}
+			rb.AddForce(Vector3.down * (Gravity * FallSpeed));
 		}
-		rb.AddForce(Vector3.down * (Gravity * FallSpeed));
-
 	}
 
 	//キャラの向きを変える
@@ -579,7 +581,7 @@ public class Player : MonoBehaviour
 			cntJumpCheckSec = 0;
 		}
 		animator.SetBool("isJump", isJump);
-		if (isJump)
+		if (isJump && cntGetItemBlankSec == 0)
 		{
 			this.transform.Translate(Vector3.up * jumpSpeed * Time.deltaTime);
 			jumpSpeed -= Gravity * JumpSpeed;
@@ -603,6 +605,7 @@ public class Player : MonoBehaviour
 		Vector3 itemPositon = new Vector3(transform.position.x - (1.0f * angleValue), transform.position.y + 0.5f, transform.position.z);
 		if (cntGetItemBlankSec > 0)
 		{
+			rb.velocity = Vector3.zero;
 			animator.SetBool("isGetItem", true);
 			cntGetItemBlankSec -= Time.deltaTime;
 			if (cntGetItemBlankSec <= 0)
@@ -657,7 +660,7 @@ public class Player : MonoBehaviour
 				ReceiveItem(_itemObj.transform.parent.gameObject);
 			} else
 			{
-				//effectManager.PlayHoldItem(new Vector3(ItemPosition.transform.position.x,ItemPosition.transform.position.y,-1));
+				effectManager.PlayHoldItem(new Vector3(ItemPosition.transform.position.x,ItemPosition.transform.position.y,-1));
 				SoundManager.Get.PlaySE("get");
 				rightSpeed = leftSpeed = 0.0f;
 				XPad.Get.SetVibration(PlayerIndex, 0.3f, 0.3f, 0.2f);
@@ -720,6 +723,7 @@ public class Player : MonoBehaviour
 		{
 			if (isHoldItem)
 			{
+				effectManager.PlayReleaseItem(new Vector3(ItemPosition.transform.position.x, ItemPosition.transform.position.y, -1));
 				SoundManager.Get.PlaySE("releace");
 				XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
 				getItemObj.transform.parent = null;

@@ -18,6 +18,7 @@ public class EffectManager : MonoBehaviour {
 	public GameObject EffectRespawnHeart;
 	public GameObject EffectPlayerDamage;
 	public GameObject EffectHoldItem;
+	public GameObject EffectReleaseItem;
 
 	private ParticleSystem psDelete;
 	private ParticleSystem psCreateEvidence;
@@ -27,6 +28,13 @@ public class EffectManager : MonoBehaviour {
 	private ParticleSystem psRespawnHeart;
 	private ParticleSystem psPlayerDamage;
 	private ParticleSystem psHoldItem;
+	private ParticleSystem psReleaseItem;
+
+	public void PlayReleaseItem(Vector3 _pos)
+	{
+		psReleaseItem = Instantiate(EffectReleaseItem, _pos, transform.rotation).GetComponent<ParticleSystem>();
+		psReleaseItem.Play();
+	}
 
 	public void PlayHoldItem(Vector3 _pos)
 	{
