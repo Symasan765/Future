@@ -660,7 +660,7 @@ public class Player : MonoBehaviour
 			{
 				SoundManager.Get.PlaySE("get");
 				rightSpeed = leftSpeed = 0.0f;
-				XPad.Get.SetVibration(PlayerIndex, 0.2f, 0.2f, 0.1f);
+				XPad.Get.SetVibration(PlayerIndex, 0.3f, 0.3f, 0.2f);
 				getItemObj = _itemObj.gameObject;
 				cntGetItemBlankSec = GetItemBlankSec;
 				isHoldItem = true;
@@ -716,7 +716,7 @@ public class Player : MonoBehaviour
 	//アイテムを離す
 	private void ReleaseItem()
 	{
-		if (getItemObj)
+		if (getItemObj && cntGetItemBlankSec == 0)
 		{
 			if (isHoldItem)
 			{
