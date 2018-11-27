@@ -29,6 +29,10 @@ public class Arrow : MonoBehaviour {
 
     AudioSource seCymbal;
 
+    [SerializeField]
+    GameObject effectObj;
+    ParticleSystem particle;
+
     // 初期化
     void Awake() {
         inputDelay = 0;
@@ -121,10 +125,14 @@ public class Arrow : MonoBehaviour {
         }
     }
 
+    // エントリー待機
     void WaitingJoin() {
         if (XPad.Get.GetTrigger(XPad.KeyData.START, playerIndex)) {
             canInput = true;
             XPad.Get.SetVibration(playerIndex, 0.3f, 0.3f, 0.5f);
+
+            particle = Instantiate(effectObj, cursorTransform, Quaternion.identity).GetComponent<ParticleSystem>();
+            particle.Play();
         }
     }
 
