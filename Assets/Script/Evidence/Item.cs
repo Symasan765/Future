@@ -44,9 +44,10 @@ public class Item : MonoBehaviour {
 
 	private float cntScaleUpTime = 0;
 	private Vector3 modelStartScale;
-
+	private Vector3 effectStartScale;
 	void Start ()
 	{
+		effectStartScale = EviEffectObj.transform.localScale;
 		eviParticle = EviEffectObj.GetComponent<ParticleSystem>();
 		startSize = transform.localScale;
 		modelStartScale = ModelObj.transform.localScale;
@@ -82,6 +83,7 @@ public class Item : MonoBehaviour {
 		if (isHold || isScaleDown)
 		{
 			eviParticle.Stop();
+			EviEffectObj.transform.localScale = Vector3.zero;
 			transform.eulerAngles = new Vector3(0, 0, 0);
 			if (isScaleDown)
 			{
@@ -95,6 +97,7 @@ public class Item : MonoBehaviour {
 		{
 			if (!eviParticle.isPlaying)
 			{
+				EviEffectObj.transform.localScale = effectStartScale;
 				eviParticle.Play();
 			}
 			transform.eulerAngles = new Vector3(0, 0, 0);

@@ -38,7 +38,7 @@ public class LoadingText : MonoBehaviour {
 		}
 
 		// バズーカに証拠が入った
-		if (m_Bazooka.isSetEvidence)
+		if (m_Bazooka.isSetNormalEvidence)
 		{
 			m_StartFlag = true;
 		}

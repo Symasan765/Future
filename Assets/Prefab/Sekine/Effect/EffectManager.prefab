@@ -69,5 +69,7 @@ MonoBehaviour:
   EffectRespawnHeart: {fileID: 1273942130558040, guid: ab678d816ad1cbd47a1a7b5ab175888d,
     type: 2}
   EffectPlayerDamage: {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 2}
-  EffectHoldItem: {fileID: 1748713215249014, guid: be01434a82fd83b49899290d8ebb0b41,
+  EffectHoldItem: {fileID: 1128130787838074, guid: be01434a82fd83b49899290d8ebb0b41,
+    type: 2}
+  EffectReleaseItem: {fileID: 1033142996480864, guid: 93e1769794d1635448a4e2ff469bdd0d,
     type: 2}
