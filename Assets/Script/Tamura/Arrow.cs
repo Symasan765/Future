@@ -51,12 +51,15 @@ public class Arrow : MonoBehaviour {
             if (!isCharacterSelected) {
                 MoveCursor();
                 AnimateCursor();
-
                 SelectCharacter();
+
+                this.transform.localScale = Vector3.Lerp(this.transform.localScale, new Vector3(2.0f, 2.0f, 1.0f), 0.5f);
             }
             else {
                 UnselectCharacter();
                 StartGame();
+
+                this.transform.localScale = Vector3.Lerp(this.transform.localScale, new Vector3(3.0f, 3.0f, 1.0f), 0.25f);
             }
         }
         else {
