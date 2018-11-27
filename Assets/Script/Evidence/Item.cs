@@ -285,22 +285,4 @@ public class Item : MonoBehaviour {
 			}
 		}
 	}
-
-	/*
-	void OnTriggerStay(Collider other)
-	{
-		if (!isHold)
-		{
-			if (other.tag == "Bazooka")
-			{
-				BazookaRifle br = other.gameObject.GetComponent<BazookaRifle>();
-				if (!br.isSetEvidence)
-				{
-					br.isSetEvidence = true;
-					SetBazooka(other.gameObject);
-				}
-			}
-		}
-	}*/
-
 }

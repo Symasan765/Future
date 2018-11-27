@@ -6,6 +6,7 @@ public class FeverManager : MonoBehaviour {
 
 	public GameObject CutInObj;
 	public GameObject cameraObj;
+	[SerializeField]
 	private GameObject nowCutInObj = null;
 
 	[SerializeField]
@@ -96,10 +97,13 @@ public class FeverManager : MonoBehaviour {
 
 	public void PlayCutIn(int _playerIndex)
 	{
-		//カットイン用キャラ番号格納
-		CutinScript.m_CharaNo = CharacterManager.SelectedCharacters[_playerIndex];
-		CutinScript.m_PlayerNo = _playerIndex;
-		Instantiate(CutInObj);
+		if (nowCutInObj == null)
+		{
+			//カットイン用キャラ番号格納
+			CutinScript.m_CharaNo = CharacterManager.SelectedCharacters[_playerIndex];
+			CutinScript.m_PlayerNo = _playerIndex;
+			nowCutInObj = Instantiate(CutInObj);
+		}
 	}
 
 }
