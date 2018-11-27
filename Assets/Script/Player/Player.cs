@@ -655,9 +655,9 @@ public class Player : MonoBehaviour
 			if (item.IsHold())
 			{
 				ReceiveItem(_itemObj.transform.parent.gameObject);
-
 			} else
 			{
+				//effectManager.PlayHoldItem(new Vector3(ItemPosition.transform.position.x,ItemPosition.transform.position.y,-1));
 				SoundManager.Get.PlaySE("get");
 				rightSpeed = leftSpeed = 0.0f;
 				XPad.Get.SetVibration(PlayerIndex, 0.3f, 0.3f, 0.2f);
