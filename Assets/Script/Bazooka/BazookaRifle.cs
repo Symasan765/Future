@@ -43,7 +43,6 @@ public class BazookaRifle : MonoBehaviour{
 	public bool isSetEvidence = false;
 	public bool isSetNormalEvidence = false;
 
-	private bool isFirstFeverEvidenceHit = false;
 	private bool canShot = false;
 
 	private Vector3 startPosition;
@@ -73,6 +72,12 @@ public class BazookaRifle : MonoBehaviour{
 
 	void Update()
     {
+
+		if (Input.GetKeyDown(KeyCode.T))
+		{
+			partyTimeManager.LetsParty();
+		}
+
 		if(cntScaleUpTime > 0)
 		{
 			float maxScale = 2.0f;
@@ -95,15 +100,6 @@ public class BazookaRifle : MonoBehaviour{
 			transform.localScale = startLocalScale;
 		}
 
-		if (setNormalEvidenceNum == MaxEvidenceNum)
-		{
-			isSetEvidence = true;
-		}
-
-		if (!feverManager.IsFever())
-		{
-			isFirstFeverEvidenceHit = false;
-		}
 		Explosion();
 
 		if (stageChangeManager.CanBazookaShot() && setNormalEvidenceNum > 0)
@@ -182,7 +178,6 @@ public class BazookaRifle : MonoBehaviour{
 		} else
 		{
 			feverManager.BossDamage((BulletAttackPower * 0.5f) / 8);
-			isFirstFeverEvidenceHit = true;
 			partyTimeManager.LetsParty();
 		}
 		for (int i = 0; i < 4; i++)
@@ -239,6 +234,11 @@ public class BazookaRifle : MonoBehaviour{
 		} else
 		{
 			setNormalEvidenceNum++;
+			if (setNormalEvidenceNum == MaxEvidenceNum)
+			{
+				isSetNormalEvidence = true;
+				isSetEvidence = true;
+			}
 		}
 	}
 	public void SetPlayerIndex(int _index)
