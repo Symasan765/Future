@@ -63,7 +63,7 @@ public class TimelineManager : MonoBehaviour
 		}
 
 		m_TimeCnt += Time.deltaTime;
-		if(m_TimeCnt > 3.0f)
+		if(m_TimeCnt > 0.0f)
 		{
 			if(LoadFlag == false)
 			{
