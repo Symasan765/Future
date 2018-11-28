@@ -21,8 +21,8 @@ public class UICountRespawnSec : MonoBehaviour {
 		}
 		if (playerIndex == 1)
 		{
-			textMesh[0].color = Color.blue;
-			textMesh[2].color = Color.blue;
+			textMesh[0].color = Color.red;
+			textMesh[2].color = Color.red;
 		}
 		if (playerIndex == 2)
 		{
