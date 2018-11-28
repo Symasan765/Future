@@ -112,7 +112,7 @@ public class BossAttackRange : MonoBehaviour
 		float t = m_AttackCount / m_AttackTime;     // 徐々に振動を強くする
 		t *= t;
 
-		if(((int)((1.0f - t) / 0.05f) % 2 == 0))
+		if(((int)((1.0f - t) / 0.05f) % 4 > 0))
 		{
 			m_AttackRangeBoard.GetComponent<MeshRenderer>().enabled = true;
 		}
