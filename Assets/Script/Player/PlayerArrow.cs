@@ -39,13 +39,19 @@ public class PlayerArrow : MonoBehaviour
 		transform.parent.transform.eulerAngles = Vector3.zero;
 		transform.parent.transform.localPosition = new Vector3(0, transform.parent.transform.localPosition.y, -0.01f);
 		oldNearBazookaObj = nearBazookaObj;
-		if (player.IsHoldItem())
+		if (!player.CanIMove())
 		{
-			//一番近いバズーカを探してその方向に向く
-			SerchNearBazooka();
+			transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, 0.4f);
 		} else
 		{
-			SerchNearEvidence();
+			if (player.IsHoldItem())
+			{
+				//一番近いバズーカを探してその方向に向く
+				SerchNearBazooka();
+			} else
+			{
+				SerchNearEvidence();
+			}
 		}
 	}
 
@@ -132,31 +138,22 @@ public class PlayerArrow : MonoBehaviour
 			oldNearEvidenceObj = nearEvidenceObj;
 			for (int i = 0; i < EvidenceObjList.Count; i++)
 			{
-				//証拠がバズーカに入れられた時リストから削除
-				//if (EvidenceScriptList[i].isInBazooka || EvidenceObjList[i] == null)
-				//{
-				//	EvidenceObjList.RemoveAt(i);
-				//	EvidenceScriptList.RemoveAt(i);
-				//	nowEvidenceDistance = 10000;
-				//} else
-				//{
-					if (!EvidenceScriptList[i].isHold)
+				if (!EvidenceScriptList[i].isHold)
+				{
+					Vector3 evidencePos = new Vector3(EvidenceObjList[i].transform.position.x, EvidenceObjList[i].transform.position.y, 0);
+					if (i == 0)
 					{
-						Vector3 evidencePos = new Vector3(EvidenceObjList[i].transform.position.x, EvidenceObjList[i].transform.position.y, 0);
-						if (i == 0)
+						nearEvidenceObj = EvidenceObjList[i];
+						nowEvidenceDistance = Vector3.Distance(transform.position, evidencePos);
+					} else
+					{
+						if (nowEvidenceDistance > Vector3.Distance(transform.position, evidencePos))
 						{
-							nearEvidenceObj = EvidenceObjList[i];
 							nowEvidenceDistance = Vector3.Distance(transform.position, evidencePos);
-						} else
-						{
-							if (nowEvidenceDistance > Vector3.Distance(transform.position, evidencePos))
-							{
-								nowEvidenceDistance = Vector3.Distance(transform.position, evidencePos);
-								nearEvidenceObj = EvidenceObjList[i];
-							}
+							nearEvidenceObj = EvidenceObjList[i];
 						}
 					}
-				//}
+				}
 			}
 			if (EvidenceScriptList.Count > 0)
 			{

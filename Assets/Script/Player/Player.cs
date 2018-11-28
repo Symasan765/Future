@@ -64,6 +64,7 @@ public class Player : MonoBehaviour
 	public GameObject ItemHoldCollisionObj;
 	public GameObject RespawnCountObj;
 	public GameObject ArrowObj;
+	public GameObject HoldUIObj;
 
 	private GameObject getItemObj;
 	private GameObject holdDeskObj;
@@ -88,6 +89,7 @@ public class Player : MonoBehaviour
 	private float RespawnSec = 0;
 	private float cntRespawnSec = 0;
 	private Vector3 startFootRPosition;
+	private Vector3 startholdUIScale;
 
 	private Vector3 respawnPosition;
 	private float rotationValue = 0;
@@ -98,6 +100,7 @@ public class Player : MonoBehaviour
 
 	void Start ()
 	{
+		startholdUIScale = HoldUIObj.transform.localScale;
 		for (int i = 0; i < 2; i++)
 		{
 			effectSweetSystem[i] = EffectSweatObj[i].GetComponent<ParticleSystem>();
@@ -164,6 +167,7 @@ public class Player : MonoBehaviour
 				Damage();
 			}
 		}
+		HoldUIScale();
 		//DamageImpact();
 		EvidenceHoldCollision();
 		Down();
@@ -205,6 +209,19 @@ public class Player : MonoBehaviour
 		}
 		rb.position = new Vector3(rb.position.x, rb.position.y, 0);
     }
+
+	//持つUI処理
+	private void HoldUIScale()
+	{
+		HoldUIObj.transform.eulerAngles = new Vector3(0, 0, 0);
+		if (checkForwardEvidence && !isHoldItem && !isDown)
+		{
+			HoldUIObj.transform.localScale = Vector3.Lerp(HoldUIObj.transform.localScale, startholdUIScale, 0.6f);
+		} else
+		{
+			HoldUIObj.transform.localScale = Vector3.Lerp(HoldUIObj.transform.localScale, Vector3.zero, 0.6f);
+		}
+	}
 
 	//落下処理
 	private void Fall()
@@ -521,7 +538,6 @@ public class Player : MonoBehaviour
 		//地上ジャンプの処理
 		if (IsOnGround() && !isJump && !isDamage && CanIMove() && !checkJumpTrigger)
 		{
-			
 			if (XPad.Get.GetPress(XPad.KeyData.X, PlayerIndex))
 			{
 				cntJumpCheckSec += Time.deltaTime;
@@ -624,7 +640,13 @@ public class Player : MonoBehaviour
 			Debug.DrawRay(itemPositon, transform.forward * CanHoldItemDistance, Color.blue);
 			if (hit.collider)
 			{
-				checkForwardEvidence = true;
+				if (hit.collider.GetComponent<Item>().isInBazooka)
+				{
+					checkForwardEvidence = false;
+				} else
+				{
+					checkForwardEvidence = true;
+				}
 				if (XPad.Get.HoldTrigger(PlayerIndex))
 				{
 					GetItem(hit.collider.gameObject);		
@@ -660,6 +682,7 @@ public class Player : MonoBehaviour
 				ReceiveItem(_itemObj.transform.parent.gameObject);
 			} else
 			{
+				checkForwardEvidence = false;
 				effectManager.PlayHoldItem(new Vector3(ItemPosition.transform.position.x,ItemPosition.transform.position.y,-1));
 				SoundManager.Get.PlaySE("get");
 				rightSpeed = leftSpeed = 0.0f;
@@ -825,6 +848,7 @@ public class Player : MonoBehaviour
 				}
 				mentalGauge = 0;
 				rightSpeed = leftSpeed = 0.0f;
+				checkForwardEvidence = false;
 				//transform.position = respawnPosition;		
 				cntDamageSec = 0;
 				cntGetItemBlankSec = 0;
@@ -851,7 +875,6 @@ public class Player : MonoBehaviour
 
 		if (cntRespawnSec > 0)
 		{
-
 			RotateObj.transform.localPosition = new Vector3(1000, 1000, 1000);
 			cntRespawnSec -= Time.deltaTime;
 			if (cntRespawnSec <= 0)
