@@ -838,6 +838,7 @@ public class Player : MonoBehaviour
 				isReleaceItem = false;
 				isDown = false;
 				isAirjumpRotation = false;
+				animator.SetBool("isGetItem", false);
 				cntRespawnSec = RespawnSec;
 				cntCantMoveSec = RespawnSec;
 				cntInvincibleSec = RespawnSec;
