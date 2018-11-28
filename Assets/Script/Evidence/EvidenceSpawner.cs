@@ -37,6 +37,9 @@ public class EvidenceSpawner : MonoBehaviour {
 	private float cntSpawnDeraySec = 0;
 	private float nowLifeTime;
 
+	private GameObject[] playerObjects = new GameObject[4];
+	private Player[] playerScripts = new Player[4];
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -134,6 +137,7 @@ public class EvidenceSpawner : MonoBehaviour {
 			particleSystem = Instantiate(EffectObj, transform.position, transform.rotation).GetComponent<ParticleSystem>();
 			particleSystem.Play();
 			eviObj = Instantiate(evidenceObj, transform.position, transform.rotation);
+			AddEvidenceObjToPlayerArrows(eviObj);
 			Item item = eviObj.GetComponent<Item>();
 			item.SetEvidenceSpawnerObject(gameObject);
 			if (_isFever)
@@ -150,6 +154,23 @@ public class EvidenceSpawner : MonoBehaviour {
 	public void DeleteEvidenceObj()
 	{
 		eviObj = null;
+	}
+
+	public void AddEvidenceObjToPlayerArrows(GameObject _obj)
+	{
+		for (int i = 0; i < playerObjects.Length; i++)
+		{
+			playerScripts[i].AddEvidenceObjToArrow(_obj);
+		}
+	}
+
+	public void ReloadPlayerObjects()
+	{
+		playerObjects = GameObject.FindGameObjectsWithTag("Player");
+		for (int i = 0; i < playerObjects.Length; i++)
+		{
+			playerScripts[i] = playerObjects[i].GetComponent<Player>();
+		}
 	}
 
 }

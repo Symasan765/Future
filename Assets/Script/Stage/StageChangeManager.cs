@@ -97,6 +97,8 @@ public class StageChangeManager : MonoBehaviour {
 		playerManager = playerManagerObj.GetComponent<PlayerManager>();
 
 		playerObjects = GameObject.FindGameObjectsWithTag("Player");
+
+		ReloadPlayerObjectForEvidenceSpawners();
 	}
 	
 	void Update ()
@@ -107,7 +109,7 @@ public class StageChangeManager : MonoBehaviour {
 			if (cntStageChangeSec <= 0)
 			{
 				cntStageChangeSec = 0;
-				ReloadPlayerArrowBazookaObj();
+				playerManager.ReloadBazookaObjAndEvidenceObj();
 				Debug.Log("バズーカオブジェクトリロード");
 			}
 		}
@@ -147,14 +149,10 @@ public class StageChangeManager : MonoBehaviour {
 			CreateStage(_nextStageIndex);	//ステージ生成
 			isChangeStage = false;
 			RespawnPlayers(_nextStageIndex);
+			ReloadPlayerObjectForEvidenceSpawners();
 		}
 	}
-
-	private void ReloadPlayerArrowBazookaObj()
-	{
-		playerManager.ReloadBazookaObj();
-	}
-
+	
 	void CreateStage(int _stageIndex)
 	{
 		cntStageChangeSec = 0.2f;
@@ -178,6 +176,16 @@ public class StageChangeManager : MonoBehaviour {
 			{
 				AllEvidenceSpawners[nowEviIndex + cntEviNum] = eviSpawner[cntEviNum].gameObject.GetComponent<EvidenceSpawner>();
 			}
+		}
+	}
+
+	private void ReloadPlayerObjectForEvidenceSpawners()
+	{
+		//EvidenceSpawnerコンポーネントの取得
+		EvidenceSpawner[] eviSpawner = nowStageObject.GetComponentsInChildren<EvidenceSpawner>();
+		for (int i = 0; i < eviSpawner.Length; i++)
+		{
+			eviSpawner[i].ReloadPlayerObjects();
 		}
 	}
 

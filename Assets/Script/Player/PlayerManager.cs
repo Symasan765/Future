@@ -39,12 +39,12 @@ public class PlayerManager : MonoBehaviour {
 
 	}
 
-	public void ReloadBazookaObj()
+	public void ReloadBazookaObjAndEvidenceObj()
 	{
 		for (int i = 0; i < PlayerNum; i++)
 		{
 			Player ply = plyObjs[i].GetComponent<Player>();
-			ply.ReloadBazookaObj();
+			ply.ReloadBazookaObjAndEvidenceObj();
 		}
 	}
 }

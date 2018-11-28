@@ -947,10 +947,17 @@ public class Player : MonoBehaviour
 		isOnCollisionStay = false;
 	}
 
-	public void ReloadBazookaObj()
+	public void ReloadBazookaObjAndEvidenceObj()
 	{
 		PlayerArrow playerArrow = ArrowObj.GetComponent<PlayerArrow>();
 		playerArrow.ReloadBazookaObj();
+		playerArrow.ReloadEvidenceObj();
+	}
+
+	public void AddEvidenceObjToArrow(GameObject _obj)
+	{
+		PlayerArrow playerArrow = ArrowObj.GetComponent<PlayerArrow>();
+		playerArrow.AddEvidenceObjToList(_obj);
 	}
 
     public int GetPlayerIndex()

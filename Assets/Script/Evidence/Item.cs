@@ -30,7 +30,7 @@ public class Item : MonoBehaviour {
 	public bool isHold = false;
 	public bool isFeverEvidence = false;
 
-	private bool isInBazooka = false;
+	public bool isInBazooka = false;
 	private bool isTriggerStay = false;
 
 	public int holdPlayerIndex = 0;
