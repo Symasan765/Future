@@ -41,7 +41,7 @@
 
 				fixed4 frag(v2f i) : SV_Target {
 					float2 s = i.sp.xy / i.sp.w * 0.5 + 0.5;
-					s = 1.0f - s;
+					s.y = 1.0f - s.y;
 					//s.y *= 1080.0f / 1920.0f;
 					//clip(0.5 + (sin(s.x) + sin(s.y)) * 0.25 - (1.0 - _Color.a));
 
