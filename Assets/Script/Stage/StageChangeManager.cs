@@ -95,7 +95,6 @@ public class StageChangeManager : MonoBehaviour {
 		playerManagerObj = Instantiate(PlayerManagerObj, transform.position, transform.rotation);
 		playerManagerObj.name = "PlayerManager";
 		playerManager = playerManagerObj.GetComponent<PlayerManager>();
-
 		playerObjects = GameObject.FindGameObjectsWithTag("Player");
 
 		ReloadPlayerObjectForEvidenceSpawners();

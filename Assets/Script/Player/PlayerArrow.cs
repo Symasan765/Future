@@ -32,13 +32,13 @@ public class PlayerArrow : MonoBehaviour
 		startLocalScale = transform.localScale;
 		transform.localScale = Vector3.zero;
 		player = PlayerObj.GetComponent<Player>();
+		ChangeColor();
 	}
 
 	void Update ()
 	{
 		transform.parent.transform.eulerAngles = Vector3.zero;
-		transform.parent.transform.localPosition = new Vector3(0, transform.parent.transform.localPosition.y, -0.01f);
-		oldNearBazookaObj = nearBazookaObj;
+		transform.parent.transform.localPosition = new Vector3(0, transform.parent.transform.localPosition.y, -0.1f);
 		if (!player.CanIMove())
 		{
 			transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, 0.4f);
@@ -55,15 +55,36 @@ public class PlayerArrow : MonoBehaviour
 		}
 	}
 
+	private void ChangeColor()
+	{
+		if (player.PlayerIndex == 0)
+		{
+			ArrowObj.GetComponent<TextMesh>().color = Color.blue;
+		}
+		if (player.PlayerIndex == 1)
+		{
+			ArrowObj.GetComponent<TextMesh>().color = Color.red;
+		}
+		if (player.PlayerIndex == 2)
+		{
+			ArrowObj.GetComponent<TextMesh>().color = Color.yellow;
+		}
+		if (player.PlayerIndex == 3)
+		{
+			ArrowObj.GetComponent<TextMesh>().color = Color.green;
+		}
+	}
+
 	private void SerchNearBazooka()
 	{
+		oldNearBazookaObj = nearBazookaObj;
 		if (BazookaObj != null)
 		{
 			for (int i = 0; i < BazookaObj.Length; i++)
 			{
-				Vector3 bazookaPos = new Vector3(BazookaObj[i].transform.position.x, BazookaObj[i].transform.position.y, 0);
-				if (!bazookaScript[i].isSetEvidence)
+				if (!bazookaScript[i].isSetEvidence && BazookaObj[i] != null)
 				{
+					Vector3 bazookaPos = new Vector3(BazookaObj[i].transform.position.x, BazookaObj[i].transform.position.y, 0);
 					if (i == 0)
 					{
 						nearBazookaObj = BazookaObj[i];
@@ -138,7 +159,7 @@ public class PlayerArrow : MonoBehaviour
 			oldNearEvidenceObj = nearEvidenceObj;
 			for (int i = 0; i < EvidenceObjList.Count; i++)
 			{
-				if (!EvidenceScriptList[i].isHold)
+				if (!EvidenceScriptList[i].isHold || EvidenceObjList[i] != null)
 				{
 					Vector3 evidencePos = new Vector3(EvidenceObjList[i].transform.position.x, EvidenceObjList[i].transform.position.y, 0);
 					if (i == 0)

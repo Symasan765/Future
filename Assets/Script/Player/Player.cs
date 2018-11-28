@@ -974,7 +974,7 @@ public class Player : MonoBehaviour
 	{
 		PlayerArrow playerArrow = ArrowObj.GetComponent<PlayerArrow>();
 		playerArrow.ReloadBazookaObj();
-		playerArrow.ReloadEvidenceObj();
+		//playerArrow.ReloadEvidenceObj();
 	}
 
 	public void AddEvidenceObjToArrow(GameObject _obj)
