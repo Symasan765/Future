@@ -68,7 +68,7 @@ public class ResultManager : MonoBehaviour
 		if (m_PushAUI.active == true)
 		{
 			// タイムラインが終了している
-			if (XPad.Get.GetTrigger(XPad.KeyData.A, 0))
+			if (XPad.Get.AnyoneTrigger(XPad.KeyData.A))
 			{
 				m_FadeOutObj.SetActive(true);
 			}
