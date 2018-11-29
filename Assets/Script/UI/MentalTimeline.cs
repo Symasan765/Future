@@ -36,6 +36,7 @@ public class MentalTimeline : MonoBehaviour {
 		{
 			// 入力機能を戻す
 			m_InpuUpdate.SetActive(true);
+			XPad.Get.m_UpdateFlag = true;
 			Destroy(gameObject);
 			GameObject.FindGameObjectWithTag("BossManager").GetComponent<BossAttackManager>().m_AttackFlag = true;
 		}

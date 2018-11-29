@@ -47,7 +47,9 @@ public class BossAppearanceObj : MonoBehaviour
 			if (m_Timeline.duration < m_TimeCnt)
 			{
 				// レーダー処理へ移行！
+#if UNITY_EDITOR
 				Instantiate(m_RadarTimeline);
+#endif
 				m_Light.LightChage(false);
 				// 自身を消滅させる
 				Destroy(gameObject);
