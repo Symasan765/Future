@@ -2793,6 +2793,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 345315702}
+  - component: {fileID: 345315703}
   m_Layer: 0
   m_Name: BuildingObject
   m_TagString: Untagged
@@ -2816,6 +2817,17 @@ Transform:
   m_Father: {fileID: 247144477}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &345315703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 345315701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2d14431f66536f44ac41eee4a77367e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &345478294 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4180429738409906, guid: 9ea0deace3751bc41ad1f2fd5625684d,
