@@ -48,6 +48,8 @@ public class BossAppearanceObj : MonoBehaviour
 			{
 				// レーダー処理へ移行！
 #if UNITY_EDITOR
+
+#else
 				Instantiate(m_RadarTimeline);
 #endif
 				m_Light.LightChage(false);
