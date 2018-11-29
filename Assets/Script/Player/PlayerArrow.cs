@@ -105,6 +105,7 @@ public class PlayerArrow : MonoBehaviour
 				}
 			}
 			transform.rotation = Quaternion.LookRotation(nearBazookaPos - transform.position);
+			
 		}
 		if (oldNearBazookaObj != nearBazookaObj)
 		{
@@ -147,7 +148,7 @@ public class PlayerArrow : MonoBehaviour
 				if (!EvidenceScriptList[i].isHold)
 				{
 					flgLastEvi = true;
-				}		
+				}
 			}
 		}
 
@@ -177,7 +178,8 @@ public class PlayerArrow : MonoBehaviour
 				}
 			}
 			transform.rotation = Quaternion.LookRotation(nearEvidenceObj.transform.position - transform.position);
-			
+			//Quaternion rot = Quaternion.LookRotation(nearEvidenceObj.transform.position - transform.position);
+
 			if (oldNearEvidenceObj != nearEvidenceObj)
 			{
 				cntScaleUpTime = 2.0f;
