@@ -368,7 +368,7 @@ public class Player : MonoBehaviour
 		if (!IsInvincible())
 		{
 			animator.SetBool("isDash", false);
-			effectManager.PlayPlayerDamage(transform.position);
+			effectManager.PlayPlayerDamage(new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z));
 			ShakeCamera.Impact(0.009f, 0.6f);
 			animator.SetBool("isDamageTrigger", true);
 			SoundManager.Get.PlaySE("hit1");
