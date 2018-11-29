@@ -8,6 +8,7 @@ public class BossAppearanceObj : MonoBehaviour
 
 	GameObject m_BossObj;
 	public PlayableDirector m_Timeline;
+	public GameObject m_RadarTimeline;
 	float m_TimeCnt = 0.0f;
 	BossLight m_Light;
 	SkinnedMeshRenderer[] skin;
@@ -45,6 +46,8 @@ public class BossAppearanceObj : MonoBehaviour
 			// タイムラインが終了した
 			if (m_Timeline.duration < m_TimeCnt)
 			{
+				// レーダー処理へ移行！
+				Instantiate(m_RadarTimeline);
 				m_Light.LightChage(false);
 				// 自身を消滅させる
 				Destroy(gameObject);

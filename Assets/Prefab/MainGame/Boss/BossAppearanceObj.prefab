@@ -1091,6 +1091,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Timeline: {fileID: 320801295700014466}
+  m_RadarTimeline: {fileID: 1577947885422510, guid: feb5003760d316741978e2ca39583e69,
+    type: 2}
 --- !u!114 &114958673461420670
 MonoBehaviour:
   m_ObjectHideFlags: 1
