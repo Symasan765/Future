@@ -144,22 +144,19 @@ public class PlayerArrow : MonoBehaviour
 				i--;
 			} else
 			{
-				if (EvidenceObjList.Count == 1)
+				if (!EvidenceScriptList[i].isHold)
 				{
-					if (EvidenceScriptList[i].isHold)
-					{
-						flgLastEvi = true;
-					}
-				}
+					flgLastEvi = true;
+				}		
 			}
 		}
 
-		if (EvidenceObjList.Count > 0 && !flgLastEvi)
+		if (flgLastEvi)
 		{
 			oldNearEvidenceObj = nearEvidenceObj;
 			for (int i = 0; i < EvidenceObjList.Count; i++)
 			{
-				if (!EvidenceScriptList[i].isHold || EvidenceObjList[i] != null)
+				if (!EvidenceScriptList[i].isHold)
 				{
 					Vector3 evidencePos = new Vector3(EvidenceObjList[i].transform.position.x, EvidenceObjList[i].transform.position.y, 0);
 					if (i == 0)
@@ -174,12 +171,13 @@ public class PlayerArrow : MonoBehaviour
 							nearEvidenceObj = EvidenceObjList[i];
 						}
 					}
+				} else
+				{
+					nowEvidenceDistance = 10000;
 				}
 			}
-			if (EvidenceScriptList.Count > 0)
-			{
-				transform.rotation = Quaternion.LookRotation(nearEvidenceObj.transform.position - transform.position);
-			}
+			transform.rotation = Quaternion.LookRotation(nearEvidenceObj.transform.position - transform.position);
+			
 			if (oldNearEvidenceObj != nearEvidenceObj)
 			{
 				cntScaleUpTime = 2.0f;
