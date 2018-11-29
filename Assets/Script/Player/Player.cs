@@ -397,7 +397,7 @@ public class Player : MonoBehaviour
 			damageImpactPower = new Vector3(5, 7, 0);
 			cntDamageImpactSec =1;
 			isDamage = true;
-			mentalGauge += Random.Range(8, 15);
+			mentalGauge += Random.Range(25, 40);
 			cntInvincibleSec = InvincibleSec;
 			if (mentalGauge >= MentalGaugeMax)
 			{
