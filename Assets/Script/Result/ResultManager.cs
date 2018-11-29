@@ -22,7 +22,7 @@ public class ResultManager : MonoBehaviour
 	public GameObject m_FadeOutObj;
 
 	// こいつらにメインシーンでの数値を入れ込む
-	int m_TargetAttackValue = 50;
+	int m_TargetBreakValue = 50;
 	int m_TargetDamageValue = 10;
 
 	float m_AttackTimeCnt = 0;
@@ -37,6 +37,26 @@ public class ResultManager : MonoBehaviour
 		// TODO ここでダメージと攻撃回数をメインシーンから取得して変数に入れる
 		m_AttackNum = GameScore.m_PlayerDownNum;
 		m_DamageNum = GameScore.m_AttackNum;
+
+		// スコア点数の計算(MAX100点方式を採用)
+		m_TargetBreakValue = 100 - (GameScore.m_PlayerDownNum * 10);		// 1ダウン毎に１０点マイナス
+		m_TargetDamageValue = 100 - (GameScore.m_AttackNum * 5);                                // 1被弾毎の５点マイナス
+
+		int score = m_TargetBreakValue + m_TargetDamageValue;
+
+		// 最高評価(200点満点)
+		if(score > 185)
+		{
+			GameScore.m_ScoreStar = "★★★";
+		}
+		else if(score > 100)
+		{
+			GameScore.m_ScoreStar = "☆★★";
+		}
+		else
+		{
+			GameScore.m_ScoreStar = "☆☆★";
+		}
 	}
 
 	// Update is called once per frame
@@ -70,7 +90,7 @@ public class ResultManager : MonoBehaviour
 			// 数値が上昇しきってなかったら数値を上げる
 			float t = m_AttackTimeCnt / m_ReflectTimeSec;
 			if (t > 1.0f) t = 1.0f;
-			int attackText = (int)(m_TargetAttackValue * t);
+			int attackText = (int)(m_TargetBreakValue * t);
 			m_AttacNumText.text = attackText.ToString();
 			m_AttackTimeCnt += Time.deltaTime;
 		}
