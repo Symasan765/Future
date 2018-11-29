@@ -22,6 +22,7 @@ public class AttackID : MonoBehaviour {
 
 	public AttackType m_AttackType = AttackType.DownSwing;
 	GameObject m_EffectPrefab;
+	GameObject m_EffectSmokePrefab;
 	GameObject m_BeamObj;
 
 	GameObject m_Beam;
@@ -29,7 +30,8 @@ public class AttackID : MonoBehaviour {
 	private void Start()
 	{
 		GetComponent<MeshRenderer>().enabled = false;
-
+		m_EffectSmokePrefab = (GameObject)Resources.Load("Prefab/EffectBossSmoke");
+		/*
 		switch (m_AttackType)
 		{
 			case AttackType.DownSwing:
@@ -48,7 +50,7 @@ public class AttackID : MonoBehaviour {
 				m_BossLaunchPos = GameObject.Find("BossLaunchPos").gameObject;
 				m_BeamObj = (GameObject)Resources.Load("Prefab/BeamObj");
 				break;
-		}
+		}*/
 	}
 
 	public void BeamLunch()
@@ -65,16 +67,48 @@ public class AttackID : MonoBehaviour {
 	/// </summary>
 	public void m_AttackEffect()
 	{
-		if (m_EffectPrefab != null)
+		if (m_EffectSmokePrefab != null)
 		{
-			GameObject obj = Instantiate(m_EffectPrefab, transform.position, Quaternion.identity);
-			obj.transform.localScale = new Vector3(transform.localScale.x * obj.transform.localScale.x, transform.localScale.y * obj.transform.localScale.y, transform.localScale.y * obj.transform.localScale.y);
-
+			//GameObject obj = Instantiate(m_EffectPrefab, transform.position, Quaternion.identity);
+			//obj.transform.localScale = new Vector3(transform.localScale.x * obj.transform.localScale.x, transform.localScale.y * obj.transform.localScale.y, transform.localScale.y * obj.transform.localScale.y);
+			SmokeEffect();
 			if(m_Beam != null)
 			{
 				Destroy(m_Beam, 0.0f);
 				m_Beam = null;
 			}
 		}
+	}
+
+	private void SmokeEffect()
+	{
+		int createCountX = 0;
+		int createCountY = 0;
+		for (int cntY = 0; cntY < transform.localScale.y; cntY++)
+		{
+			if (createCountY == 0)
+			{
+				for (int cntX = 0; cntX < transform.localScale.x; cntX++)
+				{
+					if (createCountX == 0)
+					{
+						float effectWidth = 1.0f;
+						Vector3 effectPos = new Vector3((transform.position.x - ((transform.localScale.x / 2) * effectWidth)) + (effectWidth * cntX), (transform.position.y + effectWidth - ((transform.localScale.y / 2) * effectWidth)) + (effectWidth * cntY), transform.position.z);
+						Instantiate(m_EffectSmokePrefab, effectPos, Quaternion.identity);
+					}
+					createCountX++;
+					if (createCountX > 1)
+					{
+						createCountX = 0;
+					}
+				}
+			}
+			createCountY++;
+			if (createCountY > 1)
+			{
+				createCountY = 0;
+			}
+		}
+		
 	}
 }
