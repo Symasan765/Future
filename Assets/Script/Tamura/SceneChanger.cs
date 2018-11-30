@@ -57,8 +57,8 @@ public class SceneChanger : SingletonMonoBehaviour<SceneChanger> {
     }
 
     void Update() {
-        coutn++;
-        if (coutn % 100 == 0) {
+        //coutn++;
+        //if (coutn % 100 == 0) {
             if (isMoving) {
                 if (!isSceneUIMoveEnd) {
                     if (!isSceneUIMoveMiddle) {
@@ -109,7 +109,7 @@ public class SceneChanger : SingletonMonoBehaviour<SceneChanger> {
                     Time.timeScale = 1.0f;
                 }
             }
-        }
+        //}
     }
 
     public void ChangeScene(string _sceneName) {
