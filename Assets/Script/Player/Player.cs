@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
 
 	private Vector3 damageImpactPower;
 	private float cntDamageImpactSec = 0;
-
+	private bool isBugRespawn = false;
 	void Start ()
 	{
 		startholdUIScale = HoldUIObj.transform.localScale;
@@ -859,14 +859,20 @@ public class Player : MonoBehaviour
 				isReleaceItem = false;
 				isDown = false;
 				isAirjumpRotation = false;
-				animator.SetBool("isGetItem", false);
-				cntRespawnSec = RespawnSec;
-				cntCantMoveSec = RespawnSec;
-				cntInvincibleSec = RespawnSec;
+				animator.SetBool("isGetItem", false);				
+				if (isBugRespawn)
+				{
+
+				} else
+				{
+					UICountRespawnSec uiCount = Instantiate(RespawnCountObj, transform.position, new Quaternion(0, 0, 0, 0)).GetComponent<UICountRespawnSec>();
+					uiCount.SetPlayerIndex(PlayerIndex);
+					uiCount.SetRespawnSec(RespawnSec);
+					cntRespawnSec = RespawnSec;
+					cntCantMoveSec = RespawnSec;
+					cntInvincibleSec = RespawnSec;
+				}
 				isRespawn = false;
-				UICountRespawnSec uiCount = Instantiate(RespawnCountObj, transform.position,new Quaternion(0,0,0,0)).GetComponent<UICountRespawnSec>();
-				uiCount.SetPlayerIndex(PlayerIndex);
-				uiCount.SetRespawnSec(RespawnSec);
 			}
 		}
 
@@ -884,6 +890,18 @@ public class Player : MonoBehaviour
 				transform.position = respawnPosition;
 				effectManager.PlayRespawnHeart(new Vector3(transform.position.x, transform.position.y, -2));
 			}
+		}
+
+		if (isBugRespawn)
+		{
+			RotateObj.transform.localPosition = new Vector3(0, 0, 0);
+			cntInvincibleSec = 3;
+			cntCantMoveSec = 3;
+			isStandUp = true;
+			animator.SetBool("isStandUp", true);
+			transform.position = respawnPosition;
+			effectManager.PlayRespawnHeart(new Vector3(transform.position.x, transform.position.y, -2));
+			isBugRespawn = false;
 		}
 
 	}
@@ -948,6 +966,12 @@ public class Player : MonoBehaviour
 					i.SetBazooka(other.gameObject);
 				}
 			}
+		}
+		if (other.tag == "RespawnCollider")
+		{
+			isBugRespawn = true;
+			isRespawn = true;
+			cntInvincibleSec = 0;
 		}
 	}
 
