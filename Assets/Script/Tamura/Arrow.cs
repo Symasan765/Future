@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class Arrow : MonoBehaviour {
     [SerializeField]
@@ -27,18 +27,23 @@ public class Arrow : MonoBehaviour {
     public bool canSelect;
     bool canInput;
 
-    AudioSource seCymbal;
+    public AudioSource seEntry;
+    public AudioSource seReady;
 
     [SerializeField]
     GameObject effectObj;
     ParticleSystem particle;
+
+    [SerializeField]
+    RawImage portrait;
+    [SerializeField]
+    Image charaSheet;
 
     // 初期化
     void Awake() {
         inputDelay = 0;
         cursorPos = playerIndex;
         csManager = FindObjectOfType<CharacterSelectManager>();
-        seCymbal = GetComponent<AudioSource>();
 
         animAngle = 0.0f/* + playerIndex * 1.0f*/;
 
@@ -61,6 +66,8 @@ public class Arrow : MonoBehaviour {
 
                 this.transform.localScale = Vector3.Lerp(this.transform.localScale, new Vector3(3.0f, 3.0f, 1.0f), 0.25f);
             }
+
+            ChangeSheetColor();
         }
         else {
             WaitingJoin();
@@ -136,6 +143,8 @@ public class Arrow : MonoBehaviour {
 
             particle = Instantiate(effectObj, cursorTransform, Quaternion.identity).GetComponent<ParticleSystem>();
             particle.Play();
+
+            seEntry.Play();
         }
     }
 
@@ -148,6 +157,21 @@ public class Arrow : MonoBehaviour {
 
         animAngle += xSpeed;
         this.transform.position = cursorTransform + cursorAnimateTransform;
+    }
+
+    // キャラ選択後の履歴書グレーアウト
+    void ChangeSheetColor() {
+        Color nextColor;
+
+        if (isCharacterSelected) {
+            nextColor = Color.gray;
+        }
+        else {
+            nextColor = Color.white;
+        }
+
+        portrait.color = Color.Lerp(portrait.color, nextColor, 0.2f);
+        charaSheet.color = Color.Lerp(charaSheet.color, nextColor, 0.2f);
     }
 
     public bool GetCanInput() {

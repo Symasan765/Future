@@ -54,6 +54,9 @@ public class CharacterSelectManager : MonoBehaviour {
     bool sceneChangeFlg;
     SceneChanger sc;
 
+    [SerializeField]
+    AudioSource seStart;
+
     void Start() {
         //SoundManager.Get.PlayBGM("はりきっちゃう時のテーマ", true);
         sc = FindObjectOfType<SceneChanger>();
@@ -118,7 +121,9 @@ public class CharacterSelectManager : MonoBehaviour {
 
                 int pIndex = selectDataList[0]._playerIndex;
                 int cPos = selectDataList[0]._cursorPos;
-                Debug.Log("プレイヤー番号:" + (pIndex+1) + " カーソル位置:" + (cPos+1) + " キャラ番号:" + (unselectCharaList[cPos]+1));
+                //Debug.Log("プレイヤー番号:" + (pIndex+1) + " カーソル位置:" + (cPos+1) + " キャラ番号:" + (unselectCharaList[cPos]+1));
+
+                arrowList[pIndex].seReady.Play();
 
                 arrowList[pIndex].charaNum = unselectCharaList[cPos];
 
@@ -224,6 +229,7 @@ public class CharacterSelectManager : MonoBehaviour {
         for (int cursorIndex = 0; cursorIndex < 4; ) {
             if (arrowList[cursorIndex].GetStartGameFlg()) {
                 if (sceneChangeFlg == false) {
+                    seStart.Play();
                     sc.ChangeScene("TimeLineTest");
                     sceneChangeFlg = true;
                 }
