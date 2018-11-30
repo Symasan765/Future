@@ -138,7 +138,7 @@ public class Arrow : MonoBehaviour {
 
     // エントリー待機
     void WaitingJoin() {
-        if (XPad.Get.GetTrigger(XPad.KeyData.START, playerIndex)) {
+        if (XPad.Get.GetTrigger(XPad.KeyData.START, playerIndex) || XPad.Get.GetTrigger(XPad.KeyData.A, playerIndex)) {
             canInput = true;
             XPad.Get.SetVibration(playerIndex, 0.3f, 0.3f, 0.5f);
 

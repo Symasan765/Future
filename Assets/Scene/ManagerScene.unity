@@ -209,6 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   KeyDebugFlag: 00000000
+  m_UpdateFlag: 1
 --- !u!4 &3375845
 Transform:
   m_ObjectHideFlags: 0
@@ -671,3 +672,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneImage: {fileID: 1372313403}
   cutsceneImage: {fileID: 1275927}
+  changeSceneFlg: 0
+  isMoving: 0
+  isSceneUIMoveMiddle: 1
+  isSceneUIMoveEnd: 1
+  isCutsceneUIMoveMiddle: 1
+  isCutsceneUIMoveEnd: 1

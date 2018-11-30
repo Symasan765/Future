@@ -111,14 +111,14 @@ public class CharacterSelectManager : MonoBehaviour {
             // unselectリストからRemoveして、それが重複なく成功したらArrow側にそれを通知する
             // 残りゼロ件になるまでやる
             for (; selectDataList.Count > 0; ) {
-                Debug.Log("残り件数" + selectDataList.Count);
+                //Debug.Log("残り件数" + selectDataList.Count);
                 // いじるデータが残り一件の時以外
                 if (selectDataList.Count != 1) {
                     // いじる位置が重複している場合はデータ登録の早かったほうを優先
                     for (int j = 1; selectDataList.Count > j;) {
                         if (selectDataList[0]._cursorPos == selectDataList[j]._cursorPos) {
                             selectDataList.RemoveAt(j);
-                            Debug.Log("重複削除");
+                            //Debug.Log("重複削除");
                         }
                         else {
                             j++;
@@ -143,7 +143,7 @@ public class CharacterSelectManager : MonoBehaviour {
 
                 // キャラ選択フラグをオンに
                 arrowList[pIndex].SetIsCharacterSelected(true);
-                Debug.Log("選択データ削除" + selectDataList[0]._playerIndex);
+                //Debug.Log("選択データ削除" + selectDataList[0]._playerIndex);
                 selectDataList.RemoveAt(0);
 
                 for (int i = 0; i < 4; i++) {
@@ -170,7 +170,7 @@ public class CharacterSelectManager : MonoBehaviour {
                     }
                 }
 
-                Debug.Log("select処理");
+                //Debug.Log("select処理");
             }
 
             if (unselectDataList.Count != 0) {
@@ -185,7 +185,7 @@ public class CharacterSelectManager : MonoBehaviour {
                     allAnimatorList[pIndex].animList[cNum].SetBool("isSelected", false);
 
                     // キャラ選択フラグをオフに
-                    Debug.Log("キャラ番号" + cNum + "unselect処理");
+                    //Debug.Log("キャラ番号" + cNum + "unselect処理");
                     arrowList[pIndex].SetIsCharacterSelected(false);
                     camAnimList[pIndex].StartCameraAnimation();
 

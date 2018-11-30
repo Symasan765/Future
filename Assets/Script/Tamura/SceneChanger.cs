@@ -31,14 +31,22 @@ public class SceneChanger : SingletonMonoBehaviour<SceneChanger> {
     string nextSceneName;
     Scene nowScene;
 
+    [SerializeField]
     bool changeSceneFlg;
+    [SerializeField]
     bool isMoving = false;
 
+    [SerializeField]
     bool isSceneUIMoveMiddle = true;
+    [SerializeField]
     bool isSceneUIMoveEnd = true;
 
+    [SerializeField]
     bool isCutsceneUIMoveMiddle = true;
+    [SerializeField]
     bool isCutsceneUIMoveEnd = true;
+
+    int coutn = 0;
 
     void Awake() {
         var sceneChangers = FindObjectsOfType<SceneChanger>();
@@ -49,48 +57,57 @@ public class SceneChanger : SingletonMonoBehaviour<SceneChanger> {
     }
 
     void Update() {
-        if (isMoving) {
-            if (!isSceneUIMoveEnd) {
-                if (!isSceneUIMoveMiddle) {
-                    MoveUI_Scene1();
-                }
-                else {
-                    MoveUI_Scene2();
-                }
-
-                if (isSceneUIMoveEnd) {
-                    // 前のシーン表示UIを画面上端まで送ったら
-                    sceneImage.transform.localPosition = new Vector3(0.0f, -1080.0f, 0.0f);
-
-                    // 次のシーンを読み込み
-                    SceneManager.LoadSceneAsync(nextSceneName);
-                    nowScene = SceneManager.GetSceneByName(nextSceneName);
-                }
-            }
-
-            if (nowScene.isLoaded) {
-                if (!isCutsceneUIMoveEnd) {
-                    if (!isCutsceneUIMoveMiddle) {
-                        MoveUI_Cutscene1();
+        coutn++;
+        if (coutn % 100 == 0) {
+            if (isMoving) {
+                if (!isSceneUIMoveEnd) {
+                    if (!isSceneUIMoveMiddle) {
+                        Debug.Log("MSUI1");
+                        MoveUI_Scene1();
                     }
                     else {
-                        MoveUI_Cutscene2();
+                        Debug.Log("MSUI22");
+                        MoveUI_Scene2();
                     }
 
-                    if (isCutsceneUIMoveEnd) {
-                        isMoving = false;
+                    if (isSceneUIMoveEnd) {
+                        // 前のシーン表示UIを画面上端まで送ったら
+                        sceneImage.transform.localPosition = new Vector3(0.0f, -1080.0f, 0.0f);
+
+                        // 次のシーンを読み込み
+                        SceneManager.LoadSceneAsync(nextSceneName);
+                        nowScene = SceneManager.GetSceneByName(nextSceneName);
+                        Debug.Log("NEXT SCENE");
+                    }
+                }
+
+                if (nowScene.isLoaded) {
+                    if (!isCutsceneUIMoveEnd) {
+                        if (!isCutsceneUIMoveMiddle) {
+                            MoveUI_Cutscene1();
+                            Debug.Log("MCUI1");
+                        }
+                        else {
+                            MoveUI_Cutscene2();
+                            Debug.Log("MCUI2");
+                        }
+
+                        if (isCutsceneUIMoveEnd) {
+                            isMoving = false;
+                        }
                     }
                 }
             }
-        }
-        else {
-            if (isCutsceneUIMoveEnd) {
-                // 次のシーン表示UIを画面上に出し終わったら
-                // RawImageを非表示に
-                sceneImage.enabled = false;
+            else {
+                if (isCutsceneUIMoveEnd) {
+                    // 次のシーン表示UIを画面上に出し終わったら
+                    // RawImageを非表示に
+                    sceneImage.enabled = false;
+                    MoveReset();
 
-                // ゲームの進行を再開
-                Time.timeScale = 1.0f;
+                    // ゲームの進行を再開
+                    Time.timeScale = 1.0f;
+                }
             }
         }
     }
@@ -137,5 +154,10 @@ public class SceneChanger : SingletonMonoBehaviour<SceneChanger> {
     }
     void MoveUI_Cutscene2() {
         isCutsceneUIMoveEnd = MoveSceneUI(0.0f, 1080.0f);
+    }
+
+    void MoveReset() {
+        sceneImage.transform.localPosition = Vector3.zero;
+        cutsceneImage.transform.localPosition = new Vector3(0.0f, 1080.0f, 0.0f);
     }
 }
