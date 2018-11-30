@@ -181,6 +181,8 @@ public class CharacterSelectManager : MonoBehaviour {
                     arrowList[pIndex].SetIsCharacterSelected(false);
                     camAnimList[pIndex].StartCameraAnimation();
 
+                    arrowList[pIndex].seCancel.Play();
+
                     for (int i = 0; i < 4; i++) {
                         if (i != pIndex) {
                             if (arrowList[i].cursorPos >= arrowList[pIndex].cursorPos) {

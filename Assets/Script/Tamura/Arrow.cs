@@ -29,6 +29,7 @@ public class Arrow : MonoBehaviour {
 
     public AudioSource seEntry;
     public AudioSource seReady;
+    public AudioSource seCancel;
 
     [SerializeField]
     GameObject effectObj;
