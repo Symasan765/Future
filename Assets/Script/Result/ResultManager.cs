@@ -45,7 +45,7 @@ public class ResultManager : MonoBehaviour
 		int score = m_TargetBreakValue + m_TargetDamageValue;
 
 		// 最高評価(200点満点)
-		if(score > 185)
+		if(score > 170)
 		{
 			GameScore.m_ScoreStar = "★★★";
 		}
@@ -53,9 +53,13 @@ public class ResultManager : MonoBehaviour
 		{
 			GameScore.m_ScoreStar = "☆★★";
 		}
-		else
+		else if(score > 0)
 		{
 			GameScore.m_ScoreStar = "☆☆★";
+		}
+		else
+		{
+			GameScore.m_ScoreStar = "☆☆☆";
 		}
 	}
 

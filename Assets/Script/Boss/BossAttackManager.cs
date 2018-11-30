@@ -446,6 +446,9 @@ public class BossAttackManager : MonoBehaviour
 			case global::AttackID.AttackType.Beam:
 				m_Beam = true;
 				break;
+			case global::AttackID.AttackType.Special:
+				m_Beam = true;
+				break;
 		}
 	}
 

@@ -20,6 +20,7 @@ TagManager:
   - BossAppearanceObj
   - UIManagerObject
   - AttackRange
+  - RespawnCollider
   layers:
   - Default
   - TransparentFX

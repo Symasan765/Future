@@ -53,8 +53,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StageObjects:
   - {fileID: 1059359867092288, guid: 224af4287ae116c488a1f10775233c05, type: 2}
-  - {fileID: 1954064531802366, guid: 600912e04d80dca41a326e602e754180, type: 2}
   - {fileID: 1424128272610020, guid: 3f823d394f132c8499c41aed970dcf16, type: 2}
+  - {fileID: 1954064531802366, guid: 600912e04d80dca41a326e602e754180, type: 2}
   PlayerManagerObj: {fileID: 1724187466683938, guid: a9e75026abd56f34887eac896f367664,
     type: 2}
   PlayerRespawnSec: 5
