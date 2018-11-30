@@ -298,6 +298,10 @@ public class XPad : SingletonMonoBehaviour<XPad>
 		}
 		KeyDebugFlag[0] = true;     // 第一コントローラーは初期段階で入力できるようにしている
 		DebugFlag = Debug.isDebugBuild;     // デバッグ状態を取得
+
+        // カーソルを切る
+        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 	}
 
 	// Update is called once per frame
