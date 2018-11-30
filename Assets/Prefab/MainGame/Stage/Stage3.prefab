@@ -7923,7 +7923,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1246882168240074}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4440788468774890}
@@ -8934,7 +8934,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1171262810974648}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4055318119193812}
@@ -13466,7 +13466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc0fc60836219b34ab8c23741d652171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletAttackPower: 10
+  MaxEvidenceNum: 1
   EffectObj: {fileID: 1247311384876784, guid: 4adffb0018aeda44e9263f901167af1f, type: 2}
   BulletObj: {fileID: 1883188493593020, guid: 281784580f20d5e4cb5d2ee972c332c6, type: 2}
   CurvePointObj:
@@ -13474,7 +13474,7 @@ MonoBehaviour:
   - {fileID: 1884083362439480}
   - {fileID: 1884083362439480}
   EvidenceDistance: 2
-  NearEvidenceNum: 0
+  setNormalEvidenceNum: 0
   nowEvidenceNormal: 0
   ExplosionSec: 2
   isSetEvidence: 0
@@ -13896,7 +13896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc0fc60836219b34ab8c23741d652171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletAttackPower: 10
+  MaxEvidenceNum: 1
   EffectObj: {fileID: 1247311384876784, guid: 4adffb0018aeda44e9263f901167af1f, type: 2}
   BulletObj: {fileID: 1883188493593020, guid: 281784580f20d5e4cb5d2ee972c332c6, type: 2}
   CurvePointObj:
@@ -13904,7 +13904,7 @@ MonoBehaviour:
   - {fileID: 1769230332675556}
   - {fileID: 1769230332675556}
   EvidenceDistance: 2
-  NearEvidenceNum: 0
+  setNormalEvidenceNum: 0
   nowEvidenceNormal: 0
   ExplosionSec: 2
   isSetEvidence: 0
@@ -14105,7 +14105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc0fc60836219b34ab8c23741d652171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletAttackPower: 10
+  MaxEvidenceNum: 1
   EffectObj: {fileID: 1247311384876784, guid: 4adffb0018aeda44e9263f901167af1f, type: 2}
   BulletObj: {fileID: 1883188493593020, guid: 281784580f20d5e4cb5d2ee972c332c6, type: 2}
   CurvePointObj:
@@ -14113,7 +14113,7 @@ MonoBehaviour:
   - {fileID: 1236065546173610}
   - {fileID: 1236065546173610}
   EvidenceDistance: 2
-  NearEvidenceNum: 0
+  setNormalEvidenceNum: 0
   nowEvidenceNormal: 0
   ExplosionSec: 2
   isSetEvidence: 0
@@ -14236,7 +14236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc0fc60836219b34ab8c23741d652171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletAttackPower: 10
+  MaxEvidenceNum: 1
   EffectObj: {fileID: 1247311384876784, guid: 4adffb0018aeda44e9263f901167af1f, type: 2}
   BulletObj: {fileID: 1883188493593020, guid: 281784580f20d5e4cb5d2ee972c332c6, type: 2}
   CurvePointObj:
@@ -14244,7 +14244,7 @@ MonoBehaviour:
   - {fileID: 1646447712601650}
   - {fileID: 1646447712601650}
   EvidenceDistance: 2
-  NearEvidenceNum: 0
+  setNormalEvidenceNum: 0
   nowEvidenceNormal: 0
   ExplosionSec: 2
   isSetEvidence: 0
