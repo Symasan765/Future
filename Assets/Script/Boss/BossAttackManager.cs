@@ -412,8 +412,8 @@ public class BossAttackManager : MonoBehaviour
 	{
 		float t = m_BossDamage / m_BossMaxDamage;
 
-		if (t < 0.66f) m_Condition = BossCondition.Spicy;
-		if (t < 0.33f) m_Condition = BossCondition.Dying;
+		if (t < 0.8f) m_Condition = BossCondition.Spicy;
+		if (t < 0.5f) m_Condition = BossCondition.Dying;
 	}
 
 	public BossCondition GetCondition()
