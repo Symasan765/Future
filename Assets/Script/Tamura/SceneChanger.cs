@@ -158,6 +158,6 @@ public class SceneChanger : SingletonMonoBehaviour<SceneChanger> {
 
     void MoveReset() {
         sceneImage.transform.localPosition = Vector3.zero;
-        cutsceneImage.transform.localPosition = new Vector3(0.0f, 1080.0f, 0.0f);
+        cutsceneImage.transform.localPosition = new Vector3(0.0f, -1080.0f, 0.0f);
     }
 }
