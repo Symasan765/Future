@@ -175,6 +175,11 @@ public class Arrow : MonoBehaviour {
         charaSheet.color = Color.Lerp(charaSheet.color, nextColor, 0.2f);
     }
 
+    public void SetImg(RawImage _pImg, Image _cImg) {
+        portrait = _pImg;
+        charaSheet = _cImg;
+    }
+
     public bool GetCanInput() {
         return canInput;
     }

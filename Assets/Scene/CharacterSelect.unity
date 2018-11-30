@@ -7185,6 +7185,16 @@ MonoBehaviour:
   - {fileID: 1952179572}
   - {fileID: 1984605577}
   - {fileID: 1916617918}
+  portlaitImgList:
+  - {fileID: 1034678208}
+  - {fileID: 1653977820}
+  - {fileID: 124063746}
+  - {fileID: 908029426}
+  charaSheetImgList:
+  - {fileID: 1165126541}
+  - {fileID: 498663564}
+  - {fileID: 356198500}
+  - {fileID: 498781664}
   seStart: {fileID: 1774133917}
 --- !u!82 &1774133917
 AudioSource:

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class CharacterSelectManager : MonoBehaviour {
@@ -43,6 +44,12 @@ public class CharacterSelectManager : MonoBehaviour {
 
     [SerializeField]
     List<CameraAnimation> camAnimList = new List<CameraAnimation>();
+
+    [SerializeField]
+    List<RawImage> portlaitImgList = new List<RawImage>();
+
+    [SerializeField]
+    List<Image> charaSheetImgList = new List<Image>();
 
     // 変更するキャラ選択データの格納先
     List<changeData> selectDataList = new List<changeData>();
@@ -126,6 +133,7 @@ public class CharacterSelectManager : MonoBehaviour {
                 arrowList[pIndex].seReady.Play();
 
                 arrowList[pIndex].charaNum = unselectCharaList[cPos];
+                arrowList[pIndex].SetImg(portlaitImgList[unselectCharaList[cPos]], charaSheetImgList[unselectCharaList[cPos]]);
 
                 CharacterManager.SetCharacter(pIndex, unselectCharaList[cPos]);
                 allAnimatorList[pIndex].animList[unselectCharaList[cPos]].SetBool("isSelected", true);
