@@ -168,7 +168,6 @@ public class Player : MonoBehaviour
 			}
 		}
 		HoldUIScale();
-		//DamageImpact();
 		EvidenceHoldCollision();
 		Down();
 		Respawn();
@@ -180,7 +179,6 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
 	{
-		//DamageImpact();
 
 		if (!IsDown())
 		{
@@ -449,29 +447,6 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	private void DamageImpact()
-	{
-		if (damageImpactPower.x > 0)
-		{
-			this.transform.Translate((Vector3.forward * -1) * damageImpactPower.x * Time.deltaTime);
-			damageImpactPower.x -= Time.deltaTime * 15;
-			if (damageImpactPower.x <= 0)
-			{
-				damageImpactPower.x = 0;
-			}
-		}
-		if (damageImpactPower.y > 0)
-		{
-			rb.velocity = Vector3.zero;
-			this.transform.Translate(Vector3.up * damageImpactPower.y * Time.deltaTime);
-			damageImpactPower.y -= Time.deltaTime * 15;
-			if (damageImpactPower.y <= 0)
-			{
-				damageImpactPower.y = 0;
-			}
-		}
-	}
-
 	//移動しているか
 	public bool IsMove()
 	{
@@ -556,32 +531,6 @@ public class Player : MonoBehaviour
 				jumpSpeed = nowJumpPower;
 				isJump = true;
 			}
-
-			/*
-			if (cntJumpCheckSec >= 0.07f)
-			{
-				cntJumpCheckSec = 0;
-				checkJumpTrigger = true;
-				cntAirJumpNum = AirJumpNum;
-				effectManager.PlayDUM(PlayerIndex, effectPos);
-				SoundManager.Get.PlaySE("AirJump");
-				jumpSpeed = nowJumpPower;
-				isJump = true;
-			} else
-			{
-				if (XPad.Get.GetRelease(XPad.KeyData.X, PlayerIndex))
-				{
-					cntJumpCheckSec = 0;
-					checkJumpTrigger = false;
-					cntAirJumpNum = AirJumpNum;
-					effectManager.PlayDUM(PlayerIndex, effectPos);
-					SoundManager.Get.PlaySE("AirJump");
-					jumpSpeed = nowJumpPower - (nowJumpPower / 3);
-					isJump = true;
-				}
-
-			}*/
-
 		}
 
 		if (IsOnGround() && !XPad.Get.GetPress(XPad.KeyData.X, PlayerIndex) && !XPad.Get.GetTrigger(XPad.KeyData.X, PlayerIndex))
