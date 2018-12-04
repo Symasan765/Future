@@ -58,17 +58,20 @@ public class Arrow : MonoBehaviour {
                 MoveCursor();
                 AnimateCursor();
                 SelectCharacter();
+                ChangeSheetColor();
 
                 this.transform.localScale = Vector3.Lerp(this.transform.localScale, new Vector3(2.0f, 2.0f, 1.0f), 0.5f);
             }
             else {
                 UnselectCharacter();
+                AnimateCursor();
                 StartGame();
+                ChangeSheetColor();
 
                 this.transform.localScale = Vector3.Lerp(this.transform.localScale, new Vector3(3.0f, 3.0f, 1.0f), 0.25f);
             }
 
-            ChangeSheetColor();
+            //ChangeSheetColor();
         }
         else {
             WaitingJoin();
@@ -154,9 +157,11 @@ public class Arrow : MonoBehaviour {
         float range = 0.1f;
         float xSpeed = 0.25f;
 
-        cursorAnimateTransform = new Vector3(Mathf.Sin(animAngle) * range, Mathf.Sin(animAngle) * -0.05f, 0.0f);
+        if (!isCharacterSelected) {
+            cursorAnimateTransform = new Vector3(Mathf.Sin(animAngle) * range, Mathf.Sin(animAngle) * -0.05f, 0.0f);
 
-        animAngle += xSpeed;
+            animAngle += xSpeed;
+        }
         this.transform.position = cursorTransform + cursorAnimateTransform;
     }
 

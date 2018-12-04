@@ -80,6 +80,8 @@ public class CharacterSelectManager : MonoBehaviour {
         //履歴書を上に飛ばしていく
         //sheetList[0].transform.position = sheetList[0].transform.position + sheetList[0].transform.up;
         CheckCanInput();
+
+        ForceNextScene();
 	}
 
     // カーソルの位置を更新
@@ -101,6 +103,13 @@ public class CharacterSelectManager : MonoBehaviour {
                 else{
                     aElement.canSelect = false;
                 }
+            }
+            else {
+                float posX = -60.0f + 10.0f * aElement.charaNum;
+                float posY = 10.0f * aElement.GetPlayerIndex();
+
+                // n番のカーソルの位置を履歴書の顔写真の横に移動
+                aElement.cursorTransform = Vector3.Lerp(aElement.cursorTransform, portraitList[aElement.charaNum].arrowPosList[cursorIndex].transform.position, 0.5f);
             }
         }
     }
@@ -246,6 +255,17 @@ public class CharacterSelectManager : MonoBehaviour {
                 cursorIndex = 999;
             }
             cursorIndex++;
+        }
+    }
+
+    void ForceNextScene() {
+        if (Input.GetKeyDown(KeyCode.P)) {
+            for (int pIndex = 0; pIndex < 4; pIndex++) {
+                CharacterManager.SetCharacter(pIndex, pIndex);
+            }
+
+            sc.ChangeScene("TimeLineTest");
+            sceneChangeFlg = true;
         }
     }
 
