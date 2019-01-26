@@ -173,11 +173,11 @@ public class BazookaRifle : MonoBehaviour{
 	{
 		if (_isFever)
 		{
-			bossAttackManager.BossDamage(BulletAttackPower * 0.5f);
+			bossAttackManager.BossDamage(BulletAttackPower * 0.7f);
 			effectManager.PlaySMASH(-1, _hitPos, -1);
 		} else
 		{
-			feverManager.BossDamage((BulletAttackPower * 0.5f) / 8);
+			feverManager.BossDamage((BulletAttackPower * 0.9f) / 8);
 			partyTimeManager.LetsParty();
 		}
 		for (int i = 0; i < 4; i++)
